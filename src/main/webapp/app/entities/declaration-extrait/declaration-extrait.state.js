@@ -1,8 +1,8 @@
-(function () {
+(function() {
     'use strict';
 
     angular
-        .module('etatcivilApp')
+        .module('etatCivilApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -14,7 +14,7 @@
                 url: '/declaration-extrait',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'etatcivilApp.declarationExtrait.home.title'
+                    pageTitle: 'etatCivilApp.declarationExtrait.home.title'
                 },
                 views: {
                     'content@': {
@@ -37,7 +37,7 @@
                 url: '/declaration-extrait/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'etatcivilApp.declarationExtrait.detail.title'
+                    pageTitle: 'etatCivilApp.declarationExtrait.detail.title'
                 },
                 views: {
                     'content@': {
@@ -52,8 +52,8 @@
                         $translatePartialLoader.addPart('genre');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'DeclarationExtrait', function ($stateParams, DeclarationExtrait) {
-                        return DeclarationExtrait.get({id: $stateParams.id}).$promise;
+                    entity: ['$stateParams', 'DeclarationExtrait', function($stateParams, DeclarationExtrait) {
+                        return DeclarationExtrait.get({id : $stateParams.id}).$promise;
                     }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
@@ -71,7 +71,7 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/declaration-extrait/declaration-extrait-dialog.html',
                         controller: 'DeclarationExtraitDialogController',
@@ -79,13 +79,13 @@
                         backdrop: 'static',
                         size: 'lg',
                         resolve: {
-                            entity: ['DeclarationExtrait', function (DeclarationExtrait) {
-                                return DeclarationExtrait.get({id: $stateParams.id}).$promise;
+                            entity: ['DeclarationExtrait', function(DeclarationExtrait) {
+                                return DeclarationExtrait.get({id : $stateParams.id}).$promise;
                             }]
                         }
-                    }).result.then(function () {
-                        $state.go('^', {}, {reload: false});
-                    }, function () {
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
                         $state.go('^');
                     });
                 }]
@@ -96,7 +96,7 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/declaration-extrait/declaration-extrait-dialog.html',
                         controller: 'DeclarationExtraitDialogController',
@@ -133,9 +133,9 @@
                                 };
                             }
                         }
-                    }).result.then(function () {
-                        $state.go('declaration-extrait', null, {reload: 'declaration-extrait'});
-                    }, function () {
+                    }).result.then(function() {
+                        $state.go('declaration-extrait', null, { reload: 'declaration-extrait' });
+                    }, function() {
                         $state.go('declaration-extrait');
                     });
                 }]
@@ -146,7 +146,7 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/declaration-extrait/declaration-extrait-dialog.html',
                         controller: 'DeclarationExtraitDialogController',
@@ -154,13 +154,13 @@
                         backdrop: 'static',
                         size: 'lg',
                         resolve: {
-                            entity: ['DeclarationExtrait', function (DeclarationExtrait) {
-                                return DeclarationExtrait.get({id: $stateParams.id}).$promise;
+                            entity: ['DeclarationExtrait', function(DeclarationExtrait) {
+                                return DeclarationExtrait.get({id : $stateParams.id}).$promise;
                             }]
                         }
-                    }).result.then(function () {
-                        $state.go('declaration-extrait', null, {reload: 'declaration-extrait'});
-                    }, function () {
+                    }).result.then(function() {
+                        $state.go('declaration-extrait', null, { reload: 'declaration-extrait' });
+                    }, function() {
                         $state.go('^');
                     });
                 }]
@@ -171,41 +171,24 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/declaration-extrait/declaration-extrait-delete-dialog.html',
                         controller: 'DeclarationExtraitDeleteController',
                         controllerAs: 'vm',
                         size: 'md',
                         resolve: {
-                            entity: ['DeclarationExtrait', function (DeclarationExtrait) {
-                                return DeclarationExtrait.get({id: $stateParams.id}).$promise;
+                            entity: ['DeclarationExtrait', function(DeclarationExtrait) {
+                                return DeclarationExtrait.get({id : $stateParams.id}).$promise;
                             }]
                         }
-                    }).result.then(function () {
-                        $state.go('declaration-extrait', null, {reload: 'declaration-extrait'});
-                    }, function () {
+                    }).result.then(function() {
+                        $state.go('declaration-extrait', null, { reload: 'declaration-extrait' });
+                    }, function() {
                         $state.go('^');
                     });
                 }]
-            })
-            .state('declaration-naissance-affichagePdf', {
-                parent: 'declaration-naissance-detail',
-                url: '/affichagePdf',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'etatcivilApp.declarationNaissance.detail.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'app/entities/declaration-naissance/affichagePdf.html',
-                        controller: 'DeclarationTestController',
-                        controllerAs: 'vm'
-                    }
-                },
-
             });
-        ;
     }
 
 })();
