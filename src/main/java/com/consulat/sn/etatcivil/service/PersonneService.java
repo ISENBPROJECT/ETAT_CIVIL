@@ -37,4 +37,6 @@ public interface PersonneService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    PersonneDTO isPersonneExist(String nom, String prenom);
 }

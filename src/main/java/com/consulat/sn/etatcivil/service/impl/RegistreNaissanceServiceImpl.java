@@ -84,4 +84,10 @@ public class RegistreNaissanceServiceImpl implements RegistreNaissanceService{
         log.debug("Request to delete RegistreNaissance : {}", id);
         registreNaissanceRepository.delete(id);
     }
+    @Override
+    public RegistreNaissanceDTO findFirstByOrderByIdDesc() {
+        RegistreNaissance registreNaissance = registreNaissanceRepository.findFirstByOrderByIdDesc();
+        RegistreNaissanceDTO registreNaissanceDTO = registreNaissanceMapper.toDto(registreNaissance);
+        return registreNaissanceDTO;
+    }
 }

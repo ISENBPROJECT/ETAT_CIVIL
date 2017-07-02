@@ -12,5 +12,6 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface RegistreNaissanceRepository extends JpaRepository<RegistreNaissance,Long> {
-    
+
+    RegistreNaissance findFirstByOrderByIdDesc();
 }

@@ -12,5 +12,6 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface PersonneRepository extends JpaRepository<Personne,Long> {
-    
+
+    Personne findByNomAndPrenom(String nom, String prenom);
 }

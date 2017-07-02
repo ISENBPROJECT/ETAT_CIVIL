@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('etatCivilApp')
+        .module('etatcivilApp')
         .controller('DeclarationExtraitDialogController', DeclarationExtraitDialogController);
 
     DeclarationExtraitDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays'];
@@ -38,9 +38,10 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('etatCivilApp:declarationExtraitUpdate', result);
+            $scope.$emit('etatcivilApp:declarationExtraitUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
+            $state.go('declaration-naissance-affichagePdf');
         }
 
         function onSaveError () {

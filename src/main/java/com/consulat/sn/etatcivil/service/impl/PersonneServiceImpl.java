@@ -84,4 +84,11 @@ public class PersonneServiceImpl implements PersonneService{
         log.debug("Request to delete Personne : {}", id);
         personneRepository.delete(id);
     }
+
+    @Override
+    public PersonneDTO isPersonneExist(String nom, String prenom) {
+        Personne personne = personneRepository.findByNomAndPrenom(nom, prenom);
+        PersonneDTO personneDTO = personneMapper.toDto(personne);
+        return personneDTO;
+    }
 }
