@@ -188,6 +188,22 @@
                         $state.go('^');
                     });
                 }]
+            })
+            .state('declaration-naissance-affichagePdf', {
+                parent: 'declaration-naissance-detail',
+                url: '/affichagePdf',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'etatcivilApp.declarationNaissance.detail.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/declaration-naissance/affichagePdf.html',
+                        controller: 'DeclarationExtraitDialogController',
+                        controllerAs: 'vm'
+                    }
+                }
+
             });
     }
 

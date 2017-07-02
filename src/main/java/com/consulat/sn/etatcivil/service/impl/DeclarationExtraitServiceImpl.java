@@ -80,7 +80,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             extraitDTO.setMereId(mereId);
             extraitDTO.setEnfantId(enfantId);
             extraitDTO.setValidated(false);
-            extraitDTO.setLieuDeclarationId(declarationExtraitDTO.getLieuDeclarationId());
+            extraitDTO.setLieuDeclarationId(declarationExtraitDTO.getLieuDeclarationId().getId());
             extraitDTO.setAgentId(getCurrentUserId());
 
             extraitDTO = extraitService.save(extraitDTO);
@@ -190,26 +190,26 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         enfant.setPrenom(declarationExtraitDTO.getPrenomEnfant());
         enfant.setDateNaissance(declarationExtraitDTO.getDateNaissanceEnfant());
         enfant.setGenre(declarationExtraitDTO.getGenreEnfant());
-        enfant.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceEnfantId());
-        enfant.setAdresseId(declarationExtraitDTO.getAdresseMereId());
+        enfant.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceEnfantId().getId());
+        enfant.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
 
 
         mere.setNom(declarationExtraitDTO.getNomMere());
         mere.setPrenom(declarationExtraitDTO.getPrenomMere());
         //mere.setDateNaissance(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()));
         mere.setGenre(Genre.FEMININ);
-        mere.setAdresseId(declarationExtraitDTO.getAdresseMereId());
+        mere.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
         mere.setFonction(declarationExtraitDTO.getFonctionMere());
-        mere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceMereId());
+        mere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceMereId().getId());
 
 
         pere.setNom(declarationExtraitDTO.getNomPere());
         pere.setPrenom(declarationExtraitDTO.getPrenomPere());
         pere.setDateNaissance(declarationExtraitDTO.getDateNaissancePere());
         pere.setGenre(Genre.MASCULIN);
-        pere.setAdresseId(declarationExtraitDTO.getAdressePereId());
+        pere.setAdresseId(declarationExtraitDTO.getAdressePereId().getId());
         pere.setFonction(declarationExtraitDTO.getFonctionPere());
-        pere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissancePereId());
+        pere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissancePereId().getId());
 
         pere = personneService.save(pere);
         mere = personneService.save(mere);

@@ -343,7 +343,6 @@ ui bootstrap tweaks
 .containerFlex {
     display: flex;
     justify-content: space-between;
-    background-color: rgba(113, 179, 227, 0.13);
 }
 
 .containerFlexItemCommun {
@@ -361,6 +360,4 @@ ui bootstrap tweaks
 .containerFlexItemEnfant {
     background-color: #e2f6d1;
 }
-.modal-dialog {
-    width: 90% !important;
-}
+
