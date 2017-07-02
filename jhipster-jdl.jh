@@ -1,0 +1,98 @@
+entity Pays {
+	nom String required
+}
+
+entity Ville {
+	nom String required,
+    codePostal String required,
+    adresseComplementaire String
+}
+enum Genre {
+    MASCULIN, FEMININ
+  }
+
+entity Personne {
+	nom String required,
+    prenom String required,
+    dateNaissance LocalDate required,
+    fonction String,
+    genre Genre,
+    numeroCarteIdentite String,
+    numeroPassport String
+}
+
+entity Extrait {
+	numeroRegistre String required,
+    mention TextBlob maxbytes(1000) required,
+    dateDeclaration LocalDate required,
+    validated Boolean
+}
+
+entity PieceJointe {
+    copieLiterale AnyBlob minbytes(8192) maxbytes(25165824) required,
+    copieCarte   AnyBlob minbytes(8192) maxbytes(25165824) required
+}
+
+entity RegistreNaissance {
+    numero Integer min(0001) max(9999) required,
+    anneeRegistre   LocalDate required
+}
+
+entity DeclarationExtrait {
+    copieLiterale AnyBlob minbytes(8192) maxbytes(25165824) required,
+    copieCarte   AnyBlob minbytes(8192) maxbytes(25165824) required,
+    mention TextBlob maxbytes(1000) required,
+    nomEnfant String required,
+    prenomEnfant String required,
+    dateNaissanceEnfant LocalDate required,
+    genreEnfant Genre,
+    nomMere String required,
+    prenomMere String required,
+    dateNaissanceMere LocalDate required,
+    fonctionMere String,
+    adresseComplMere String,
+    numeroIdentiteMere String,
+    numeroPassportMere String,
+    nomPere String required,
+    prenomPere String required,
+    dateNaissancePere LocalDate required,
+    adresseComplPere String,
+    fonctionPere String,
+    numeroIdentitePere String,
+    numeroPassportPere String
+
+}
+
+skipServer for DeclarationExtrait
+
+relationship ManyToOne {
+  Personne{adresse required} to Ville,
+  Personne{pere} to Personne,
+  Personne{mere} to Personne,
+  Personne{lieuNaissance required} to Ville,
+  DeclarationExtrait{lieuNaissanceEnfant required} to Ville,
+  DeclarationExtrait{adresseEnfant required} to Ville,
+  DeclarationExtrait{adressePere required} to Ville,
+  DeclarationExtrait{adresseMere required} to Ville,
+  DeclarationExtrait{lieuNaissancePere required} to Ville,
+  DeclarationExtrait{lieuNaissanceMere required} to Ville,
+  DeclarationExtrait{lieuDeclaration required} to Ville,
+  DeclarationExtrait{paysNaissanceEnfant required} to Pays,
+  DeclarationExtrait{adrPaysEnfant required} to Pays,
+  DeclarationExtrait{paysNaissanceMere required} to Pays,
+  DeclarationExtrait{adrPaysMere required} to Pays,
+  DeclarationExtrait{paysNaissancePere required} to Pays,
+  DeclarationExtrait{adrPaysPere required} to Pays,
+  DeclarationExtrait{PaysDeclaration required} to Pays,
+  Ville{pays} to Pays,
+  Extrait{lieuDeclaration required} to Ville,
+  Extrait{enfant required} to Personne,
+  Extrait{mere required} to Personne,
+  Extrait{pere required} to Personne,
+  Extrait{agent required} to User,
+  RegistreNaissance{extrait required} to Extrait,
+  PieceJointe{declaration required} to Extrait{piecesJointes}
+}
+
+dto * with mapstruct
+service * with serviceImpl
