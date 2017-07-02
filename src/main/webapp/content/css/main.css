@@ -342,10 +342,12 @@ ui bootstrap tweaks
 
 .containerFlex {
     display: flex;
+    justify-content: space-between;
+    background-color: rgba(113, 179, 227, 0.13);
 }
 
 .containerFlexItemCommun {
-    background-color: #B5E655;
+    background-color: #cdc1e6;
 }
 
 .containerFlexItemMere {
@@ -353,11 +355,11 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemPere {
-    background-color: #6df897;
+    background-color: #82c2f8;
 }
 
 .containerFlexItemEnfant {
-    background-color: #F6E497;
+    background-color: #e2f6d1;
 }
 .modal-dialog {
     width: 90% !important;
