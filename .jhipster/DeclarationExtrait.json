@@ -1,0 +1,245 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuNaissanceEnfant",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adresseEnfant",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adressePere",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adresseMere",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuNaissancePere",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuNaissanceMere",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuDeclaration",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "paysNaissanceEnfant",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adrPaysEnfant",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "paysNaissanceMere",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adrPaysMere",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "paysNaissancePere",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adrPaysPere",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "paysDeclaration",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "copieLiterale",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "minbytes",
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMinbytes": 8192,
+            "fieldValidateRulesMaxbytes": 25165824
+        },
+        {
+            "fieldName": "copieCarte",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "minbytes",
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMinbytes": 8192,
+            "fieldValidateRulesMaxbytes": 25165824
+        },
+        {
+            "fieldName": "mention",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMaxbytes": 1000
+        },
+        {
+            "fieldName": "nomEnfant",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prenomEnfant",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateNaissanceEnfant",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "genreEnfant",
+            "fieldType": "Genre",
+            "fieldValues": "MASCULIN,FEMININ"
+        },
+        {
+            "fieldName": "nomMere",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prenomMere",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateNaissanceMere",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fonctionMere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresseComplMere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroIdentiteMere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroPassportMere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nomPere",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prenomPere",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateNaissancePere",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "adresseComplPere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fonctionPere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroIdentitePere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroPassportPere",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170702122640",
+    "entityTableName": "declaration_extrait",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "skipServer": true
+}

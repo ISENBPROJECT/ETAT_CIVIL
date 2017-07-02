@@ -1,0 +1,68 @@
+<div>
+    <h2 data-translate="etatCivilApp.pieceJointe.home.title">Piece Jointes</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="piece-jointe.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="etatCivilApp.pieceJointe.home.createLabel">
+                        Create new Piece Jointe
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="etatCivilApp.pieceJointe.copieLiterale">Copie Literale</span></th>
+                    <th><span data-translate="etatCivilApp.pieceJointe.copieCarte">Copie Carte</span></th>
+                    <th><span data-translate="etatCivilApp.pieceJointe.declaration">Declaration</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pieceJointe in vm.pieceJointes track by pieceJointe.id">
+                    <td><a ui-sref="piece-jointe-detail({id:pieceJointe.id})">{{pieceJointe.id}}</a></td>
+                    <td>
+                        <a ng-if="pieceJointe.copieLiterale" ng-click="vm.openFile(pieceJointe.copieLiteraleContentType, pieceJointe.copieLiterale)" data-translate="entity.action.open">open</a>
+                        <span ng-if="pieceJointe.copieLiterale">{{pieceJointe.copieLiteraleContentType}}, {{vm.byteSize(pieceJointe.copieLiterale)}}</span>
+                    </td>
+                    <td>
+                        <a ng-if="pieceJointe.copieCarte" ng-click="vm.openFile(pieceJointe.copieCarteContentType, pieceJointe.copieCarte)" data-translate="entity.action.open">open</a>
+                        <span ng-if="pieceJointe.copieCarte">{{pieceJointe.copieCarteContentType}}, {{vm.byteSize(pieceJointe.copieCarte)}}</span>
+                    </td>
+                    <td>
+                        <a ui-sref="extrait-detail({id:pieceJointe.declarationId})">{{pieceJointe.declarationId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="piece-jointe-detail({id:pieceJointe.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="piece-jointe.edit({id:pieceJointe.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="piece-jointe.delete({id:pieceJointe.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myRegistreNaissanceLabel" data-translate="etatCivilApp.registreNaissance.home.createOrEditLabel">Create or edit a Registre Naissance</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.registreNaissance.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.registreNaissance.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.registreNaissance.numero" for="field_numero">Numero</label>
+            <input type="number" class="form-control" name="numero" id="field_numero"
+                    ng-model="vm.registreNaissance.numero"
+                    required min="1" max="9999"/>
+            <div ng-show="editForm.numero.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.numero.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.numero.$error.min" data-translate="entity.validation.min" translate-value-min="1">
+                    This field should be at least 1.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.numero.$error.max" data-translate="entity.validation.max" translate-value-max="9999">
+                    This field cannot be more than 9999.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.numero.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.registreNaissance.anneeRegistre" for="field_anneeRegistre">Annee Registre</label>
+                <div class="input-group">
+                    <input id="field_anneeRegistre" type="text" class="form-control" name="anneeRegistre" uib-datepicker-popup="{{dateformat}}" ng-model="vm.registreNaissance.anneeRegistre" is-open="vm.datePickerOpenStatus.anneeRegistre"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('anneeRegistre')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.anneeRegistre.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.anneeRegistre.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="etatCivilApp.registreNaissance.extrait" for="field_extrait">Extrait</label>
+            <select class="form-control" id="field_extrait" name="extrait" ng-model="vm.registreNaissance.extraitId" ng-options="extrait.id as extrait.id for extrait in vm.extraits"             required>
+            </select>
+        </div>
+        <div ng-show="editForm.extrait.$invalid">
+            <p class="help-block"
+                ng-show="editForm.extrait.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

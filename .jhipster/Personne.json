@@ -1,0 +1,76 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "adresse",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pere",
+            "otherEntityName": "personne",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "mere",
+            "otherEntityName": "personne",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuNaissance",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateNaissance",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fonction",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "genre",
+            "fieldType": "Genre",
+            "fieldValues": "MASCULIN,FEMININ"
+        },
+        {
+            "fieldName": "numeroCarteIdentite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroPassport",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170702122636",
+    "entityTableName": "personne",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

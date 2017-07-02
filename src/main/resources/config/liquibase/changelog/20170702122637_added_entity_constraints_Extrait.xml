@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Extrait.
+    -->
+    <changeSet id="20170702122637-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="lieu_declaration_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_lieu_declaration_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ville"/>
+
+        <addForeignKeyConstraint baseColumnNames="enfant_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_enfant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne"/>
+
+        <addForeignKeyConstraint baseColumnNames="mere_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_mere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne"/>
+
+        <addForeignKeyConstraint baseColumnNames="pere_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_pere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne"/>
+
+        <addForeignKeyConstraint baseColumnNames="agent_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_agent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

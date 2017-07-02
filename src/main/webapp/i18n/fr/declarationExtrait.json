@@ -1,0 +1,55 @@
+{
+    "etatCivilApp": {
+        "declarationExtrait" : {
+            "home": {
+                "title": "DeclarationExtraits",
+                "createLabel": "Créer un nouveau Declaration Extrait",
+                "createOrEditLabel": "Créer ou éditer un Declaration Extrait"
+            },
+            "created": "Un nouveau Declaration Extrait a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Declaration Extrait avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Declaration Extrait avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Declaration Extrait {{ id }} ?"
+            },
+            "detail": {
+                "title": "Declaration Extrait"
+            },
+            "copieLiterale": "Copie Literale",
+            "copieCarte": "Copie Carte",
+            "mention": "Mention",
+            "nomEnfant": "Nom Enfant",
+            "prenomEnfant": "Prenom Enfant",
+            "dateNaissanceEnfant": "Date Naissance Enfant",
+            "genreEnfant": "Genre Enfant",
+            "nomMere": "Nom Mere",
+            "prenomMere": "Prenom Mere",
+            "dateNaissanceMere": "Date Naissance Mere",
+            "fonctionMere": "Fonction Mere",
+            "adresseComplMere": "Adresse Compl Mere",
+            "numeroIdentiteMere": "Numero Identite Mere",
+            "numeroPassportMere": "Numero Passport Mere",
+            "nomPere": "Nom Pere",
+            "prenomPere": "Prenom Pere",
+            "dateNaissancePere": "Date Naissance Pere",
+            "adresseComplPere": "Adresse Compl Pere",
+            "fonctionPere": "Fonction Pere",
+            "numeroIdentitePere": "Numero Identite Pere",
+            "numeroPassportPere": "Numero Passport Pere",
+            "lieuNaissanceEnfant": "Lieu Naissance Enfant",
+            "adresseEnfant": "Adresse Enfant",
+            "adressePere": "Adresse Pere",
+            "adresseMere": "Adresse Mere",
+            "lieuNaissancePere": "Lieu Naissance Pere",
+            "lieuNaissanceMere": "Lieu Naissance Mere",
+            "lieuDeclaration": "Lieu Declaration",
+            "paysNaissanceEnfant": "Pays Naissance Enfant",
+            "adrPaysEnfant": "Adr Pays Enfant",
+            "paysNaissanceMere": "Pays Naissance Mere",
+            "adrPaysMere": "Adr Pays Mere",
+            "paysNaissancePere": "Pays Naissance Pere",
+            "adrPaysPere": "Adr Pays Pere",
+            "paysDeclaration": "Pays Declaration"
+        }
+    }
+}

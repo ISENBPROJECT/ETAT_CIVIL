@@ -1,0 +1,31 @@
+{
+    "etatCivilApp": {
+        "personne" : {
+            "home": {
+                "title": "Personnes",
+                "createLabel": "Create a new Personne",
+                "createOrEditLabel": "Create or edit a Personne"
+            },
+            "created": "A new Personne is created with identifier {{ param }}",
+            "updated": "A Personne is updated with identifier {{ param }}",
+            "deleted": "A Personne is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Personne {{ id }}?"
+            },
+            "detail": {
+                "title": "Personne"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "dateNaissance": "Date Naissance",
+            "fonction": "Fonction",
+            "genre": "Genre",
+            "numeroCarteIdentite": "Numero Carte Identite",
+            "numeroPassport": "Numero Passport",
+            "adresse": "Adresse",
+            "pere": "Pere",
+            "mere": "Mere",
+            "lieuNaissance": "Lieu Naissance"
+        }
+    }
+}

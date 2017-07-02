@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "declaration",
+            "otherEntityName": "extrait",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "copieLiterale",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "minbytes",
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMinbytes": 8192,
+            "fieldValidateRulesMaxbytes": 25165824
+        },
+        {
+            "fieldName": "copieCarte",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "minbytes",
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMinbytes": 8192,
+            "fieldValidateRulesMaxbytes": 25165824
+        }
+    ],
+    "changelogDate": "20170702122638",
+    "entityTableName": "piece_jointe",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

@@ -1,0 +1,82 @@
+<div>
+    <h2 data-translate="etatCivilApp.extrait.home.title">Extraits</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="extrait.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="etatCivilApp.extrait.home.createLabel">
+                        Create new Extrait
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.numeroRegistre">Numero Registre</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.mention">Mention</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.dateDeclaration">Date Declaration</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.validated">Validated</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.lieuDeclaration">Lieu Declaration</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.enfant">Enfant</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.mere">Mere</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.pere">Pere</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.agent">Agent</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="extrait in vm.extraits track by extrait.id">
+                    <td><a ui-sref="extrait-detail({id:extrait.id})">{{extrait.id}}</a></td>
+                    <td>{{extrait.numeroRegistre}}</td>
+                    <td>{{extrait.mention}}</td>
+                        <td>{{extrait.dateDeclaration | date:'mediumDate'}}</td>
+                    <td>{{extrait.validated}}</td>
+                    <td>
+                        <a ui-sref="ville-detail({id:extrait.lieuDeclarationId})">{{extrait.lieuDeclarationId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="personne-detail({id:extrait.enfantId})">{{extrait.enfantId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="personne-detail({id:extrait.mereId})">{{extrait.mereId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="personne-detail({id:extrait.pereId})">{{extrait.pereId}}</a>
+                    </td>
+                    <td>
+                        {{extrait.agentId}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="extrait-detail({id:extrait.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="extrait.edit({id:extrait.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="extrait.delete({id:extrait.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

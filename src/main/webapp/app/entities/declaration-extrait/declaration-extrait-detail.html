@@ -1,0 +1,165 @@
+
+<div>
+    <h2><span data-translate="etatCivilApp.declarationExtrait.detail.title">Declaration Extrait</span> {{vm.declarationExtrait.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="etatCivilApp.declarationExtrait.copieLiterale">Copie Literale</span></dt>
+        <dd>
+            <div ng-if="vm.declarationExtrait.copieLiterale">
+                <a ng-click="vm.openFile(vm.declarationExtrait.copieLiteraleContentType, vm.declarationExtrait.copieLiterale)" data-translate="entity.action.open">open</a>
+                {{vm.declarationExtrait.copieLiteraleContentType}}, {{vm.byteSize(vm.declarationExtrait.copieLiterale)}}
+            </div>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.copieCarte">Copie Carte</span></dt>
+        <dd>
+            <div ng-if="vm.declarationExtrait.copieCarte">
+                <a ng-click="vm.openFile(vm.declarationExtrait.copieCarteContentType, vm.declarationExtrait.copieCarte)" data-translate="entity.action.open">open</a>
+                {{vm.declarationExtrait.copieCarteContentType}}, {{vm.byteSize(vm.declarationExtrait.copieCarte)}}
+            </div>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.mention">Mention</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.mention}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.nomEnfant">Nom Enfant</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.nomEnfant}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.prenomEnfant">Prenom Enfant</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.prenomEnfant}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant">Date Naissance Enfant</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.dateNaissanceEnfant | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.genreEnfant">Genre Enfant</span></dt>
+        <dd>
+            <span data-translate="{{'etatCivilApp.Genre.' + vm.declarationExtrait.genreEnfant}}">{{vm.declarationExtrait.genreEnfant}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.nomMere">Nom Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.nomMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.prenomMere">Prenom Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.prenomMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere">Date Naissance Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.dateNaissanceMere | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.fonctionMere">Fonction Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.fonctionMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adresseComplMere">Adresse Compl Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.adresseComplMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.numeroIdentiteMere">Numero Identite Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.numeroIdentiteMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.numeroPassportMere">Numero Passport Mere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.numeroPassportMere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.nomPere">Nom Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.nomPere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.prenomPere">Prenom Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.prenomPere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.dateNaissancePere">Date Naissance Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.dateNaissancePere | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adresseComplPere">Adresse Compl Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.adresseComplPere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.fonctionPere">Fonction Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.fonctionPere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere">Numero Identite Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.numeroIdentitePere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.numeroPassportPere">Numero Passport Pere</span></dt>
+        <dd>
+            <span>{{vm.declarationExtrait.numeroPassportPere}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant">Lieu Naissance Enfant</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.lieuNaissanceEnfantId})">{{vm.declarationExtrait.lieuNaissanceEnfantId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adresseEnfant">Adresse Enfant</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.adresseEnfantId})">{{vm.declarationExtrait.adresseEnfantId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adressePere">Adresse Pere</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.adressePereId})">{{vm.declarationExtrait.adressePereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adresseMere">Adresse Mere</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.adresseMereId})">{{vm.declarationExtrait.adresseMereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere">Lieu Naissance Pere</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.lieuNaissancePereId})">{{vm.declarationExtrait.lieuNaissancePereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere">Lieu Naissance Mere</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.lieuNaissanceMereId})">{{vm.declarationExtrait.lieuNaissanceMereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.lieuDeclaration">Lieu Declaration</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.declarationExtrait.lieuDeclarationId})">{{vm.declarationExtrait.lieuDeclarationId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant">Pays Naissance Enfant</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.paysNaissanceEnfantId})">{{vm.declarationExtrait.paysNaissanceEnfantId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant">Adr Pays Enfant</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.adrPaysEnfantId})">{{vm.declarationExtrait.adrPaysEnfantId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere">Pays Naissance Mere</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.paysNaissanceMereId})">{{vm.declarationExtrait.paysNaissanceMereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adrPaysMere">Adr Pays Mere</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.adrPaysMereId})">{{vm.declarationExtrait.adrPaysMereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.paysNaissancePere">Pays Naissance Pere</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.paysNaissancePereId})">{{vm.declarationExtrait.paysNaissancePereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.adrPaysPere">Adr Pays Pere</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.adrPaysPereId})">{{vm.declarationExtrait.adrPaysPereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.declarationExtrait.paysDeclaration">Pays Declaration</span></dt>
+        <dd>
+            <a ui-sref="pays-detail({id:vm.declarationExtrait.paysDeclarationId})">{{vm.declarationExtrait.paysDeclarationId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="declaration-extrait-detail.edit({id:vm.declarationExtrait.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

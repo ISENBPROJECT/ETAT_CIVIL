@@ -1,0 +1,30 @@
+{
+    "etatCivilApp": {
+        "extrait" : {
+            "home": {
+                "title": "Extraits",
+                "createLabel": "Créer un nouveau Extrait",
+                "createOrEditLabel": "Créer ou éditer un Extrait"
+            },
+            "created": "Un nouveau Extrait a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Extrait avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Extrait avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Extrait {{ id }} ?"
+            },
+            "detail": {
+                "title": "Extrait"
+            },
+            "numeroRegistre": "Numero Registre",
+            "mention": "Mention",
+            "dateDeclaration": "Date Declaration",
+            "validated": "Validated",
+            "lieuDeclaration": "Lieu Declaration",
+            "enfant": "Enfant",
+            "mere": "Mere",
+            "pere": "Pere",
+            "agent": "Agent",
+            "piecesJointes": "Pieces Jointes"
+        }
+    }
+}

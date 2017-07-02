@@ -42,6 +42,13 @@ public class CacheConfiguration {
             cm.createCache(com.consulat.sn.etatcivil.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.consulat.sn.etatcivil.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.consulat.sn.etatcivil.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.Pays.class.getName(), jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.Ville.class.getName(), jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.Personne.class.getName(), jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.Extrait.class.getName(), jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.Extrait.class.getName() + ".piecesJointes", jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.PieceJointe.class.getName(), jcacheConfiguration);
+            cm.createCache(com.consulat.sn.etatcivil.domain.RegistreNaissance.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

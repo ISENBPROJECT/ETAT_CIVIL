@@ -1,0 +1,23 @@
+{
+    "etatCivilApp": {
+        "pieceJointe" : {
+            "home": {
+                "title": "PieceJointes",
+                "createLabel": "Créer un nouveau Piece Jointe",
+                "createOrEditLabel": "Créer ou éditer un Piece Jointe"
+            },
+            "created": "Un nouveau Piece Jointe a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Piece Jointe avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Piece Jointe avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Piece Jointe {{ id }} ?"
+            },
+            "detail": {
+                "title": "Piece Jointe"
+            },
+            "copieLiterale": "Copie Literale",
+            "copieCarte": "Copie Carte",
+            "declaration": "Declaration"
+        }
+    }
+}

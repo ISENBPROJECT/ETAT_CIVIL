@@ -1,0 +1,84 @@
+<div>
+    <h2 data-translate="etatCivilApp.personne.home.title">Personnes</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="personne.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="etatCivilApp.personne.home.createLabel">
+                        Create new Personne
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="etatCivilApp.personne.nom">Nom</span></th>
+                    <th><span data-translate="etatCivilApp.personne.prenom">Prenom</span></th>
+                    <th><span data-translate="etatCivilApp.personne.dateNaissance">Date Naissance</span></th>
+                    <th><span data-translate="etatCivilApp.personne.fonction">Fonction</span></th>
+                    <th><span data-translate="etatCivilApp.personne.genre">Genre</span></th>
+                    <th><span data-translate="etatCivilApp.personne.numeroCarteIdentite">Numero Carte Identite</span></th>
+                    <th><span data-translate="etatCivilApp.personne.numeroPassport">Numero Passport</span></th>
+                    <th><span data-translate="etatCivilApp.personne.adresse">Adresse</span></th>
+                    <th><span data-translate="etatCivilApp.personne.pere">Pere</span></th>
+                    <th><span data-translate="etatCivilApp.personne.mere">Mere</span></th>
+                    <th><span data-translate="etatCivilApp.personne.lieuNaissance">Lieu Naissance</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="personne in vm.personnes track by personne.id">
+                    <td><a ui-sref="personne-detail({id:personne.id})">{{personne.id}}</a></td>
+                    <td>{{personne.nom}}</td>
+                    <td>{{personne.prenom}}</td>
+                        <td>{{personne.dateNaissance | date:'mediumDate'}}</td>
+                    <td>{{personne.fonction}}</td>
+                    <td data-translate="{{'etatCivilApp.Genre.' + personne.genre}}">{{personne.genre}}</td>
+                    <td>{{personne.numeroCarteIdentite}}</td>
+                    <td>{{personne.numeroPassport}}</td>
+                    <td>
+                        <a ui-sref="ville-detail({id:personne.adresseId})">{{personne.adresseId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="personne-detail({id:personne.pereId})">{{personne.pereId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="personne-detail({id:personne.mereId})">{{personne.mereId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="ville-detail({id:personne.lieuNaissanceId})">{{personne.lieuNaissanceId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="personne-detail({id:personne.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="personne.edit({id:personne.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="personne.delete({id:personne.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

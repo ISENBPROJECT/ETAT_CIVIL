@@ -1,0 +1,23 @@
+{
+    "etatCivilApp": {
+        "registreNaissance" : {
+            "home": {
+                "title": "Registre Naissances",
+                "createLabel": "Create a new Registre Naissance",
+                "createOrEditLabel": "Create or edit a Registre Naissance"
+            },
+            "created": "A new Registre Naissance is created with identifier {{ param }}",
+            "updated": "A Registre Naissance is updated with identifier {{ param }}",
+            "deleted": "A Registre Naissance is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Registre Naissance {{ id }}?"
+            },
+            "detail": {
+                "title": "Registre Naissance"
+            },
+            "numero": "Numero",
+            "anneeRegistre": "Annee Registre",
+            "extrait": "Extrait"
+        }
+    }
+}

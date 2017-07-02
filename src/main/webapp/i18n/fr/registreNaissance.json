@@ -1,0 +1,23 @@
+{
+    "etatCivilApp": {
+        "registreNaissance" : {
+            "home": {
+                "title": "RegistreNaissances",
+                "createLabel": "Créer un nouveau Registre Naissance",
+                "createOrEditLabel": "Créer ou éditer un Registre Naissance"
+            },
+            "created": "Un nouveau Registre Naissance a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Registre Naissance avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Registre Naissance avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Registre Naissance {{ id }} ?"
+            },
+            "detail": {
+                "title": "Registre Naissance"
+            },
+            "numero": "Numero",
+            "anneeRegistre": "Annee Registre",
+            "extrait": "Extrait"
+        }
+    }
+}

@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="etatCivilApp.extrait.detail.title">Extrait</span> {{vm.extrait.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="etatCivilApp.extrait.numeroRegistre">Numero Registre</span></dt>
+        <dd>
+            <span>{{vm.extrait.numeroRegistre}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.mention">Mention</span></dt>
+        <dd>
+            <span>{{vm.extrait.mention}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.dateDeclaration">Date Declaration</span></dt>
+        <dd>
+            <span>{{vm.extrait.dateDeclaration | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.validated">Validated</span></dt>
+        <dd>
+            <span>{{vm.extrait.validated}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.lieuDeclaration">Lieu Declaration</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.extrait.lieuDeclarationId})">{{vm.extrait.lieuDeclarationId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.enfant">Enfant</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.extrait.enfantId})">{{vm.extrait.enfantId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.mere">Mere</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.extrait.mereId})">{{vm.extrait.mereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.pere">Pere</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.extrait.pereId})">{{vm.extrait.pereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.agent">Agent</span></dt>
+        <dd>
+            {{vm.extrait.agentId}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="extrait-detail.edit({id:vm.extrait.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

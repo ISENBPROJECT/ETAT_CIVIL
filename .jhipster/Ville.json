@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pays",
+            "otherEntityName": "pays",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "codePostal",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "adresseComplementaire",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170702122635",
+    "entityTableName": "ville",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

@@ -1,0 +1,81 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lieuDeclaration",
+            "otherEntityName": "ville",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "enfant",
+            "otherEntityName": "personne",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "mere",
+            "otherEntityName": "personne",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "pere",
+            "otherEntityName": "personne",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "piecesJointes",
+            "otherEntityName": "pieceJointe",
+            "otherEntityRelationshipName": "declaration"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numeroRegistre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "mention",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "maxbytes",
+                "required"
+            ],
+            "fieldValidateRulesMaxbytes": 1000
+        },
+        {
+            "fieldName": "dateDeclaration",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "validated",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170702122637",
+    "entityTableName": "extrait",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

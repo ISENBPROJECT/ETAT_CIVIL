@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span data-translate="etatCivilApp.personne.detail.title">Personne</span> {{vm.personne.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="etatCivilApp.personne.nom">Nom</span></dt>
+        <dd>
+            <span>{{vm.personne.nom}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{vm.personne.prenom}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.dateNaissance">Date Naissance</span></dt>
+        <dd>
+            <span>{{vm.personne.dateNaissance | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.fonction">Fonction</span></dt>
+        <dd>
+            <span>{{vm.personne.fonction}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.genre">Genre</span></dt>
+        <dd>
+            <span data-translate="{{'etatCivilApp.Genre.' + vm.personne.genre}}">{{vm.personne.genre}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.numeroCarteIdentite">Numero Carte Identite</span></dt>
+        <dd>
+            <span>{{vm.personne.numeroCarteIdentite}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.numeroPassport">Numero Passport</span></dt>
+        <dd>
+            <span>{{vm.personne.numeroPassport}}</span>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.adresse">Adresse</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.personne.adresseId})">{{vm.personne.adresseId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.pere">Pere</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.personne.pereId})">{{vm.personne.pereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.mere">Mere</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.personne.mereId})">{{vm.personne.mereId}}</a>
+        </dd>
+        <dt><span data-translate="etatCivilApp.personne.lieuNaissance">Lieu Naissance</span></dt>
+        <dd>
+            <a ui-sref="ville-detail({id:vm.personne.lieuNaissanceId})">{{vm.personne.lieuNaissanceId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="personne-detail.edit({id:vm.personne.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

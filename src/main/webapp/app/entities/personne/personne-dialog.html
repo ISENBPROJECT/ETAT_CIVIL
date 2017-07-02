@@ -1,0 +1,125 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPersonneLabel" data-translate="etatCivilApp.personne.home.createOrEditLabel">Create or edit a Personne</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.personne.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.personne.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                    ng-model="vm.personne.nom"
+                    required/>
+            <div ng-show="editForm.nom.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.nom.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                    ng-model="vm.personne.prenom"
+                    required/>
+            <div ng-show="editForm.prenom.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.prenom.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+                <div class="input-group">
+                    <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance" uib-datepicker-popup="{{dateformat}}" ng-model="vm.personne.dateNaissance" is-open="vm.datePickerOpenStatus.dateNaissance"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissance')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.dateNaissance.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.dateNaissance.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.fonction" for="field_fonction">Fonction</label>
+            <input type="text" class="form-control" name="fonction" id="field_fonction"
+                    ng-model="vm.personne.fonction"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.genre" for="field_genre">Genre</label>
+            <select class="form-control" name="genre" ng-model="vm.personne.genre" id="field_genre">
+                <option value="MASCULIN" data-translate="etatCivilApp.Genre.MASCULIN">MASCULIN</option>
+                <option value="FEMININ" data-translate="etatCivilApp.Genre.FEMININ">FEMININ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.numeroCarteIdentite" for="field_numeroCarteIdentite">Numero Carte Identite</label>
+            <input type="text" class="form-control" name="numeroCarteIdentite" id="field_numeroCarteIdentite"
+                    ng-model="vm.personne.numeroCarteIdentite"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.numeroPassport" for="field_numeroPassport">Numero Passport</label>
+            <input type="text" class="form-control" name="numeroPassport" id="field_numeroPassport"
+                    ng-model="vm.personne.numeroPassport"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="etatCivilApp.personne.adresse" for="field_adresse">Adresse</label>
+            <select class="form-control" id="field_adresse" name="adresse" ng-model="vm.personne.adresseId" ng-options="ville.id as ville.id for ville in vm.villes"             required>
+            </select>
+        </div>
+        <div ng-show="editForm.adresse.$invalid">
+            <p class="help-block"
+                ng-show="editForm.adresse.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="etatCivilApp.personne.pere" for="field_pere">Pere</label>
+            <select class="form-control" id="field_pere" name="pere" ng-model="vm.personne.pereId" ng-options="personne.id as personne.id for personne in vm.personnes"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="etatCivilApp.personne.mere" for="field_mere">Mere</label>
+            <select class="form-control" id="field_mere" name="mere" ng-model="vm.personne.mereId" ng-options="personne.id as personne.id for personne in vm.personnes"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="etatCivilApp.personne.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
+            <select class="form-control" id="field_lieuNaissance" name="lieuNaissance" ng-model="vm.personne.lieuNaissanceId" ng-options="ville.id as ville.id for ville in vm.villes"             required>
+            </select>
+        </div>
+        <div ng-show="editForm.lieuNaissance.$invalid">
+            <p class="help-block"
+                ng-show="editForm.lieuNaissance.$error.required" data-translate="entity.validation.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
