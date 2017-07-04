@@ -5,9 +5,9 @@
         .module('etatCivilApp')
         .controller('DeclarationExtraitDialogController', DeclarationExtraitDialogController);
 
-    DeclarationExtraitDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays'];
+    DeclarationExtraitDialogController.$inject = ['$timeout', '$scope', '$state', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays'];
 
-    function DeclarationExtraitDialogController($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, DeclarationExtrait, Ville, Pays) {
+    function DeclarationExtraitDialogController($timeout, $scope, $state, DataUtils, entity, DeclarationExtrait, Ville, Pays) {
         var vm = this;
 
         vm.declarationExtrait = entity;
@@ -33,7 +33,7 @@
         vm.updateVilleResidenceMere = updateVilleResidenceMere;
         vm.updateVilleResidencePere = updateVilleResidencePere;
         vm.updateResidenceEnfant = updateResidenceEnfant;
-        vm.updateVilleDeclaration= updateVilleDeclaration;
+        vm.updateVilleDeclaration = updateVilleDeclaration;
         vm.F_PrintFile = F_PrintFile;
         vm.retourAccueil = retourAccueil;
         vm.ouvirActeNaissancePopup = ouvirActeNaissancePopup;
@@ -43,7 +43,7 @@
         });
 
         function clear() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         }
 
         function save() {
@@ -52,14 +52,16 @@
                 DeclarationExtrait.update(vm.declarationExtrait, onSaveSuccess, onSaveError);
             } else {
                 DeclarationExtrait.save(vm.declarationExtrait, onSaveSuccess, onSaveError);
+
             }
+
         }
 
         function onSaveSuccess(result) {
-            $scope.$emit('etatCivilApp:declarationExtraitUpdate', result);
-            $uibModalInstance.close(result);
+            //$scope.$emit('etatCivilApp:declarationExtraitUpdate', result);
+            // $uibModalInstance.close(result);
+            $state.go('declaration-extrait-affichagePdf');
             vm.isSaving = false;
-            $state.go('declaration-naissance-affichagePdf');
         }
 
         function onSaveError() {
@@ -97,7 +99,7 @@
         }
 
         function updateVilleNaissanceMere() {
-           vm.villesNaissancesMere.length = 0;
+            vm.villesNaissancesMere.length = 0;
 
             vm.villes.forEach(function (ville) {
                 if (ville.paysId == vm.declarationExtrait.paysNaissanceMereId.id) {
@@ -166,13 +168,13 @@
 
         function ouvirActeNaissancePopup() {
 
-            var fichier = 'app/document/' + vm.declarationNaissance.informationEnfant.prenom + '_' + vm.declarationNaissance.informationEnfant.nom + '_acte_naissance.pdf';
+            var fichier = 'app/documents/' + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_acte_naissance.pdf';
             window.open(fichier, "popup", "width=900,height=600")
         }
 
         function ouvirTranscriptionPopup() {
 
-            var fichier = 'app/document/' + vm.declarationNaissance.informationEnfant.prenom + '_' + vm.declarationNaissance.informationEnfant.nom + '_transcription_naissance.pdf';
+            var fichier = 'app/documents/' + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_transcription_naissance.pdf';
             window.open(fichier, "popup", "width=900,height=600")
         }
 
