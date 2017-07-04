@@ -4,10 +4,13 @@ import com.consulat.sn.etatcivil.domain.User;
 import com.consulat.sn.etatcivil.domain.enumeration.Genre;
 import com.consulat.sn.etatcivil.service.*;
 import com.consulat.sn.etatcivil.service.dto.*;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,6 +105,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
             //je créé l'extrait fichier
             printExtraitNaissance(extraitDTO.getId());
+
+            try{
+                creerTranscription(declarationExtraitDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         log.debug("Request to save DeclarationExtrait : {}", declarationExtraitDTO);
         // ExtraitDTO declarationExtrait = declarationExtraitMapper.toExtrait(declarationExtraitDTO);
@@ -190,13 +199,17 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         enfant.setPrenom(declarationExtraitDTO.getPrenomEnfant());
         enfant.setDateNaissance(declarationExtraitDTO.getDateNaissanceEnfant());
         enfant.setGenre(declarationExtraitDTO.getGenreEnfant());
-        enfant.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceEnfantId().getId());
-        enfant.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
-
+        if (null != declarationExtraitDTO.getLieuNaissanceEnfantId().getId()) {
+            enfant.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceEnfantId().getId());
+        }
+        if (null != declarationExtraitDTO.getAdresseMereId().getId()) {
+            enfant.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
+        }
 
         mere.setNom(declarationExtraitDTO.getNomMere());
         mere.setPrenom(declarationExtraitDTO.getPrenomMere());
-        //mere.setDateNaissance(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()));
+        mere.setDateNaissance(declarationExtraitDTO.getDateNaissanceMere());
+        mere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportMere());
         mere.setGenre(Genre.FEMININ);
         mere.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
         mere.setFonction(declarationExtraitDTO.getFonctionMere());
@@ -304,12 +317,65 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         Instant instant = date.atStartOfDay().atZone(ZoneId.systemDefault())
             .toInstant();
         return Date.from(instant);
-    }public static Date local(LocalDate date) {
+    }
+
+    public static Date local(LocalDate date) {
         Instant instant = date.atStartOfDay().atZone(ZoneId.systemDefault())
             .toInstant();
         //return ZonedDateTime.from(TemporalAccessor.class);
         return null;
     }
+
+    /**
+     *
+     * @param declarationExtraitDTO
+     * @throws IOException
+     * @throws DocumentException
+     *
+     * Cette fonction permet de créer le fichier de transcription de naissance
+     */
+    public void creerTranscription (DeclarationExtraitDTO declarationExtraitDTO)
+        throws IOException, DocumentException{
+        User user = userService.getUserWithAuthorities(3L);
+        String FILE = declarationExtraitDTO.getPrenomEnfant()+"_"+declarationExtraitDTO.getNomEnfant()
+            +"_transcription_naissance.pdf";
+        Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+            Font.BOLD);
+        Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+            Font.BOLD);
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("src/main/webapp/app/documents/"+FILE));
+        document.open();
+        String personne_qui_transcrit = "Monsieur "+ user.getFirstName() + "  " + user.getLastName(); //"Monsieur Abdourahmane KOITA"; /// c'est le user qui s'est connecté
+        String  fonction = "Consul Général de la République du Sénégal à Bordeaux"; //fonction du user
+
+        Paragraph preface = new Paragraph();
+        addEmptyLine(preface, 1);
+        preface.add(new Paragraph("Transcription de l’acte de naissance", catFont));
+        addEmptyLine(preface, 2);
+        preface.add(new Paragraph("Année :"+year,smallBold));
+        addEmptyLine(preface, 1);
+        preface.add(new Paragraph("Le "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant()))+" est né(e) à "
+            +declarationExtraitDTO.getAdresseEnfantId().getNom()+", "
+            +declarationExtraitDTO.getPrenomEnfant()+" "+declarationExtraitDTO.getNomEnfant()
+            +", de "+declarationExtraitDTO.getPrenomPere()+" "+declarationExtraitDTO.getNomPere()
+            +" né le : "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissancePere()))
+            +" à "+declarationExtraitDTO.getLieuNaissancePereId().getNom()+", "+declarationExtraitDTO.getFonctionPere()
+            +" et de "+declarationExtraitDTO.getPrenomMere()+" "+declarationExtraitDTO.getNomMere()+","
+            + " née le : "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()))
+            +" à "+declarationExtraitDTO.getLieuNaissanceMereId().getNom()+", "+declarationExtraitDTO.getFonctionMere()+"."));
+        addEmptyLine(preface, 1);
+        preface.add(new Paragraph("Transcrit le "+format_fr.format(new Date())+", par Nous, "+personne_qui_transcrit+", "+fonction
+            +", Officier de l’état-civil sur la foi de l’acte de naissance authentique, ci-contre, dressé par la Mairie de "
+            +declarationExtraitDTO.getLieuDeclarationId().getNom()+"."));
+        document.add(preface);
+        document.close();
+
+    }
+
 /*
     *//**
      * Get all the declarationExtraits.
