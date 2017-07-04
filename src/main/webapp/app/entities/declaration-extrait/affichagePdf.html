@@ -2,21 +2,40 @@
 <html>
 
 <body>
+<jhi-alert></jhi-alert>
+<div class="modal-header">
+   <h2 class="headerImpression"> Impression des documents</h2>
 
-   <h2 class="titre"> Impression des documents</h2>
-    <br><br>
-<button  class="h0 couleurBouton  dark-gray thumbnail blockPageAccueil" ng-click ="vm.ouvirActeNaissancePopup();">Imprimer l'acte de naissance</button> 
- 
- <button  class="h0 couleurBouton dark-gray thumbnail blockPageAccueil" ng-click ="vm.ouvirTranscriptionPopup();">Imprimer la transcription</button> 
- 
+    </div>
+
+<div class="row">
+    <div class="col-xs-4">
+        <button class="btn btn-primary" ng-click="vm.ouvirActeNaissancePopup()" >
+                    <span  data-translate="etatCivilApp.declarationExtrait.home.impressionExtrait">
+                        Create new Declaration Extrait
+                    </span>
+        </button>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col-xs-4">
+        <button class="btn btn-primary" ng-click="vm.ouvirTranscriptionPopup()" >
+                    <span  data-translate="etatCivilApp.declarationExtrait.home.impressionTranscription">
+                        Create new Declaration Extrait
+                    </span>
+        </button>
+    </div>
+</div>
 
  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.retourAccueil();">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Retour</span>
         </button>
-      
+
    </div>
 </body>
- 
+
 </html>
 

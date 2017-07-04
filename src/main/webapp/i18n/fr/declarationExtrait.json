@@ -4,7 +4,9 @@
             "home": {
                 "title": "DeclarationExtraits",
                 "createLabel": "Créer un nouveau Declaration Extrait",
-                "createOrEditLabel": "Extrait de naissance"
+                "createOrEditLabel": "Extrait de naissance",
+                "impressionExtrait": "Imprimer l'acte de naissance",
+                "impressionTranscription": "Imprimer la transcription"
             },
             "created": "Un nouveau Declaration Extrait a été créé avec l'identifiant {{ param }}",
             "updated": "Le Declaration Extrait avec l'identifiant {{ param }} a été mis à jour",

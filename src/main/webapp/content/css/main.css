@@ -360,4 +360,7 @@ ui bootstrap tweaks
 .containerFlexItemEnfant {
     background-color: #e2f6d1;
 }
+.headerImpression{
+    text-align: center;
+}
 

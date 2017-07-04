@@ -96,49 +96,44 @@
                 data: {
                     authorities: ['ROLE_USER']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
+                views: {
+                    'content@': {
                         templateUrl: 'app/entities/declaration-extrait/declaration-extrait-dialog.html',
                         controller: 'DeclarationExtraitDialogController',
-                        controllerAs: 'vm',
-                        backdrop: 'static',
-                        size: 'lg',
-                        resolve: {
-                            entity: function () {
-                                return {
-                                    copieLiterale: null,
-                                    copieLiteraleContentType: null,
-                                    copieCarte: null,
-                                    copieCarteContentType: null,
-                                    mention: null,
-                                    nomEnfant: null,
-                                    prenomEnfant: null,
-                                    dateNaissanceEnfant: null,
-                                    genreEnfant: null,
-                                    nomMere: null,
-                                    prenomMere: null,
-                                    dateNaissanceMere: null,
-                                    fonctionMere: null,
-                                    adresseComplMere: null,
-                                    numeroIdentiteMere: null,
-                                    numeroPassportMere: null,
-                                    nomPere: null,
-                                    prenomPere: null,
-                                    dateNaissancePere: null,
-                                    adresseComplPere: null,
-                                    fonctionPere: null,
-                                    numeroIdentitePere: null,
-                                    numeroPassportPere: null,
-                                    id: null
-                                };
-                            }
-                        }
-                    }).result.then(function() {
-                        $state.go('declaration-extrait', null, { reload: 'declaration-extrait' });
-                    }, function() {
-                        $state.go('declaration-extrait');
-                    });
-                }]
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    entity: function () {
+                        return {
+                            copieLiterale: null,
+                            copieLiteraleContentType: null,
+                            copieCarte: null,
+                            copieCarteContentType: null,
+                            mention: null,
+                            nomEnfant: null,
+                            prenomEnfant: null,
+                            dateNaissanceEnfant: null,
+                            genreEnfant: null,
+                            nomMere: null,
+                            prenomMere: null,
+                            dateNaissanceMere: null,
+                            fonctionMere: null,
+                            adresseComplMere: null,
+                            numeroIdentiteMere: null,
+                            numeroPassportMere: null,
+                            nomPere: null,
+                            prenomPere: null,
+                            dateNaissancePere: null,
+                            adresseComplPere: null,
+                            fonctionPere: null,
+                            numeroIdentitePere: null,
+                            numeroPassportPere: null,
+                            id: null
+                        };
+                    }
+                }
+
             })
             .state('declaration-extrait.edit', {
                 parent: 'declaration-extrait',
@@ -189,16 +184,15 @@
                     });
                 }]
             })
-            .state('declaration-naissance-affichagePdf', {
-                parent: 'declaration-naissance-detail',
-                url: '/affichagePdf',
+            .state('declaration-extrait-affichagePdf', {
+                parent: 'declaration-extrait.new',
+                url: '/impressionPdf',
                 data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'etatcivilApp.declarationNaissance.detail.title'
+                    authorities: ['ROLE_USER']
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/entities/declaration-naissance/affichagePdf.html',
+                        templateUrl: 'app/entities/declaration-extrait/affichagePdf.html',
                         controller: 'DeclarationExtraitDialogController',
                         controllerAs: 'vm'
                     }
