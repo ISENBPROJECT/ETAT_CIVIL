@@ -38,12 +38,18 @@
         vm.retourAccueil = retourAccueil;
         vm.ouvirActeNaissancePopup = ouvirActeNaissancePopup;
         vm.ouvirTranscriptionPopup = ouvirTranscriptionPopup;
+        vm.valider = valider;
+        $scope.test = false;
+        $scope.isrecap = false;
+        $scope.isnew = true;
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear() {
-            //$uibModalInstance.dismiss('cancel');
+            $scope.isnew = true;
+            $scope.isrecap = false;
+            $scope.test = false;
         }
 
         function save() {
@@ -185,6 +191,20 @@
         function retourAccueil() {
             $state.go('home');
 
+        }
+
+        function valider() {
+            $scope.test = true;
+            $scope.isrecap = true;
+            $scope.isnew = false;
+            vm.isSaving = true;
+        }
+
+
+        function modifier(){
+            $scope.isnew = true;
+            $scope.isrecap = false;
+            $scope.test = false;
         }
     }
 })();

@@ -5,6 +5,7 @@
                 "title": "DeclarationExtraits",
                 "createLabel": "Créer un nouveau Declaration Extrait",
                 "createOrEditLabel": "Extrait de naissance",
+                "recaptitulatif": "Récapitulatif des informations saisies",
                 "impressionExtrait": "Imprimer l'acte de naissance",
                 "impressionTranscription": "Imprimer la transcription"
             },

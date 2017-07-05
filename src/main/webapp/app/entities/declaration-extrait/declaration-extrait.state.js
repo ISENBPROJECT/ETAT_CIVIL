@@ -198,6 +198,21 @@
                     }
                 }
 
+            })
+            .state('declaration-extrait.recap', {
+                parent: 'declaration-extrait.new',
+                url: '/recap',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/declaration-extrait/declaration-extrait-recap.html',
+                        controller: 'DeclarationExtraitDialogController',
+                        controllerAs: 'vm'
+                    }
+                }
+
             });
     }
 

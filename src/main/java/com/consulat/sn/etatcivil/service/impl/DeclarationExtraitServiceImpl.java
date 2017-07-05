@@ -11,12 +11,14 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -103,10 +105,19 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
             declarationExtraitDTO.setId(extraitDTO.getId());
 
-            //je créé l'extrait fichier
-            printExtraitNaissance(extraitDTO.getId());
+            //je vide le répertoire de travail src/main/webapp/app/documents/
+            viderDocuments();
 
-            try{
+            //je créé l'extrait fichier
+            try {
+
+                printExtraitNaissance(extraitDTO.getId());
+            } catch (Exception e) {
+                e.getMessage();
+            }
+
+
+            try {
                 creerTranscription(declarationExtraitDTO);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -116,6 +127,18 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         // ExtraitDTO declarationExtrait = declarationExtraitMapper.toExtrait(declarationExtraitDTO);
 
         return declarationExtraitDTO;
+    }
+
+    private void viderDocuments() {
+        File file = new File("src/main/webapp/app/documents/");
+        try {
+            File[] listeDesFichiers = file.listFiles();
+            if (listeDesFichiers.length !=0) {
+                FileUtils.cleanDirectory(file);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -327,18 +350,15 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     }
 
     /**
-     *
      * @param declarationExtraitDTO
      * @throws IOException
-     * @throws DocumentException
-     *
-     * Cette fonction permet de créer le fichier de transcription de naissance
+     * @throws DocumentException Cette fonction permet de créer le fichier de transcription de naissance
      */
-    public void creerTranscription (DeclarationExtraitDTO declarationExtraitDTO)
-        throws IOException, DocumentException{
+    public void creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
+        throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
-        String FILE = declarationExtraitDTO.getPrenomEnfant()+"_"+declarationExtraitDTO.getNomEnfant()
-            +"_transcription_naissance.pdf";
+        String FILE = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+            + "_transcription_naissance.pdf";
         Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
         Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -347,30 +367,30 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         int year = c.get(Calendar.YEAR);
         DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("src/main/webapp/app/documents/"+FILE));
+        PdfWriter.getInstance(document, new FileOutputStream("src/main/webapp/app/documents/" + FILE));
         document.open();
-        String personne_qui_transcrit = "Monsieur "+ user.getFirstName() + "  " + user.getLastName(); //"Monsieur Abdourahmane KOITA"; /// c'est le user qui s'est connecté
-        String  fonction = "Consul Général de la République du Sénégal à Bordeaux"; //fonction du user
+        String personne_qui_transcrit = "Monsieur " + user.getFirstName() + "  " + user.getLastName(); //"Monsieur Abdourahmane KOITA"; /// c'est le user qui s'est connecté
+        String fonction = "Consul Général de la République du Sénégal à Bordeaux"; //fonction du user
 
         Paragraph preface = new Paragraph();
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Transcription de l’acte de naissance", catFont));
         addEmptyLine(preface, 2);
-        preface.add(new Paragraph("Année :"+year,smallBold));
+        preface.add(new Paragraph("Année :" + year, smallBold));
         addEmptyLine(preface, 1);
-        preface.add(new Paragraph("Le "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant()))+" est né(e) à "
-            +declarationExtraitDTO.getAdresseEnfantId().getNom()+", "
-            +declarationExtraitDTO.getPrenomEnfant()+" "+declarationExtraitDTO.getNomEnfant()
-            +", de "+declarationExtraitDTO.getPrenomPere()+" "+declarationExtraitDTO.getNomPere()
-            +" né le : "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissancePere()))
-            +" à "+declarationExtraitDTO.getLieuNaissancePereId().getNom()+", "+declarationExtraitDTO.getFonctionPere()
-            +" et de "+declarationExtraitDTO.getPrenomMere()+" "+declarationExtraitDTO.getNomMere()+","
-            + " née le : "+format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()))
-            +" à "+declarationExtraitDTO.getLieuNaissanceMereId().getNom()+", "+declarationExtraitDTO.getFonctionMere()+"."));
+        preface.add(new Paragraph("Le " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant())) + " est né(e) à "
+            + declarationExtraitDTO.getAdresseEnfantId().getNom() + ", "
+            + declarationExtraitDTO.getPrenomEnfant() + " " + declarationExtraitDTO.getNomEnfant()
+            + ", de " + declarationExtraitDTO.getPrenomPere() + " " + declarationExtraitDTO.getNomPere()
+            + " né le : " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissancePere()))
+            + " à " + declarationExtraitDTO.getLieuNaissancePereId().getNom() + ", " + declarationExtraitDTO.getFonctionPere()
+            + " et de " + declarationExtraitDTO.getPrenomMere() + " " + declarationExtraitDTO.getNomMere() + ","
+            + " née le : " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()))
+            + " à " + declarationExtraitDTO.getLieuNaissanceMereId().getNom() + ", " + declarationExtraitDTO.getFonctionMere() + "."));
         addEmptyLine(preface, 1);
-        preface.add(new Paragraph("Transcrit le "+format_fr.format(new Date())+", par Nous, "+personne_qui_transcrit+", "+fonction
-            +", Officier de l’état-civil sur la foi de l’acte de naissance authentique, ci-contre, dressé par la Mairie de "
-            +declarationExtraitDTO.getLieuDeclarationId().getNom()+"."));
+        preface.add(new Paragraph("Transcrit le " + format_fr.format(new Date()) + ", par Nous, " + personne_qui_transcrit + ", " + fonction
+            + ", Officier de l’état-civil sur la foi de l’acte de naissance authentique, ci-contre, dressé par la Mairie de "
+            + declarationExtraitDTO.getLieuDeclarationId().getNom() + "."));
         document.add(preface);
         document.close();
 

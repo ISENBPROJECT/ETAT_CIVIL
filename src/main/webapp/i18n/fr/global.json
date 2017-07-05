@@ -96,7 +96,8 @@
             "delete": "Supprimer",
             "open": "Ouvrir",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "valider": "Valider"
         },
         "detail": {
             "field": "Champs",
@@ -128,5 +129,5 @@
         "emailexists": "Email déjà utilisé !",
         "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !"
     },
-    "footer": "Ceci est votre pied de page"
+    "footer": "Consulat du Sénégal à Bordeaux"
 }
