@@ -453,3 +453,12 @@ ui bootstrap tweaks
     border-right: 2px solid;
     margin-bottom: 2%;
 }
+.label_racap{
+    text-align: right;
+}
+.span_recap{
+    float: right;
+}
+.menuGeneral{
+    width: 130%;
+}

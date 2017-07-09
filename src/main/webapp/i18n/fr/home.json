@@ -1,9 +1,11 @@
 {
     "home": {
-        "title": "Bienvenue, Java Hipster !",
-        "subtitle": "Ceci est votre page d'accueil",
+        "devise":"UN PEUPLE UN BUT UNE FOI",
+        "title": "Bienvenue",
+        "subtitle": "Application de Gestion des Etats civils",
+        "consulat":"Consulat du Sénégal à Bordeaux",
         "logged": {
-            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+            "message": "Bienvenue \"{{username}}\"."
         },
         "question": "Si vous avez des questions à propos de JHipster :",
         "link": {

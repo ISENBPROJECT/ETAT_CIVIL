@@ -25,9 +25,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Service Implementation for managing DeclarationExtrait.
@@ -70,6 +68,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     @Override
     public DeclarationExtraitDTO save(DeclarationExtraitDTO declarationExtraitDTO) {
 
+        String numeroRegistre = "1/CGSB/2017";
+            ;
         ExtraitDTO extraitDTO = new ExtraitDTO();
 
 
@@ -106,7 +106,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             declarationExtraitDTO.setId(extraitDTO.getId());
 
             //je vide le répertoire de travail src/main/webapp/app/documents/
-            viderDocuments();
+            //viderDocuments();
 
             //je créé l'extrait fichier
             try {
@@ -396,6 +396,16 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
     }
 
+    @Transactional(readOnly = true)
+    public List<DeclarationExtraitDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO) {
+        log.debug("Request to get DeclarationNaissances by criteria");
+        String nom = "%" + declarationNaissanceDTO.getNomEnfant() +"%";
+        String prenom = "%" + declarationNaissanceDTO.getPrenomEnfant() +"%";
+
+        List<DeclarationExtraitDTO> result = extraitService.findExtraitByCriteria(declarationNaissanceDTO.getId(), nom,
+            prenom, declarationNaissanceDTO);
+        return result;
+    }
 /*
     *//**
      * Get all the declarationExtraits.

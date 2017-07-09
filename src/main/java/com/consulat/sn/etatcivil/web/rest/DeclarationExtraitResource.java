@@ -3,15 +3,21 @@ package com.consulat.sn.etatcivil.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.consulat.sn.etatcivil.service.DeclarationExtraitService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * REST controller for managing DeclarationExtrait.
@@ -22,7 +28,9 @@ public class DeclarationExtraitResource {
     private static final String ENTITY_NAME = "declarationExtrait";
     private final Logger log = LoggerFactory.getLogger(DeclarationExtraitResource.class);
     private final DeclarationExtraitService declarationExtraitService;
-
+    private static String UNDEFINED = "undefined";
+    private String [] datePattern = {"yyyy-MM-dd"};
+    final org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MMM-dd");
     public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService) {
         this.declarationExtraitService = declarationExtraitService;
     }
@@ -67,6 +75,16 @@ public class DeclarationExtraitResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getId().toString()))
             .body(result);
+    }
+
+    @RequestMapping(value = "/declaration-extraits",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<DeclarationExtraitDTO> searchDeclarationRecherche(@RequestBody DeclarationExtraitRechercheDTO declarationExtraitDTO) {
+        log.debug("REST request to search DeclarationNaissance");
+
+        return declarationExtraitService.findExtraitByCriteria(null);
     }
 /*
     *//**

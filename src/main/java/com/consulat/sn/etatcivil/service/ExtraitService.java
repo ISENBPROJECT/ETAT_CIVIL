@@ -1,7 +1,12 @@
 package com.consulat.sn.etatcivil.service;
 
+import com.consulat.sn.etatcivil.domain.Extrait;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Interface for managing Extrait.
@@ -37,4 +42,6 @@ public interface ExtraitService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    List<DeclarationExtraitDTO> findExtraitByCriteria(Long id, String nom, String prenom, DeclarationExtraitDTO declarationExtraitDTO);
 }

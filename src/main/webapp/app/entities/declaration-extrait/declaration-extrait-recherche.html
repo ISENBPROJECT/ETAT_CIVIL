@@ -1,0 +1,89 @@
+<div>
+    <h2 translate="etatcivilApp.declarationNaissance.home.title">Declaration Naissances</h2>
+    <jhi-alert></jhi-alert>
+
+    <form >
+	    <div>
+	 		<!--nom-->
+	        <div class="form-group">
+	            <label class="control-label" translate="etatCivilApp.declarationExtrait.search.numeroRegistre"
+	                   for="field_child_name">N° registre</label>
+	            <input type="text" class="form-control" name="childName" id="field_child_id"
+	                   ng-model="vm.declarationNaissance.id"
+	            />
+	        </div>
+
+	        <!--nom-->
+	        <div class="form-group">
+	            <label class="control-label" translate="etatCivilApp.declarationExtrait.search.nom"
+	                   for="field_child_name">Nom</label>
+	            <input type="text" class="form-control" name="childName" id="field_child_name"
+	                   ng-model="vm.declarationNaissance.informationEnfant.nom"
+	            />
+	        </div>
+
+	        <!--prenom-->
+	        <div class="form-group">
+	            <label class="control-label" translate="etatCivilApp.declarationExtrait.search.prenom"
+	                   for="field_child_firstname">Prenom</label>
+	            <input type="text" class="form-control" name="childName" id="field_child_firstname"
+	                   ng-model="vm.declarationNaissance.informationEnfant.prenom"
+	            />
+	        </div>
+
+	        <!--date naissance-->
+	        <div class="form-group">
+	            <label class="control-label" translate="etatCivilApp.declarationExtrait.search.dateNaissance"
+	                   for="field_dateNaissance">Date Declaration</label>
+	            <div class="input-group">
+	                <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance"
+	                       uib-datepicker-popup="{{dateformat}}" ng-model="vm.declarationNaissance.informationEnfant.dateNaissance"
+	                       is-open="vm.datePickerOpenStatus.dateNaissance"
+	                       />
+	                <span class="input-group-btn">
+	                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissance')"><i
+	                            class="glyphicon glyphicon-calendar"></i></button>
+	                    </span>
+	            </div>
+	        </div>
+	        <button type="button" class="btn btn-primary" ng-click="vm.search()">
+	            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="etatcivilApp.declarationNaissance.action.search">Rechercher</span>
+	        </button>
+	    </div>
+    </form>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="etatcivilApp.declarationNaissance.name">Nom</span></th>
+                    <th><span translate="etatcivilApp.declarationNaissance.firstname">Prénom</span></th>
+                    <th><span translate="etatcivilApp.declarationNaissance.dateDeclaration">Date Declaration</span></th>
+                    <th><span translate="etatcivilApp.declarationNaissance.dadfirstname">Prénom père</span></th>
+                    <th><span translate="etatcivilApp.declarationNaissance.momfirstname">Prénom mère</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="declarationNaissance in vm.declarationNaissances track by declarationNaissance.id">
+                    <td><a ui-sref="declaration-naissance-detail({id:declarationNaissance.id})">{{declarationNaissance.id}}</a></td>
+                    <td>{{declarationNaissance.informationEnfant.nom}}</td>
+                    <td>{{declarationNaissance.informationEnfant.prenom}}</td>
+                    <td>{{declarationNaissance.dateDeclaration | date:'mediumDate'}}</td>
+                    <td>{{declarationNaissance.informationPere.prenom}}</td>
+                    <td>{{declarationNaissance.informationMere.prenom}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="declaration-naissance-detail({id:declarationNaissance.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

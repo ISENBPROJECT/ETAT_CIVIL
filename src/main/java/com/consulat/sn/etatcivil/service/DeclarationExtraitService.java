@@ -3,6 +3,8 @@ package com.consulat.sn.etatcivil.service;
 
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Extrait.
  */
@@ -15,6 +17,8 @@ public interface DeclarationExtraitService {
      * @return the persisted entity
      */
     DeclarationExtraitDTO save(DeclarationExtraitDTO declarationExtraitDTO);
+
+    List<DeclarationExtraitDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO);
 
   /*  *//**
      * Get all the declarationExtraits.
