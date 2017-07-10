@@ -462,3 +462,16 @@ ui bootstrap tweaks
 .menuGeneral{
     width: 130%;
 }
+.rechercheButton{
+    margin-top: 1%;
+    text-align: center;
+}
+.flexRecherche{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.flexItemRecherche{
+
+}

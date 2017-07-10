@@ -14,6 +14,7 @@
         vm.search = search;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
+        $scope.noData = true;
         function search() {
 
             var dataSearch = {
@@ -31,7 +32,12 @@
 
         function onSuccess(data, headers) {
             vm.declarationNaissances = data;
-            console.log(data)
+
+            if(data.length != 0){
+                $scope.noData =false;
+            }else {
+                $scope.noData =true;
+            }
         }
 
         function onError() {
