@@ -2,6 +2,7 @@ package com.consulat.sn.etatcivil.service;
 
 
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface DeclarationExtraitService {
      */
     DeclarationExtraitDTO save(DeclarationExtraitDTO declarationExtraitDTO);
 
-    List<DeclarationExtraitDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO);
+    List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO);
 
   /*  *//**
      * Get all the declarationExtraits.

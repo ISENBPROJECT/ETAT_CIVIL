@@ -12,15 +12,17 @@
 
         vm.declarationNaissances = [];
         vm.search = search;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         function search() {
 
             var dataSearch = {
-                numeroRegistre: vm.declarationNaissance.id,
-                nomEnfant:vm.declarationNaissance.informationEnfant.nom,
-                prenomEnfant: vm.declarationNaissance.informationEnfant.prenom,
+                numeroRegistre: vm.declarationNaissance.numeroRegistre,
+                nomEnfant: vm.declarationNaissance.nomEnfant,
+                prenomEnfant: vm.declarationNaissance.prenomEnfant,
                 dateNaissanceEnfant: vm.declarationNaissance.dateNaissance
             };
-
+            console.log(vm.declarationNaissance.dateNaissance)
             DeclarationExtrait.search(dataSearch,
                 onSuccess, onError);
 
@@ -36,6 +38,10 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.dateNaissance = false;
 
+        function openCalendar(date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

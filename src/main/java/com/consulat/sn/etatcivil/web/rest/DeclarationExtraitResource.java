@@ -5,7 +5,6 @@ import com.consulat.sn.etatcivil.service.DeclarationExtraitService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -81,10 +79,10 @@ public class DeclarationExtraitResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<DeclarationExtraitDTO> searchDeclarationRecherche(@RequestBody DeclarationExtraitRechercheDTO declarationExtraitDTO) {
+    public List<DeclarationExtraitRechercheDTO> searchDeclarationRecherche(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) {
         log.debug("REST request to search DeclarationNaissance");
 
-        return declarationExtraitService.findExtraitByCriteria(null);
+        return declarationExtraitService.findExtraitByCriteria(declarationExtraitDTO);
     }
 /*
     *//**

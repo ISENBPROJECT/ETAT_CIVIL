@@ -32,16 +32,22 @@
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.dateDeclaration = DateUtils.convertLocalDateToServer(data.dateDeclaration);
+                    data.dateNaissanceEnfant = DateUtils.convertLocalDateToServer(data.dateNaissanceEnfant);
                     return angular.toJson(data);
                 }
             },
             'search': {
                 method: 'POST',
+
+                transformRequest: function (data) {
+                    data.dateDeclaration = DateUtils.convertLocalDateToServer(data.dateDeclaration);
+                    return angular.toJson(data);
+                },
                 transformResponse: function (data) {
                 	 if (data) {
                          data = angular.fromJson(data);
                      }
+
                 	 return data;
                 },
                 isArray: true

@@ -4,7 +4,9 @@ import com.consulat.sn.etatcivil.domain.Extrait;
 import com.consulat.sn.etatcivil.repository.ExtraitRepository;
 import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
+import com.consulat.sn.etatcivil.service.mapper.DeclarationExtraitMapper;
 import com.consulat.sn.etatcivil.service.mapper.ExtraitMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +30,12 @@ public class ExtraitServiceImpl implements ExtraitService {
 
     private final ExtraitMapper extraitMapper;
 
-    public ExtraitServiceImpl(ExtraitRepository extraitRepository, ExtraitMapper extraitMapper) {
+    private final DeclarationExtraitMapper declarationExtraitMapper;
+
+    public ExtraitServiceImpl(ExtraitRepository extraitRepository, ExtraitMapper extraitMapper, DeclarationExtraitMapper declarationExtraitMapper) {
         this.extraitRepository = extraitRepository;
         this.extraitMapper = extraitMapper;
+        this.declarationExtraitMapper = declarationExtraitMapper;
     }
 
     /**
@@ -88,13 +93,16 @@ public class ExtraitServiceImpl implements ExtraitService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<DeclarationExtraitDTO> findExtraitByCriteria(Long id, String nom, String prenom, DeclarationExtraitDTO declarationExtraitDTO) {
+    public List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO) {
 
-        extraitRepository.findExtraitByCriteria(declarationExtraitDTO.getId(), nom,
+        String nom = "%" + declarationExtraitDTO.getNomEnfant() + "%";
+        String prenom = "%" + declarationExtraitDTO.getPrenomEnfant() + "%";
+        String numeroRegistre = declarationExtraitDTO.getNumeroRegistre();
+       return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
             prenom, declarationExtraitDTO.getDateNaissanceEnfant()).stream()
-            .map(extraitMapper::toDto)
+            .map(declarationExtraitMapper::toEntity)
             .collect(Collectors.toCollection(LinkedList::new));
-        return null;
+
     }
 
 }

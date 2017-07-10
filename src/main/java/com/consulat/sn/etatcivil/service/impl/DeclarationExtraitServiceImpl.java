@@ -397,13 +397,9 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     }
 
     @Transactional(readOnly = true)
-    public List<DeclarationExtraitDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO) {
+    public List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO) {
         log.debug("Request to get DeclarationNaissances by criteria");
-        String nom = "%" + declarationNaissanceDTO.getNomEnfant() +"%";
-        String prenom = "%" + declarationNaissanceDTO.getPrenomEnfant() +"%";
-
-        List<DeclarationExtraitDTO> result = extraitService.findExtraitByCriteria(declarationNaissanceDTO.getId(), nom,
-            prenom, declarationNaissanceDTO);
+        List<DeclarationExtraitRechercheDTO> result = extraitService.findExtraitByCriteria(declarationNaissanceDTO);
         return result;
     }
 /*

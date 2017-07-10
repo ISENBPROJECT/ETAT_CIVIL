@@ -92,7 +92,8 @@
                 "nom": "Nom",
                 "prenom": "Prénom",
                 "dateNaissance": "date de Naissance",
-                "numeroRegistre": "numéro registre"
+                "numeroRegistre": "numéro registre",
+                "rechercher": "rechercher"
 
             }
         }

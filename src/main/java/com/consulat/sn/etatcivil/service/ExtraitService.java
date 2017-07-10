@@ -2,6 +2,7 @@ package com.consulat.sn.etatcivil.service;
 
 import com.consulat.sn.etatcivil.domain.Extrait;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
 
 import java.time.LocalDate;
@@ -43,5 +44,5 @@ public interface ExtraitService {
      */
     void delete(Long id);
 
-    List<DeclarationExtraitDTO> findExtraitByCriteria(Long id, String nom, String prenom, DeclarationExtraitDTO declarationExtraitDTO);
+    List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO);
 }

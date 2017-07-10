@@ -19,16 +19,19 @@ public class DeclarationExtraitDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
-    @Size(min = 8192, max = 25165824)
-    @Lob
-    private byte[] copieLiterale;
-    private String copieLiteraleContentType;
+    private String numeroRegistre;
 
     @NotNull
     @Size(min = 8192, max = 25165824)
     @Lob
+    private byte[] copieLiterale;
+
+    private String copieLiteraleContentType;
+    @NotNull
+    @Size(min = 8192, max = 25165824)
+    @Lob
     private byte[] copieCarte;
+
     private String copieCarteContentType;
 
     @NotNull
@@ -106,7 +109,6 @@ public class DeclarationExtraitDTO implements Serializable {
     private PaysDTO paysNaissancePereId;
 
     private PaysDTO adrPaysPereId;
-
     private PaysDTO paysDeclarationId;
 
     public Long getId() {
@@ -411,6 +413,14 @@ public class DeclarationExtraitDTO implements Serializable {
 
     public void setPaysDeclarationId(PaysDTO paysDeclarationId) {
         this.paysDeclarationId = paysDeclarationId;
+    }
+
+    public String getNumeroRegistre() {
+        return numeroRegistre;
+    }
+
+    public void setNumeroRegistre(String numeroRegistre) {
+        this.numeroRegistre = numeroRegistre;
     }
 
     @Override
