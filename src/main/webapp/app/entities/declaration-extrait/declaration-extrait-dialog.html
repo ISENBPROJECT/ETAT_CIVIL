@@ -8,6 +8,14 @@
                 data-translate="etatCivilApp.declarationExtrait.home.createOrEditLabel">Create or edit a Declaration
                 Extrait</h4>
         </div>
+
+        <!--sans père-->
+        <div>
+                <label for="sansPere">Enfant sans père</label>
+                <input class="checkbox-inline" id="sansPere" ng-model="vm.isNotWithFather" type="checkbox" ng-click="vm.renseignerInfosPere()"/>
+        </div>
+
+        <label>{{vm.isNotWithFather}}</label>
         <div class="modal-body">
             <jhi-alert-error></jhi-alert-error>
 
@@ -184,7 +192,7 @@
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomPere"
                                for="field_nomPere">Nom Pere</label>
                         <input type="text" class="form-control" name="nomPere" id="field_nomPere"
-                               ng-model="vm.declarationExtrait.nomPere"
+                               ng-model="vm.declarationExtrait.nomPere" ng-disabled="vm.isNotWithFather"
                                required/>
                         <div ng-show="editForm.nomPere.$invalid">
                             <p class="help-block"
@@ -196,7 +204,7 @@
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomPere"
                                for="field_prenomPere">Prenom Pere</label>
-                        <input type="text" class="form-control" name="prenomPere" id="field_prenomPere"
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="prenomPere" id="field_prenomPere"
                                ng-model="vm.declarationExtrait.prenomPere"
                                required/>
                         <div ng-show="editForm.prenomPere.$invalid">
@@ -211,7 +219,7 @@
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
                                for="field_dateNaissancePere">Date Naissance Pere</label>
                         <div class="input-group">
-                            <input id="field_dateNaissancePere" type="text" class="form-control"
+                            <input ng-disabled="vm.isNotWithFather" id="field_dateNaissancePere" type="text" class="form-control"
                                    name="dateNaissancePere"
                                    uib-datepicker-popup="{{dateformat}}"
                                    ng-model="vm.declarationExtrait.dateNaissancePere"
@@ -233,28 +241,27 @@
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
                                for="field_adresseComplPere">Adresse Compl Pere</label>
-                        <input type="text" class="form-control" name="adresseComplPere" id="field_adresseComplPere"
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="adresseComplPere" id="field_adresseComplPere"
                                ng-model="vm.declarationExtrait.adresseComplPere"
                         />
                     </div>
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.fonctionPere"
                                for="field_fonctionPere">Fonction Pere</label>
-                        <input type="text" class="form-control" name="fonctionPere" id="field_fonctionPere"
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="fonctionPere" id="field_fonctionPere"
                                ng-model="vm.declarationExtrait.fonctionPere"
                         />
                     </div>
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
                                for="field_numeroIdentitePere">Numero Identite Pere</label>
-                        <input type="text" class="form-control" name="numeroIdentitePere" id="field_numeroIdentitePere"
-                               ng-model="vm.declarationExtrait.numeroIdentitePere"
-                        />
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="numeroIdentitePere" id="field_numeroIdentitePere"
+                               ng-model="vm.declarationExtrait.numeroIdentitePere" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
                                for="field_numeroPassportPere">Numero Passport Pere</label>
-                        <input type="text" class="form-control" name="numeroPassportPere" id="field_numeroPassportPere"
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="numeroPassportPere" id="field_numeroPassportPere"
                                ng-model="vm.declarationExtrait.numeroPassportPere"
                         />
                     </div>
@@ -263,7 +270,7 @@
                         <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
                                for="field_paysNaissancePere">Pays
                             Naissance Pere</label>
-                        <select ng-change="vm.updateVilleNaissancePere()" class="form-control"
+                        <select ng-disabled="vm.isNotWithFather" ng-change="vm.updateVilleNaissancePere()" class="form-control"
                                 id="field_paysNaissancePere" name="paysNaissancePere"
                                 ng-model="vm.declarationExtrait.paysNaissancePereId"
                                 ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
@@ -280,7 +287,7 @@
                         <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
                                for="field_lieuNaissancePere">Lieu
                             Naissance Pere</label>
-                        <select class="form-control" id="field_lieuNaissancePere" name="lieuNaissancePere"
+                        <select ng-disabled="vm.isNotWithFather" class="form-control" id="field_lieuNaissancePere" name="lieuNaissancePere"
                                 ng-model="vm.declarationExtrait.lieuNaissancePereId"
                                 ng-options="ville as ville.nom for ville in vm.villesNaissancesPere track by ville.id"
                                 required>
@@ -298,7 +305,7 @@
                         <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere" for="field_adrPaysPere">Adr
                             Pays
                             Pere</label>
-                        <select ng-change="vm.updateVilleResidencePere()" class="form-control" id="field_adrPaysPere"
+                        <select ng-disabled="vm.isNotWithFather" ng-change="vm.updateVilleResidencePere()" class="form-control" id="field_adrPaysPere"
                                 name="adrPaysPere"
                                 ng-model="vm.declarationExtrait.adrPaysPereId"
                                 ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
@@ -313,7 +320,7 @@
                     <div class="form-group">
                         <label data-translate="etatCivilApp.declarationExtrait.adressePere" for="field_adressePere">Adresse
                             Pere</label>
-                        <select class="form-control" id="field_adressePere" name="adressePere"
+                        <select ng-disabled="vm.isNotWithFather" class="form-control" id="field_adressePere" name="adressePere"
                                 ng-model="vm.declarationExtrait.adressePereId"
                                 ng-options="ville as ville.nom for ville in vm.villesResidencePere track by ville.id "
                                 required>

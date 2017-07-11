@@ -39,9 +39,12 @@
         vm.ouvirActeNaissancePopup = ouvirActeNaissancePopup;
         vm.ouvirTranscriptionPopup = ouvirTranscriptionPopup;
         vm.valider = valider;
+        vm.isNotWithFather = false;
         $scope.test = false;
         $scope.isrecap = false;
         $scope.isnew = true;
+        vm.renseignerInfosPere = renseignerInfosPere;
+
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -121,6 +124,10 @@
                     vm.villesNaissancesPere.push(ville);
                 }
             })
+
+            if (vm.isNotWithFather) {
+                modifierVillePourSansPere();
+            }
         };
 
         function updateVilleResidenceMere() {
@@ -140,6 +147,10 @@
                     vm.villesResidencePere.push(ville);
                 }
             })
+
+            if (vm.isNotWithFather) {
+                modifierVillePourSansPere();
+            }
         };
 
         function updateResidenceEnfant() {
@@ -201,10 +212,75 @@
         }
 
 
-        function modifier(){
+        function modifier() {
             $scope.isnew = true;
             $scope.isrecap = false;
             $scope.test = false;
+        }
+
+        function renseignerInfosPere() {
+            var paysInconnu;
+            vm.pays.forEach(function (pays) {
+                if (pays.nom == "Inconnu") {
+                    paysInconnu = pays;
+                }
+            });
+
+            var villeInconnu;
+
+            vm.villes.forEach(function (ville) {
+                if (ville.nom == "Inconnu") {
+                    villeInconnu = ville;
+                }
+            });
+
+
+            if (vm.isNotWithFather) {
+                vm.villesNaissancesPere.push(villeInconnu);
+                vm.villesResidencePere.push(villeInconnu);
+                vm.declarationExtrait.nomPere = "xxxx",
+                    vm.declarationExtrait.prenomPere = "xxxx",
+                    vm.declarationExtrait.dateNaissancePere = new Date(null),
+                    vm.declarationExtrait.adresseComplPere = "xxxx",
+                    vm.declarationExtrait.fonctionPere = "xxxx",
+                    vm.declarationExtrait.numeroIdentitePere = "xxxx",
+                    vm.declarationExtrait.numeroPassportPere = "xxxx",
+                    vm.declarationExtrait.adrPaysPereId = paysInconnu,
+                    vm.declarationExtrait.paysNaissancePereId = paysInconnu,
+                    vm.declarationExtrait.lieuNaissancePereId = villeInconnu,
+                    vm.declarationExtrait.adressePereId = villeInconnu
+            }
+            if (!vm.isNotWithFather) {
+                vm.villesNaissancesPere.length == 0;
+                vm.villesResidencePere.length == 0;
+                vm.declarationExtrait.nomPere = null,
+                    vm.declarationExtrait.prenomPere = null,
+                    vm.declarationExtrait.dateNaissancePere = null,
+                    vm.declarationExtrait.adresseComplPere = null,
+                    vm.declarationExtrait.fonctionPere = null,
+                    vm.declarationExtrait.numeroIdentitePere = null,
+                    vm.declarationExtrait.numeroPassportPere = null,
+                    vm.declarationExtrait.adrPaysPereId = null,
+                    vm.declarationExtrait.paysNaissancePereId = null,
+                    vm.declarationExtrait.lieuNaissancePereId = null,
+                    vm.declarationExtrait.adressePereId = null
+            }
+        }
+
+        function modifierVillePourSansPere() {
+
+            var villeInconnu;
+
+            vm.villes.forEach(function (ville) {
+                if (ville.nom == "Inconnu") {
+                    villeInconnu = ville;
+                }
+            });
+
+
+            vm.declarationExtrait.lieuNaissancePereId = villeInconnu,
+                vm.declarationExtrait.adressePereId = villeInconnu
+
         }
     }
 })();

@@ -15,7 +15,7 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 Development Ribbon
 ========================================================================== */
 .ribbon {
-    background-color: #a00;
+    background-color: #23c759;
     box-shadow: 0 0 10px #888;
     left: -3.5em;
     moz-box-shadow: 0 0 10px #888;
@@ -381,23 +381,28 @@ ui bootstrap tweaks
 
 .containerFlex {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
 }
 
 .containerFlexItemCommun {
     background-color: #cdc1e6;
+    margin: 1%;
+    flex-direction: row;
 }
 
 .containerFlexItemMere {
     background-color: #01B0F0;
+    margin: 1%;
 }
 
 .containerFlexItemPere {
     background-color: #82c2f8;
+    margin: 1%;
 }
 
 .containerFlexItemEnfant {
     background-color: #e2f6d1;
+    margin: 1%;
 }
 
 .containerFlex_recap {
@@ -469,9 +474,10 @@ ui bootstrap tweaks
 .flexRecherche{
     display: flex;
     justify-content: space-between;
+    width: 80%;
 
 }
 
 .flexItemRecherche{
-
+    order: 1;
 }
