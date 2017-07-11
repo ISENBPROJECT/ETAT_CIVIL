@@ -42,7 +42,7 @@
                     copy.dateNaissancePere = DateUtils.convertLocalDateToServer(copy.dateNaissancePere);
                     return angular.toJson(copy);
                 }
-            },
+            }
         });
     }
 })();

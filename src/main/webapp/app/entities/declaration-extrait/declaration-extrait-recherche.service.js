@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('etatCivilApp')
-        .factory('DeclarationExtrait', DeclarationRecherche);
+        .factory('DeclarationRecherche', DeclarationRecherche);
 
     DeclarationRecherche.$inject = ['$resource', 'DateUtils'];
 
     function DeclarationRecherche ($resource, DateUtils) {
-        var resourceUrl =  'api/declaration-extraits/:id';
+        var resourceUrl =  'api/declaration-extraits-recherche';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: false},

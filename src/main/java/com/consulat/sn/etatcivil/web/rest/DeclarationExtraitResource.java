@@ -75,7 +75,7 @@ public class DeclarationExtraitResource {
             .body(result);
     }
 
-    @RequestMapping(value = "/declaration-extraits",
+    @RequestMapping(value = "/declaration-extraits-recherche",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

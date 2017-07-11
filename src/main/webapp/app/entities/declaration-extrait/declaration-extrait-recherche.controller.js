@@ -5,9 +5,9 @@
         .module('etatCivilApp')
         .controller('DeclarationNaissanceRechercheController', DeclarationNaissanceRechercheController);
 
-    DeclarationNaissanceRechercheController.$inject = ['$scope', '$state', 'DeclarationExtrait'];
+    DeclarationNaissanceRechercheController.$inject = ['$scope', '$state', 'DeclarationRecherche'];
 
-    function DeclarationNaissanceRechercheController($scope, $state, DeclarationExtrait) {
+    function DeclarationNaissanceRechercheController($scope, $state, DeclarationRecherche) {
         var vm = this;
 
         vm.declarationNaissances = [];
@@ -15,6 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         $scope.noData = true;
+
         function search() {
 
             var dataSearch = {
@@ -24,7 +25,7 @@
                 dateNaissanceEnfant: vm.declarationNaissance.dateNaissance
             };
             console.log(vm.declarationNaissance.dateNaissance)
-            DeclarationExtrait.search(dataSearch,
+            DeclarationRecherche.search(dataSearch,
                 onSuccess, onError);
 
 
