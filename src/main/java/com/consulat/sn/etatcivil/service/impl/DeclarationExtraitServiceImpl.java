@@ -47,16 +47,18 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     private Long pereId = null;
     private Long mereId = null;
     private final VilleService villeService;
+    private final MailService mailService;
 
     // private final DeclarationExtraitSearchRepository declarationExtraitSearchRepository;
     public DeclarationExtraitServiceImpl(PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
-                                         RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService) {
+                                         RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService) {
         this.extraitService = extraitService;
         this.personneService = personneService;
         this.pieceJointeService = pieceJointeService;
         this.registreNaissanceService = registreNaissanceService;
         this.userService = userService;
         this.villeService = villeService;
+        this.mailService = mailService;
     }
 
     /**
@@ -126,6 +128,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         log.debug("Request to save DeclarationExtrait : {}", declarationExtraitDTO);
         // ExtraitDTO declarationExtrait = declarationExtraitMapper.toExtrait(declarationExtraitDTO);
 
+
+        //envoyer le mail ici
         return declarationExtraitDTO;
     }
 

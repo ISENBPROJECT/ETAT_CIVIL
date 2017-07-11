@@ -20,7 +20,7 @@ management:
     context-path: /management
     health:
         mail:
-            enabled: false # When using the MailService, configure an SMTP server and set this to true
+            enabled: true # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
         name: ETAT_CIVIL
@@ -79,7 +79,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: ETAT_CIVIL@localhost
+        from: consulatsenegalbordeaux@gmail.com
     swagger:
         default-include-pattern: /api/.*
         title: ETAT_CIVIL API

@@ -27,8 +27,10 @@ public class DeclarationExtraitResource {
     private final Logger log = LoggerFactory.getLogger(DeclarationExtraitResource.class);
     private final DeclarationExtraitService declarationExtraitService;
     private static String UNDEFINED = "undefined";
-    private String [] datePattern = {"yyyy-MM-dd"};
+    private String[] datePattern = {"yyyy-MM-dd"};
     final org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MMM-dd");
+
+
     public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService) {
         this.declarationExtraitService = declarationExtraitService;
     }
