@@ -15,7 +15,6 @@
                 <input class="checkbox-inline" id="sansPere" ng-model="vm.isNotWithFather" type="checkbox" ng-click="vm.renseignerInfosPere()"/>
         </div>
 
-        <label>{{vm.isNotWithFather}}</label>
         <div class="modal-body">
             <jhi-alert-error></jhi-alert-error>
 
@@ -63,11 +62,11 @@
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere"
                                for="field_dateNaissanceMere">Date Naissance Mere</label>
                         <div class="input-group">
-                            <input id="field_dateNaissanceMere" type="text" class="form-control"
+                            <input id="field_dateNaissanceMere" type="text" class="form-control" ng-change="vm.verifierSiMajeur()"
                                    name="dateNaissanceMere"
                                    uib-datepicker-popup="{{dateformat}}"
                                    ng-model="vm.declarationExtrait.dateNaissanceMere"
-                                   is-open="vm.datePickerOpenStatus.dateNaissanceMere"
+                                   is-open="vm.datePickerOpenStatus.dateNaissanceMere" min
                                    required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissanceMere')"><i
@@ -79,6 +78,13 @@
                                ng-show="editForm.dateNaissanceMere.$error.required"
                                data-translate="entity.validation.required">
                                 This field is required.
+                            </p>
+                        </div>
+                        <div ng-show="vm.dateNaissanceMereError">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceMereError"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceMereErreur">
+                                champs supérieur à 10 ans.
                             </p>
                         </div>
                     </div>
@@ -220,7 +226,7 @@
                                for="field_dateNaissancePere">Date Naissance Pere</label>
                         <div class="input-group">
                             <input ng-disabled="vm.isNotWithFather" id="field_dateNaissancePere" type="text" class="form-control"
-                                   name="dateNaissancePere"
+                                   name="dateNaissancePere" ng-change="vm.verifierSiPereMajeur()"
                                    uib-datepicker-popup="{{dateformat}}"
                                    ng-model="vm.declarationExtrait.dateNaissancePere"
                                    is-open="vm.datePickerOpenStatus.dateNaissancePere"
@@ -237,6 +243,14 @@
                                 This field is required.
                             </p>
                         </div>
+                        <div ng-show="vm.dateNaissancePereError">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissancePereError"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissancePereErreur">
+                                champs supérieur à 10 ans.
+                            </p>
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <label class="control-label" data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
@@ -376,7 +390,7 @@
                                for="field_dateNaissanceEnfant">Date Naissance Enfant</label>
                         <div class="input-group">
                             <input id="field_dateNaissanceEnfant" type="text" class="form-control"
-                                   name="dateNaissanceEnfant"
+                                   name="dateNaissanceEnfant" ng-change="vm.dateNaissanceEnfantFutur()"
                                    uib-datepicker-popup="{{dateformat}}"
                                    ng-model="vm.declarationExtrait.dateNaissanceEnfant"
                                    is-open="vm.datePickerOpenStatus.dateNaissanceEnfant"
@@ -391,6 +405,14 @@
                                ng-show="editForm.dateNaissanceEnfant.$error.required"
                                data-translate="entity.validation.required">
                                 This field is required.
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissanceEnfantErrorFutur">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceEnfantErrorFutur"
+                               data-translate="etatCivilApp.declarationExtrait.naissanceFutur">
+                                impossible de naitre dans le futur
                             </p>
                         </div>
                     </div>

@@ -385,23 +385,23 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemCommun {
-    background-color: #cdc1e6;
+    background-color: #ecf0f1;
     margin: 1%;
     flex-direction: row;
 }
 
 .containerFlexItemMere {
-    background-color: #01B0F0;
+    background-color: #ecf0f1;
     margin: 1%;
 }
 
 .containerFlexItemPere {
-    background-color: #82c2f8;
+    background-color: #ecf0f1;
     margin: 1%;
 }
 
 .containerFlexItemEnfant {
-    background-color: #e2f6d1;
+    background-color: #ecf0f1;
     margin: 1%;
 }
 

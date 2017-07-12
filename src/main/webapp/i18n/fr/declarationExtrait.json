@@ -88,6 +88,9 @@
             "paysNaissancePere_recap": "Pays Naissance Père:  ",
             "adrPaysPere_recap": "Adr Pays Père:  ",
             "paysDeclaration_recap": "Pays Declaration:  ",
+            "dateNaissanceMereErreur": "La mère doit être agéé de plus de 10 ans.",
+            "dateNaissancePereErreur": "Le père doit être agé de plus de 10 ans.",
+            "naissanceFutur": "Impossible de naitre dans le futur.",
             "search": {
                 "nom": "Nom",
                 "prenom": "Prénom",

@@ -44,7 +44,12 @@
         $scope.isrecap = false;
         $scope.isnew = true;
         vm.renseignerInfosPere = renseignerInfosPere;
-
+        vm.verifierSiMajeur = verifierSiMajeur;
+        vm.verifierSiPereMajeur = verifierSiPereMajeur;
+        vm.dateNaissanceEnfantFutur = dateNaissanceEnfantFutur;
+        vm.dateNaissanceMereError = false;
+        vm.dateNaissancePereError = false;
+        vm.dateNaissanceEnfantErrorFutur = false;
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -281,6 +286,63 @@
             vm.declarationExtrait.lieuNaissancePereId = villeInconnu,
                 vm.declarationExtrait.adressePereId = villeInconnu
 
+        };
+
+
+        //si l'année de naissance de la mere est inférieure à 10 ans,
+        // je l'empeche et j'annule la date car l'attribut du name n'est qu'en getter
+        function verifierSiMajeur() {
+
+            var dateNaissance = vm.declarationExtrait.dateNaissanceMere;
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+
+                if (todayTime - dateNaissanceTime < 10) {
+                    vm.dateNaissanceMereError = true;
+                    vm.declarationExtrait.dateNaissanceMere = null;
+                } else {
+                    vm.dateNaissanceMereError = false;
+                }
+            }
+        }
+
+        function verifierSiPereMajeur() {
+
+            var dateNaissance = vm.declarationExtrait.dateNaissancePere;
+
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+
+                if (todayTime - dateNaissanceTime < 10) {
+                    vm.dateNaissancePereError = true;
+                    vm.declarationExtrait.dateNaissancePere = null;
+                } else {
+                    vm.dateNaissancePereError = false;
+                }
+
+            }
+        };
+
+        function dateNaissanceEnfantFutur() {
+            var dateNaissance = vm.declarationExtrait.dateNaissanceEnfant;
+
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+
+                if (todayTime < dateNaissanceTime) {
+                    vm.dateNaissanceEnfantErrorFutur= true;
+                    vm.declarationExtrait.dateNaissanceEnfant = null;
+                } else {
+                    vm.dateNaissanceEnfantErrorFutur = false;
+                }
+
+            }
         }
     }
 })();
