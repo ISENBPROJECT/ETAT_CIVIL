@@ -48,7 +48,9 @@
         vm.verifierSiPereMajeur = verifierSiPereMajeur;
         vm.dateNaissanceEnfantFutur = dateNaissanceEnfantFutur;
         vm.dateNaissanceMereError = false;
+        vm.dateNaissanceMereEnfantInfDix = false;
         vm.dateNaissancePereError = false;
+        vm.dateNaissancePlusCinquante = false;
         vm.dateNaissanceEnfantErrorFutur = false;
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
@@ -72,8 +74,7 @@
         }
 
         function onSaveSuccess(result) {
-            //$scope.$emit('etatCivilApp:declarationExtraitUpdate', result);
-            // $uibModalInstance.close(result);
+            vm.declarationExtrait.id = result.id;
             $state.go('declaration-extrait-affichagePdf');
             vm.isSaving = false;
         }
@@ -189,14 +190,12 @@
         }
 
         function ouvirActeNaissancePopup() {
-
-            var fichier = 'app/documents/' + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_acte_naissance.pdf';
+            var fichier = 'app/documents/' + vm.declarationExtrait.id + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_acte_naissance.pdf';
             window.open(fichier, "popup", "width=900,height=600")
         }
 
         function ouvirTranscriptionPopup() {
-
-            var fichier = 'app/documents/' + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_transcription_naissance.pdf';
+            var fichier = 'app/documents/' + vm.declarationExtrait.id + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_transcription_naissance.pdf';
             window.open(fichier, "popup", "width=900,height=600")
         }
 
@@ -205,7 +204,11 @@
         }
 
         function retourAccueil() {
+            console.log(DeclarationExtrait)
             $state.go('home');
+            if (null != vm.declarationExtrait.prenomEnfant && null != vm.declarationExtrait.nomEnfant) {
+                DeclarationExtrait.update(vm.declarationExtrait, onDeleteSuccess, onDeleteError);
+            }
 
         }
 
@@ -294,16 +297,26 @@
         function verifierSiMajeur() {
 
             var dateNaissance = vm.declarationExtrait.dateNaissanceMere;
+          vm.declarationExtrait.dateNaissanceMereCache = vm.declarationExtrait.dateNaissanceMere;
+            var dateNaissanceEnfant = vm.declarationExtrait.dateNaissanceEnfant;
             if (null != dateNaissance) {
                 var today = new Date();
                 var todayTime = today.getFullYear();
-                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+                var dateNaissanceMere = new Date(dateNaissance).getFullYear();
 
-                if (todayTime - dateNaissanceTime < 10) {
+                if (todayTime - dateNaissanceMere < 10) {
                     vm.dateNaissanceMereError = true;
-                    vm.declarationExtrait.dateNaissanceMere = null;
-                } else {
+                    vm.declarationExtrait.dateNaissanceMereCache = null;
+                } else if (null != dateNaissanceEnfant && (new Date(dateNaissanceEnfant).getFullYear() - dateNaissanceMere) > 50) {
+                    vm.dateNaissancePlusCinquante = true;
+                } else if (null != dateNaissanceEnfant && (new Date(dateNaissanceEnfant).getFullYear() - dateNaissanceMere) < 10) {
+                    vm.dateNaissanceMereEnfantInfDix = true;
+                }
+
+                else {
                     vm.dateNaissanceMereError = false;
+                    vm.dateNaissancePlusCinquante = false;
+                    vm.dateNaissanceMereEnfantInfDix = false;
                 }
             }
         }
@@ -336,13 +349,21 @@
                 var dateNaissanceTime = new Date(dateNaissance).getFullYear();
 
                 if (todayTime < dateNaissanceTime) {
-                    vm.dateNaissanceEnfantErrorFutur= true;
+                    vm.dateNaissanceEnfantErrorFutur = true;
                     vm.declarationExtrait.dateNaissanceEnfant = null;
                 } else {
                     vm.dateNaissanceEnfantErrorFutur = false;
                 }
-
+                verifierSiMajeur();
             }
-        }
+        };
+
+        function onDeleteSuccess(result) {
+            console.log(result)
+        };
+
+        function onDeleteError(result) {
+            console.log(result)
+        };
     }
 })();

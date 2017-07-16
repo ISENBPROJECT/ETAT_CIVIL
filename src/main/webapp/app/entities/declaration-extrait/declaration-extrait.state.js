@@ -55,7 +55,7 @@
                 }
             })
             .state('declaration-extrait-detail', {
-                parent: 'declaration-extrait',
+                parent: 'declaration-naissance-recherche',
                 url: '/declaration-extrait/{id}',
                 data: {
                     authorities: ['ROLE_USER'],

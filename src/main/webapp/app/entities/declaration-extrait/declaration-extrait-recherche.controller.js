@@ -33,6 +33,7 @@
 
         function onSuccess(data, headers) {
             vm.declarationNaissances = data;
+            console.log(data)
 
             if(data.length != 0){
                 $scope.noData =false;

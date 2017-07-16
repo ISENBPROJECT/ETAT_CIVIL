@@ -91,6 +91,8 @@
             "dateNaissanceMereErreur": "La mère doit être agéé de plus de 10 ans.",
             "dateNaissancePereErreur": "Le père doit être agé de plus de 10 ans.",
             "naissanceFutur": "Impossible de naitre dans le futur.",
+            "dateNaissancePlusCinquante": "La mère ne doit pas avoir 50 ans de plus que son enfant .",
+            "dateNaissanceMereEnfantInfDix": "La mère doit avoir minimun 10 ans de plus que son enfant .",
             "search": {
                 "nom": "Nom",
                 "prenom": "Prénom",

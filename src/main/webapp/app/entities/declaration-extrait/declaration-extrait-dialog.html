@@ -68,6 +68,10 @@
                                    ng-model="vm.declarationExtrait.dateNaissanceMere"
                                    is-open="vm.datePickerOpenStatus.dateNaissanceMere" min
                                    required/>
+
+                            <input hidden id="field_dateNaissanceMereCache" type="text"
+                                   ng-model="vm.declarationExtrait.dateNaissanceMereCache"
+                                   required/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissanceMere')"><i
                             class="glyphicon glyphicon-calendar"></i></button>
@@ -85,6 +89,22 @@
                                ng-show="vm.dateNaissanceMereError"
                                data-translate="etatCivilApp.declarationExtrait.dateNaissanceMereErreur">
                                 champs supérieur à 10 ans.
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissancePlusCinquante">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissancePlusCinquante"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissancePlusCinquante">
+                                la mère ne peut pas être agée de plus de 50 ans par rapport à son enfant
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissanceMereEnfantInfDix">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceMereEnfantInfDix"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceMereEnfantInfDix">
+                                entre la mère et l'enfant il doit y avoir plus de 10 ans .
                             </p>
                         </div>
                     </div>

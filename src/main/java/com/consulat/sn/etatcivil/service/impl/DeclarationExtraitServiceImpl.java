@@ -25,7 +25,10 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Service Implementation for managing DeclarationExtrait.
@@ -71,7 +74,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public DeclarationExtraitDTO save(DeclarationExtraitDTO declarationExtraitDTO) {
 
         String numeroRegistre = "1/CGSB/2017";
-            ;
+        ;
         ExtraitDTO extraitDTO = new ExtraitDTO();
 
 
@@ -107,9 +110,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
             declarationExtraitDTO.setId(extraitDTO.getId());
 
-            //je vide le répertoire de travail src/main/webapp/app/documents/
-            //viderDocuments();
-
             //je créé l'extrait fichier
             try {
 
@@ -137,7 +137,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         File file = new File("src/main/webapp/app/documents/");
         try {
             File[] listeDesFichiers = file.listFiles();
-            if (listeDesFichiers.length !=0) {
+            if (listeDesFichiers.length != 0) {
                 FileUtils.cleanDirectory(file);
             }
         } catch (IOException e) {
@@ -297,7 +297,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         String acteNaissance = "";
         if (null != extraitDTO && null != enfant && null != mere && null != pere) {
             PdfReader pdfTemplate;
-            acteNaissance = enfant.getPrenom() + "_" + enfant.getNom()
+            acteNaissance = idExtrait + enfant.getPrenom() + "_" + enfant.getNom()
                 + "_acte_naissance.pdf";
             // SimpleDateFormat dateDeclaration = null;
             Calendar c = Calendar.getInstance();
@@ -361,7 +361,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public void creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
-        String FILE = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+        String FILE = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
             + "_transcription_naissance.pdf";
         Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
@@ -405,6 +405,18 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         log.debug("Request to get DeclarationNaissances by criteria");
         List<DeclarationExtraitRechercheDTO> result = extraitService.findExtraitByCriteria(declarationNaissanceDTO);
         return result;
+    }
+
+    @Override
+    public void supprimerActesImprimer(String acteNaissance, String transcriptionNaissance) {
+        File documents = new File("src/main/webapp/app/documents/");
+        if (documents.isDirectory()) {
+            for (File file : documents.listFiles()) {
+                if (file.getName().equals(acteNaissance) || file.getName().equals(transcriptionNaissance)) {
+                    file.delete();
+                }
+            }
+        }
     }
 /*
     *//**

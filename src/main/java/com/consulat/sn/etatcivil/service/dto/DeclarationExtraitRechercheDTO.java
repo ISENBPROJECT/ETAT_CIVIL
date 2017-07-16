@@ -42,6 +42,7 @@ public class DeclarationExtraitRechercheDTO implements Serializable {
     private PersonneDTO pere;
 
     private UserDTO agent;
+    private Set<PieceJointeDTO> piecesJointes= new HashSet<>();
 
     public Long getId() {
         return id;
@@ -121,5 +122,13 @@ public class DeclarationExtraitRechercheDTO implements Serializable {
 
     public void setAgent(UserDTO agent) {
         this.agent = agent;
+    }
+
+    public Set<PieceJointeDTO> getPiecesJointes() {
+        return piecesJointes;
+    }
+
+    public void setPiecesJointes(Set<PieceJointeDTO> piecesJointes) {
+        this.piecesJointes = piecesJointes;
     }
 }

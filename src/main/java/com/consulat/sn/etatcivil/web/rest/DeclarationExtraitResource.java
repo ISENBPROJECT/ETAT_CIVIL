@@ -66,15 +66,25 @@ public class DeclarationExtraitResource {
      */
     @PutMapping("/declaration-extraits")
     @Timed
-    public ResponseEntity<DeclarationExtraitDTO> updateDeclarationExtrait(@Valid @RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
+    public ResponseEntity<DeclarationExtraitDTO> updateDeclarationExtrait(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to update DeclarationExtrait : {}", declarationExtraitDTO);
-        if (declarationExtraitDTO.getId() == null) {
-            return createDeclarationExtrait(declarationExtraitDTO);
+
+        String acteToDelete = "";
+        String transcriptionToDelete = "";
+
+        if (null != declarationExtraitDTO) {
+            transcriptionToDelete = declarationExtraitDTO.getId()+declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+                + "_transcription_naissance.pdf";
+
+            acteToDelete = declarationExtraitDTO.getId()+declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+                + "_acte_naissance.pdf";
+
+            declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);
+
         }
-        DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getId().toString()))
-            .body(result);
+            .body(null);
     }
 
     @RequestMapping(value = "/declaration-extraits-recherche",
@@ -86,6 +96,33 @@ public class DeclarationExtraitResource {
 
         return declarationExtraitService.findExtraitByCriteria(declarationExtraitDTO);
     }
+
+   /* *//**
+     * DELETE  /declaration-extraits/:id : delete the "id" declarationExtrait.
+     *
+     * @param id the id of the declarationExtraitDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     *//*
+    @RequestMapping(value = "/declaration-extraits-recherche",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void supprimerimpressionDeclarationExtrait(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) {
+        log.debug("REST request to delete DeclarationExtrait : {}", declarationExtraitDTO);
+        String acteToDelete = "";
+        String transcriptionToDelete = "";
+
+        if (null != declarationExtraitDTO) {
+            transcriptionToDelete = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+                + "_transcription_naissance.pdf";
+
+            acteToDelete = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+                + "_acte_naissance.pdf";
+
+            declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);
+        }
+
+    }*/
 /*
     *//**
      * GET  /declaration-extraits : get all the declarationExtraits.
@@ -111,20 +148,6 @@ public class DeclarationExtraitResource {
         log.debug("REST request to get DeclarationExtrait : {}", id);
         DeclarationExtraitDTO declarationExtraitDTO = declarationExtraitService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(declarationExtraitDTO));
-    }
-
-    *//**
-     * DELETE  /declaration-extraits/:id : delete the "id" declarationExtrait.
-     *
-     * @param id the id of the declarationExtraitDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     *//*
-    @DeleteMapping("/declaration-extraits/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteDeclarationExtrait(@PathVariable Long id) {
-        log.debug("REST request to delete DeclarationExtrait : {}", id);
-        declarationExtraitService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
     *//**
