@@ -1,0 +1,1069 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <!--formulaire de saisie-->
+    <div ng-if="isnew">
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="myDeclarationExtraitLabel"
+                data-translate="etatCivilApp.declarationExtrait.home.createOrEditLabel">Create or edit a Declaration
+                Extrait</h4>
+        </div>
+
+        <!--sans père-->
+        <div>
+                <label for="sansPere">Enfant sans père</label>
+                <input class="checkbox-inline" id="sansPere" ng-model="vm.isNotWithFather" type="checkbox" ng-click="vm.renseignerInfosPere()"/>
+        </div>
+
+        <div class="modal-body">
+            <jhi-alert-error></jhi-alert-error>
+
+            <!--container-->
+            <div class="containerFlex">
+
+
+                <!--mere-->
+                <div class="containerFlexItemMere">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myDeclarationExtraitLabelt"
+                            data-translate="etatCivilApp.declarationExtrait.home.blocMere">Informations sur la mère
+                            Extrait</h4>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomMere"
+                               for="field_nomMere">Nom Mere</label>
+                        <input type="text" class="form-control" name="nomMere" id="field_nomMere"
+                               ng-model="vm.declarationExtrait.nomMere"
+                               required/>
+                        <div ng-show="editForm.nomMere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.nomMere.$error.required" data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomMere"
+                               for="field_prenomMere">Prenom Mere</label>
+                        <input type="text" class="form-control" name="prenomMere" id="field_prenomMere"
+                               ng-model="vm.declarationExtrait.prenomMere"
+                               required/>
+                        <div ng-show="editForm.prenomMere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.prenomMere.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere"
+                               for="field_dateNaissanceMere">Date Naissance Mere</label>
+                        <div class="input-group">
+                            <input id="field_dateNaissanceMere" type="text" class="form-control" ng-change="vm.verifierSiMajeur()"
+                                   name="dateNaissanceMere"
+                                   uib-datepicker-popup="{{dateformat}}"
+                                   ng-model="vm.declarationExtrait.dateNaissanceMere"
+                                   is-open="vm.datePickerOpenStatus.dateNaissanceMere" min
+                                   required/>
+
+                            <input hidden id="field_dateNaissanceMereCache" type="text"
+                                   ng-model="vm.declarationExtrait.dateNaissanceMereCache"
+                                   required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissanceMere')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        </div>
+                        <div ng-show="editForm.dateNaissanceMere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.dateNaissanceMere.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                        <div ng-show="vm.dateNaissanceMereError">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceMereError"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceMereErreur">
+                                champs supérieur à 10 ans.
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissancePlusCinquante">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissancePlusCinquante"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissancePlusCinquante">
+                                la mère ne peut pas être agée de plus de 50 ans par rapport à son enfant
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissanceMereEnfantInfDix">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceMereEnfantInfDix"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceMereEnfantInfDix">
+                                entre la mère et l'enfant il doit y avoir plus de 10 ans .
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.fonctionMere"
+                               for="field_fonctionMere">Fonction Mere</label>
+                        <input type="text" class="form-control" name="fonctionMere" id="field_fonctionMere"
+                               ng-model="vm.declarationExtrait.fonctionMere"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.adresseComplMere"
+                               for="field_adresseComplMere">Adresse Compl Mere</label>
+                        <input type="text" class="form-control" name="adresseComplMere" id="field_adresseComplMere"
+                               ng-model="vm.declarationExtrait.adresseComplMere"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroIdentiteMere"
+                               for="field_numeroIdentiteMere">Numero Identite Mere</label>
+                        <input type="text" class="form-control" name="numeroIdentiteMere" id="field_numeroIdentiteMere"
+                               ng-model="vm.declarationExtrait.numeroIdentiteMere"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroPassportMere"
+                               for="field_numeroPassportMere">Numero Passport Mere</label>
+                        <input type="text" class="form-control" name="numeroPassportMere" id="field_numeroPassportMere"
+                               ng-model="vm.declarationExtrait.numeroPassportMere"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere"
+                               for="field_paysNaissanceMere">Pays
+                            Naissance Mere</label>
+                        <select ng-change="vm.updateVilleNaissanceMere()" class="form-control"
+                                id="field_paysNaissanceMere" name="paysNaissanceMere"
+                                ng-model="vm.declarationExtrait.paysNaissanceMereId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.paysNaissanceMere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.paysNaissanceMere.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere"
+                               for="field_lieuNaissanceMere">Lieu
+                            Naissance Mere</label>
+                        <select class="form-control" id="field_lieuNaissanceMere" name="lieuNaissanceMere"
+                                ng-model="vm.declarationExtrait.lieuNaissanceMereId"
+                                ng-options="ville as ville.nom for ville in vm.villesNaissancesMere track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.lieuNaissanceMere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.lieuNaissanceMere.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adrPaysMere" for="field_adrPaysMere">Adr
+                            Pays
+                            Mere</label>
+                        <select ng-change="vm.updateVilleResidenceMere()" class="form-control" id="field_adrPaysMere"
+                                name="adrPaysMere"
+                                ng-model="vm.declarationExtrait.adrPaysMereId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adrPaysMere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adrPaysMere.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adresseMere" for="field_adresseMere">Adresse
+                            Mere</label>
+                        <select class="form-control" id="field_adresseMere" name="adresseMere"
+                                ng-model="vm.declarationExtrait.adresseMereId"
+                                ng-options="ville as ville.nom for ville in vm.villesResidenceMere track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adresseMere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adresseMere.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!--pere-->
+                <div class="containerFlexItemPere">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myDeclarationExtraitLabeltt"
+                            data-translate="etatCivilApp.declarationExtrait.home.blocPere">Informations sur le père
+                            Extrait</h4>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomPere"
+                               for="field_nomPere">Nom Pere</label>
+                        <input type="text" class="form-control" name="nomPere" id="field_nomPere"
+                               ng-model="vm.declarationExtrait.nomPere" ng-disabled="vm.isNotWithFather"
+                               required/>
+                        <div ng-show="editForm.nomPere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.nomPere.$error.required" data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomPere"
+                               for="field_prenomPere">Prenom Pere</label>
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="prenomPere" id="field_prenomPere"
+                               ng-model="vm.declarationExtrait.prenomPere"
+                               required/>
+                        <div ng-show="editForm.prenomPere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.prenomPere.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
+                               for="field_dateNaissancePere">Date Naissance Pere</label>
+                        <div class="input-group">
+                            <input ng-disabled="vm.isNotWithFather" id="field_dateNaissancePere" type="text" class="form-control"
+                                   name="dateNaissancePere" ng-change="vm.verifierSiPereMajeur()"
+                                   uib-datepicker-popup="{{dateformat}}"
+                                   ng-model="vm.declarationExtrait.dateNaissancePere"
+                                   is-open="vm.datePickerOpenStatus.dateNaissancePere"
+                                   required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissancePere')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        </div>
+                        <div ng-show="editForm.dateNaissancePere.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.dateNaissancePere.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                        <div ng-show="vm.dateNaissancePereError">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissancePereError"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissancePereErreur">
+                                champs supérieur à 10 ans.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.fonctionPere"
+                               for="field_fonctionPere">Fonction Pere</label>
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="fonctionPere" id="field_fonctionPere"
+                               ng-model="vm.declarationExtrait.fonctionPere"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
+                               for="field_adresseComplPere">Adresse Compl Pere</label>
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="adresseComplPere" id="field_adresseComplPere"
+                               ng-model="vm.declarationExtrait.adresseComplPere"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
+                               for="field_numeroIdentitePere">Numero Identite Pere</label>
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="numeroIdentitePere" id="field_numeroIdentitePere"
+                               ng-model="vm.declarationExtrait.numeroIdentitePere" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
+                               for="field_numeroPassportPere">Numero Passport Pere</label>
+                        <input ng-disabled="vm.isNotWithFather" type="text" class="form-control" name="numeroPassportPere" id="field_numeroPassportPere"
+                               ng-model="vm.declarationExtrait.numeroPassportPere"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
+                               for="field_paysNaissancePere">Pays
+                            Naissance Pere</label>
+                        <select ng-disabled="vm.isNotWithFather" ng-change="vm.updateVilleNaissancePere()" class="form-control"
+                                id="field_paysNaissancePere" name="paysNaissancePere"
+                                ng-model="vm.declarationExtrait.paysNaissancePereId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.paysNaissancePere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.paysNaissancePere.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
+                               for="field_lieuNaissancePere">Lieu
+                            Naissance Pere</label>
+                        <select ng-disabled="vm.isNotWithFather" class="form-control" id="field_lieuNaissancePere" name="lieuNaissancePere"
+                                ng-model="vm.declarationExtrait.lieuNaissancePereId"
+                                ng-options="ville as ville.nom for ville in vm.villesNaissancesPere track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.lieuNaissancePere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.lieuNaissancePere.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere" for="field_adrPaysPere">Adr
+                            Pays
+                            Pere</label>
+                        <select ng-disabled="vm.isNotWithFather" ng-change="vm.updateVilleResidencePere()" class="form-control" id="field_adrPaysPere"
+                                name="adrPaysPere"
+                                ng-model="vm.declarationExtrait.adrPaysPereId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adrPaysPere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adrPaysPere.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adressePere" for="field_adressePere">Adresse
+                            Pere</label>
+                        <select ng-disabled="vm.isNotWithFather" class="form-control" id="field_adressePere" name="adressePere"
+                                ng-model="vm.declarationExtrait.adressePereId"
+                                ng-options="ville as ville.nom for ville in vm.villesResidencePere track by ville.id "
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adressePere.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adressePere.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+
+                <!--enfant-->
+                <div class="containerFlexItemEnfant">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myDeclarationExtraitLabelttt"
+                            data-translate="etatCivilApp.declarationExtrait.home.blocEnfant">Informations sur l'enfant
+                            Extrait</h4>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomEnfant"
+                               for="field_nomEnfant">Nom Enfant</label>
+                        <input type="text" class="form-control" name="nomEnfant" id="field_nomEnfant"
+                               ng-model="vm.declarationExtrait.nomEnfant"
+                               required/>
+                        <div ng-show="editForm.nomEnfant.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.nomEnfant.$error.required" data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomEnfant"
+                               for="field_prenomEnfant">Prenom Enfant</label>
+                        <input type="text" class="form-control" name="prenomEnfant" id="field_prenomEnfant"
+                               ng-model="vm.declarationExtrait.prenomEnfant"
+                               required/>
+                        <div ng-show="editForm.prenomEnfant.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.prenomEnfant.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant"
+                               for="field_dateNaissanceEnfant">Date Naissance Enfant</label>
+                        <div class="input-group">
+                            <input id="field_dateNaissanceEnfant" type="text" class="form-control"
+                                   name="dateNaissanceEnfant" ng-change="vm.dateNaissanceEnfantFutur()"
+                                   uib-datepicker-popup="{{dateformat}}"
+                                   ng-model="vm.declarationExtrait.dateNaissanceEnfant"
+                                   is-open="vm.datePickerOpenStatus.dateNaissanceEnfant"
+                                   required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissanceEnfant')">
+                            <i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        </div>
+                        <div ng-show="editForm.dateNaissanceEnfant.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.dateNaissanceEnfant.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                        </div>
+
+                        <div ng-show="vm.dateNaissanceEnfantErrorFutur">
+                            <p class="help-block alert-danger"
+                               ng-show="vm.dateNaissanceEnfantErrorFutur"
+                               data-translate="etatCivilApp.declarationExtrait.naissanceFutur">
+                                impossible de naitre dans le futur
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.genreEnfant"
+                               for="field_genreEnfant">Genre Enfant</label>
+                        <select class="form-control" name="genreEnfant" ng-model="vm.declarationExtrait.genreEnfant"
+                                id="field_genreEnfant" required>
+                            <option value="MASCULIN" data-translate="etatCivilApp.Genre.MASCULIN">MASCULIN</option>
+                            <option value="FEMININ" data-translate="etatCivilApp.Genre.FEMININ">FEMININ</option>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.genreEnfant.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.genreEnfant.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant"
+                               for="field_paysNaissanceEnfant">Pays Naissance Enfant</label>
+                        <select ng-change="vm.updateVilleNaissanceEnfant()" class="form-control"
+                                id="field_paysNaissanceEnfant" name="paysNaissanceEnfant"
+                                ng-model="vm.declarationExtrait.paysNaissanceEnfantId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.paysNaissanceEnfant.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.paysNaissanceEnfant.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant"
+                               for="field_lieuNaissanceEnfant">Lieu Naissance Enfant</label>
+                        <select class="form-control" id="field_lieuNaissanceEnfant" name="lieuNaissanceEnfant"
+                                ng-model="vm.declarationExtrait.lieuNaissanceEnfantId"
+                                ng-options="ville as ville.nom for ville in vm.villesNaissancesEnfant track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.lieuNaissanceEnfant.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.lieuNaissanceEnfant.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant" for="field_adrPaysEnfant">Adr
+                            Pays
+                            Enfant</label>
+                        <select ng-change="vm.updateResidenceEnfant()" class="form-control" id="field_adrPaysEnfant"
+                                name="adrPaysEnfant"
+                                ng-model="vm.declarationExtrait.adrPaysEnfantId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adrPaysEnfant.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adrPaysEnfant.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adresseEnfant" for="field_adresseEnfant">Adresse
+                            Enfant</label>
+                        <select class="form-control" id="field_adresseEnfant" name="adresseEnfant"
+                                ng-model="vm.declarationExtrait.adresseEnfantId"
+                                ng-options="ville as ville.nom for ville in vm.villesResidenceEnfant track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.adresseEnfant.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.adresseEnfant.$error.required" data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+
+
+                </div>
+
+                <!--commun à  l'extrait-->
+                <div class="containerFlexItemCommun">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myDeclarationExtraitLabeltttt"
+                            data-translate="etatCivilApp.declarationExtrait.home.blocCommun">Information sur l'Extrait</h4>
+                    </div>
+
+                    <div class="form-group" ngf-drop ngf-change="vm.setCopieLiterale($file, vm.declarationExtrait)">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.copieLiterale"
+                               for="field_copieLiterale">Copie Literale</label>
+                        <div>
+                            <div ng-if="vm.declarationExtrait.copieLiterale" class="help-block clearfix">
+                                <a class="pull-left"
+                                   ng-click="vm.openFile(vm.declarationExtrait.copieLiteraleContentType, vm.declarationExtrait.copieLiterale)"
+                                   data-translate="entity.action.open">open</a><br>
+                                <span class="pull-left">{{vm.declarationExtrait.copieLiteraleContentType}}, {{vm.byteSize(vm.declarationExtrait.copieLiterale)}}</span>
+                                <button type="button"
+                                        ng-click="vm.declarationExtrait.copieLiterale=null;vm.declarationExtrait.copieLiteraleContentType=null;"
+                                        class="btn btn-default btn-xs pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <button type="button" ngf-select class="btn btn-default btn-block"
+                                    ngf-change="vm.setCopieLiterale($file, vm.declarationExtrait)"
+                                    data-translate="entity.action.addblob">
+                                Add blob
+                            </button>
+                        </div>
+                        <input type="hidden" class="form-control" name="copieLiterale" id="field_copieLiterale"
+                               ng-model="vm.declarationExtrait.copieLiterale"
+                               required minbytes="8192" maxbytes="25165824"/>
+                        <input type="hidden" class="form-control" name="copieLiteraleContentType"
+                               id="field_copieLiteraleContentType"
+                               ng-model="vm.declarationExtrait.copieLiteraleContentType"/>
+                        <div ng-show="editForm.copieLiterale.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.copieLiterale.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.copieLiterale.$error.minbytes"
+                               data-translate="entity.validation.minbytes"
+                               translate-value-min="8192">
+                                This field should be at least 8192.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.copieLiterale.$error.maxbytes"
+                               data-translate="entity.validation.maxbytes"
+                               translate-value-max="25165824">
+                                This field cannot be more than 25165824.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group" ngf-drop ngf-change="vm.setCopieCarte($file, vm.declarationExtrait)">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.copieCarte"
+                               for="field_copieCarte">Copie Carte</label>
+                        <div>
+                            <div ng-if="vm.declarationExtrait.copieCarte" class="help-block clearfix">
+                                <a class="pull-left"
+                                   ng-click="vm.openFile(vm.declarationExtrait.copieCarteContentType, vm.declarationExtrait.copieCarte)"
+                                   data-translate="entity.action.open">open</a><br>
+                                <span class="pull-left">{{vm.declarationExtrait.copieCarteContentType}}, {{vm.byteSize(vm.declarationExtrait.copieCarte)}}</span>
+                                <button type="button"
+                                        ng-click="vm.declarationExtrait.copieCarte=null;vm.declarationExtrait.copieCarteContentType=null;"
+                                        class="btn btn-default btn-xs pull-right">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                            <button type="button" ngf-select class="btn btn-default btn-block"
+                                    ngf-change="vm.setCopieCarte($file, vm.declarationExtrait)"
+                                    data-translate="entity.action.addblob">
+                                Add blob
+                            </button>
+                        </div>
+                        <input type="hidden" class="form-control" name="copieCarte" id="field_copieCarte"
+                               ng-model="vm.declarationExtrait.copieCarte"
+                               required minbytes="8192" maxbytes="25165824"/>
+                        <input type="hidden" class="form-control" name="copieCarteContentType"
+                               id="field_copieCarteContentType"
+                               ng-model="vm.declarationExtrait.copieCarteContentType"/>
+                        <div ng-show="editForm.copieCarte.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.copieCarte.$error.required"
+                               data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.copieCarte.$error.minbytes" data-translate="entity.validation.minbytes"
+                               translate-value-min="8192">
+                                This field should be at least 8192.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.copieCarte.$error.maxbytes" data-translate="entity.validation.maxbytes"
+                               translate-value-max="25165824">
+                                This field cannot be more than 25165824.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysDeclaration"
+                               for="field_paysDeclaration">Pays
+                            Declaration</label>
+                        <select ng-change="vm.updateVilleDeclaration()" class="form-control" id="field_paysDeclaration"
+                                name="paysDeclaration"
+                                ng-model="vm.declarationExtrait.paysDeclarationId"
+                                ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.paysDeclaration.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.paysDeclaration.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuDeclaration"
+                               for="field_lieuDeclaration">Lieu
+                            Declaration</label>
+                        <select class="form-control" id="field_lieuDeclaration" name="lieuDeclaration"
+                                ng-model="vm.declarationExtrait.lieuDeclarationId"
+                                ng-options="ville as ville.nom for ville in vm.villesDeclaration track by ville.id"
+                                required>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.lieuDeclaration.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.lieuDeclaration.$error.required"
+                           data-translate="entity.validation.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.mention"
+                               for="field_mention">Mention</label>
+                <textarea class="form-control" name="mention" id="field_mention"
+                          ng-model="vm.declarationExtrait.mention" required maxbytes="1000"></textarea>
+                        <div ng-show="editForm.mention.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.mention.$error.required" data-translate="entity.validation.required">
+                                This field is required.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.mention.$error.maxbytes" data-translate="entity.validation.maxbytes"
+                               translate-value-max="1000">
+                                This field cannot be more than 1000.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--Recap des infos apres saisie-->
+    <div ng-if="!isnew">
+
+
+
+
+        <div class="modal-header">
+            <h4 class="modal-title" id="recapDeclarationExtraitLabel"
+                data-translate="etatCivilApp.declarationExtrait.home.recaptitulatif">Recapitulatif Declaration
+                Extrait</h4>
+        </div>
+        <div class="modal-body">
+            <jhi-alert-error></jhi-alert-error>
+
+            <!--container-->
+            <div>
+
+
+                <!--mere-->
+                <fieldset class="fieldsetMere">
+                    <legend>Information de la Maman</legend>
+                    <div style="display: flex; justify-content: space-between;">
+
+                        <div style="display: flex;flex-direction: column; align-items: flex-end">
+                            <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.nomMere_recap">Nom
+                                Mere</label>
+                            <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.prenomMere_recap">Prenom
+                                Mere</label>
+                            <label class="label_racap"
+                                   data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere_recap">Date
+                                Naissance Mere</label>
+                            <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.fonctionMere_recap">Fonction
+                                Mere</label>
+                        </div>
+
+                        <div style="display: inline-flex;flex-direction: column; align-items: flex-end">
+                            <span class="span_recap"> {{vm.declarationExtrait.nomMere}}efzetfreg</span>
+                            <span class="span_recap"> {{vm.declarationExtrait.dateNaissanceMere}}gedfyue</span>
+                            <span class="span_recap">{{vm.declarationExtrait.fonctionMere}}fzdtyfyte</span>
+                            <span class="span_recap"> {{vm.declarationExtrait.prenomMere}}fztdyfzt</span>
+                        </div>
+
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end;">
+
+                            <label class="label_racap" class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.adresseComplMere_recap">Adresse Compl
+                                Mere</label>
+                            <label class="label_racap" class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroIdentiteMere_recap">Numero Identite
+                                Mere</label>
+                            <label class="label_racap" class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroPassportMere_recap">Numero Passport
+                                Mere</label>
+                            <label class="label_racap"
+                                   data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere_recap">Pays
+                                Naissance Mere</label>
+                        </div>
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end;">
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.adresseComplMere}}</span>
+                            </div>
+
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.numeroIdentiteMere}}</span>
+                            </div>
+
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.numeroPassportMere}}</span>
+                            </div>
+
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.paysNaissanceMereId.nom}}</span>
+                            </div>
+                        </div>
+
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <label class="label_racap"
+                                   data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere_recap">Lieu
+                                Naissance Mere</label>
+                            <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adrPaysMere_recap">Adr
+                                Pays Mere</label>
+                            <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adresseMere_recap">Adresse
+                                Mere</label>
+                        </div>
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.lieuNaissanceMereId.nom}}</span>
+                            </div>
+
+                            <div>
+
+                                <span class="span_recap">{{vm.declarationExtrait.adrPaysMereId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <span class="span_recap">{{vm.declarationExtrait.adresseMereId.nom}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!--pere-->
+                <fieldset class="fieldsetPere">
+                    <legend>Information Père</legend>
+
+                    <div style="display: flex; justify-content: space-between">
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.nomPere_recap">Nom
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.nomPere}}zorrzeerrr</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.prenomPere_recap">Prenom
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.prenomPere}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.dateNaissancePere_recap">Date Naissance
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.dateNaissancePere}}</span>
+
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.adresseComplPere_recap">Adresse Compl
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.adresseComplPere}}</span>
+
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.fonctionPere_recap">Fonction
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.fonctionPere}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere_recap">Numero Identite
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.numeroIdentitePere}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.numeroPassportPere_recap">Numero Passport
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.numeroPassportPere}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.paysNaissancePere_recap">Pays Naissance
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.paysNaissancePereId.nom}}</span>
+                            </div>
+                        </div>
+
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere_recap">Lieu Naissance
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.lieuNaissancePereId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adrPaysPere_recap">Adr
+                                    Pays Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.adrPaysPereId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adressePere_recap">Adresse
+                                    Pere</label>
+                                <span class="span_recap">{{vm.declarationExtrait.adressePereId.nom}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!--enfant-->
+                <fieldset class="fieldsetEnfant">
+                    <legend>Information à l'enfant</legend>
+
+                    <div style="display: flex; justify-content: space-between">
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.nomEnfant_recap">Nom
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.nomEnfant}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.prenomEnfant_recap">Prenom
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.prenomEnfant}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant_recap">Date Naissance
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.dateNaissanceEnfant}}</span>
+                            </div>
+
+
+                        </div>
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant_recap">Pays Naissance
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.paysNaissanceEnfantId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant_recap">Lieu Naissance
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.lieuNaissanceEnfantId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant_recap">Adr
+                                    Pays
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.adrPaysEnfantId.nom}}</span>
+                            </div>
+
+
+                        </div>
+
+                        <div style="display: flex;flex-direction: column;align-items: flex-end">
+
+                            <div>
+                                <label class="label_racap" class="control-label"
+                                       data-translate="etatCivilApp.declarationExtrait.genreEnfant_recap">Genre
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.genreEnfant}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap" data-translate="etatCivilApp.declarationExtrait.adresseEnfant_recap">Adresse
+                                    Enfant</label>
+                                <span class="span_recap">{{vm.declarationExtrait.adresseEnfantId.nom}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!--commun à  l'extrait-->
+                <fieldset class="fieldsetCommun">
+                    <legend>Informations communes à l'extrait</legend>
+
+                    <div style="display: flex; justify-content: space-between">
+
+                        <div style="display: flex;flex-direction: column">
+
+                            <div>
+                                <div class="form-group" ngf-drop
+                                     ngf-change="vm.setCopieLiterale($file, vm.declarationExtrait)">
+                                    <label class="label_racap" class="control-label_recap"
+                                           data-translate="etatCivilApp.declarationExtrait.copieLiterale_recap"
+                                           for="field_copieLiterale_recap">Copie Literale</label>
+                                    <div>
+                                        <div ng-if="vm.declarationExtrait.copieLiterale" class="help-block clearfix">
+                                            <a class="pull-left"
+                                               ng-click="vm.openFile(vm.declarationExtrait.copieLiteraleContentType, vm.declarationExtrait.copieLiterale)"
+                                               data-translate="entity.action.open">open</a><br>
+                                            <span class="pull-left">{{vm.declarationExtrait.copieLiteraleContentType}}, {{vm.byteSize(vm.declarationExtrait.copieLiterale)}}</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="copieLiterale" id="field_copieLiterale_recap"
+                                           ng-model="vm.declarationExtrait.copieLiterale"
+                                           required minbytes="8192" maxbytes="25165824"/>
+
+                                </div>
+                                <div class="form-group" ngf-drop
+                                     ngf-change="vm.setCopieCarte($file, vm.declarationExtrait)">
+                                    <label class="label_racap" class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.copieCarte_recap"
+                                           for="field_copieCarte_recap">Copie Carte</label>
+                                    <div>
+                                        <div ng-if="vm.declarationExtrait.copieCarte" class="help-block clearfix">
+                                            <a class="pull-left"
+                                               ng-click="vm.openFile(vm.declarationExtrait.copieCarteContentType, vm.declarationExtrait.copieCarte)"
+                                               data-translate="entity.action.open">open</a><br>
+                                            <span class="pull-left">{{vm.declarationExtrait.copieCarteContentType}}, {{vm.byteSize(vm.declarationExtrait.copieCarte)}}</span>
+
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="copieCarte" id="field_copieCarte_recap"
+                                           ng-model="vm.declarationExtrait.copieCarte"
+                                           required minbytes="8192" maxbytes="25165824"/>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div style="display: flex;flex-direction: column">
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.paysDeclaration_recap">Pays
+                                    Declaration</label>
+                                <span class="span_recap">{{vm.declarationExtrait.paysDeclarationId.nom}}</span>
+                            </div>
+
+                            <div>
+                                <label class="label_racap"
+                                       data-translate="etatCivilApp.declarationExtrait.lieuDeclaration_recap">Lieu
+                                    Declaration</label>
+                                <span>{{vm.declarationExtrait.lieuDeclarationId.nom}}</span>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex;flex-direction: column">
+                            <div>
+                                <label class="control-label" data-translate="etatCivilApp.declarationExtrait.mention_recap"
+                                       for="field_mention_recap">Mention</label>
+                            <textarea name="mention" id="field_mention_recap"
+                                      ng-model="vm.declarationExtrait.mention" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" ng-show="test" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-show="test" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span
+            data-translate="entity.action.save">Save</span>
+        </button>
+
+        <button type="button" ng-click="vm.valider()" ng-show="editForm.$valid && !isrecap" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span>&nbsp;<span
+            data-translate="entity.action.valider">Recap</span>
+        </button>
+    </div>
+</form>
+
