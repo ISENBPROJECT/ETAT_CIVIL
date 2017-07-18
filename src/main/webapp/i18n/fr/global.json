@@ -131,5 +131,5 @@
         "emailexists": "Email déjà utilisé !",
         "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !"
     },
-    "footer": "Consulat du Sénégal à Bordeaux"
+    "footer": "Consulat général du Sénégal à Bordeaux"
 }
