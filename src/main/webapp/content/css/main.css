@@ -495,3 +495,13 @@ ui bootstrap tweaks
 .merebloc1 {
     flex-direction: column;
 }
+.recapInfo{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+.recapLabel{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end
+}
