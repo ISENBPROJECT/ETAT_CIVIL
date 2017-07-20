@@ -1,8 +1,8 @@
 package com.consulat.sn.etatcivil.service.impl;
 
+import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.domain.Extrait;
 import com.consulat.sn.etatcivil.repository.ExtraitRepository;
-import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-public class ExtraitServiceImpl implements ExtraitService {
+public class ExtraitServiceImpl implements ExtraitService{
 
     private final Logger log = LoggerFactory.getLogger(ExtraitServiceImpl.class);
 
@@ -53,9 +53,9 @@ public class ExtraitServiceImpl implements ExtraitService {
     }
 
     /**
-     * Get all the extraits.
+     *  Get all the extraits.
      *
-     * @return the list of entities
+     *  @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -67,10 +67,10 @@ public class ExtraitServiceImpl implements ExtraitService {
     }
 
     /**
-     * Get one extrait by id.
+     *  Get one extrait by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     *  @param id the id of the entity
+     *  @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -81,9 +81,9 @@ public class ExtraitServiceImpl implements ExtraitService {
     }
 
     /**
-     * Delete the  extrait by id.
+     *  Delete the  extrait by id.
      *
-     * @param id the id of the entity
+     *  @param id the id of the entity
      */
     @Override
     public void delete(Long id) {

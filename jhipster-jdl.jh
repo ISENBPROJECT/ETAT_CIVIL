@@ -3,10 +3,13 @@ entity Pays {
 }
 
 entity Ville {
-	nom String required,
-    codePostal String required,
-    adresseComplementaire String
+	nom String required
 }
+
+entity Commune {
+	nom String required
+}
+
 enum Genre {
     MASCULIN, FEMININ
   }
@@ -18,7 +21,11 @@ entity Personne {
     fonction String,
     genre Genre,
     numeroCarteIdentite String,
-    numeroPassport String
+    numeroPassport String,
+    paysNaissance String required,
+    villeNaissance String required,
+    paysResidence String required,
+    villeResidence String required
 }
 
 entity Extrait {
@@ -59,7 +66,17 @@ entity DeclarationExtrait {
     adresseComplPere String,
     fonctionPere String,
     numeroIdentitePere String,
-    numeroPassportPere String
+    numeroPassportPere String,
+    paysNaissanceEnfant String required,
+    villeNaissanceEnfant String required,
+    paysNaissanceMere String required,
+    villeNaissanceMere String required,
+    paysResidenceMere String required,
+    villeResidenceMere String required,
+    paysNaissancePere String required,
+    villeNaissancePere String required,
+    paysResidencePere String required,
+    villeResidencePere String required
 
 }
 
@@ -70,20 +87,11 @@ relationship ManyToOne {
   Personne{pere} to Personne,
   Personne{mere} to Personne,
   Personne{lieuNaissance required} to Ville,
-  DeclarationExtrait{lieuNaissanceEnfant required} to Ville,
-  DeclarationExtrait{adresseEnfant required} to Ville,
-  DeclarationExtrait{adressePere required} to Ville,
-  DeclarationExtrait{adresseMere required} to Ville,
-  DeclarationExtrait{lieuNaissancePere required} to Ville,
-  DeclarationExtrait{lieuNaissanceMere required} to Ville,
-  DeclarationExtrait{lieuDeclaration required} to Ville,
   DeclarationExtrait{paysNaissanceEnfant required} to Pays,
-  DeclarationExtrait{adrPaysEnfant required} to Pays,
-  DeclarationExtrait{paysNaissanceMere required} to Pays,
-  DeclarationExtrait{adrPaysMere required} to Pays,
-  DeclarationExtrait{paysNaissancePere required} to Pays,
-  DeclarationExtrait{adrPaysPere required} to Pays,
+  DeclarationExtrait{villeNaissanceEnfant required} to Ville,
   DeclarationExtrait{PaysDeclaration required} to Pays,
+  DeclarationExtrait{lieuDeclaration required} to Ville,
+  Commune{ville required} to Ville,
   Ville{pays} to Pays,
   Extrait{lieuDeclaration required} to Ville,
   Extrait{enfant required} to Personne,

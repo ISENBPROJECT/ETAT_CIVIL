@@ -26,13 +26,6 @@ public class Ville implements Serializable {
     @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotNull
-    @Column(name = "code_postal", nullable = false)
-    private String codePostal;
-
-    @Column(name = "adresse_complementaire")
-    private String adresseComplementaire;
-
     @ManyToOne
     private Pays pays;
 
@@ -55,32 +48,6 @@ public class Ville implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public Ville codePostal(String codePostal) {
-        this.codePostal = codePostal;
-        return this;
-    }
-
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public String getAdresseComplementaire() {
-        return adresseComplementaire;
-    }
-
-    public Ville adresseComplementaire(String adresseComplementaire) {
-        this.adresseComplementaire = adresseComplementaire;
-        return this;
-    }
-
-    public void setAdresseComplementaire(String adresseComplementaire) {
-        this.adresseComplementaire = adresseComplementaire;
     }
 
     public Pays getPays() {
@@ -121,8 +88,6 @@ public class Ville implements Serializable {
         return "Ville{" +
             "id=" + getId() +
             ", nom='" + getNom() + "'" +
-            ", codePostal='" + getCodePostal() + "'" +
-            ", adresseComplementaire='" + getAdresseComplementaire() + "'" +
             "}";
     }
 }

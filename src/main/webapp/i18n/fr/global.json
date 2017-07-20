@@ -16,6 +16,7 @@
                 "pieceJointe": "Piece Jointe",
                 "registreNaissance": "Registre Naissance",
                 "declarationExtrait": "Declaration Extrait",
+                "commune": "Commune",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

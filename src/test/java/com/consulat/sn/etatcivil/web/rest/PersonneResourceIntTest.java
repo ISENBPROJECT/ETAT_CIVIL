@@ -66,6 +66,18 @@ public class PersonneResourceIntTest {
     private static final String DEFAULT_NUMERO_PASSPORT = "AAAAAAAAAA";
     private static final String UPDATED_NUMERO_PASSPORT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PAYS_NAISSANCE = "AAAAAAAAAA";
+    private static final String UPDATED_PAYS_NAISSANCE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_VILLE_NAISSANCE = "AAAAAAAAAA";
+    private static final String UPDATED_VILLE_NAISSANCE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PAYS_RESIDENCE = "AAAAAAAAAA";
+    private static final String UPDATED_PAYS_RESIDENCE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_VILLE_RESIDENCE = "AAAAAAAAAA";
+    private static final String UPDATED_VILLE_RESIDENCE = "BBBBBBBBBB";
+
     @Autowired
     private PersonneRepository personneRepository;
 
@@ -115,7 +127,11 @@ public class PersonneResourceIntTest {
             .fonction(DEFAULT_FONCTION)
             .genre(DEFAULT_GENRE)
             .numeroCarteIdentite(DEFAULT_NUMERO_CARTE_IDENTITE)
-            .numeroPassport(DEFAULT_NUMERO_PASSPORT);
+            .numeroPassport(DEFAULT_NUMERO_PASSPORT)
+            .paysNaissance(DEFAULT_PAYS_NAISSANCE)
+            .villeNaissance(DEFAULT_VILLE_NAISSANCE)
+            .paysResidence(DEFAULT_PAYS_RESIDENCE)
+            .villeResidence(DEFAULT_VILLE_RESIDENCE);
         // Add required entity
         Ville adresse = VilleResourceIntTest.createEntity(em);
         em.persist(adresse);
@@ -157,6 +173,10 @@ public class PersonneResourceIntTest {
         assertThat(testPersonne.getGenre()).isEqualTo(DEFAULT_GENRE);
         assertThat(testPersonne.getNumeroCarteIdentite()).isEqualTo(DEFAULT_NUMERO_CARTE_IDENTITE);
         assertThat(testPersonne.getNumeroPassport()).isEqualTo(DEFAULT_NUMERO_PASSPORT);
+        assertThat(testPersonne.getPaysNaissance()).isEqualTo(DEFAULT_PAYS_NAISSANCE);
+        assertThat(testPersonne.getVilleNaissance()).isEqualTo(DEFAULT_VILLE_NAISSANCE);
+        assertThat(testPersonne.getPaysResidence()).isEqualTo(DEFAULT_PAYS_RESIDENCE);
+        assertThat(testPersonne.getVilleResidence()).isEqualTo(DEFAULT_VILLE_RESIDENCE);
     }
 
     @Test
@@ -238,6 +258,82 @@ public class PersonneResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPaysNaissanceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personneRepository.findAll().size();
+        // set the field null
+        personne.setPaysNaissance(null);
+
+        // Create the Personne, which fails.
+        PersonneDTO personneDTO = personneMapper.toDto(personne);
+
+        restPersonneMockMvc.perform(post("/api/personnes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personneDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Personne> personneList = personneRepository.findAll();
+        assertThat(personneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkVilleNaissanceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personneRepository.findAll().size();
+        // set the field null
+        personne.setVilleNaissance(null);
+
+        // Create the Personne, which fails.
+        PersonneDTO personneDTO = personneMapper.toDto(personne);
+
+        restPersonneMockMvc.perform(post("/api/personnes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personneDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Personne> personneList = personneRepository.findAll();
+        assertThat(personneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPaysResidenceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personneRepository.findAll().size();
+        // set the field null
+        personne.setPaysResidence(null);
+
+        // Create the Personne, which fails.
+        PersonneDTO personneDTO = personneMapper.toDto(personne);
+
+        restPersonneMockMvc.perform(post("/api/personnes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personneDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Personne> personneList = personneRepository.findAll();
+        assertThat(personneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkVilleResidenceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personneRepository.findAll().size();
+        // set the field null
+        personne.setVilleResidence(null);
+
+        // Create the Personne, which fails.
+        PersonneDTO personneDTO = personneMapper.toDto(personne);
+
+        restPersonneMockMvc.perform(post("/api/personnes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personneDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Personne> personneList = personneRepository.findAll();
+        assertThat(personneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPersonnes() throws Exception {
         // Initialize the database
         personneRepository.saveAndFlush(personne);
@@ -253,7 +349,11 @@ public class PersonneResourceIntTest {
             .andExpect(jsonPath("$.[*].fonction").value(hasItem(DEFAULT_FONCTION.toString())))
             .andExpect(jsonPath("$.[*].genre").value(hasItem(DEFAULT_GENRE.toString())))
             .andExpect(jsonPath("$.[*].numeroCarteIdentite").value(hasItem(DEFAULT_NUMERO_CARTE_IDENTITE.toString())))
-            .andExpect(jsonPath("$.[*].numeroPassport").value(hasItem(DEFAULT_NUMERO_PASSPORT.toString())));
+            .andExpect(jsonPath("$.[*].numeroPassport").value(hasItem(DEFAULT_NUMERO_PASSPORT.toString())))
+            .andExpect(jsonPath("$.[*].paysNaissance").value(hasItem(DEFAULT_PAYS_NAISSANCE.toString())))
+            .andExpect(jsonPath("$.[*].villeNaissance").value(hasItem(DEFAULT_VILLE_NAISSANCE.toString())))
+            .andExpect(jsonPath("$.[*].paysResidence").value(hasItem(DEFAULT_PAYS_RESIDENCE.toString())))
+            .andExpect(jsonPath("$.[*].villeResidence").value(hasItem(DEFAULT_VILLE_RESIDENCE.toString())));
     }
 
     @Test
@@ -273,7 +373,11 @@ public class PersonneResourceIntTest {
             .andExpect(jsonPath("$.fonction").value(DEFAULT_FONCTION.toString()))
             .andExpect(jsonPath("$.genre").value(DEFAULT_GENRE.toString()))
             .andExpect(jsonPath("$.numeroCarteIdentite").value(DEFAULT_NUMERO_CARTE_IDENTITE.toString()))
-            .andExpect(jsonPath("$.numeroPassport").value(DEFAULT_NUMERO_PASSPORT.toString()));
+            .andExpect(jsonPath("$.numeroPassport").value(DEFAULT_NUMERO_PASSPORT.toString()))
+            .andExpect(jsonPath("$.paysNaissance").value(DEFAULT_PAYS_NAISSANCE.toString()))
+            .andExpect(jsonPath("$.villeNaissance").value(DEFAULT_VILLE_NAISSANCE.toString()))
+            .andExpect(jsonPath("$.paysResidence").value(DEFAULT_PAYS_RESIDENCE.toString()))
+            .andExpect(jsonPath("$.villeResidence").value(DEFAULT_VILLE_RESIDENCE.toString()));
     }
 
     @Test
@@ -300,7 +404,11 @@ public class PersonneResourceIntTest {
             .fonction(UPDATED_FONCTION)
             .genre(UPDATED_GENRE)
             .numeroCarteIdentite(UPDATED_NUMERO_CARTE_IDENTITE)
-            .numeroPassport(UPDATED_NUMERO_PASSPORT);
+            .numeroPassport(UPDATED_NUMERO_PASSPORT)
+            .paysNaissance(UPDATED_PAYS_NAISSANCE)
+            .villeNaissance(UPDATED_VILLE_NAISSANCE)
+            .paysResidence(UPDATED_PAYS_RESIDENCE)
+            .villeResidence(UPDATED_VILLE_RESIDENCE);
         PersonneDTO personneDTO = personneMapper.toDto(updatedPersonne);
 
         restPersonneMockMvc.perform(put("/api/personnes")
@@ -319,6 +427,10 @@ public class PersonneResourceIntTest {
         assertThat(testPersonne.getGenre()).isEqualTo(UPDATED_GENRE);
         assertThat(testPersonne.getNumeroCarteIdentite()).isEqualTo(UPDATED_NUMERO_CARTE_IDENTITE);
         assertThat(testPersonne.getNumeroPassport()).isEqualTo(UPDATED_NUMERO_PASSPORT);
+        assertThat(testPersonne.getPaysNaissance()).isEqualTo(UPDATED_PAYS_NAISSANCE);
+        assertThat(testPersonne.getVilleNaissance()).isEqualTo(UPDATED_VILLE_NAISSANCE);
+        assertThat(testPersonne.getPaysResidence()).isEqualTo(UPDATED_PAYS_RESIDENCE);
+        assertThat(testPersonne.getVilleResidence()).isEqualTo(UPDATED_VILLE_RESIDENCE);
     }
 
     @Test

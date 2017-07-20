@@ -15,17 +15,6 @@
             "fieldValidateRules": [
                 "required"
             ]
-        },
-        {
-            "fieldName": "codePostal",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "adresseComplementaire",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20170702122635",

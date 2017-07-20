@@ -72,8 +72,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
      */
     @Override
     public DeclarationExtraitDTO save(DeclarationExtraitDTO declarationExtraitDTO) {
-
-        String numeroRegistre = "1/CGSB/2017";
         ;
         ExtraitDTO extraitDTO = new ExtraitDTO();
 

@@ -5,9 +5,9 @@
         .module('etatCivilApp')
         .controller('DeclarationExtraitDetailController', DeclarationExtraitDetailController);
 
-    DeclarationExtraitDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays'];
+    DeclarationExtraitDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville'];
 
-    function DeclarationExtraitDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Ville, Pays) {
+    function DeclarationExtraitDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville) {
         var vm = this;
 
         vm.declarationExtrait = entity;

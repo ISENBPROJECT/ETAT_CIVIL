@@ -26,14 +26,6 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="code_postal" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="adresse_complementaire" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="pays_id" type="bigint">
                 <constraints nullable="true" />
             </column>

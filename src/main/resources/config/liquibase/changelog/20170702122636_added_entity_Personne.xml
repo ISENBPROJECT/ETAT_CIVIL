@@ -50,6 +50,22 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="pays_naissance" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="ville_naissance" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="pays_residence" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="ville_residence" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="adresse_id" type="bigint">
                 <constraints nullable="false" />
             </column>

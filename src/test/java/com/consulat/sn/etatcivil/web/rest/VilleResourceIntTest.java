@@ -43,12 +43,6 @@ public class VilleResourceIntTest {
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CODE_POSTAL = "AAAAAAAAAA";
-    private static final String UPDATED_CODE_POSTAL = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ADRESSE_COMPLEMENTAIRE = "AAAAAAAAAA";
-    private static final String UPDATED_ADRESSE_COMPLEMENTAIRE = "BBBBBBBBBB";
-
     @Autowired
     private VilleRepository villeRepository;
 
@@ -92,9 +86,7 @@ public class VilleResourceIntTest {
      */
     public static Ville createEntity(EntityManager em) {
         Ville ville = new Ville()
-            .nom(DEFAULT_NOM)
-            .codePostal(DEFAULT_CODE_POSTAL)
-            .adresseComplementaire(DEFAULT_ADRESSE_COMPLEMENTAIRE);
+            .nom(DEFAULT_NOM);
         return ville;
     }
 
@@ -120,8 +112,6 @@ public class VilleResourceIntTest {
         assertThat(villeList).hasSize(databaseSizeBeforeCreate + 1);
         Ville testVille = villeList.get(villeList.size() - 1);
         assertThat(testVille.getNom()).isEqualTo(DEFAULT_NOM);
-        assertThat(testVille.getCodePostal()).isEqualTo(DEFAULT_CODE_POSTAL);
-        assertThat(testVille.getAdresseComplementaire()).isEqualTo(DEFAULT_ADRESSE_COMPLEMENTAIRE);
     }
 
     @Test
@@ -165,25 +155,6 @@ public class VilleResourceIntTest {
 
     @Test
     @Transactional
-    public void checkCodePostalIsRequired() throws Exception {
-        int databaseSizeBeforeTest = villeRepository.findAll().size();
-        // set the field null
-        ville.setCodePostal(null);
-
-        // Create the Ville, which fails.
-        VilleDTO villeDTO = villeMapper.toDto(ville);
-
-        restVilleMockMvc.perform(post("/api/villes")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(villeDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Ville> villeList = villeRepository.findAll();
-        assertThat(villeList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllVilles() throws Exception {
         // Initialize the database
         villeRepository.saveAndFlush(ville);
@@ -193,9 +164,7 @@ public class VilleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ville.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].codePostal").value(hasItem(DEFAULT_CODE_POSTAL.toString())))
-            .andExpect(jsonPath("$.[*].adresseComplementaire").value(hasItem(DEFAULT_ADRESSE_COMPLEMENTAIRE.toString())));
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())));
     }
 
     @Test
@@ -209,9 +178,7 @@ public class VilleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ville.getId().intValue()))
-            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
-            .andExpect(jsonPath("$.codePostal").value(DEFAULT_CODE_POSTAL.toString()))
-            .andExpect(jsonPath("$.adresseComplementaire").value(DEFAULT_ADRESSE_COMPLEMENTAIRE.toString()));
+            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()));
     }
 
     @Test
@@ -232,9 +199,7 @@ public class VilleResourceIntTest {
         // Update the ville
         Ville updatedVille = villeRepository.findOne(ville.getId());
         updatedVille
-            .nom(UPDATED_NOM)
-            .codePostal(UPDATED_CODE_POSTAL)
-            .adresseComplementaire(UPDATED_ADRESSE_COMPLEMENTAIRE);
+            .nom(UPDATED_NOM);
         VilleDTO villeDTO = villeMapper.toDto(updatedVille);
 
         restVilleMockMvc.perform(put("/api/villes")
@@ -247,8 +212,6 @@ public class VilleResourceIntTest {
         assertThat(villeList).hasSize(databaseSizeBeforeUpdate);
         Ville testVille = villeList.get(villeList.size() - 1);
         assertThat(testVille.getNom()).isEqualTo(UPDATED_NOM);
-        assertThat(testVille.getCodePostal()).isEqualTo(UPDATED_CODE_POSTAL);
-        assertThat(testVille.getAdresseComplementaire()).isEqualTo(UPDATED_ADRESSE_COMPLEMENTAIRE);
     }
 
     @Test

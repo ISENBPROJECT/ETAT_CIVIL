@@ -26,6 +26,10 @@
                     <th><span data-translate="etatCivilApp.personne.genre">Genre</span></th>
                     <th><span data-translate="etatCivilApp.personne.numeroCarteIdentite">Numero Carte Identite</span></th>
                     <th><span data-translate="etatCivilApp.personne.numeroPassport">Numero Passport</span></th>
+                    <th><span data-translate="etatCivilApp.personne.paysNaissance">Pays Naissance</span></th>
+                    <th><span data-translate="etatCivilApp.personne.villeNaissance">Ville Naissance</span></th>
+                    <th><span data-translate="etatCivilApp.personne.paysResidence">Pays Residence</span></th>
+                    <th><span data-translate="etatCivilApp.personne.villeResidence">Ville Residence</span></th>
                     <th><span data-translate="etatCivilApp.personne.adresse">Adresse</span></th>
                     <th><span data-translate="etatCivilApp.personne.pere">Pere</span></th>
                     <th><span data-translate="etatCivilApp.personne.mere">Mere</span></th>
@@ -43,6 +47,10 @@
                     <td data-translate="{{'etatCivilApp.Genre.' + personne.genre}}">{{personne.genre}}</td>
                     <td>{{personne.numeroCarteIdentite}}</td>
                     <td>{{personne.numeroPassport}}</td>
+                    <td>{{personne.paysNaissance}}</td>
+                    <td>{{personne.villeNaissance}}</td>
+                    <td>{{personne.paysResidence}}</td>
+                    <td>{{personne.villeResidence}}</td>
                     <td>
                         <a ui-sref="ville-detail({id:personne.adresseId})">{{personne.adresseId}}</a>
                     </td>

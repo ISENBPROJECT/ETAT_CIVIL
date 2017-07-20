@@ -78,6 +78,54 @@
                     ng-model="vm.personne.numeroPassport"
                     />
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.paysNaissance" for="field_paysNaissance">Pays Naissance</label>
+            <input type="text" class="form-control" name="paysNaissance" id="field_paysNaissance"
+                    ng-model="vm.personne.paysNaissance"
+                    required/>
+            <div ng-show="editForm.paysNaissance.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.paysNaissance.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.villeNaissance" for="field_villeNaissance">Ville Naissance</label>
+            <input type="text" class="form-control" name="villeNaissance" id="field_villeNaissance"
+                    ng-model="vm.personne.villeNaissance"
+                    required/>
+            <div ng-show="editForm.villeNaissance.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.villeNaissance.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.paysResidence" for="field_paysResidence">Pays Residence</label>
+            <input type="text" class="form-control" name="paysResidence" id="field_paysResidence"
+                    ng-model="vm.personne.paysResidence"
+                    required/>
+            <div ng-show="editForm.paysResidence.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.paysResidence.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="etatCivilApp.personne.villeResidence" for="field_villeResidence">Ville Residence</label>
+            <input type="text" class="form-control" name="villeResidence" id="field_villeResidence"
+                    ng-model="vm.personne.villeResidence"
+                    required/>
+            <div ng-show="editForm.villeResidence.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.villeResidence.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label data-translate="etatCivilApp.personne.adresse" for="field_adresse">Adresse</label>

@@ -50,6 +50,22 @@ public class Personne implements Serializable {
     @Column(name = "numero_passport")
     private String numeroPassport;
 
+    @NotNull
+    @Column(name = "pays_naissance", nullable = false)
+    private String paysNaissance;
+
+    @NotNull
+    @Column(name = "ville_naissance", nullable = false)
+    private String villeNaissance;
+
+    @NotNull
+    @Column(name = "pays_residence", nullable = false)
+    private String paysResidence;
+
+    @NotNull
+    @Column(name = "ville_residence", nullable = false)
+    private String villeResidence;
+
     @ManyToOne(optional = false)
     @NotNull
     private Ville adresse;
@@ -163,6 +179,58 @@ public class Personne implements Serializable {
         this.numeroPassport = numeroPassport;
     }
 
+    public String getPaysNaissance() {
+        return paysNaissance;
+    }
+
+    public Personne paysNaissance(String paysNaissance) {
+        this.paysNaissance = paysNaissance;
+        return this;
+    }
+
+    public void setPaysNaissance(String paysNaissance) {
+        this.paysNaissance = paysNaissance;
+    }
+
+    public String getVilleNaissance() {
+        return villeNaissance;
+    }
+
+    public Personne villeNaissance(String villeNaissance) {
+        this.villeNaissance = villeNaissance;
+        return this;
+    }
+
+    public void setVilleNaissance(String villeNaissance) {
+        this.villeNaissance = villeNaissance;
+    }
+
+    public String getPaysResidence() {
+        return paysResidence;
+    }
+
+    public Personne paysResidence(String paysResidence) {
+        this.paysResidence = paysResidence;
+        return this;
+    }
+
+    public void setPaysResidence(String paysResidence) {
+        this.paysResidence = paysResidence;
+    }
+
+    public String getVilleResidence() {
+        return villeResidence;
+    }
+
+    public Personne villeResidence(String villeResidence) {
+        this.villeResidence = villeResidence;
+        return this;
+    }
+
+    public void setVilleResidence(String villeResidence) {
+        this.villeResidence = villeResidence;
+    }
+
     public Ville getAdresse() {
         return adresse;
     }
@@ -246,6 +314,10 @@ public class Personne implements Serializable {
             ", genre='" + getGenre() + "'" +
             ", numeroCarteIdentite='" + getNumeroCarteIdentite() + "'" +
             ", numeroPassport='" + getNumeroPassport() + "'" +
+            ", paysNaissance='" + getPaysNaissance() + "'" +
+            ", villeNaissance='" + getVilleNaissance() + "'" +
+            ", paysResidence='" + getPaysResidence() + "'" +
+            ", villeResidence='" + getVilleResidence() + "'" +
             "}";
     }
 }

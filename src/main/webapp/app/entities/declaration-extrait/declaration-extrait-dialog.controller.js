@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -52,6 +52,9 @@
         vm.dateNaissancePereError = false;
         vm.dateNaissancePlusCinquante = false;
         vm.dateNaissanceEnfantErrorFutur = false;
+        vm.declarationExtrait.paysNaissanceEnfantId = "FRANCE";
+        vm.declarationExtrait.paysDeclarationId = "FRANCE";
+        vm.declarationExtrait.lieuDeclarationId = "Bordeaux";
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -68,9 +71,7 @@
                 DeclarationExtrait.update(vm.declarationExtrait, onSaveSuccess, onSaveError);
             } else {
                 DeclarationExtrait.save(vm.declarationExtrait, onSaveSuccess, onSaveError);
-
             }
-
         }
 
         function onSaveSuccess(result) {
@@ -86,8 +87,8 @@
 
         vm.setCopieLiterale = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function (base64Data) {
-                    $scope.$apply(function () {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
                         declarationExtrait.copieLiterale = base64Data;
                         declarationExtrait.copieLiteraleContentType = $file.type;
                     });
@@ -97,8 +98,8 @@
 
         vm.setCopieCarte = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function (base64Data) {
-                    $scope.$apply(function () {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
                         declarationExtrait.copieCarte = base64Data;
                         declarationExtrait.copieCarteContentType = $file.type;
                     });
@@ -109,7 +110,7 @@
         vm.datePickerOpenStatus.dateNaissanceMere = false;
         vm.datePickerOpenStatus.dateNaissancePere = false;
 
-        function openCalendar(date) {
+        function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
 

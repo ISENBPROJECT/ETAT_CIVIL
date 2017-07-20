@@ -105,8 +105,6 @@
                         entity: function () {
                             return {
                                 nom: null,
-                                codePostal: null,
-                                adresseComplementaire: null,
                                 id: null
                             };
                         }

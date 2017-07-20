@@ -40,20 +40,20 @@
                     <th><span data-translate="etatCivilApp.declarationExtrait.fonctionPere">Fonction Pere</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere">Numero Identite Pere</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.numeroPassportPere">Numero Passport Pere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant">Lieu Naissance Enfant</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adresseEnfant">Adresse Enfant</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adressePere">Adresse Pere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adresseMere">Adresse Mere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere">Lieu Naissance Pere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere">Lieu Naissance Mere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.lieuDeclaration">Lieu Declaration</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant">Pays Naissance Enfant</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant">Adr Pays Enfant</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeNaissanceEnfant">Ville Naissance Enfant</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere">Pays Naissance Mere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adrPaysMere">Adr Pays Mere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeNaissanceMere">Ville Naissance Mere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.paysResidenceMere">Pays Residence Mere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeResidenceMere">Ville Residence Mere</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.paysNaissancePere">Pays Naissance Pere</span></th>
-                    <th><span data-translate="etatCivilApp.declarationExtrait.adrPaysPere">Adr Pays Pere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeNaissancePere">Ville Naissance Pere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.paysResidencePere">Pays Residence Pere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeResidencePere">Ville Residence Pere</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant">Pays Naissance Enfant</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.villeNaissanceEnfant">Ville Naissance Enfant</span></th>
                     <th><span data-translate="etatCivilApp.declarationExtrait.paysDeclaration">Pays Declaration</span></th>
+                    <th><span data-translate="etatCivilApp.declarationExtrait.lieuDeclaration">Lieu Declaration</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -87,47 +87,27 @@
                     <td>{{declarationExtrait.fonctionPere}}</td>
                     <td>{{declarationExtrait.numeroIdentitePere}}</td>
                     <td>{{declarationExtrait.numeroPassportPere}}</td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.lieuNaissanceEnfantId})">{{declarationExtrait.lieuNaissanceEnfantId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.adresseEnfantId})">{{declarationExtrait.adresseEnfantId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.adressePereId})">{{declarationExtrait.adressePereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.adresseMereId})">{{declarationExtrait.adresseMereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.lieuNaissancePereId})">{{declarationExtrait.lieuNaissancePereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.lieuNaissanceMereId})">{{declarationExtrait.lieuNaissanceMereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ville-detail({id:declarationExtrait.lieuDeclarationId})">{{declarationExtrait.lieuDeclarationId}}</a>
-                    </td>
+                    <td>{{declarationExtrait.paysNaissanceEnfant}}</td>
+                    <td>{{declarationExtrait.villeNaissanceEnfant}}</td>
+                    <td>{{declarationExtrait.paysNaissanceMere}}</td>
+                    <td>{{declarationExtrait.villeNaissanceMere}}</td>
+                    <td>{{declarationExtrait.paysResidenceMere}}</td>
+                    <td>{{declarationExtrait.villeResidenceMere}}</td>
+                    <td>{{declarationExtrait.paysNaissancePere}}</td>
+                    <td>{{declarationExtrait.villeNaissancePere}}</td>
+                    <td>{{declarationExtrait.paysResidencePere}}</td>
+                    <td>{{declarationExtrait.villeResidencePere}}</td>
                     <td>
                         <a ui-sref="pays-detail({id:declarationExtrait.paysNaissanceEnfantId})">{{declarationExtrait.paysNaissanceEnfantId}}</a>
                     </td>
                     <td>
-                        <a ui-sref="pays-detail({id:declarationExtrait.adrPaysEnfantId})">{{declarationExtrait.adrPaysEnfantId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="pays-detail({id:declarationExtrait.paysNaissanceMereId})">{{declarationExtrait.paysNaissanceMereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="pays-detail({id:declarationExtrait.adrPaysMereId})">{{declarationExtrait.adrPaysMereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="pays-detail({id:declarationExtrait.paysNaissancePereId})">{{declarationExtrait.paysNaissancePereId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="pays-detail({id:declarationExtrait.adrPaysPereId})">{{declarationExtrait.adrPaysPereId}}</a>
+                        <a ui-sref="ville-detail({id:declarationExtrait.villeNaissanceEnfantId})">{{declarationExtrait.villeNaissanceEnfantId}}</a>
                     </td>
                     <td>
                         <a ui-sref="pays-detail({id:declarationExtrait.paysDeclarationId})">{{declarationExtrait.paysDeclarationId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="ville-detail({id:declarationExtrait.lieuDeclarationId})">{{declarationExtrait.lieuDeclarationId}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

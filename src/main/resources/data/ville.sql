@@ -1,0 +1,13 @@
+insert INTO pays VALUE (null,'Dakar');
+insert INTO pays VALUE (null,'Diourbel');
+insert INTO pays VALUE (null,'Kaffrine');
+insert INTO pays VALUE (null,'Kaolack');
+insert INTO pays VALUE (null,'Kédougou');
+insert INTO pays VALUE (null,'Kolda');
+insert INTO pays VALUE (null,'Louga');
+insert INTO pays VALUE (null,'Matam');
+insert INTO pays VALUE (null,'Saint-Louis');
+insert INTO pays VALUE (null,'Sédhiou');
+insert INTO pays VALUE (null,'Tambacounda');
+insert INTO pays VALUE (null,'Thies');
+insert INTO pays VALUE (null,'Ziguinchor');

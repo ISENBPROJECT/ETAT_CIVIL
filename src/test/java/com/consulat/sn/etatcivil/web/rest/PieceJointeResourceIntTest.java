@@ -11,7 +11,6 @@ import com.consulat.sn.etatcivil.service.mapper.PieceJointeMapper;
 import com.consulat.sn.etatcivil.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -235,7 +234,6 @@ public class PieceJointeResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
-    @Ignore
     @Test
     @Transactional
     public void updatePieceJointe() throws Exception {

@@ -17,11 +17,6 @@ public class VilleDTO implements Serializable {
     @NotNull
     private String nom;
 
-    @NotNull
-    private String codePostal;
-
-    private String adresseComplementaire;
-
     private Long paysId;
 
     public Long getId() {
@@ -38,22 +33,6 @@ public class VilleDTO implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public String getAdresseComplementaire() {
-        return adresseComplementaire;
-    }
-
-    public void setAdresseComplementaire(String adresseComplementaire) {
-        this.adresseComplementaire = adresseComplementaire;
     }
 
     public Long getPaysId() {
@@ -90,8 +69,6 @@ public class VilleDTO implements Serializable {
         return "VilleDTO{" +
             "id=" + getId() +
             ", nom='" + getNom() + "'" +
-            ", codePostal='" + getCodePostal() + "'" +
-            ", adresseComplementaire='" + getAdresseComplementaire() + "'" +
             "}";
     }
 }

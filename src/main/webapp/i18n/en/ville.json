@@ -16,8 +16,6 @@
                 "title": "Ville"
             },
             "nom": "Nom",
-            "codePostal": "Code Postal",
-            "adresseComplementaire": "Adresse Complementaire",
             "pays": "Pays"
         }
     }

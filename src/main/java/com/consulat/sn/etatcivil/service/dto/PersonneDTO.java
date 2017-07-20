@@ -33,6 +33,18 @@ public class PersonneDTO implements Serializable {
 
     private String numeroPassport;
 
+    @NotNull
+    private String paysNaissance;
+
+    @NotNull
+    private String villeNaissance;
+
+    @NotNull
+    private String paysResidence;
+
+    @NotNull
+    private String villeResidence;
+
     private Long adresseId;
 
     private Long pereId;
@@ -105,6 +117,38 @@ public class PersonneDTO implements Serializable {
         this.numeroPassport = numeroPassport;
     }
 
+    public String getPaysNaissance() {
+        return paysNaissance;
+    }
+
+    public void setPaysNaissance(String paysNaissance) {
+        this.paysNaissance = paysNaissance;
+    }
+
+    public String getVilleNaissance() {
+        return villeNaissance;
+    }
+
+    public void setVilleNaissance(String villeNaissance) {
+        this.villeNaissance = villeNaissance;
+    }
+
+    public String getPaysResidence() {
+        return paysResidence;
+    }
+
+    public void setPaysResidence(String paysResidence) {
+        this.paysResidence = paysResidence;
+    }
+
+    public String getVilleResidence() {
+        return villeResidence;
+    }
+
+    public void setVilleResidence(String villeResidence) {
+        this.villeResidence = villeResidence;
+    }
+
     public Long getAdresseId() {
         return adresseId;
     }
@@ -169,6 +213,10 @@ public class PersonneDTO implements Serializable {
             ", genre='" + getGenre() + "'" +
             ", numeroCarteIdentite='" + getNumeroCarteIdentite() + "'" +
             ", numeroPassport='" + getNumeroPassport() + "'" +
+            ", paysNaissance='" + getPaysNaissance() + "'" +
+            ", villeNaissance='" + getVilleNaissance() + "'" +
+            ", paysResidence='" + getPaysResidence() + "'" +
+            ", villeResidence='" + getVilleResidence() + "'" +
             "}";
     }
 }

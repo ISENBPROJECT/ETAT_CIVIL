@@ -11,11 +11,13 @@
     <include file="classpath:config/liquibase/changelog/20170702122637_added_entity_Extrait.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122638_added_entity_PieceJointe.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122639_added_entity_RegistreNaissance.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170720203132_added_entity_Commune.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170702122635_added_entity_constraints_Ville.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122636_added_entity_constraints_Personne.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122637_added_entity_constraints_Extrait.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122638_added_entity_constraints_PieceJointe.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170702122639_added_entity_constraints_RegistreNaissance.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170720203132_added_entity_constraints_Commune.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

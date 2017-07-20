@@ -151,6 +151,16 @@
                             fonctionPere: null,
                             numeroIdentitePere: null,
                             numeroPassportPere: null,
+                            paysNaissanceEnfant: null,
+                            villeNaissanceEnfant: null,
+                            paysNaissanceMere: null,
+                            villeNaissanceMere: null,
+                            paysResidenceMere: null,
+                            villeResidenceMere: null,
+                            paysNaissancePere: null,
+                            villeNaissancePere: null,
+                            paysResidencePere: null,
+                            villeResidencePere: null,
                             id: null
                         };
                     }

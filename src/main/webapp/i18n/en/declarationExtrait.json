@@ -36,20 +36,20 @@
             "fonctionPere": "Fonction Pere",
             "numeroIdentitePere": "Numero Identite Pere",
             "numeroPassportPere": "Numero Passport Pere",
-            "lieuNaissanceEnfant": "Lieu Naissance Enfant",
-            "adresseEnfant": "Adresse Enfant",
-            "adressePere": "Adresse Pere",
-            "adresseMere": "Adresse Mere",
-            "lieuNaissancePere": "Lieu Naissance Pere",
-            "lieuNaissanceMere": "Lieu Naissance Mere",
-            "lieuDeclaration": "Lieu Declaration",
             "paysNaissanceEnfant": "Pays Naissance Enfant",
-            "adrPaysEnfant": "Adr Pays Enfant",
+            "villeNaissanceEnfant": "Ville Naissance Enfant",
             "paysNaissanceMere": "Pays Naissance Mere",
-            "adrPaysMere": "Adr Pays Mere",
+            "villeNaissanceMere": "Ville Naissance Mere",
+            "paysResidenceMere": "Pays Residence Mere",
+            "villeResidenceMere": "Ville Residence Mere",
             "paysNaissancePere": "Pays Naissance Pere",
-            "adrPaysPere": "Adr Pays Pere",
-            "paysDeclaration": "Pays Declaration"
+            "villeNaissancePere": "Ville Naissance Pere",
+            "paysResidencePere": "Pays Residence Pere",
+            "villeResidencePere": "Ville Residence Pere",
+            "paysNaissanceEnfant": "Pays Naissance Enfant",
+            "villeNaissanceEnfant": "Ville Naissance Enfant",
+            "paysDeclaration": "Pays Declaration",
+            "lieuDeclaration": "Lieu Declaration"
         }
     }
 }

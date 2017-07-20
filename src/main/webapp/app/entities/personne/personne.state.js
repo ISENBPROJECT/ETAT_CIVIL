@@ -113,6 +113,10 @@
                                 genre: null,
                                 numeroCarteIdentite: null,
                                 numeroPassport: null,
+                                paysNaissance: null,
+                                villeNaissance: null,
+                                paysResidence: null,
+                                villeResidence: null,
                                 id: null
                             };
                         }
