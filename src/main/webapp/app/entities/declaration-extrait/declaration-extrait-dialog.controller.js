@@ -55,6 +55,7 @@
         vm.declarationExtrait.paysNaissanceEnfantId = "FRANCE";
         vm.declarationExtrait.paysDeclarationId = "FRANCE";
         vm.declarationExtrait.lieuDeclarationId = "Bordeaux";
+        vm.dateformat = "dd-MM-yyyy";
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
