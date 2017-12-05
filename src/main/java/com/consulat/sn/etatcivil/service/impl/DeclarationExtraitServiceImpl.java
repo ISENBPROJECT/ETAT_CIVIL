@@ -41,6 +41,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public static final String INTIAL_INSTITUTION = "/CGSB/";
     private final Logger log = LoggerFactory.getLogger(DeclarationExtraitServiceImpl.class);
     private final ExtraitService extraitService;
+    private final PaysService paysService;
     private final PersonneService personneService;
     private final PieceJointeService pieceJointeService;
     private final RegistreNaissanceService registreNaissanceService;
@@ -53,8 +54,9 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     private final MailService mailService;
 
     // private final DeclarationExtraitSearchRepository declarationExtraitSearchRepository;
-    public DeclarationExtraitServiceImpl(PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
+    public DeclarationExtraitServiceImpl(PaysService paysService, PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
                                          RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService) {
+        this.paysService = paysService;
         this.extraitService = extraitService;
         this.personneService = personneService;
         this.pieceJointeService = pieceJointeService;
@@ -88,7 +90,9 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             extraitDTO.setMereId(mereId);
             extraitDTO.setEnfantId(enfantId);
             extraitDTO.setValidated(false);
-            extraitDTO.setLieuDeclarationId(declarationExtraitDTO.getLieuDeclarationId().getId());
+            PaysDTO paysDeclarationDto = paysService.findByNom(declarationExtraitDTO.getLieuDeclaration());
+            VilleDTO lieuDeclarationDto = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuDeclaration(), paysDeclarationDto);
+            extraitDTO.setLieuDeclarationId(lieuDeclarationDto.getId());
             extraitDTO.setAgentId(getCurrentUserId());
 
             extraitDTO = extraitService.save(extraitDTO);
@@ -224,32 +228,67 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         enfant.setPrenom(declarationExtraitDTO.getPrenomEnfant());
         enfant.setDateNaissance(declarationExtraitDTO.getDateNaissanceEnfant());
         enfant.setGenre(declarationExtraitDTO.getGenreEnfant());
-        if (null != declarationExtraitDTO.getLieuNaissanceEnfantId().getId()) {
-            enfant.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceEnfantId().getId());
+
+
+        //je verifie si le pays existe sinon je le crée
+        PaysDTO paysNaissanceEnfant = paysService.findByNom(declarationExtraitDTO.getPaysNaissanceEnfant());
+
+        PaysDTO paysNaissanceMere = paysService.findByNom(declarationExtraitDTO.getPaysNaissanceMere());
+        PaysDTO paysResidenceMere = paysService.findByNom(declarationExtraitDTO.getPaysResidenceMere());
+
+        PaysDTO paysNaissancePere = paysService.findByNom(declarationExtraitDTO.getPaysNaissancePere());
+        PaysDTO paysResidencePere = paysService.findByNom(declarationExtraitDTO.getPaysResidencePere());
+
+        VilleDTO lieuNaissanceEnfant = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceEnfant(), paysNaissanceEnfant);
+
+        VilleDTO lieuNaissanceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceMere(), paysNaissanceMere);
+        VilleDTO villeResidenceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidenceMere(), paysResidenceMere);
+
+        VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissancePere(), paysNaissancePere);
+        VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidencePere(), paysResidencePere);
+
+        if (null != lieuNaissanceEnfant.getId()) {
+            enfant.setLieuNaissanceId(lieuNaissanceEnfant.getId());
         }
-        if (null != declarationExtraitDTO.getAdresseMereId().getId()) {
-            enfant.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
+        if (null != villeResidenceMere.getId()) {
+            enfant.setVilleResidence(villeResidenceMere.getNom());
+            enfant.setAdresseId(villeResidenceMere.getId());
+            enfant.setPaysResidence(paysResidenceMere.getNom());
         }
+
+
+        enfant.setPaysNaissance(paysNaissanceEnfant.getNom());
+        enfant.setVilleNaissance(lieuNaissanceEnfant.getNom());
+
 
         mere.setNom(declarationExtraitDTO.getNomMere());
         mere.setPrenom(declarationExtraitDTO.getPrenomMere());
         mere.setDateNaissance(declarationExtraitDTO.getDateNaissanceMere());
         mere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportMere());
         mere.setGenre(Genre.FEMININ);
-        mere.setAdresseId(declarationExtraitDTO.getAdresseMereId().getId());
+        mere.setAdresseId(villeResidenceMere.getId());
         mere.setFonction(declarationExtraitDTO.getFonctionMere());
-        mere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissanceMereId().getId());
+        mere.setLieuNaissanceId(lieuNaissanceMere.getId());
+        mere.setPaysResidence(paysResidencePere.getNom());
+        mere.setPaysNaissance(paysNaissanceMere.getNom());
+        mere.setVilleNaissance(lieuNaissanceMere.getNom());
+        mere.setVilleResidence(villeResidenceMere.getNom());
 
 
         pere.setNom(declarationExtraitDTO.getNomPere());
         pere.setPrenom(declarationExtraitDTO.getPrenomPere());
         pere.setDateNaissance(declarationExtraitDTO.getDateNaissancePere());
         pere.setGenre(Genre.MASCULIN);
-        pere.setAdresseId(declarationExtraitDTO.getAdressePereId().getId());
+        pere.setAdresseId(villeResidencePere.getId());
         pere.setFonction(declarationExtraitDTO.getFonctionPere());
-        pere.setLieuNaissanceId(declarationExtraitDTO.getLieuNaissancePereId().getId());
+        pere.setLieuNaissanceId(lieuNaissancePere.getId());
+        pere.setPaysResidence(paysResidencePere.getNom());
+        pere.setPaysNaissance(paysNaissancePere.getNom());
+        pere.setVilleNaissance(lieuNaissancePere.getNom());
+        pere.setVilleResidence(villeResidencePere.getNom());
 
         pere = personneService.save(pere);
+
         mere = personneService.save(mere);
         if (null != pere.getId() && null != mere.getId()) {
             enfant.setPereId(pere.getId());
@@ -381,18 +420,18 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         preface.add(new Paragraph("Année :" + year, smallBold));
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Le " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant())) + " est né(e) à "
-            + declarationExtraitDTO.getAdresseEnfantId().getNom() + ", "
+            + declarationExtraitDTO.getLieuNaissanceEnfant() + ", "
             + declarationExtraitDTO.getPrenomEnfant() + " " + declarationExtraitDTO.getNomEnfant()
             + ", de " + declarationExtraitDTO.getPrenomPere() + " " + declarationExtraitDTO.getNomPere()
             + " né le : " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissancePere()))
-            + " à " + declarationExtraitDTO.getLieuNaissancePereId().getNom() + ", " + declarationExtraitDTO.getFonctionPere()
+            + " à " + declarationExtraitDTO.getLieuNaissancePere() + ", " + declarationExtraitDTO.getFonctionPere()
             + " et de " + declarationExtraitDTO.getPrenomMere() + " " + declarationExtraitDTO.getNomMere() + ","
             + " née le : " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()))
-            + " à " + declarationExtraitDTO.getLieuNaissanceMereId().getNom() + ", " + declarationExtraitDTO.getFonctionMere() + "."));
+            + " à " + declarationExtraitDTO.getLieuNaissanceMere() + ", " + declarationExtraitDTO.getFonctionMere() + "."));
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Transcrit le " + format_fr.format(new Date()) + ", par Nous, " + personne_qui_transcrit + ", " + fonction
             + ", Officier de l’état-civil sur la foi de l’acte de naissance authentique, ci-contre, dressé par la Mairie de "
-            + declarationExtraitDTO.getLieuDeclarationId().getNom() + "."));
+            + declarationExtraitDTO.getLieuDeclaration() + "."));
         document.add(preface);
         document.close();
 

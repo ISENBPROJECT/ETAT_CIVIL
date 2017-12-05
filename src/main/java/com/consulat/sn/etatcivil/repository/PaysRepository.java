@@ -12,5 +12,6 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface PaysRepository extends JpaRepository<Pays,Long> {
-    
+
+    Pays findByNom(String paysNaissanceEnfant);
 }

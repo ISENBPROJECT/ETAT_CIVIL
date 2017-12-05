@@ -123,7 +123,7 @@
                             <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant"
                                    for="field_lieuNaissanceEnfant">Lieu Naissance Enfant</label>
                             <input class="form-control" id="field_lieuNaissanceEnfant" name="lieuNaissanceEnfant"
-                                    list="pays" data-ng-model="vm.declarationExtrait.lieuNaissanceEnfantId"
+                                    list="villes" data-ng-model="vm.declarationExtrait.lieuNaissanceEnfant"
                                    required/>
                         </div>
                         <div ng-show="editForm.lieuNaissanceEnfant.$invalid">
@@ -139,7 +139,7 @@
                                    for="field_paysNaissanceEnfant">Pays Naissance Enfant</label>
                             <input class="form-control"
                                     id="field_paysNaissanceEnfant" name="paysNaissanceEnfant"
-                                    ng-model="vm.declarationExtrait.paysNaissanceEnfantId" readonly="true" required/>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysNaissanceEnfant" readonly="true" required/>
                         </div>
                         <div ng-show="editForm.paysNaissanceEnfant.$invalid">
                             <p class="help-block"
@@ -156,46 +156,8 @@
                             <option data-ng-repeat="item in vm.villes" value="{{item.nom}}" />
                         </datalist>
 
-                            {{vm.declarationExtrait.lieuNaissanceEnfantId}}
                     </div>
 
-                    <!--<div class="merebloc1">
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant"
-                                   for="field_adrPaysEnfant">Adr
-                                Pays
-                                Enfant</label>
-                            <select ng-change="vm.updateResidenceEnfant()" class="form-control" id="field_adrPaysEnfant"
-                                    name="adrPaysEnfant"
-                                    ng-model="vm.declarationExtrait.adrPaysEnfantId"
-                                    ng-options="pays as pays.nom for pays in vm.pays track by pays.id" required>
-                            </select>
-                        </div>
-                        <div ng-show="editForm.adrPaysEnfant.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.adrPaysEnfant.$error.required"
-                               data-translate="entity.validation.required">
-                                This field is required.
-                            </p>
-                        </div>
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.adresseEnfant"
-                                   for="field_adresseEnfant">Adresse
-                                Enfant</label>
-                            <select class="form-control" id="field_adresseEnfant" name="adresseEnfant"
-                                    ng-model="vm.declarationExtrait.adresseEnfantId"
-                                    ng-options="ville as ville.nom for ville in vm.villesResidenceEnfant track by ville.id"
-                                    required>
-                            </select>
-                        </div>
-                        <div ng-show="editForm.adresseEnfant.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.adresseEnfant.$error.required"
-                               data-translate="entity.validation.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>-->
                 </div>
 
                 <!--mere-->
@@ -292,9 +254,9 @@
                             <label data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere"
                                    for="field_paysNaissanceMere">Pays
                                 Naissance Mere</label>
-                            <input ng-change="vm.updateVilleNaissanceMere()" class="form-control"
+                            <input class="form-control"
                                     id="field_paysNaissanceMere" name="paysNaissanceMere"
-                                   list="pays" data-ng-model="vm.declarationExtrait.paysNaissanceMereId" required>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysNaissanceMere" required>
                             </input>
                         </div>
                         <div ng-show="editForm.paysNaissanceMere.$invalid">
@@ -313,7 +275,7 @@
                                    for="field_lieuNaissanceMere">Lieu
                                 Naissance Mere</label>
                             <input class="form-control" id="field_lieuNaissanceMere" name="lieuNaissanceMere"
-                                   list="villes" data-ng-model="vm.declarationExtrait.lieuNaissanceMereId"
+                                   list="villes" data-ng-model="vm.declarationExtrait.lieuNaissanceMere"
                                     required>
                             </input>
                         </div>
@@ -329,10 +291,10 @@
                             <label data-translate="etatCivilApp.declarationExtrait.adrPaysMere" for="field_adrPaysMere">Adr
                                 Pays
                                 Mere</label>
-                            <input ng-change="vm.updateVilleResidenceMere()" class="form-control"
+                            <input class="form-control"
                                     id="field_adrPaysMere"
                                     name="adrPaysMere"
-                                    ng-model="vm.declarationExtrait.adrPaysMereId" required>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysResidenceMere" required>
                             </input>
                         </div>
                         <div ng-show="editForm.adrPaysMere.$invalid">
@@ -346,7 +308,7 @@
                             <label data-translate="etatCivilApp.declarationExtrait.adresseMere" for="field_adresseMere">Adresse
                                 Mere</label>
                             <input class="form-control" id="field_adresseMere" name="adresseMere"
-                                    ng-model="vm.declarationExtrait.adresseMereId"
+                                   list="villes" data-ng-model="vm.declarationExtrait.lieuResidenceMere"
                                     required>
                             </input>
                         </div>
@@ -478,10 +440,10 @@
                             <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
                                    for="field_paysNaissancePere">Pays
                                 Naissance Pere</label>
-                            <input ng-disabled="vm.isNotWithFather" ng-change="vm.updateVilleNaissancePere()"
+                            <input ng-disabled="vm.isNotWithFather"
                                     class="form-control"
                                     id="field_paysNaissancePere" name="paysNaissancePere"
-                                    ng-model="vm.declarationExtrait.paysNaissancePereId" required/>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysNaissancePere" required/>
                         </div>
                         <div ng-show="editForm.paysNaissancePere.$invalid">
                             <p class="help-block"
@@ -500,7 +462,7 @@
                                 Naissance Pere</label>
                             <input ng-disabled="vm.isNotWithFather" class="form-control" id="field_lieuNaissancePere"
                                     name="lieuNaissancePere"
-                                    ng-model="vm.declarationExtrait.lieuNaissancePereId"
+                                   list="villes" data-ng-model="vm.declarationExtrait.lieuNaissancePere"
                                     required/>
                         </div>
                         <div ng-show="editForm.lieuNaissancePere.$invalid">
@@ -518,7 +480,7 @@
                             <input ng-disabled="vm.isNotWithFather"
                                     class="form-control" id="field_adrPaysPere"
                                     name="adrPaysPere"
-                                    ng-model="vm.declarationExtrait.adrPaysPereId" required/>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysResidencePere" required/>
                         </div>
                         <div ng-show="editForm.adrPaysPere.$invalid">
                             <p class="help-block"
@@ -532,7 +494,7 @@
                                 Pere</label>
                             <input ng-disabled="vm.isNotWithFather" class="form-control" id="field_adressePere"
                                     name="adressePere"
-                                    ng-model="vm.declarationExtrait.adressePereId"
+                                   list="villes" data-ng-model="vm.declarationExtrait.lieuResidencePere"
                                     required/>
                         </div>
                         <div ng-show="editForm.adressePere.$invalid">
@@ -701,7 +663,7 @@
                             <input class="form-control" readonly
                                     id="field_paysDeclaration"
                                     name="paysDeclaration"
-                                    ng-model="vm.declarationExtrait.paysDeclarationId" required/>
+                                    ng-model="vm.declarationExtrait.paysDeclaration" required/>
                         </div>
                         <div ng-show="editForm.paysDeclaration.$invalid">
                             <p class="help-block"
@@ -716,7 +678,7 @@
                                    for="field_lieuDeclaration">Lieu
                                 Declaration</label>
                             <input class="form-control" id="field_lieuDeclaration" name="lieuDeclaration" readonly
-                                    ng-model="vm.declarationExtrait.lieuDeclarationId"
+                                    ng-model="vm.declarationExtrait.lieuDeclaration"
                                     required/>
                         </div>
                         <div ng-show="editForm.lieuDeclaration.$invalid">

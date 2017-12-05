@@ -12,5 +12,8 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface VilleRepository extends JpaRepository<Ville,Long> {
-    
+
+    Ville findByNom(String lieuNaissanceEnfant);
+
+    Ville findByNomAndPaysId(String lieuNaissanceEnfant, Long id);
 }

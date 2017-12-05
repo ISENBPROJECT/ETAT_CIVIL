@@ -1,7 +1,6 @@
 package com.consulat.sn.etatcivil.service.dto;
 
 
-
 import com.consulat.sn.etatcivil.domain.enumeration.Genre;
 
 import javax.persistence.Lob;
@@ -74,6 +73,43 @@ public class DeclarationExtraitDTO implements Serializable {
     private String prenomPere;
 
     @NotNull
+    private String lieuNaissanceEnfant;
+
+    @NotNull
+    private String lieuResidencePere;
+
+    @NotNull
+    private String lieuResidenceMere;
+
+    @NotNull
+    private String paysResidencePere;
+
+    @NotNull
+    private String paysResidenceMere;
+
+    @NotNull
+    private String lieuNaissanceMere;
+
+    @NotNull
+    private String lieuNaissancePere;
+
+    @NotNull
+    private String lieuDeclaration;
+
+
+    @NotNull
+    private String paysNaissanceEnfant;
+
+    @NotNull
+    private String paysNaissanceMere;
+
+    @NotNull
+    private String paysNaissancePere;
+
+    @NotNull
+    private String paysDeclaration;
+
+    @NotNull
     private LocalDate dateNaissancePere;
 
     private String adresseComplPere;
@@ -109,6 +145,7 @@ public class DeclarationExtraitDTO implements Serializable {
     private PaysDTO paysNaissancePereId;
 
     private PaysDTO adrPaysPereId;
+
     private PaysDTO paysDeclarationId;
 
     public Long getId() {
@@ -423,118 +460,99 @@ public class DeclarationExtraitDTO implements Serializable {
         this.numeroRegistre = numeroRegistre;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DeclarationExtraitDTO that = (DeclarationExtraitDTO) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (!Arrays.equals(copieLiterale, that.copieLiterale)) return false;
-        if (copieLiteraleContentType != null ? !copieLiteraleContentType.equals(that.copieLiteraleContentType) : that.copieLiteraleContentType != null)
-            return false;
-        if (!Arrays.equals(copieCarte, that.copieCarte)) return false;
-        if (copieCarteContentType != null ? !copieCarteContentType.equals(that.copieCarteContentType) : that.copieCarteContentType != null)
-            return false;
-        if (mention != null ? !mention.equals(that.mention) : that.mention != null) return false;
-        if (nomEnfant != null ? !nomEnfant.equals(that.nomEnfant) : that.nomEnfant != null) return false;
-        if (prenomEnfant != null ? !prenomEnfant.equals(that.prenomEnfant) : that.prenomEnfant != null) return false;
-        if (dateNaissanceEnfant != null ? !dateNaissanceEnfant.equals(that.dateNaissanceEnfant) : that.dateNaissanceEnfant != null)
-            return false;
-        if (genreEnfant != that.genreEnfant) return false;
-        if (nomMere != null ? !nomMere.equals(that.nomMere) : that.nomMere != null) return false;
-        if (prenomMere != null ? !prenomMere.equals(that.prenomMere) : that.prenomMere != null) return false;
-        if (dateNaissanceMere != null ? !dateNaissanceMere.equals(that.dateNaissanceMere) : that.dateNaissanceMere != null)
-            return false;
-        if (fonctionMere != null ? !fonctionMere.equals(that.fonctionMere) : that.fonctionMere != null) return false;
-        if (adresseComplMere != null ? !adresseComplMere.equals(that.adresseComplMere) : that.adresseComplMere != null)
-            return false;
-        if (numeroIdentiteMere != null ? !numeroIdentiteMere.equals(that.numeroIdentiteMere) : that.numeroIdentiteMere != null)
-            return false;
-        if (numeroPassportMere != null ? !numeroPassportMere.equals(that.numeroPassportMere) : that.numeroPassportMere != null)
-            return false;
-        if (nomPere != null ? !nomPere.equals(that.nomPere) : that.nomPere != null) return false;
-        if (prenomPere != null ? !prenomPere.equals(that.prenomPere) : that.prenomPere != null) return false;
-        if (dateNaissancePere != null ? !dateNaissancePere.equals(that.dateNaissancePere) : that.dateNaissancePere != null)
-            return false;
-        if (adresseComplPere != null ? !adresseComplPere.equals(that.adresseComplPere) : that.adresseComplPere != null)
-            return false;
-        if (fonctionPere != null ? !fonctionPere.equals(that.fonctionPere) : that.fonctionPere != null) return false;
-        if (numeroIdentitePere != null ? !numeroIdentitePere.equals(that.numeroIdentitePere) : that.numeroIdentitePere != null)
-            return false;
-        if (numeroPassportPere != null ? !numeroPassportPere.equals(that.numeroPassportPere) : that.numeroPassportPere != null)
-            return false;
-        if (lieuNaissanceEnfantId != null ? !lieuNaissanceEnfantId.equals(that.lieuNaissanceEnfantId) : that.lieuNaissanceEnfantId != null)
-            return false;
-        if (adresseEnfantId != null ? !adresseEnfantId.equals(that.adresseEnfantId) : that.adresseEnfantId != null)
-            return false;
-        if (adressePereId != null ? !adressePereId.equals(that.adressePereId) : that.adressePereId != null)
-            return false;
-        if (adresseMereId != null ? !adresseMereId.equals(that.adresseMereId) : that.adresseMereId != null)
-            return false;
-        if (lieuNaissancePereId != null ? !lieuNaissancePereId.equals(that.lieuNaissancePereId) : that.lieuNaissancePereId != null)
-            return false;
-        if (lieuNaissanceMereId != null ? !lieuNaissanceMereId.equals(that.lieuNaissanceMereId) : that.lieuNaissanceMereId != null)
-            return false;
-        if (lieuDeclarationId != null ? !lieuDeclarationId.equals(that.lieuDeclarationId) : that.lieuDeclarationId != null)
-            return false;
-        if (paysNaissanceEnfantId != null ? !paysNaissanceEnfantId.equals(that.paysNaissanceEnfantId) : that.paysNaissanceEnfantId != null)
-            return false;
-        if (adrPaysEnfantId != null ? !adrPaysEnfantId.equals(that.adrPaysEnfantId) : that.adrPaysEnfantId != null)
-            return false;
-        if (paysNaissanceMereId != null ? !paysNaissanceMereId.equals(that.paysNaissanceMereId) : that.paysNaissanceMereId != null)
-            return false;
-        if (adrPaysMereId != null ? !adrPaysMereId.equals(that.adrPaysMereId) : that.adrPaysMereId != null)
-            return false;
-        if (paysNaissancePereId != null ? !paysNaissancePereId.equals(that.paysNaissancePereId) : that.paysNaissancePereId != null)
-            return false;
-        if (adrPaysPereId != null ? !adrPaysPereId.equals(that.adrPaysPereId) : that.adrPaysPereId != null)
-            return false;
-        return paysDeclarationId != null ? paysDeclarationId.equals(that.paysDeclarationId) : that.paysDeclarationId == null;
-
+    public String getLieuNaissanceEnfant() {
+        return lieuNaissanceEnfant;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + Arrays.hashCode(copieLiterale);
-        result = 31 * result + (copieLiteraleContentType != null ? copieLiteraleContentType.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(copieCarte);
-        result = 31 * result + (copieCarteContentType != null ? copieCarteContentType.hashCode() : 0);
-        result = 31 * result + (mention != null ? mention.hashCode() : 0);
-        result = 31 * result + (nomEnfant != null ? nomEnfant.hashCode() : 0);
-        result = 31 * result + (prenomEnfant != null ? prenomEnfant.hashCode() : 0);
-        result = 31 * result + (dateNaissanceEnfant != null ? dateNaissanceEnfant.hashCode() : 0);
-        result = 31 * result + (genreEnfant != null ? genreEnfant.hashCode() : 0);
-        result = 31 * result + (nomMere != null ? nomMere.hashCode() : 0);
-        result = 31 * result + (prenomMere != null ? prenomMere.hashCode() : 0);
-        result = 31 * result + (dateNaissanceMere != null ? dateNaissanceMere.hashCode() : 0);
-        result = 31 * result + (fonctionMere != null ? fonctionMere.hashCode() : 0);
-        result = 31 * result + (adresseComplMere != null ? adresseComplMere.hashCode() : 0);
-        result = 31 * result + (numeroIdentiteMere != null ? numeroIdentiteMere.hashCode() : 0);
-        result = 31 * result + (numeroPassportMere != null ? numeroPassportMere.hashCode() : 0);
-        result = 31 * result + (nomPere != null ? nomPere.hashCode() : 0);
-        result = 31 * result + (prenomPere != null ? prenomPere.hashCode() : 0);
-        result = 31 * result + (dateNaissancePere != null ? dateNaissancePere.hashCode() : 0);
-        result = 31 * result + (adresseComplPere != null ? adresseComplPere.hashCode() : 0);
-        result = 31 * result + (fonctionPere != null ? fonctionPere.hashCode() : 0);
-        result = 31 * result + (numeroIdentitePere != null ? numeroIdentitePere.hashCode() : 0);
-        result = 31 * result + (numeroPassportPere != null ? numeroPassportPere.hashCode() : 0);
-        result = 31 * result + (lieuNaissanceEnfantId != null ? lieuNaissanceEnfantId.hashCode() : 0);
-        result = 31 * result + (adresseEnfantId != null ? adresseEnfantId.hashCode() : 0);
-        result = 31 * result + (adressePereId != null ? adressePereId.hashCode() : 0);
-        result = 31 * result + (adresseMereId != null ? adresseMereId.hashCode() : 0);
-        result = 31 * result + (lieuNaissancePereId != null ? lieuNaissancePereId.hashCode() : 0);
-        result = 31 * result + (lieuNaissanceMereId != null ? lieuNaissanceMereId.hashCode() : 0);
-        result = 31 * result + (lieuDeclarationId != null ? lieuDeclarationId.hashCode() : 0);
-        result = 31 * result + (paysNaissanceEnfantId != null ? paysNaissanceEnfantId.hashCode() : 0);
-        result = 31 * result + (adrPaysEnfantId != null ? adrPaysEnfantId.hashCode() : 0);
-        result = 31 * result + (paysNaissanceMereId != null ? paysNaissanceMereId.hashCode() : 0);
-        result = 31 * result + (adrPaysMereId != null ? adrPaysMereId.hashCode() : 0);
-        result = 31 * result + (paysNaissancePereId != null ? paysNaissancePereId.hashCode() : 0);
-        result = 31 * result + (adrPaysPereId != null ? adrPaysPereId.hashCode() : 0);
-        result = 31 * result + (paysDeclarationId != null ? paysDeclarationId.hashCode() : 0);
-        return result;
+    public void setLieuNaissanceEnfant(String lieuNaissanceEnfant) {
+        this.lieuNaissanceEnfant = lieuNaissanceEnfant;
+    }
+
+    public String getLieuNaissanceMere() {
+        return lieuNaissanceMere;
+    }
+
+    public void setLieuNaissanceMere(String lieuNaissanceMere) {
+        this.lieuNaissanceMere = lieuNaissanceMere;
+    }
+
+    public String getLieuNaissancePere() {
+        return lieuNaissancePere;
+    }
+
+    public void setLieuNaissancePere(String lieuNaissancePere) {
+        this.lieuNaissancePere = lieuNaissancePere;
+    }
+
+    public String getLieuDeclaration() {
+        return lieuDeclaration;
+    }
+
+    public void setLieuDeclaration(String lieuDeclaration) {
+        this.lieuDeclaration = lieuDeclaration;
+    }
+
+    public String getPaysNaissanceEnfant() {
+        return paysNaissanceEnfant;
+    }
+
+    public void setPaysNaissanceEnfant(String paysNaissanceEnfant) {
+        this.paysNaissanceEnfant = paysNaissanceEnfant;
+    }
+
+    public String getPaysNaissanceMere() {
+        return paysNaissanceMere;
+    }
+
+    public void setPaysNaissanceMere(String paysNaissanceMere) {
+        this.paysNaissanceMere = paysNaissanceMere;
+    }
+
+    public String getPaysNaissancePere() {
+        return paysNaissancePere;
+    }
+
+    public void setPaysNaissancePere(String paysNaissancePere) {
+        this.paysNaissancePere = paysNaissancePere;
+    }
+
+    public String getLieuResidencePere() {
+        return lieuResidencePere;
+    }
+
+    public void setLieuResidencePere(String lieuResidencePere) {
+        this.lieuResidencePere = lieuResidencePere;
+    }
+
+    public String getLieuResidenceMere() {
+        return lieuResidenceMere;
+    }
+
+    public void setLieuResidenceMere(String lieuResidenceMere) {
+        this.lieuResidenceMere = lieuResidenceMere;
+    }
+
+    public String getPaysResidencePere() {
+        return paysResidencePere;
+    }
+
+    public void setPaysResidencePere(String paysResidencePere) {
+        this.paysResidencePere = paysResidencePere;
+    }
+
+    public String getPaysResidenceMere() {
+        return paysResidenceMere;
+    }
+
+    public void setPaysResidenceMere(String paysResidenceMere) {
+        this.paysResidenceMere = paysResidenceMere;
+    }
+
+    public String getPaysDeclaration() {
+        return paysDeclaration;
+    }
+
+    public void setPaysDeclaration(String paysDeclaration) {
+        this.paysDeclaration = paysDeclaration;
     }
 }

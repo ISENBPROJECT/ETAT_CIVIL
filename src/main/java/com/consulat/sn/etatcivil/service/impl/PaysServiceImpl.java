@@ -1,8 +1,8 @@
 package com.consulat.sn.etatcivil.service.impl;
 
-import com.consulat.sn.etatcivil.service.PaysService;
 import com.consulat.sn.etatcivil.domain.Pays;
 import com.consulat.sn.etatcivil.repository.PaysRepository;
+import com.consulat.sn.etatcivil.service.PaysService;
 import com.consulat.sn.etatcivil.service.dto.PaysDTO;
 import com.consulat.sn.etatcivil.service.mapper.PaysMapper;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-public class PaysServiceImpl implements PaysService{
+public class PaysServiceImpl implements PaysService {
 
     private final Logger log = LoggerFactory.getLogger(PaysServiceImpl.class);
 
@@ -47,9 +47,9 @@ public class PaysServiceImpl implements PaysService{
     }
 
     /**
-     *  Get all the pays.
+     * Get all the pays.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -61,10 +61,10 @@ public class PaysServiceImpl implements PaysService{
     }
 
     /**
-     *  Get one pays by id.
+     * Get one pays by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -75,13 +75,26 @@ public class PaysServiceImpl implements PaysService{
     }
 
     /**
-     *  Delete the  pays by id.
+     * Delete the  pays by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Pays : {}", id);
         paysRepository.delete(id);
+    }
+
+    @Override
+    public PaysDTO findByNom(String paysNaissanceEnfant) {
+        log.debug("Request to get Pays : {}", paysNaissanceEnfant);
+        Pays pays = paysRepository.findByNom(paysNaissanceEnfant);
+
+        if (null == pays) {
+            Pays paysEntity = new Pays();
+            paysEntity.setNom(paysNaissanceEnfant);
+            pays = paysRepository.save(paysEntity);
+        }
+        return paysMapper.toDto(pays);
     }
 }

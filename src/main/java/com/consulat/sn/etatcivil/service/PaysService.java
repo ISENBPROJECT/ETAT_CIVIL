@@ -37,4 +37,6 @@ public interface PaysService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    PaysDTO findByNom(String paysNaissanceEnfant);
 }

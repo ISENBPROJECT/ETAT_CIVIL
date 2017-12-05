@@ -52,9 +52,9 @@
         vm.dateNaissancePereError = false;
         vm.dateNaissancePlusCinquante = false;
         vm.dateNaissanceEnfantErrorFutur = false;
-        vm.declarationExtrait.paysNaissanceEnfantId = "FRANCE";
-        vm.declarationExtrait.paysDeclarationId = "FRANCE";
-        vm.declarationExtrait.lieuDeclarationId = "Bordeaux";
+        vm.declarationExtrait.paysNaissanceEnfant = "FRANCE";
+        vm.declarationExtrait.paysDeclaration = "FRANCE";
+        vm.declarationExtrait.lieuDeclaration = "Bordeaux";
         vm.dateformat = "dd-MM-yyyy";
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
