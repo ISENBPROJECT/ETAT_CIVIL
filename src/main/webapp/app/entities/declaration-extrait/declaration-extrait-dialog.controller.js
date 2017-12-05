@@ -367,5 +367,8 @@
         function onDeleteError(result) {
             console.log(result)
         };
+
+        // saisie du nom de la carte
+        $scope.card = null;
     }
 })();

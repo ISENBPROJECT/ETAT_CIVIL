@@ -123,7 +123,7 @@
                             <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant"
                                    for="field_lieuNaissanceEnfant">Lieu Naissance Enfant</label>
                             <input class="form-control" id="field_lieuNaissanceEnfant" name="lieuNaissanceEnfant"
-                                   ng-model="vm.declarationExtrait.lieuNaissanceEnfantId"
+                                    list="pays" data-ng-model="vm.declarationExtrait.lieuNaissanceEnfantId"
                                    required/>
                         </div>
                         <div ng-show="editForm.lieuNaissanceEnfant.$invalid">
@@ -148,10 +148,15 @@
                                 This field is required.
                             </p>
                         </div>
+                        <datalist id="pays">
+                            <option data-ng-repeat="item in vm.pays" value="{{item.nom}}" />
+                        </datalist>
 
+                        <datalist id="villes">
+                            <option data-ng-repeat="item in vm.villes" value="{{item.nom}}" />
+                        </datalist>
 
-
-
+                            {{vm.declarationExtrait.lieuNaissanceEnfantId}}
                     </div>
 
                     <!--<div class="merebloc1">
@@ -289,7 +294,7 @@
                                 Naissance Mere</label>
                             <input ng-change="vm.updateVilleNaissanceMere()" class="form-control"
                                     id="field_paysNaissanceMere" name="paysNaissanceMere"
-                                    ng-model="vm.declarationExtrait.paysNaissanceMereId" required>
+                                   list="pays" data-ng-model="vm.declarationExtrait.paysNaissanceMereId" required>
                             </input>
                         </div>
                         <div ng-show="editForm.paysNaissanceMere.$invalid">
@@ -308,7 +313,7 @@
                                    for="field_lieuNaissanceMere">Lieu
                                 Naissance Mere</label>
                             <input class="form-control" id="field_lieuNaissanceMere" name="lieuNaissanceMere"
-                                    ng-model="vm.declarationExtrait.lieuNaissanceMereId"
+                                   list="villes" data-ng-model="vm.declarationExtrait.lieuNaissanceMereId"
                                     required>
                             </input>
                         </div>
