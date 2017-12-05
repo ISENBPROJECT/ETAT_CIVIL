@@ -387,25 +387,25 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemCommun {
-    background-color: #a0a9b9;
+    background-color: #d7dade;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemMere {
-    background-color: #f0e9aa;
+    background-color: #ececec;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemPere {
-    background-color: #ccf157;
+    background-color: #c3c3c3;;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemEnfant {
-    background-color: #c7f382;
+    background-color: #cad1cd;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -498,7 +498,6 @@ ui bootstrap tweaks
     margin-right: 1%;
 }
 
-}
 .recapInfo{
     display: inline-flex;
     flex-direction: column;
