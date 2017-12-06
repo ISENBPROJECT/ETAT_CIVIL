@@ -2,6 +2,7 @@ package com.consulat.sn.etatcivil.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.consulat.sn.etatcivil.service.DeclarationExtraitService;
+import com.consulat.sn.etatcivil.service.PersonneService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
@@ -25,14 +26,20 @@ import java.util.List;
 public class DeclarationExtraitResource {
     private static final String ENTITY_NAME = "declarationExtrait";
     private final Logger log = LoggerFactory.getLogger(DeclarationExtraitResource.class);
+
     private final DeclarationExtraitService declarationExtraitService;
+
+    private final PersonneService personneService;
+
+
     private static String UNDEFINED = "undefined";
     private String[] datePattern = {"yyyy-MM-dd"};
     final org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MMM-dd");
 
 
-    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService) {
+    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService, PersonneService personneService) {
         this.declarationExtraitService = declarationExtraitService;
+        this.personneService = personneService;
     }
 
     /**
@@ -46,6 +53,15 @@ public class DeclarationExtraitResource {
     @Timed
     public ResponseEntity<DeclarationExtraitDTO> createDeclarationExtrait(@Valid @RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to save DeclarationExtrait : {}", declarationExtraitDTO);
+
+        Boolean isMotherExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+
+        Boolean isFatherExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+
+        Boolean isChildExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+
+        Boolean declarations= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+
         if (declarationExtraitDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new declarationExtrait cannot already have an ID")).body(null);
         }

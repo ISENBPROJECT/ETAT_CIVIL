@@ -1,8 +1,8 @@
 package com.consulat.sn.etatcivil.service.impl;
 
-import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.domain.Extrait;
 import com.consulat.sn.etatcivil.repository.ExtraitRepository;
+import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-public class ExtraitServiceImpl implements ExtraitService{
+public class ExtraitServiceImpl implements ExtraitService {
 
     private final Logger log = LoggerFactory.getLogger(ExtraitServiceImpl.class);
 
@@ -31,6 +34,9 @@ public class ExtraitServiceImpl implements ExtraitService{
     private final ExtraitMapper extraitMapper;
 
     private final DeclarationExtraitMapper declarationExtraitMapper;
+
+    @PersistenceContext
+    public EntityManager entityManager;
 
     public ExtraitServiceImpl(ExtraitRepository extraitRepository, ExtraitMapper extraitMapper, DeclarationExtraitMapper declarationExtraitMapper) {
         this.extraitRepository = extraitRepository;
@@ -53,9 +59,9 @@ public class ExtraitServiceImpl implements ExtraitService{
     }
 
     /**
-     *  Get all the extraits.
+     * Get all the extraits.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -67,10 +73,10 @@ public class ExtraitServiceImpl implements ExtraitService{
     }
 
     /**
-     *  Get one extrait by id.
+     * Get one extrait by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -81,9 +87,9 @@ public class ExtraitServiceImpl implements ExtraitService{
     }
 
     /**
-     *  Delete the  extrait by id.
+     * Delete the  extrait by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -98,11 +104,26 @@ public class ExtraitServiceImpl implements ExtraitService{
         String nom = "%" + declarationExtraitDTO.getNomEnfant() + "%";
         String prenom = "%" + declarationExtraitDTO.getPrenomEnfant() + "%";
         String numeroRegistre = declarationExtraitDTO.getNumeroRegistre();
-       return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
+        return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
             prenom, declarationExtraitDTO.getDateNaissanceEnfant()).stream()
             .map(declarationExtraitMapper::toEntity)
             .collect(Collectors.toCollection(LinkedList::new));
 
+    }
+
+
+    @Override
+    @Transactional
+    public Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO) {
+        Boolean result = false;
+        Query query = entityManager.createNamedQuery("Extrait.isExtraitExist");
+        query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+        query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+        List<Extrait> list = (List<Extrait>) query.getResultList();
+        if (null != list && !list.isEmpty()) {
+            result = true;
+        }
+        return result;
     }
 
 }

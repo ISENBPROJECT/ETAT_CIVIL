@@ -3,6 +3,8 @@ package com.consulat.sn.etatcivil.service;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,26 +21,29 @@ public interface ExtraitService {
     ExtraitDTO save(ExtraitDTO extraitDTO);
 
     /**
-     *  Get all the extraits.
+     * Get all the extraits.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     List<ExtraitDTO> findAll();
 
     /**
-     *  Get the "id" extrait.
+     * Get the "id" extrait.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     ExtraitDTO findOne(Long id);
 
     /**
-     *  Delete the "id" extrait.
+     * Delete the "id" extrait.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO);
+
+    Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO);
+
 }

@@ -1,8 +1,9 @@
 package com.consulat.sn.etatcivil.service.impl;
 
-import com.consulat.sn.etatcivil.service.PersonneService;
 import com.consulat.sn.etatcivil.domain.Personne;
 import com.consulat.sn.etatcivil.repository.PersonneRepository;
+import com.consulat.sn.etatcivil.service.PersonneService;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.PersonneDTO;
 import com.consulat.sn.etatcivil.service.mapper.PersonneMapper;
 import org.slf4j.Logger;
@@ -10,6 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,13 +25,17 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-public class PersonneServiceImpl implements PersonneService{
+public class PersonneServiceImpl implements PersonneService {
 
+    public static final String IS_PARENT_EXIST = "Personne.isParentExist";
     private final Logger log = LoggerFactory.getLogger(PersonneServiceImpl.class);
 
     private final PersonneRepository personneRepository;
 
     private final PersonneMapper personneMapper;
+
+    @PersistenceContext
+    public EntityManager entityManager;
 
     public PersonneServiceImpl(PersonneRepository personneRepository, PersonneMapper personneMapper) {
         this.personneRepository = personneRepository;
@@ -47,9 +57,9 @@ public class PersonneServiceImpl implements PersonneService{
     }
 
     /**
-     *  Get all the personnes.
+     * Get all the personnes.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -61,10 +71,10 @@ public class PersonneServiceImpl implements PersonneService{
     }
 
     /**
-     *  Get one personne by id.
+     * Get one personne by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -75,9 +85,9 @@ public class PersonneServiceImpl implements PersonneService{
     }
 
     /**
-     *  Delete the  personne by id.
+     * Delete the  personne by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -85,10 +95,31 @@ public class PersonneServiceImpl implements PersonneService{
         personneRepository.delete(id);
     }
 
+
     @Override
-    public PersonneDTO isPersonneExist(String nom, String prenom) {
-        Personne personne = personneRepository.findByNomAndPrenom(nom, prenom);
-        PersonneDTO personneDTO = personneMapper.toDto(personne);
-        return personneDTO;
+    @Transactional
+    public Boolean isParentExist(DeclarationExtraitDTO declarationExtraitDTO, Date dateNaissance, String villeNaissance, String numeroIdentite) {
+        boolean result = false;
+        Query query = entityManager.createNamedQuery(IS_PARENT_EXIST);
+        query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+        query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+        query.setParameter("dateNaissance", dateNaissance);
+        query.setParameter("villeNaissance", villeNaissance);
+        query.setParameter("numeroCarteIdentite", numeroIdentite);
+        List list = query.getResultList();
+        if (null != list && !list.isEmpty()) {
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public Boolean isPersonneExist(String nom, String prenom, LocalDate dateNaissance) {
+        Boolean result = false;
+        Personne personne = personneRepository.findByNomAndPrenomAndDateNaissance(nom, prenom, dateNaissance);
+        if (null != personne && null != personne.getId()) {
+            result = true;
+        }
+        return result;
     }
 }

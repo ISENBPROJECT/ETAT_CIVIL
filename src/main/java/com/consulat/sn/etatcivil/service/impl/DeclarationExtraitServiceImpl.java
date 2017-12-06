@@ -222,8 +222,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         //enfant
         PersonneDTO enfant = new PersonneDTO();
 
-        personneService.isPersonneExist("kaze", "sjiozehi");
-
         enfant.setNom(declarationExtraitDTO.getNomEnfant());
         enfant.setPrenom(declarationExtraitDTO.getPrenomEnfant());
         enfant.setDateNaissance(declarationExtraitDTO.getDateNaissanceEnfant());
@@ -454,6 +452,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 }
             }
         }
+    }
+
+    @Override
+    public Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO) {
+       return extraitService.findExistantExtrait(declarationExtraitDTO);
     }
 /*
     *//**

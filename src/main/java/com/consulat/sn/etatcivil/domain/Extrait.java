@@ -5,18 +5,24 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Extrait.
  */
 @Entity
 @Table(name = "extrait")
+@NamedQueries({
+    @NamedQuery(name = "Extrait.isDeclarationExist",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.id = :idEnfant and " +
+            "extrait.mere.id =  :idMere and extrait.pere.id = :idPere")
+})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Extrait implements Serializable {
 

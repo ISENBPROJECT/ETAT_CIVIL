@@ -1,6 +1,7 @@
 package com.consulat.sn.etatcivil.repository;
 
 import com.consulat.sn.etatcivil.domain.Extrait;
+import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +32,6 @@ public interface ExtraitRepository extends JpaRepository<Extrait,Long> {
     @Query(FIND_DECLARATION_NAISSANCE_BY_CRITERIA)
     public List<Extrait> findExtraitByCriteria(@Param("numeroRegistre") String numeroRegistre, @Param("nom") String nom,
                                                @Param("prenom") String prenom, @Param("dateNaissance") LocalDate dateNaissance);
+
+
 }
