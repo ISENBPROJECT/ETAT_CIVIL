@@ -2,9 +2,11 @@ package com.consulat.sn.etatcivil.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.consulat.sn.etatcivil.service.DeclarationExtraitService;
+import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.service.PersonneService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
+import com.consulat.sn.etatcivil.service.dto.PersonneDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
@@ -30,6 +32,7 @@ public class DeclarationExtraitResource {
     private final DeclarationExtraitService declarationExtraitService;
 
     private final PersonneService personneService;
+    private final ExtraitService extraitService;
 
 
     private static String UNDEFINED = "undefined";
@@ -37,9 +40,10 @@ public class DeclarationExtraitResource {
     final org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MMM-dd");
 
 
-    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService, PersonneService personneService) {
+    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService, PersonneService personneService, ExtraitService extraitService) {
         this.declarationExtraitService = declarationExtraitService;
         this.personneService = personneService;
+        this.extraitService = extraitService;
     }
 
     /**
@@ -54,16 +58,20 @@ public class DeclarationExtraitResource {
     public ResponseEntity<DeclarationExtraitDTO> createDeclarationExtrait(@Valid @RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to save DeclarationExtrait : {}", declarationExtraitDTO);
 
-        Boolean isMotherExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+        PersonneDTO mereDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomMere(), declarationExtraitDTO.getPrenomMere(), declarationExtraitDTO.getDateNaissanceMere());
 
-        Boolean isFatherExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+        PersonneDTO pereDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomPere(), declarationExtraitDTO.getPrenomPere(), declarationExtraitDTO.getDateNaissancePere());
 
-        Boolean isChildExist= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+        PersonneDTO enfantDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomEnfant(), declarationExtraitDTO.getPrenomEnfant(), declarationExtraitDTO.getDateNaissanceEnfant());
 
-        Boolean declarations= personneService.isPersonneExist(declarationExtraitDTO.getNomMere(),declarationExtraitDTO.getPrenomMere(),declarationExtraitDTO.getDateNaissanceMere());
+        Boolean isDeclarationExist = false;
 
-        if (declarationExtraitDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new declarationExtrait cannot already have an ID")).body(null);
+        if (null != mereDTO.getId() && null != pereDTO.getId() && null != enfantDTO.getId()) {
+            isDeclarationExist = extraitService.findExistantExtrait(enfantDTO.getId(),mereDTO.getId(),pereDTO.getId());
+        }
+
+        if (isDeclarationExist) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
         }
         DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);
         return ResponseEntity.created(new URI("/api/extraits/" + result.getId()))
@@ -89,10 +97,10 @@ public class DeclarationExtraitResource {
         String transcriptionToDelete = "";
 
         if (null != declarationExtraitDTO) {
-            transcriptionToDelete = declarationExtraitDTO.getId()+declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+            transcriptionToDelete = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
                 + "_transcription_naissance.pdf";
 
-            acteToDelete = declarationExtraitDTO.getId()+declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+            acteToDelete = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
                 + "_acte_naissance.pdf";
 
             declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);

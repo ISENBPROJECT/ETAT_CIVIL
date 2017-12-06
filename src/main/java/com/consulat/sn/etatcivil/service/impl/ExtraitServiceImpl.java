@@ -114,13 +114,15 @@ public class ExtraitServiceImpl implements ExtraitService {
 
     @Override
     @Transactional
-    public Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO) {
+    public Boolean findExistantExtrait(Long enfant, Long mere, Long pere) {
         Boolean result = false;
-        Query query = entityManager.createNamedQuery("Extrait.isExtraitExist");
-        query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
-        query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
-        List<Extrait> list = (List<Extrait>) query.getResultList();
-        if (null != list && !list.isEmpty()) {
+
+        Query query = entityManager.createNamedQuery("Extrait.isDeclarationExist");
+        query.setParameter("idEnfant", enfant);
+        query.setParameter("idMere", mere);
+        query.setParameter("idPere", pere);
+        Extrait extrait = (Extrait) query.getSingleResult();
+        if (null != extrait.getId()) {
             result = true;
         }
         return result;

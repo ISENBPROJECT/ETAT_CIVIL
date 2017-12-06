@@ -1,24 +1,21 @@
 package com.consulat.sn.etatcivil.repository;
 
 import com.consulat.sn.etatcivil.domain.Extrait;
-import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
+import com.consulat.sn.etatcivil.domain.Personne;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.data.jpa.repository.*;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 /**
  * Spring Data JPA repository for the Extrait entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ExtraitRepository extends JpaRepository<Extrait,Long> {
+public interface ExtraitRepository extends JpaRepository<Extrait, Long> {
 
     @Query("select extrait from Extrait extrait where extrait.agent.login = ?#{principal.username}")
     List<Extrait> findByAgentIsCurrentUser();
@@ -33,5 +30,14 @@ public interface ExtraitRepository extends JpaRepository<Extrait,Long> {
     public List<Extrait> findExtraitByCriteria(@Param("numeroRegistre") String numeroRegistre, @Param("nom") String nom,
                                                @Param("prenom") String prenom, @Param("dateNaissance") LocalDate dateNaissance);
 
+    /**
+     * permet de rechercher un extrait par son enfant, mere, et pere
+     *
+     * @param enfant id enfant
+     * @param mere   id mere
+     * @param pere   id pere
+     * @return un Extrait
+     */
+    Extrait findByEnfantAndMereAndPere(Long enfant, Long mere, Long pere);
 
 }

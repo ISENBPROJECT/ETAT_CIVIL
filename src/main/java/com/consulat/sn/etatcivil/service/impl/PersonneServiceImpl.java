@@ -114,12 +114,9 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Boolean isPersonneExist(String nom, String prenom, LocalDate dateNaissance) {
-        Boolean result = false;
+    public PersonneDTO finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance) {
+
         Personne personne = personneRepository.findByNomAndPrenomAndDateNaissance(nom, prenom, dateNaissance);
-        if (null != personne && null != personne.getId()) {
-            result = true;
-        }
-        return result;
+        return personneMapper.toDto(personne);
     }
 }

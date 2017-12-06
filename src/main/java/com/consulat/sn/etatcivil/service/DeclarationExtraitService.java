@@ -23,8 +23,6 @@ public interface DeclarationExtraitService {
 
     void supprimerActesImprimer(String acteNaissance, String transcriptionNaissance);
 
-    Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO);
-
   /*  *//**
      * Get all the declarationExtraits.
      *

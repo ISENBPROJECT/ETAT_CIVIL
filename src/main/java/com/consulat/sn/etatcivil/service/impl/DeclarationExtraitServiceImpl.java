@@ -454,10 +454,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         }
     }
 
-    @Override
-    public Boolean findExistantExtrait(DeclarationExtraitDTO declarationExtraitDTO) {
-       return extraitService.findExistantExtrait(declarationExtraitDTO);
-    }
 /*
     *//**
      * Get all the declarationExtraits.

@@ -42,7 +42,7 @@ public interface PersonneService {
      */
     void delete(Long id);
 
-    Boolean isPersonneExist(String nom, String prenom, LocalDate dateNaissance);
+    PersonneDTO finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance);
 
     Boolean isParentExist(DeclarationExtraitDTO declarationExtraitDTO, Date dateNaissance, String villeNaissance, String numeroIdentite);
 

@@ -130,7 +130,8 @@
         "Size": "Le champ {{fieldName}} ne respecte pas les critères minimum et maximum !",
         "userexists": "Login déjà utilisé !",
         "emailexists": "Email déjà utilisé !",
-        "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !"
+        "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !",
+        "declarationexist": "Cet enfant a déjà été déclaré ! Impossible de le redéclarer ! Veuillez rechercher la déclaration ."
     },
     "footer": "Consulat général du Sénégal à Bordeaux"
 }

@@ -41,4 +41,12 @@ public final class HeaderUtil {
         headers.add("X-etatCivilApp-params", entityName);
         return headers;
     }
+
+    public static HttpHeaders createAlertExistenceDeclaration(String entityName, String errorKey, String defaultMessage) {
+        log.error("Entity processing failed, {}", defaultMessage);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-etatCivilApp-error", "error." + errorKey);
+        headers.add("X-etatCivilApp-params", entityName);
+        return headers;
+    }
 }
