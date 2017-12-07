@@ -1,3 +1,4 @@
+<div>
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <!--formulaire de saisie-->
@@ -31,7 +32,7 @@
                 </div>
                 <div class="containerFlexItemEnfant">
 
-                    <div class="merebloc1">
+                    <div class="enfantbloc1">
                         <div class="form-group">
                             <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomEnfant"
                                    for="field_nomEnfant">Nom Enfant</label>
@@ -63,7 +64,7 @@
 
                     </div>
 
-                    <div class="merebloc1">
+                    <div class="enfantbloc2">
                         <div class="form-group">
                             <label class="control-label"
                                    data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant"
@@ -116,7 +117,7 @@
 
                     </div>
 
-                    <div class="merebloc1">
+                    <div class="enfantbloc1">
 
 
                         <div class="form-group">
@@ -268,7 +269,7 @@
                         </div>
                     </div>
 
-                    <div class="merebloc1">
+                    <div class="merebloc2">
 
                         <div class="form-group">
                             <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere"
@@ -330,7 +331,7 @@
                         </div>
                     </div>
 
-                    <div class="merebloc1">
+                    <div class="merebloc2">
 
                         <div class="form-group">
                             <label class="control-label" data-translate="etatCivilApp.declarationExtrait.fonctionMere"
@@ -365,6 +366,7 @@
                 </div>
 
                 <!--pere-->
+                <div ng-show="!vm.isNotWithFather">
                 <div class="modal-header">
                     <h4 class="modal-title" id="blocPere"
                         data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration
@@ -548,6 +550,7 @@
                     </div>
 
 
+                </div>
                 </div>
 
                 <!--commun-->
@@ -1120,4 +1123,4 @@
 
     </div>
 </form>
-
+</div>
