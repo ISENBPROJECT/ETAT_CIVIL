@@ -489,8 +489,13 @@ ui bootstrap tweaks
 
 }
 
-.flexItemRecherche {
-    order: 1;
+.flexItemRecherche1 {
+   max-width: 25%;
+    margin-left: 22%;
+}
+
+.flexItemRecherche2 {
+    order: 2;
 }
 
 .enfantbloc1 {
@@ -536,4 +541,22 @@ ui bootstrap tweaks
     display: flex;
     flex-direction: column;
     align-items: flex-end
+}
+
+.transcription_header {
+    text-align: center;
+    color: #1c0cf5;
+    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+    font-size: x-large;
+}
+
+.transcription_sans_pere {
+    color: #991e2c;
+    margin-top: 1%;
+}
+
+.transcription-bloc-title {
+    color: #1c0cf5;
+    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+    font-size: x-large;
 }
