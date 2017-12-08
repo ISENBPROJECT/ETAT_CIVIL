@@ -1,3 +1,4 @@
+"use strict";
 (function () {
     'use strict';
 
@@ -16,13 +17,29 @@
         vm.openCalendar = openCalendar;
         $scope.noData = true;
 
-        function search() {
+        vm.numeroRegistre = null;
+        vm.nomEnfant = null;
+        vm.prenomEnfant = null;
+        vm.dateNaissanceEnfant = null;
 
+        function search() {
+            if (null != vm.declarationNaissance.numeroRegistre) {
+                vm.numeroRegistre = vm.declarationNaissance.numeroRegistre;
+            }
+            if (null != vm.declarationNaissance.nomEnfant) {
+                vm.nomEnfant = vm.declarationNaissance.nomEnfant;
+            }
+            if (null != vm.declarationNaissance.prenomEnfant) {
+                vm.prenomEnfant = vm.declarationNaissance.prenomEnfant;
+            }
+            if (null != vm.declarationNaissance.dateNaissance) {
+                vm.dateNaissanceEnfant = vm.declarationNaissance.dateNaissance;
+            }
             var dataSearch = {
-                numeroRegistre: vm.declarationNaissance.numeroRegistre,
-                nomEnfant: vm.declarationNaissance.nomEnfant,
-                prenomEnfant: vm.declarationNaissance.prenomEnfant,
-                dateNaissanceEnfant: vm.declarationNaissance.dateNaissance
+                numeroRegistre: vm.numeroRegistre,
+                nomEnfant: vm.nomEnfant,
+                prenomEnfant: vm.prenomEnfant,
+                dateNaissanceEnfant: vm.dateNaissance
             };
             console.log(vm.declarationNaissance.dateNaissance)
             DeclarationRecherche.search(dataSearch,
@@ -35,10 +52,10 @@
             vm.declarationNaissances = data;
             console.log(data)
 
-            if(data.length != 0){
-                $scope.noData =false;
-            }else {
-                $scope.noData =true;
+            if (data.length != 0) {
+                $scope.noData = false;
+            } else {
+                $scope.noData = true;
             }
         }
 

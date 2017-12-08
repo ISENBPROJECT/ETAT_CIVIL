@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,10 +105,18 @@ public class ExtraitServiceImpl implements ExtraitService {
         String nom = "%" + declarationExtraitDTO.getNomEnfant() + "%";
         String prenom = "%" + declarationExtraitDTO.getPrenomEnfant() + "%";
         String numeroRegistre = declarationExtraitDTO.getNumeroRegistre();
-        return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
-            prenom, declarationExtraitDTO.getDateNaissanceEnfant()).stream()
-            .map(declarationExtraitMapper::toEntity)
-            .collect(Collectors.toCollection(LinkedList::new));
+        LocalDate dateNaissanceEnfant = declarationExtraitDTO.getDateNaissanceEnfant();
+
+        if (null != declarationExtraitDTO.getNumeroRegistre()) {
+            return extraitRepository.findByNumeroRegistre(declarationExtraitDTO.getNumeroRegistre()).stream()
+                .map(declarationExtraitMapper::toEntity)
+                .collect(Collectors.toCollection(LinkedList::new));
+        } else {
+            return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
+                prenom, declarationExtraitDTO.getDateNaissanceEnfant()).stream()
+                .map(declarationExtraitMapper::toEntity)
+                .collect(Collectors.toCollection(LinkedList::new));
+        }
 
     }
 

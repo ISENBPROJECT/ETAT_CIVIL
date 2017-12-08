@@ -1,7 +1,6 @@
 package com.consulat.sn.etatcivil.repository;
 
 import com.consulat.sn.etatcivil.domain.Extrait;
-import com.consulat.sn.etatcivil.domain.Personne;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,4 +39,11 @@ public interface ExtraitRepository extends JpaRepository<Extrait, Long> {
      */
     Extrait findByEnfantAndMereAndPere(Long enfant, Long mere, Long pere);
 
+    /**
+     * recherche l'extrait par son numéro de registre
+     *
+     * @param numeroRegistre le numéro de registre
+     * @return liste des extraits
+     */
+    List<Extrait> findByNumeroRegistre(String numeroRegistre);
 }
