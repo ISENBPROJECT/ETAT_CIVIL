@@ -387,26 +387,26 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemCommun {
-    background-color: #d7dade;
+    background-color: #337ab766;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemMere {
-    background-color: #ececec;
+    background-color: #337ab766;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemPere {
-    background-color: #c3c3c3;;
+    background-color: #337ab766;;
     display: inline-flex;
     justify-content: space-between;
     width: 100%
 }
 
 .containerFlexItemEnfant {
-    background-color: #ddd;
+    background-color: #337ab766;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -563,4 +563,11 @@ ui bootstrap tweaks
 
 .message-alerte-enfant-sans-pere {
     text-align: center;
+    margin-top: 3%;
+}
+
+.bouton-annuler-creation-formulaire {
+    float: right;
+    margin-top: 1%;
+    margin-right: 2%;
 }

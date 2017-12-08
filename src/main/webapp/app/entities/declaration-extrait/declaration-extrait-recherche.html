@@ -15,7 +15,7 @@
                     <label class="control-label" translate="etatCivilApp.declarationExtrait.search.numeroRegistre"
                            for="field_child_name">N° registre</label>
                     <input type="text" class="form-control" name="childName" id="field_child_id"
-                           ng-model="vm.declarationNaissance.numeroRegistre"
+                           ng-model="vm.numeroRegistre"
                     />
                 </div>
 
@@ -26,7 +26,7 @@
                     <div class="input-group">
                         <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance"
                                uib-datepicker-popup="{{dateformat}}"
-                               ng-model="vm.declarationNaissance.dateNaissance"
+                               ng-model="vm.dateNaissance"
                                is-open="vm.datePickerOpenStatus.dateNaissance"
                                required/>
                     <span class="input-group-btn">
@@ -50,7 +50,7 @@
                     <label class="control-label" translate="etatCivilApp.declarationExtrait.search.nom"
                            for="field_child_name">Nom</label>
                     <input type="text" class="form-control" name="childName" id="field_child_name"
-                           ng-model="vm.declarationNaissance.nomEnfant"
+                           ng-model="vm.nomEnfant"
                     />
                 </div>
 
@@ -59,7 +59,7 @@
                     <label class="control-label" translate="etatCivilApp.declarationExtrait.search.prenom"
                            for="field_child_firstname">Prenom</label>
                     <input type="text" class="form-control" name="childName" id="field_child_firstname"
-                           ng-model="vm.declarationNaissance.prenomEnfant"
+                           ng-model="vm.prenomEnfant"
                     />
                 </div>
             </div>
@@ -69,7 +69,12 @@
             <br>
 
         <div class="rechercheButton">
-            <button type="button" class="btn btn-primary" ng-click="vm.search()">
+            <button type="button" class="btn btn-default btn-lg" ng-show="!test" ui-sref="home">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button type="button" class="btn btn-primary btn-lg" ng-click="vm.search()">
                 <span class="glyphicon glyphicon-search"></span>&nbsp;<span
                 translate="etatCivilApp.declarationExtrait.search.rechercher">Rechercher</span>
             </button>

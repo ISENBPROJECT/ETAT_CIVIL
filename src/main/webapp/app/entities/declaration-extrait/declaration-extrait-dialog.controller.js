@@ -12,6 +12,7 @@
 
         vm.declarationExtrait = entity;
         vm.clear = clear;
+        vm.annuler = annuler;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.byteSize = DataUtils.byteSize;
@@ -66,6 +67,11 @@
             $scope.test = false;
         }
 
+        function annuler() {
+            $scope.isnew = true;
+            $scope.isrecap = false;
+            $scope.test = false;
+        }
         function save() {
             vm.isSaving = true;
             if (vm.declarationExtrait.id !== null) {
