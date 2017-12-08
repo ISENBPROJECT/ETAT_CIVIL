@@ -17,6 +17,10 @@
                    ng-click="vm.renseignerInfosPere()"/>
         </div>
 
+        <div ng-show="vm.isNotWithFather" class="alert alert-warning message-alerte-enfant-sans-pere">
+            <strong>Info! </strong><span data-translate="etatCivilApp.declarationExtrait.home.noFatherInformation"></span>
+        </div>
+
         <div class="modal-body">
             <jhi-alert-info></jhi-alert-info>
 

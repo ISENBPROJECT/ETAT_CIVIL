@@ -406,7 +406,7 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemEnfant {
-    background-color: #cad1cd;
+    background-color: #ddd;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -559,4 +559,8 @@ ui bootstrap tweaks
     color: #1c0cf5;
     font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
     font-size: x-large;
+}
+
+.message-alerte-enfant-sans-pere {
+    text-align: center;
 }

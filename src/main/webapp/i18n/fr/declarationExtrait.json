@@ -11,7 +11,8 @@
                 "blocCommun": "EXTRAIT DE NAISSANCE",
                 "recaptitulatif": "Récapitulatif des informations saisies",
                 "impressionExtrait": "Imprimer l'acte de naissance",
-                "impressionTranscription": "Imprimer la transcription"
+                "impressionTranscription": "Imprimer la transcription",
+                "noFatherInformation":" ATTENTION L'ENFANT SERA DECLARE SANS PERE ."
             },
             "created": "Un nouvel Extrait a été créé avec l'identifiant {{ param }}",
             "updated": "L'Extrait avec l'identifiant {{ param }} a été mis à jour",
