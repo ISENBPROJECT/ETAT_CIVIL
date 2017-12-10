@@ -387,26 +387,26 @@ ui bootstrap tweaks
 }
 
 .containerFlexItemCommun {
-    background-color: #337ab766;
+    background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemMere {
-    background-color: #337ab766;
+    background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
 }
 
 .containerFlexItemPere {
-    background-color: #337ab766;;
+    background-color: #a6d6ff66;;
     display: inline-flex;
     justify-content: space-between;
     width: 100%
 }
 
 .containerFlexItemEnfant {
-    background-color: #337ab766;
+    background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -545,9 +545,8 @@ ui bootstrap tweaks
 
 .transcription_header {
     text-align: center;
-    color: #1c0cf5;
-    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
-    font-size: x-large;
+    color: #1d2763;
+    font-size: xx-large;
 }
 
 .transcription_sans_pere {
@@ -557,8 +556,8 @@ ui bootstrap tweaks
 
 .transcription-bloc-title {
     color: #1c0cf5;
-    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
-    font-size: x-large;
+    font-size: larger;
+    font-weight: 1000;
 }
 
 .message-alerte-enfant-sans-pere {
