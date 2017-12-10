@@ -593,5 +593,15 @@ ui bootstrap tweaks
 }
 
 .menu-home {
-    
+
+}
+
+.containerFlexItem-recap {
+    width: 99%;
+}
+
+.text-area-creation-extrait {
+    margin: 0px -4.20312px 0px 0px;
+    max-width: 262px;
+    max-height: 120px;
 }

@@ -35,7 +35,7 @@
                     <!--enfant-->
                     <div class="modal-header transcription-bloc-title">
                         <p id="blocEnfant"
-                            data-translate="etatCivilApp.declarationExtrait.home.blocEnfant">header enfant</p>
+                           data-translate="etatCivilApp.declarationExtrait.home.blocEnfant">header enfant</p>
                     </div>
                     <div class="containerFlexItemEnfant">
 
@@ -176,7 +176,7 @@
                     <!--mere-->
                     <div class="modal-header transcription-bloc-title">
                         <p class="modal-title" id="blocMere"
-                            data-translate="etatCivilApp.declarationExtrait.home.blocMere">Create or edit a Declaration
+                           data-translate="etatCivilApp.declarationExtrait.home.blocMere">Create or edit a Declaration
                             Extrait</p>
                     </div>
                     <div class="containerFlexItemMere">
@@ -385,7 +385,7 @@
                     <div ng-show="!vm.isNotWithFather">
                         <div class="modal-header transcription-bloc-title">
                             <p class="modal-title" id="blocPere"
-                                data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a
+                               data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a
                                 Declaration
                                 Extrait</p>
                         </div>
@@ -583,7 +583,7 @@
                     <!--commun-->
                     <div class="modal-header transcription-bloc-title">
                         <p class="modal-title" id="blocCommun"
-                            data-translate="etatCivilApp.declarationExtrait.home.blocCommun">Create or edit a
+                           data-translate="etatCivilApp.declarationExtrait.home.blocCommun">Create or edit a
                             Declaration
                             Extrait</p>
                     </div>
@@ -728,7 +728,7 @@
                             <div class="form-group">
                                 <label class="control-label" data-translate="etatCivilApp.declarationExtrait.mention"
                                        for="field_mention">Mention</label>
-                                <textarea class="form-control" name="mention" id="field_mention"
+                                <textarea class="form-control text-area-creation-extrait" name="mention" id="field_mention"
                                           ng-model="vm.declarationExtrait.mention" required maxbytes="1000"></textarea>
                                 <div ng-show="editForm.mention.$invalid">
                                     <p class="help-block"
@@ -757,386 +757,389 @@
         <!--<div ng-if="!isnew"-->
         <div ng-if="!isnew">
 
-
-            <div class="modal-header">
-                <h4 class="modal-title" id="recapDeclarationExtraitLabel"
-                    data-translate="etatCivilApp.declarationExtrait.home.recaptitulatif">Recapitulatif Declaration
-                    Extrait</h4>
+            <!--enfant-->
+            <div class="modal-header transcription-bloc-title">
+                <p id="blocEnfant_recap"
+                   data-translate="etatCivilApp.declarationExtrait.home.blocEnfant">header enfant</p>
             </div>
-            <div class="modal-body">
-                <jhi-alert-info></jhi-alert-info>
+            <div class="containerFlexItemEnfant containerFlexItem-recap">
 
-                <!--container-->
-                <div>
+                <div class="enfantbloc1">
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomEnfant"
+                               for="field_nomEnfant">Nom Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.nomEnfant}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.prenomEnfant"
+                               for="field_prenomEnfant">Prenom Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.prenomEnfant}}</span>
+                        </div>
+                    </div>
 
+                </div>
 
-                    <!--mere-->
-                    <fieldset class="fieldsetMere">
-                        <legend>Informations sur la Mère</legend>
-                        <div style="display: flex; justify-content: space-between;">
-
-                            <div class="recapLabel">
-                                <label for="nomMere" class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.nomMere_recap">Nom
-                                    Mere</label>
-                                <label for="prenomMere" class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.prenomMere_recap">Prenom
-                                    Mere</label>
-                                <label for="datenaissanceMere" class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere_recap">Date
-                                    Naissance Mere</label>
-                                <label for="fonctionMere" class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.fonctionMere_recap">Fonction
-                                    Mere</label>
-                            </div>
-
-                            <div class="recapInfo">
-                                <span id="nomMere" class="span_recap"> {{vm.declarationExtrait.nomMere}}</span>
-                                <span id="prenomMere" class="span_recap"> {{vm.declarationExtrait.prenomMere}}</span>
-                                <span id="datenaissanceMere" class="span_recap">{{vm.declarationExtrait.dateNaissanceMere | date:format:"longDate"}}</span>
-                                <span id="fonctionMere"
-                                      class="span_recap"> {{vm.declarationExtrait.fonctionMere}}</span>
-                            </div>
+                <div class="enfantbloc2">
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant"
+                               for="field_dateNaissanceEnfant">Date Naissance Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.dateNaissanceEnfant | date : "dd.MM.y" }}</span>
+                        </div>
 
 
-                            <div class="recapLabel">
+                    </div>
 
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.adresseComplMere_recap">Adresse
-                                    Compl
-                                    Mere</label>
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.numeroIdentiteMere_recap">Numero
-                                    Identite
-                                    Mere</label>
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.numeroPassportMere_recap">Numero
-                                    Passport
-                                    Mere</label>
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere_recap">Pays
-                                    Naissance Mere</label>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.genreEnfant"
+                               for="field_genreEnfant">Genre Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.genreEnfant}}</span>
+                        </div>
+                    </div>
 
-                            <div class="recapInfo">
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.adresseComplMere}}</span>
-                                </div>
+                </div>
 
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.numeroIdentiteMere}}</span>
-                                </div>
-
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.numeroPassportMere}}</span>
-                                </div>
-
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.paysNaissanceMereId.nom}}</span>
-                                </div>
-                            </div>
+                <div class="enfantbloc1">
 
 
-                            <div class="recapLabel">
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant"
+                               for="field_lieuNaissanceEnfant">Lieu Naissance Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.lieuNaissanceEnfant}}</span>
+                        </div>
+                    </div>
 
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere_recap">Lieu
-                                    Naissance Mere</label>
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adrPaysMere_recap">Adr
-                                    Pays Mere</label>
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adresseMere_recap">Adresse
-                                    Mere</label>
-                            </div>
 
-                            <div class="recapInfo">
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.lieuNaissanceMereId.nom}}</span>
-                                </div>
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant"
+                               for="field_paysNaissanceEnfant">Pays Naissance Enfant</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.paysNaissanceEnfant}}</span>
+                        </div>
+                    </div>
 
-                                <div>
+                </div>
 
-                                    <span class="span_recap">{{vm.declarationExtrait.adrPaysMereId.nom}}</span>
-                                </div>
+            </div>
 
-                                <div>
-                                    <span class="span_recap">{{vm.declarationExtrait.adresseMereId.nom}}</span>
-                                </div>
+
+            <!--mere-->
+            <div class="modal-header transcription-bloc-title">
+                <p class="modal-title" id="blocMere_recap"
+                   data-translate="etatCivilApp.declarationExtrait.home.blocMere">Create or edit a Declaration
+                    Extrait</p>
+            </div>
+            <div class="containerFlexItemMere containerFlexItem-recap">
+
+                <div class="merebloc1">
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomMere"
+                               for="field_nomMere">Nom Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.nomMere}}</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomMere"
+                               for="field_prenomMere">Prenom Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.prenomMere}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.dateNaissanceMere"
+                               for="field_dateNaissanceMere">Date Naissance Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.dateNaissanceMere | date : "dd.MM.y"}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysNaissanceMere"
+                               for="field_paysNaissanceMere">Pays
+                            Naissance Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.paysNaissanceMere}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merebloc2">
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuNaissanceMere"
+                               for="field_lieuNaissanceMere">Lieu
+                            Naissance Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.lieuNaissanceMere}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adrPaysMere"
+                               for="field_adrPaysMere">Adr
+                            Pays
+                            Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.paysResidenceMere}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.adresseMere"
+                               for="field_adresseMere">Adresse
+                            Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.lieuResidenceMere}}</span>
+                            </input>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.adresseComplMere"
+                               for="field_adresseComplMere">Adresse Compl Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.adresseComplMere}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merebloc2">
+
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.fonctionMere"
+                               for="field_fonctionMere">Fonction Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.fonctionMere}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.numeroIdentiteMere"
+                               for="field_numeroIdentiteMere">Numero Identite Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.numeroIdentiteMere}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.numeroPassportMere"
+                               for="field_numeroPassportMere">Numero Passport Mere</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.numeroPassportMere}}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!--pere-->
+            <div ng-show="!vm.isNotWithFather">
+                <div class="modal-header transcription-bloc-title">
+                    <p class="modal-title" id="blocPere_recap"
+                       data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration
+                        Extrait</p>
+                </div>
+                <div class="containerFlexItemMere containerFlexItem-recap">
+
+                    <div class="merebloc1">
+                        <div class="form-group">
+                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomPere"
+                                   for="field_nomPere">Nom Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.nomPere}}</span>
                             </div>
 
                         </div>
-                    </fieldset>
-
-                    <!--pere-->
-                    <fieldset class="fieldsetPere">
-                        <legend>Informations sur le Père</legend>
-
-                        <div style="display: flex; justify-content: space-between">
-
-                            <div class="recapLabel">
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.nomPere_recap">Nom
-                                    Pere</label>
-
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.prenomPere_recap">Prenom
-                                    Pere</label>
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.dateNaissancePere_recap">Date
-                                    Naissance
-                                    Pere</label>
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.fonctionPere_recap">Fonction
-                                    Pere</label>
-
-
-                            </div>
-                            <div class="recapInfo">
-
-                                <span class="span_recap">{{vm.declarationExtrait.nomPere}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.prenomPere}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.dateNaissancePere | date:format:"longDate"}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.fonctionPere}}</span>
-
-                            </div>
-
-                            <div class="recapLabel">
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.adresseComplPere_recap">Adresse
-                                    Compl
-                                    Pere</label>
-
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere_recap">Numero
-                                    Identite
-                                    Pere</label>
-
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.numeroPassportPere_recap">Numero
-                                    Passport
-                                    Pere</label>
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.paysNaissancePere_recap">Pays
-                                    Naissance
-                                    Pere</label>
-
-                            </div>
-                            <div class="recapInfo">
-                                <span class="span_recap">{{vm.declarationExtrait.adresseComplPere}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.numeroIdentitePere}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.numeroPassportPere}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.paysNaissancePereId.nom}}</span>
-                            </div>
-
-
-                            <div class="recapLabel">
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere_recap">Lieu
-                                    Naissance
-                                    Pere</label>
-
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adrPaysPere_recap">Adr
-                                    Pays Pere</label>
-
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adressePere_recap">Adresse
-                                    Pere</label>
-
-                            </div>
-                            <div class="recapInfo">
-                                <span class="span_recap">{{vm.declarationExtrait.lieuNaissancePereId.nom}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.adrPaysPereId.nom}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.adressePereId.nom}}</span>
-                            </div>
-
-                        </div>
-                    </fieldset>
-
-                    <!--enfant-->
-                    <fieldset class="fieldsetEnfant">
-                        <legend>Informations sur l'enfant</legend>
-
-                        <div style="display: flex; justify-content: space-between">
-
-                            <div class="recapLabel">
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.nomEnfant_recap">Nom
-                                    Enfant</label>
-
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.prenomEnfant_recap">Prenom
-                                    Enfant</label>
-
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.dateNaissanceEnfant_recap">Date
-                                    Naissance
-                                    Enfant</label>
-
-
-                            </div>
-                            <div class="recapInfo">
-                                <span class="span_recap">{{vm.declarationExtrait.nomEnfant}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.prenomEnfant}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.dateNaissanceEnfant | date:format:"longDate"}}</span>
-                            </div>
-
-                            <div class="recapLabel">
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.paysNaissanceEnfant_recap">Pays
-                                    Naissance
-                                    Enfant</label>
-
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.lieuNaissanceEnfant_recap">Lieu
-                                    Naissance
-                                    Enfant</label>
-
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adrPaysEnfant_recap">Adr
-                                    Pays
-                                    Enfant</label>
-
-                            </div>
-                            <div class="recapInfo">
-
-                                <span class="span_recap">{{vm.declarationExtrait.paysNaissanceEnfantId.nom}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.lieuNaissanceEnfantId.nom}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.adrPaysEnfantId.nom}}</span>
-                            </div>
-
-                            <div class="recapLabel">
-
-                                <label class="label_racap" class="control-label"
-                                       data-translate="etatCivilApp.declarationExtrait.genreEnfant_recap">Genre
-                                    Enfant</label>
-
-
-                                <label class="label_racap"
-                                       data-translate="etatCivilApp.declarationExtrait.adresseEnfant_recap">Adresse
-                                    Enfant</label>
-
-
-                            </div>
-                            <div class="recapInfo">
-                                <span class="span_recap">{{vm.declarationExtrait.genreEnfant}}</span>
-
-                                <span class="span_recap">{{vm.declarationExtrait.adresseEnfantId.nom}}</span>
+                        <div class="form-group">
+                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomMere"
+                                   for="field_prenomMere">Prenom Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.prenomMere}}</span>
                             </div>
                         </div>
-                    </fieldset>
-
-                    <!--commun à  l'extrait-->
-                    <fieldset class="fieldsetCommun">
-                        <legend>Informations communes à l'extrait</legend>
-
-                        <div style="display: flex; justify-content: space-between">
-
-                            <div style="display: flex;flex-direction: column">
-
-                                <div>
-                                    <div class="form-group" ngf-drop
-                                         ngf-change="vm.setCopieLiterale($file, vm.declarationExtrait)">
-                                        <label class="label_racap" class="control-label_recap"
-                                               data-translate="etatCivilApp.declarationExtrait.copieLiterale_recap"
-                                               for="field_copieLiterale_recap">Copie Literale</label>
-                                        <div>
-                                            <div ng-if="vm.declarationExtrait.copieLiterale"
-                                                 class="help-block clearfix">
-                                                <a class="pull-left"
-                                                   ng-click="vm.openFile(vm.declarationExtrait.copieLiteraleContentType, vm.declarationExtrait.copieLiterale)"
-                                                   data-translate="entity.action.open">open</a><br>
-                                                <span class="pull-left">{{vm.declarationExtrait.copieLiteraleContentType}}, {{vm.byteSize(vm.declarationExtrait.copieLiterale)}}</span>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="copieLiterale" id="field_copieLiterale_recap"
-                                               ng-model="vm.declarationExtrait.copieLiterale"
-                                               required minbytes="8192" maxbytes="25165824"/>
-
-                                    </div>
-                                    <div class="form-group" ngf-drop
-                                         ngf-change="vm.setCopieCarte($file, vm.declarationExtrait)">
-                                        <label class="label_racap" class="control-label"
-                                               data-translate="etatCivilApp.declarationExtrait.copieCarte_recap"
-                                               for="field_copieCarte_recap">Copie Carte</label>
-                                        <div>
-                                            <div ng-if="vm.declarationExtrait.copieCarte" class="help-block clearfix">
-                                                <a class="pull-left"
-                                                   ng-click="vm.openFile(vm.declarationExtrait.copieCarteContentType, vm.declarationExtrait.copieCarte)"
-                                                   data-translate="entity.action.open">open</a><br>
-                                                <span class="pull-left">{{vm.declarationExtrait.copieCarteContentType}}, {{vm.byteSize(vm.declarationExtrait.copieCarte)}}</span>
-
-                                            </div>
-                                        </div>
-
-                                        <input type="hidden" name="copieCarte" id="field_copieCarte_recap"
-                                               ng-model="vm.declarationExtrait.copieCarte"
-                                               required minbytes="8192" maxbytes="25165824"/>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div style="display: flex;flex-direction: column">
-
-                                <div>
-                                    <label class="label_racap"
-                                           data-translate="etatCivilApp.declarationExtrait.paysDeclaration_recap">Pays
-                                        Declaration</label>
-                                    <span class="span_recap">{{vm.declarationExtrait.paysDeclarationId.nom}}</span>
-                                </div>
-
-                                <div>
-                                    <label class="label_racap"
-                                           data-translate="etatCivilApp.declarationExtrait.lieuDeclaration_recap">Lieu
-                                        Declaration</label>
-                                    <span>{{vm.declarationExtrait.lieuDeclarationId.nom}}</span>
-                                </div>
-
-                            </div>
-
-                            <div style="display: flex;flex-direction: column">
-                                <div>
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.mention_recap"
-                                           for="field_mention_recap">Mention</label>
-                                    <textarea name="mention" id="field_mention_recap"
-                                              ng-model="vm.declarationExtrait.mention" readonly></textarea>
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
+                                   for="field_dateNaissancePere">Date Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.dateNaissancePere | date : "dd.MM.y"}}</span>
                             </div>
                         </div>
-                    </fieldset>
+
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
+                                   for="field_paysNaissancePere">Pays
+                                Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.paysNaissancePere}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merebloc2">
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
+                                   for="field_lieuNaissancePere">Lieu
+                                Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.lieuNaissancePere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere"
+                                   for="field_adrPaysPere">Adr
+                                Pays
+                                Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.paysResidencePere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.adressePere"
+                                   for="field_adressePere">Adresse
+                                Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.lieuResidencePere}}</span>
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
+                                   for="field_adresseComplPere">Adresse Compl Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.adresseComplPere}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merebloc2">
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.fonctionPere"
+                                   for="field_fonctionPere">Fonction Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.fonctionPere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
+                                   for="field_numeroIdentitePere">Numero Identite Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.numeroIdentitePere}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
+                                   for="field_numeroPassportPere">Numero Passport Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.numeroPassportPere}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
             </div>
 
+
+            <!--commun-->
+            <div class="modal-header transcription-bloc-title">
+                <p class="modal-title" id="blocCommun_recap"
+                   data-translate="etatCivilApp.declarationExtrait.home.blocCommun">Create or edit a
+                    Declaration
+                    Extrait</p>
+            </div>
+            <div class="containerFlexItemCommun containerFlexItem-recap">
+
+                <div class="merebloc1">
+                    <div class="form-group" ngf-drop
+                         ngf-change="vm.setCopieLiterale($file, vm.declarationExtrait)">
+                        <label class="control-label"
+                               data-translate="etatCivilApp.declarationExtrait.copieLiterale"
+                               for="field_copieLiterale">Copie Literale</label>
+                        <div>
+                            <div ng-if="vm.declarationExtrait.copieLiterale" class="help-block clearfix">
+                                <a class="pull-left"
+                                   ng-click="vm.openFile(vm.declarationExtrait.copieLiteraleContentType, vm.declarationExtrait.copieLiterale)"
+                                   data-translate="entity.action.open">open</a><br>
+                                <span class="pull-left">{{vm.declarationExtrait.copieLiteraleContentType}}, {{vm.byteSize(vm.declarationExtrait.copieLiterale)}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group" ngf-drop
+                         ngf-change="vm.setCopieCarte($file, vm.declarationExtrait)">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.copieCarte"
+                               for="field_copieCarte">Copie Carte</label>
+                        <div>
+                            <div ng-if="vm.declarationExtrait.copieCarte" class="help-block clearfix">
+                                <a class="pull-left"
+                                   ng-click="vm.openFile(vm.declarationExtrait.copieCarteContentType, vm.declarationExtrait.copieCarte)"
+                                   data-translate="entity.action.open">open</a><br>
+                                <span class="pull-left">{{vm.declarationExtrait.copieCarteContentType}}, {{vm.byteSize(vm.declarationExtrait.copieCarte)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merebloc1">
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.paysDeclaration"
+                               for="field_paysDeclaration">Pays
+                            Declaration</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.paysDeclaration}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-translate="etatCivilApp.declarationExtrait.lieuDeclaration"
+                               for="field_lieuDeclaration">Lieu
+                            Declaration</label>
+                        <div class="input-group">
+                            <span>{{vm.declarationExtrait.lieuDeclaration}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merebloc1">
+                    <div class="form-group">
+                        <label class="control-label" data-translate="etatCivilApp.declarationExtrait.mention"
+                               for="field_mention_recap">Mention</label>
+
+                        <textarea readonly="true" class="form-control text-area-creation-extrait" name="mention" id="field_mention_recap">{{vm.declarationExtrait.mention}}</textarea>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -1155,7 +1158,8 @@
                 data-translate="entity.action.cancel">Cancel</span>
             </button>
 
-            <button type="button" ng-click="vm.valider()" ng-show="editForm.$valid && !isrecap" class="btn btn-primary">
+            <button type="button" ng-click="vm.valider()" ng-show="editForm.$valid && !isrecap"
+                    class="btn btn-primary">
                 <span class="glyphicon glyphicon-ok"></span>&nbsp;<span
                 data-translate="entity.action.valider">Recap</span>
             </button>
