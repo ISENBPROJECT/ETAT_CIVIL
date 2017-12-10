@@ -1,9 +1,9 @@
 {
     "home": {
-        "devise":"UN PEUPLE UN BUT UNE FOI",
-        "title": "Bienvenue",
+        "devise":"UN PEUPLE – UN BUT – UNE FOI ",
+        "title": "",
         "subtitle": "Application de Gestion des Etats civils",
-        "consulat":"Consulat du Sénégal à Bordeaux",
+        "consulat":"Consulat Général du Sénégal à Bordeaux",
         "logged": {
             "message": "Bienvenue \"{{username}}\"."
         },

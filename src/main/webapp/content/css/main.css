@@ -571,3 +571,9 @@ ui bootstrap tweaks
     margin-top: 1%;
     margin-right: 2%;
 }
+
+.menu-selection-consulat {
+    border: none;
+    margin-top: 6%;
+    margin-right: 7%;
+}

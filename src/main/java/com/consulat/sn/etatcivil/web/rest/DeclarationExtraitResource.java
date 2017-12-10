@@ -66,8 +66,8 @@ public class DeclarationExtraitResource {
 
         Boolean isDeclarationExist = false;
 
-        if (null != mereDTO.getId() && null != pereDTO.getId() && null != enfantDTO.getId()) {
-            isDeclarationExist = extraitService.findExistantExtrait(enfantDTO.getId(),mereDTO.getId(),pereDTO.getId());
+        if (null != mereDTO && null != pereDTO && null != enfantDTO) {
+            isDeclarationExist = extraitService.findExistantExtrait(enfantDTO.getId(), mereDTO.getId(), pereDTO.getId());
         }
 
         if (isDeclarationExist) {
@@ -121,7 +121,7 @@ public class DeclarationExtraitResource {
         return declarationExtraitService.findExtraitByCriteria(declarationExtraitDTO);
     }
 
-   /* *//**
+    /* *//**
      * DELETE  /declaration-extraits/:id : delete the "id" declarationExtrait.
      *
      * @param id the id of the declarationExtraitDTO to delete
@@ -147,8 +147,8 @@ public class DeclarationExtraitResource {
         }
 
     }*/
-/*
-    *//**
+    /*
+     *//**
      * GET  /declaration-extraits : get all the declarationExtraits.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of declarationExtraits in body
