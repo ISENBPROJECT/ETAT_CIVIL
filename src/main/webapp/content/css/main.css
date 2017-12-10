@@ -390,25 +390,29 @@ ui bootstrap tweaks
     background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
+    border-bottom: outset;
 }
 
 .containerFlexItemMere {
     background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
+    border-bottom: outset;
 }
 
 .containerFlexItemPere {
     background-color: #a6d6ff66;;
     display: inline-flex;
     justify-content: space-between;
-    width: 100%
+    width: 100%;
+    border-bottom: outset;
 }
 
 .containerFlexItemEnfant {
     background-color: #a6d6ff66;
     display: inline-flex;
     justify-content: space-between;
+    border-bottom: outset;
 }
 
 .containerFlex_recap {
@@ -575,4 +579,19 @@ ui bootstrap tweaks
     border: none;
     margin-top: 6%;
     margin-right: 7%;
+}
+
+.alert-success-logging {
+    color: #31708f;
+    background-color: #ccc;
+    border-color: #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-top: 9%;
+}
+
+.menu-home {
+    
 }
