@@ -4,7 +4,6 @@ import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.ExtraitDTO;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,4 +45,5 @@ public interface ExtraitService {
 
     Boolean findExistantExtrait(Long enfant, Long mere, Long pere);
 
+    DeclarationExtraitRechercheDTO findExtraitById(Long id);
 }

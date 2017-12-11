@@ -5,6 +5,7 @@
                 "title": "DeclarationExtraits",
                 "createLabel": "Créer un nouveau Declaration Extrait",
                 "createOrEditLabel": "TRANSCRIPTION D'UNE NAISSANCE",
+                "detailExtrait": "DETAILS EXTRAIT DE NAISSANCE",
                 "blocEnfant": "INFORMATIONS SUR L'ENFANT",
                 "blocMere": "INFORMATIONS SUR LA MERE",
                 "blocPere": "INFORMATIONS SUR LE PERE",
@@ -98,6 +99,8 @@
             "naissanceFutur": "Impossible de choisir une date dans le futur.",
             "dateNaissancePlusCinquante": "La mère ne doit pas avoir 50 ans de plus que son enfant .",
             "dateNaissanceMereEnfantInfDix": "La mère doit avoir minimun 10 ans de plus que son enfant .",
+            "numeroregistre": "NUMERO DE REGISTRE",
+            "dateDeclaration": "DATE DE DECLARATION",
             "search": {
                 "nom": "NOM DE L'ENFANT",
                 "prenom": "PRENOM DE L'ENFANT",

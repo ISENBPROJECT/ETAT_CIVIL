@@ -6,11 +6,13 @@
         .module('etatCivilApp')
         .controller('DeclarationNaissanceRechercheDetailController', DeclarationNaissanceRechercheDetailController);
 
-    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$state', 'DeclarationRecherche'];
+    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville'];
 
-    function DeclarationNaissanceRechercheDetailController($scope, $state, DeclarationRecherche) {
+    function DeclarationNaissanceRechercheDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville) {
 
         var vm = this;
+        vm.declarationExtrait = entity;
+        vm.paysDeclaration = "FRANCE"
 
     }
 })();

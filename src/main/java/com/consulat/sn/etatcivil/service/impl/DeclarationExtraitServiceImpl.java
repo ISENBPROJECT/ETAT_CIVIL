@@ -2,8 +2,10 @@ package com.consulat.sn.etatcivil.service.impl;
 
 import com.consulat.sn.etatcivil.domain.User;
 import com.consulat.sn.etatcivil.domain.enumeration.Genre;
+import com.consulat.sn.etatcivil.repository.ExtraitRepository;
 import com.consulat.sn.etatcivil.service.*;
 import com.consulat.sn.etatcivil.service.dto.*;
+import com.consulat.sn.etatcivil.service.mapper.ExtraitMapper;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -52,10 +54,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     private Long mereId = null;
     private final VilleService villeService;
     private final MailService mailService;
+    private final ExtraitRepository extraitRepository;
+    private final ExtraitMapper extraitMapper;
 
     // private final DeclarationExtraitSearchRepository declarationExtraitSearchRepository;
     public DeclarationExtraitServiceImpl(PaysService paysService, PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
-                                         RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService) {
+                                         RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService, ExtraitRepository extraitRepository, ExtraitMapper extraitMapper) {
         this.paysService = paysService;
         this.extraitService = extraitService;
         this.personneService = personneService;
@@ -64,6 +68,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         this.userService = userService;
         this.villeService = villeService;
         this.mailService = mailService;
+        this.extraitRepository = extraitRepository;
+        this.extraitMapper = extraitMapper;
     }
 
     /**
@@ -454,8 +460,22 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         }
     }
 
-/*
-    *//**
+    /**
+     * Get one declarationExtrait by id.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public DeclarationExtraitRechercheDTO findOne(Long id) {
+        log.debug("Request to get DeclarationExtrait : {}", id);
+        DeclarationExtraitRechercheDTO extrait = extraitService.findExtraitById(id);
+
+        return extrait;
+    }
+    /*
+     *//**
      * Get all the declarationExtraits.
      *
      * @return the list of entities

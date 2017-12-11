@@ -57,7 +57,7 @@
             })
             .state('declaration-extrait-detail-recherche', {
                 parent: 'declaration-naissance-recherche',
-                url: '/detail',
+                url: '/detail/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'etatCivilApp.declarationExtrait.detail.title'
@@ -72,8 +72,19 @@
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('declarationExtrait');
-                        $translatePartialLoader.addPart('global');
+                        $translatePartialLoader.addPart('genre');
                         return $translate.refresh();
+                    }],
+                    entity: ['$stateParams', 'DeclarationExtrait', function($stateParams, DeclarationExtrait) {
+                        return DeclarationExtrait.get({id : $stateParams.id}).$promise;
+                    }],
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'declaration-extrai-detail-recherche',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
                     }]
                 }
             })

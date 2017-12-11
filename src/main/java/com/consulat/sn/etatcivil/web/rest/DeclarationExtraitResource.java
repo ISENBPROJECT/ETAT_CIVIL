@@ -8,6 +8,7 @@ import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
 import com.consulat.sn.etatcivil.service.dto.PersonneDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing DeclarationExtrait.
@@ -119,6 +121,21 @@ public class DeclarationExtraitResource {
         log.debug("REST request to search DeclarationNaissance");
 
         return declarationExtraitService.findExtraitByCriteria(declarationExtraitDTO);
+    }
+
+
+    /**
+     * GET  /declaration-extraits/:id : get the "id" declarationExtrait.
+     *
+         * @param id the id of the declarationExtraitDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the declarationExtraitDTO, or with status 404 (Not Found)
+        */
+    @GetMapping("/declaration-extraits/{id}")
+    @Timed
+    public ResponseEntity<DeclarationExtraitRechercheDTO> getDeclarationExtrait(@PathVariable Long id) {
+        log.debug("REST request to get DeclarationExtrait : {}", id);
+        DeclarationExtraitRechercheDTO declarationExtraitDTO = declarationExtraitService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(declarationExtraitDTO));
     }
 
     /* *//**

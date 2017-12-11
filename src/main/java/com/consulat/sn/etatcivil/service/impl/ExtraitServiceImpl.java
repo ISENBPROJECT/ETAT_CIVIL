@@ -137,4 +137,10 @@ public class ExtraitServiceImpl implements ExtraitService {
         return result;
     }
 
+    @Override
+    public DeclarationExtraitRechercheDTO findExtraitById(Long id) {
+        Extrait extrait = extraitRepository.findOne(id);
+        return declarationExtraitMapper.toEntity(extrait);
+    }
+
 }

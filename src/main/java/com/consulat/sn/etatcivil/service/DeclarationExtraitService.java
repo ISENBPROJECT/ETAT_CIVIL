@@ -22,6 +22,13 @@ public interface DeclarationExtraitService {
     List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO);
 
     void supprimerActesImprimer(String acteNaissance, String transcriptionNaissance);
+    /**
+     * Get the "id" declarationExtrait.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    DeclarationExtraitRechercheDTO findOne(Long id);
 
   /*  *//**
      * Get all the declarationExtraits.
