@@ -108,6 +108,8 @@
                 "numeroRegistre": "NUMERO DANS LE REGISTRE",
                 "rechercher": "Rechercher",
                 "title": "RECHERCHER UN EXTRAIT DE NAISSANCE",
+                "modify": "Modifier",
+                "print": "Imprimer",
                 "noData": "Aucun résultat trouvé !"
 
             }
