@@ -26,7 +26,7 @@ public interface ExtraitRepository extends JpaRepository<Extrait, Long> {
         "and (e.dateNaissance = :dateNaissance or e.dateNaissance is not null )";
 
     @Query(FIND_DECLARATION_NAISSANCE_BY_CRITERIA)
-    public List<Extrait> findExtraitByCriteria(@Param("numeroRegistre") String numeroRegistre, @Param("nom") String nom,
+     List<Extrait> findExtraitByCriteria(@Param("numeroRegistre") String numeroRegistre, @Param("nom") String nom,
                                                @Param("prenom") String prenom, @Param("dateNaissance") LocalDate dateNaissance);
 
     /**

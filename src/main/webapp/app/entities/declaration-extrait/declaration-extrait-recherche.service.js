@@ -38,9 +38,11 @@
             },
             'search': {
                 method: 'POST',
-
                 transformRequest: function (data) {
                     data.dateDeclaration = DateUtils.convertLocalDateToServer(data.dateDeclaration);
+                    data.dateNaissanceEnfant = DateUtils.convertLocalDateToServer(data.dateNaissanceEnfant);
+                    data.dateNaissanceMere = DateUtils.convertLocalDateToServer(data.dateNaissanceMere);
+                    data.dateNaissancePere = DateUtils.convertLocalDateToServer(data.dateNaissancePere);
                     return angular.toJson(data);
                 },
                 transformResponse: function (data) {

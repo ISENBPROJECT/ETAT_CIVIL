@@ -102,20 +102,98 @@ public class ExtraitServiceImpl implements ExtraitService {
     @Override
     public List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO) {
 
-        String nom = "%" + declarationExtraitDTO.getNomEnfant() + "%";
-        String prenom = "%" + declarationExtraitDTO.getPrenomEnfant() + "%";
-        String numeroRegistre = declarationExtraitDTO.getNumeroRegistre();
-        LocalDate dateNaissanceEnfant = declarationExtraitDTO.getDateNaissanceEnfant();
+        LinkedList<DeclarationExtraitRechercheDTO> results = new LinkedList<>();
 
-        if (null != declarationExtraitDTO.getNumeroRegistre()) {
+        if (null != declarationExtraitDTO.getNumeroRegistre() && !declarationExtraitDTO.getNumeroRegistre().equals("")) {
             return extraitRepository.findByNumeroRegistre(declarationExtraitDTO.getNumeroRegistre()).stream()
                 .map(declarationExtraitMapper::toEntity)
                 .collect(Collectors.toCollection(LinkedList::new));
         } else {
-            return extraitRepository.findExtraitByCriteria(numeroRegistre, nom,
-                prenom, declarationExtraitDTO.getDateNaissanceEnfant()).stream()
-                .map(declarationExtraitMapper::toEntity)
-                .collect(Collectors.toCollection(LinkedList::new));
+            //si nom, prenom, date de naissance pas vides
+            if (null != declarationExtraitDTO.getNomEnfant() && null != declarationExtraitDTO.getPrenomEnfant()
+                && null != declarationExtraitDTO.getDateNaissanceEnfant()) {
+                Query query = entityManager.createNamedQuery("Extrait.findByNomAndPrenomAndDateNaissance");
+                query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+                query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+                query.setParameter("dateNaissance", declarationExtraitDTO.getDateNaissanceEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+
+            }
+            //si prenom, date naissance pas vides
+            if (null == declarationExtraitDTO.getNomEnfant() && null != declarationExtraitDTO.getPrenomEnfant()
+                && null != declarationExtraitDTO.getDateNaissanceEnfant()) {
+
+                Query query = entityManager.createNamedQuery("Extrait.findByPrenomAndDateNaissance");
+                query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+                query.setParameter("dateNaissance", declarationExtraitDTO.getDateNaissanceEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+
+            }
+            //si date de naissance pas vide
+            if (null == declarationExtraitDTO.getNomEnfant() && null == declarationExtraitDTO.getPrenomEnfant()
+                && null != declarationExtraitDTO.getDateNaissanceEnfant()) {
+                Query query = entityManager.createNamedQuery("Extrait.findByDateNaissance");
+                query.setParameter("dateNaissance", declarationExtraitDTO.getDateNaissanceEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+
+            }
+
+            //si nom, prenom pas vides
+            if (null != declarationExtraitDTO.getNomEnfant() && null != declarationExtraitDTO.getPrenomEnfant()
+                && null == declarationExtraitDTO.getDateNaissanceEnfant()) {
+                Query query = entityManager.createNamedQuery("Extrait.findByNomAndPrenom");
+                query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+                query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+
+            }
+
+            //si nom, date naissance pas vides
+            if (null != declarationExtraitDTO.getNomEnfant() && null == declarationExtraitDTO.getPrenomEnfant()
+                && null != declarationExtraitDTO.getDateNaissanceEnfant()) {
+
+                Query query = entityManager.createNamedQuery("Extrait.findByNomAndDateNaissance");
+                query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+                query.setParameter("dateNaissance", declarationExtraitDTO.getDateNaissanceEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+            }
+            //si prenom pas vide
+            if (null == declarationExtraitDTO.getNomEnfant() && null != declarationExtraitDTO.getPrenomEnfant()
+                && null == declarationExtraitDTO.getDateNaissanceEnfant()) {
+                Query query = entityManager.createNamedQuery("Extrait.findByPrenom");
+                query.setParameter("prenom", declarationExtraitDTO.getPrenomEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+            }
+            //si nom pas vide
+            if (null != declarationExtraitDTO.getNomEnfant() && null == declarationExtraitDTO.getPrenomEnfant()
+                && null == declarationExtraitDTO.getDateNaissanceEnfant()) {
+                Query query = entityManager.createNamedQuery("Extrait.findByNom");
+                query.setParameter("nom", declarationExtraitDTO.getNomEnfant());
+                List<Extrait> extraits = (List<Extrait>) query.getResultList();
+                results = extraits.stream()
+                    .map(declarationExtraitMapper::toEntity)
+                    .collect(Collectors.toCollection(LinkedList::new));
+            }
+
+            return results;
         }
 
     }

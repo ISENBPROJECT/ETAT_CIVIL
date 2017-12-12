@@ -21,7 +21,23 @@ import java.util.Set;
 @NamedQueries({
     @NamedQuery(name = "Extrait.isDeclarationExist",
         query = "SELECT extrait FROM Extrait extrait where extrait.enfant.id = :idEnfant and " +
-            "extrait.mere.id =  :idMere and extrait.pere.id = :idPere")
+            "extrait.mere.id =  :idMere and extrait.pere.id = :idPere"),
+    @NamedQuery(name = "Extrait.findByNomAndPrenomAndDateNaissance",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.nom = :nom and " +
+            "extrait.enfant.prenom =  :prenom and extrait.enfant.dateNaissance = :dateNaissance"),
+    @NamedQuery(name = "Extrait.findByPrenomAndDateNaissance",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.prenom =  :prenom and extrait.enfant.dateNaissance = :dateNaissance"),
+    @NamedQuery(name = "Extrait.findByDateNaissance",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.dateNaissance = :dateNaissance"),
+    @NamedQuery(name = "Extrait.findByNomAndPrenom",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.nom = :nom and extrait.enfant.prenom = :prenom"),
+    @NamedQuery(name = "Extrait.findByNomAndDateNaissance",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.nom = :nom and extrait.enfant.dateNaissance = :dateNaissance"),
+    @NamedQuery(name = "Extrait.findByPrenom",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.prenom = :prenom"),
+    @NamedQuery(name = "Extrait.findByNom",
+        query = "SELECT extrait FROM Extrait extrait where extrait.enfant.nom = :nom"),
+
 })
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Extrait implements Serializable {
