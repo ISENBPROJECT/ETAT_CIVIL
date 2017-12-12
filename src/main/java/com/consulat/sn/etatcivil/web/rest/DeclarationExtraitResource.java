@@ -108,6 +108,7 @@ public class DeclarationExtraitResource {
             declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);
 
         }
+        assert declarationExtraitDTO != null;
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getId().toString()))
             .body(null);
