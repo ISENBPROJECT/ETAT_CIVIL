@@ -88,6 +88,38 @@
                     }]
                 }
             })
+            .state('declaration-extrait-edit', {
+                parent: 'declaration-extrait-detail-recherche',
+                url: '/edit',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/declaration-extrait/declaration-extrait-modif.html',
+                        controller: 'DeclarationNaissanceRechercheDetailController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('declarationExtrait');
+                        $translatePartialLoader.addPart('genre');
+                        return $translate.refresh();
+                    }],
+                    entity: ['$stateParams', 'DeclarationExtrait', function($stateParams, DeclarationExtrait) {
+                        return DeclarationExtrait.get({id : $stateParams.id}).$promise;
+                    }],
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'declaration-extrai-detail-recherche',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }]
+                }
+            })
             .state('declaration-extrait-detail.edit', {
                 parent: 'declaration-extrait-detail',
                 url: '/detail/edit',
