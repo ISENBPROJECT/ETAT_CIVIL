@@ -6,11 +6,19 @@
                 data-translate="etatCivilApp.declarationExtrait.home.editLabel">modification Declaration
                 Extrait</h4>
         </div>
-        <div class="bouton-annuler-creation-formulaire">
+
+        <div class="rechercheButton">
+
             <button type="button" class="btn btn-default" ng-show="!test" ui-sref="{{vm.previousState}}">
                 <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
                 data-translate="entity.action.cancel">Cancel</span>
             </button>
+
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span
+                data-translate="entity.action.save">Save</span>
+            </button>
+
         </div>
 
         <!--sans père-->
@@ -744,12 +752,6 @@
                     </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span
-                        data-translate="entity.action.save">Save</span>
-                    </button>
-                </div>
             </div>
         </div>
 

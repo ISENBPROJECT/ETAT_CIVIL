@@ -17,7 +17,7 @@
                 "noFatherInformation":" ATTENTION L'ENFANT SERA DECLARE SANS PERE ."
             },
             "created": "Un nouvel Extrait a été créé avec l'identifiant {{ param }}",
-            "updated": "L'Extrait avec l'identifiant {{ param }} a été mis à jour",
+            "updated": "L'Extrait avec le numéro de registre {{ param }} a été mis à jour",
             "deleted": "L'Extrait avec l'identifiant {{ param }} a été supprimé",
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer l'Extrait {{ id }} ?"

@@ -100,7 +100,7 @@ public class DeclarationExtraitResource {
        }
 
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getNumeroRegistre()))
             .body(null);
     }
 

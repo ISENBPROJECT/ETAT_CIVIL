@@ -6,9 +6,9 @@
         .module('etatCivilApp')
         .controller('DeclarationNaissanceRechercheDetailController', DeclarationNaissanceRechercheDetailController);
 
-    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville'];
+    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville','$state'];
 
-    function DeclarationNaissanceRechercheDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville) {
+    function DeclarationNaissanceRechercheDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville,$state) {
 
         var vm = this;
         vm.declarationExtrait = entity;
@@ -66,11 +66,10 @@
             }
         };
         function onSaveSuccess(result) {
-            vm.isSaving = false;
+            $state.go('declaration-naissance-recherche');
         }
 
         function onSaveError() {
-            vm.isSaving = false;
         }
 
         function modifierVillePourSansPere() {
