@@ -46,4 +46,6 @@ public interface ExtraitService {
     Boolean findExistantExtrait(Long enfant, Long mere, Long pere);
 
     DeclarationExtraitRechercheDTO findExtraitById(Long id);
+
+    DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO);
 }

@@ -92,23 +92,13 @@ public class DeclarationExtraitResource {
      */
     @PutMapping("/declaration-extraits")
     @Timed
-    public ResponseEntity<DeclarationExtraitDTO> updateDeclarationExtrait(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
+    public ResponseEntity<DeclarationExtraitDTO> updateDeclarationExtrait(@RequestBody DeclarationExtraitRechercheDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to update DeclarationExtrait : {}", declarationExtraitDTO);
 
-        String acteToDelete = "";
-        String transcriptionToDelete = "";
+       if (null != declarationExtraitDTO){
+           DeclarationExtraitRechercheDTO declarationExtraitUpdatedDTO = declarationExtraitService.update(declarationExtraitDTO);
+       }
 
-        if (null != declarationExtraitDTO) {
-            transcriptionToDelete = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
-                + "_transcription_naissance.pdf";
-
-            acteToDelete = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
-                + "_acte_naissance.pdf";
-
-            declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);
-
-        }
-        assert declarationExtraitDTO != null;
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getId().toString()))
             .body(null);

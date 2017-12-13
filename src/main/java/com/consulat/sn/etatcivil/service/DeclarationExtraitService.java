@@ -30,7 +30,9 @@ public interface DeclarationExtraitService {
      */
     DeclarationExtraitRechercheDTO findOne(Long id);
 
-  /*  *//**
+    DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO);
+
+    /*  *//**
      * Get all the declarationExtraits.
      *
      * @return the list of entities

@@ -46,4 +46,5 @@ public interface PersonneService {
 
     Boolean isParentExist(DeclarationExtraitDTO declarationExtraitDTO, Date dateNaissance, String villeNaissance, String numeroIdentite);
 
+    PersonneDTO update(PersonneDTO enfantToUpdate);
 }

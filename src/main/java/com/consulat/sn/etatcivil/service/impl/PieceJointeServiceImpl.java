@@ -84,4 +84,11 @@ public class PieceJointeServiceImpl implements PieceJointeService{
         log.debug("Request to delete PieceJointe : {}", id);
         pieceJointeRepository.delete(id);
     }
+
+    @Override
+    public PieceJointeDTO update(PieceJointeDTO pieceJointeToUpdate) {
+        PieceJointe pieceJointe = pieceJointeMapper.toEntity(pieceJointeToUpdate);
+        pieceJointe = pieceJointeRepository.save(pieceJointe);
+        return pieceJointeMapper.toDto(pieceJointe);
+    }
 }

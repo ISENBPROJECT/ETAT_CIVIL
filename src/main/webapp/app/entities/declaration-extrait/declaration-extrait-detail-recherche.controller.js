@@ -24,7 +24,12 @@
         vm.pays = Pays.query();
         vm.dateformat = "dd-MM-yyyy";
         vm.previousState = previousState.name;
-
+        vm.dateNaissanceMereError = false;
+        vm.dateNaissanceMereEnfantInfDix = false;
+        vm.dateNaissancePereError = false;
+        vm.dateNaissancePlusCinquante = false;
+        vm.dateNaissanceEnfantErrorFutur = false;
+        vm.save = save;
 
         function openCalendar(date) {
             vm.datePickerOpenStatus[date] = true;
@@ -59,7 +64,97 @@
             } else {
                 DeclarationExtrait.save(vm.declarationExtrait, onSaveSuccess, onSaveError);
             }
+        };
+        function onSaveSuccess(result) {
+            vm.isSaving = false;
         }
+
+        function onSaveError() {
+            vm.isSaving = false;
+        }
+
+        function modifierVillePourSansPere() {
+
+            var villeInconnu;
+
+            vm.villes.forEach(function (ville) {
+                if (ville.nom == "Inconnu") {
+                    villeInconnu = ville;
+                }
+            });
+
+
+            vm.declarationExtrait.lieuNaissancePereId = villeInconnu,
+                vm.declarationExtrait.adressePereId = villeInconnu
+
+        };
+
+
+        //si l'année de naissance de la mere est inférieure à 10 ans,
+        // je l'empeche et j'annule la date car l'attribut du name n'est qu'en getter
+        function verifierSiMajeur() {
+
+            var dateNaissance = vm.declarationExtrait.dateNaissanceMere;
+            vm.declarationExtrait.dateNaissanceMereCache = vm.declarationExtrait.dateNaissanceMere;
+            var dateNaissanceEnfant = vm.declarationExtrait.dateNaissanceEnfant;
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceMere = new Date(dateNaissance).getFullYear();
+
+                if (todayTime - dateNaissanceMere < 10) {
+                    vm.dateNaissanceMereError = true;
+                    vm.declarationExtrait.dateNaissanceMereCache = null;
+                } else if (null != dateNaissanceEnfant && (new Date(dateNaissanceEnfant).getFullYear() - dateNaissanceMere) > 50) {
+                    vm.dateNaissancePlusCinquante = true;
+                } else if (null != dateNaissanceEnfant && (new Date(dateNaissanceEnfant).getFullYear() - dateNaissanceMere) < 10) {
+                    vm.dateNaissanceMereEnfantInfDix = true;
+                }
+
+                else {
+                    vm.dateNaissanceMereError = false;
+                    vm.dateNaissancePlusCinquante = false;
+                    vm.dateNaissanceMereEnfantInfDix = false;
+                }
+            }
+        }
+
+        function verifierSiPereMajeur() {
+
+            var dateNaissance = vm.declarationExtrait.dateNaissancePere;
+
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+
+                if (todayTime - dateNaissanceTime < 10) {
+                    vm.dateNaissancePereError = true;
+                    vm.declarationExtrait.dateNaissancePere = null;
+                } else {
+                    vm.dateNaissancePereError = false;
+                }
+
+            }
+        };
+
+        function dateNaissanceEnfantFutur() {
+            var dateNaissance = vm.declarationExtrait.dateNaissanceEnfant;
+
+            if (null != dateNaissance) {
+                var today = new Date();
+                var todayTime = today.getFullYear();
+                var dateNaissanceTime = new Date(dateNaissance).getFullYear();
+
+                if (todayTime < dateNaissanceTime) {
+                    vm.dateNaissanceEnfantErrorFutur = true;
+                    vm.declarationExtrait.dateNaissanceEnfant = null;
+                } else {
+                    vm.dateNaissanceEnfantErrorFutur = false;
+                }
+                verifierSiMajeur();
+            }
+        };
 
     }
 })();

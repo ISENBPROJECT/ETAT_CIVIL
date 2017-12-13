@@ -221,4 +221,9 @@ public class ExtraitServiceImpl implements ExtraitService {
         return declarationExtraitMapper.toEntity(extrait);
     }
 
+    @Override
+    public DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO) {
+        return null;
+    }
+
 }

@@ -114,6 +114,13 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
+    public PersonneDTO update(PersonneDTO enfantToUpdate) {
+        Personne personne = personneMapper.toEntity(enfantToUpdate);
+        personne = personneRepository.save(personne);
+        return personneMapper.toDto(personne);
+    }
+
+    @Override
     public PersonneDTO finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance) {
 
         Personne personne = personneRepository.findByNomAndPrenomAndDateNaissance(nom, prenom, dateNaissance);

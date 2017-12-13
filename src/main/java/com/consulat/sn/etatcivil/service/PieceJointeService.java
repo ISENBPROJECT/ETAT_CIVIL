@@ -37,4 +37,6 @@ public interface PieceJointeService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    PieceJointeDTO update(PieceJointeDTO pieceJointeToUpdate);
 }

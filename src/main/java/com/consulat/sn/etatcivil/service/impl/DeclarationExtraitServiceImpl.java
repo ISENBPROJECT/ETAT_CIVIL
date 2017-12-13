@@ -27,10 +27,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Service Implementation for managing DeclarationExtrait.
@@ -471,8 +468,72 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public DeclarationExtraitRechercheDTO findOne(Long id) {
         log.debug("Request to get DeclarationExtrait : {}", id);
         DeclarationExtraitRechercheDTO extrait = extraitService.findExtraitById(id);
-
+        extrait.setAgent(null);
         return extrait;
+    }
+
+    @Override
+    public DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO) {
+
+        DeclarationExtraitRechercheDTO declarationExtraitUpdatedDTO = new DeclarationExtraitRechercheDTO();
+
+        PersonneDTO enfantToUpdate = personneService.findOne(declarationExtraitDTO.getEnfant().getId());
+        PersonneDTO mereToUpdate = personneService.findOne(declarationExtraitDTO.getMere().getId());
+        PersonneDTO pereToUpdate = personneService.findOne(declarationExtraitDTO.getPere().getId());
+
+        Set<PieceJointeDTO> piecesJointes = declarationExtraitDTO.getPiecesJointes();
+        for (PieceJointeDTO pieceJointe : piecesJointes) {
+            PieceJointeDTO pieceJointeToUpdate = pieceJointeService.findOne(pieceJointe.getId());
+
+            pieceJointeToUpdate.setCopieCarte(pieceJointe.getCopieCarte());
+            pieceJointeToUpdate.setCopieCarteContentType(pieceJointe.getCopieCarteContentType());
+
+            pieceJointeToUpdate.setCopieLiterale(pieceJointe.getCopieLiterale());
+            pieceJointeToUpdate.setCopieLiteraleContentType(pieceJointe.getCopieLiteraleContentType());
+
+            pieceJointeService.update(pieceJointeToUpdate);
+        }
+
+        //modif enfant
+        enfantToUpdate.setNom(declarationExtraitDTO.getEnfant().getNom());
+        enfantToUpdate.setPrenom(declarationExtraitDTO.getEnfant().getPrenom());
+        enfantToUpdate.setDateNaissance(declarationExtraitDTO.getEnfant().getDateNaissance());
+        enfantToUpdate.setGenre(declarationExtraitDTO.getEnfant().getGenre());
+
+        mereToUpdate.setNom(declarationExtraitDTO.getMere().getNom());
+        mereToUpdate.setPrenom(declarationExtraitDTO.getMere().getPrenom());
+        mereToUpdate.setDateNaissance(declarationExtraitDTO.getMere().getDateNaissance());
+        mereToUpdate.setNumeroPassport(declarationExtraitDTO.getMere().getNumeroPassport());
+        mereToUpdate.setFonction(declarationExtraitDTO.getMere().getFonction());
+        /*mereToUpdate.setAdresseId(villeResidenceMere.getId());
+        mereToUpdate.setLieuNaissanceId(lieuNaissanceMere.getId());
+        mereToUpdate.setPaysResidence(paysResidencePere.getNom());
+        mereToUpdate.setPaysNaissance(paysNaissanceMere.getNom());
+        mereToUpdate.setVilleNaissance(lieuNaissanceMere.getNom());
+        mereToUpdate.setVilleResidence(villeResidenceMere.getNom());*/
+
+
+        pereToUpdate.setNom(declarationExtraitDTO.getPere().getNom());
+        pereToUpdate.setPrenom(declarationExtraitDTO.getMere().getPrenom());
+        pereToUpdate.setDateNaissance(declarationExtraitDTO.getMere().getDateNaissance());
+        pereToUpdate.setFonction(declarationExtraitDTO.getMere().getFonction());
+
+        /*pereToUpdate.setAdresseId(villeResidencePere.getId());
+        pereToUpdate.setLieuNaissanceId(lieuNaissancePere.getId());
+        pereToUpdate.setPaysResidence(paysResidencePere.getNom());
+        pereToUpdate.setPaysNaissance(paysNaissancePere.getNom());
+        pereToUpdate.setVilleNaissance(lieuNaissancePere.getNom());
+        pereToUpdate.setVilleResidence(villeResidencePere.getNom());*/
+
+       enfantToUpdate = personneService.update(enfantToUpdate);
+       mereToUpdate = personneService.update(mereToUpdate);
+       pereToUpdate = personneService.update(pereToUpdate);
+
+        declarationExtraitUpdatedDTO.setEnfant(enfantToUpdate);
+        declarationExtraitUpdatedDTO.setMere(mereToUpdate);
+       declarationExtraitUpdatedDTO.setPere(pereToUpdate);
+
+        return declarationExtraitUpdatedDTO;
     }
     /*
      *//**
