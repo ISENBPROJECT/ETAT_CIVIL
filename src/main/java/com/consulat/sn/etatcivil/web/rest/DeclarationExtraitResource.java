@@ -96,7 +96,7 @@ public class DeclarationExtraitResource {
         log.debug("REST request to update DeclarationExtrait : {}", declarationExtraitDTO);
 
        if (null != declarationExtraitDTO){
-           DeclarationExtraitRechercheDTO declarationExtraitUpdatedDTO = declarationExtraitService.update(declarationExtraitDTO);
+          declarationExtraitService.update(declarationExtraitDTO);
        }
 
         return ResponseEntity.ok()
