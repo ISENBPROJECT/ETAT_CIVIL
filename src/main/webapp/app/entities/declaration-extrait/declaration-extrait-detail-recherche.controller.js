@@ -6,9 +6,9 @@
         .module('etatCivilApp')
         .controller('DeclarationNaissanceRechercheDetailController', DeclarationNaissanceRechercheDetailController);
 
-    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville','$state'];
+    DeclarationNaissanceRechercheDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'DeclarationExtrait', 'Pays', 'Ville', '$state', 'DeclarationRecherche', 'DeclarationPrint'];
 
-    function DeclarationNaissanceRechercheDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville,$state) {
+    function DeclarationNaissanceRechercheDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, DeclarationExtrait, Pays, Ville, $state, DeclarationRecherche, DeclarationPrint) {
 
         var vm = this;
         vm.declarationExtrait = entity;
@@ -30,6 +30,7 @@
         vm.dateNaissancePlusCinquante = false;
         vm.dateNaissanceEnfantErrorFutur = false;
         vm.save = save;
+        vm.printExtrait = printExtrait;
 
         function openCalendar(date) {
             vm.datePickerOpenStatus[date] = true;
@@ -37,8 +38,8 @@
 
         vm.setCopieLiterale = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
+                DataUtils.toBase64($file, function (base64Data) {
+                    $scope.$apply(function () {
                         declarationExtrait.piecesJointes[0].copieLiterale = base64Data;
                         declarationExtrait.piecesJointes[0].copieLiteraleContentType = $file.type;
                     });
@@ -48,8 +49,8 @@
 
         vm.setCopieCarte = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
+                DataUtils.toBase64($file, function (base64Data) {
+                    $scope.$apply(function () {
                         declarationExtrait.piecesJointes[0].copieCarte = base64Data;
                         declarationExtrait.piecesJointes[0].copieCarteContentType = $file.type;
                     });
@@ -57,7 +58,7 @@
             }
         };
 
-        function save () {
+        function save() {
             vm.isSaving = true;
             if (vm.declarationExtrait.id !== null) {
                 DeclarationExtrait.update(vm.declarationExtrait, onSaveSuccess, onSaveError);
@@ -65,6 +66,7 @@
                 DeclarationExtrait.save(vm.declarationExtrait, onSaveSuccess, onSaveError);
             }
         };
+
         function onSaveSuccess(result) {
             $state.go('declaration-naissance-recherche');
         }
@@ -154,6 +156,34 @@
                 verifierSiMajeur();
             }
         };
+
+
+        function printExtrait(idExtrait) {
+
+            var dataSearch = {
+                id: idExtrait
+            };
+            DeclarationPrint.print(dataSearch,
+                onSuccess, onError);
+
+        }
+
+        function onSuccess(data, headers) {
+           ouvrirActeNaissancePopup(data.nomExtrait)
+        }
+
+        function onError() {
+
+        }
+
+        function ouvrirActeNaissancePopup(nomExtrait) {
+            console.log(nomExtrait);
+            var fichier = 'app/documents/' + nomExtrait;
+            console.log(fichier);
+
+            window.open(fichier, "popup", "width=900,height=600")
+        }
+
 
     }
 })();

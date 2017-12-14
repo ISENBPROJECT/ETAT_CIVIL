@@ -321,7 +321,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         pieceJointeService.save(pieceJointeDTO);
     }
 
-
+    @Override
     public String printExtraitNaissance(Long idExtrait) {
 
         ExtraitDTO extraitDTO = extraitService.findOne(idExtrait);
@@ -522,14 +522,15 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleNaissance(), paysNaissancePere);
         VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleResidence(), paysResidencePere);
 
-        if (null != paysNaissanceEnfant) {
-        /*mereToUpdate.setAdresseId(villeResidenceMere.getId());
+        enfantToUpdate.setLieuNaissanceId(lieuNaissanceEnfant.getId());
+        enfantToUpdate.setVilleNaissance(lieuNaissanceEnfant.getNom());
+
+        mereToUpdate.setAdresseId(villeResidenceMere.getId());
         mereToUpdate.setLieuNaissanceId(lieuNaissanceMere.getId());
         mereToUpdate.setPaysResidence(paysResidencePere.getNom());
         mereToUpdate.setPaysNaissance(paysNaissanceMere.getNom());
         mereToUpdate.setVilleNaissance(lieuNaissanceMere.getNom());
-        mereToUpdate.setVilleResidence(villeResidenceMere.getNom());*/
-        }
+        mereToUpdate.setVilleResidence(villeResidenceMere.getNom());
 
 
         pereToUpdate.setNom(declarationExtraitDTO.getPere().getNom());
@@ -537,12 +538,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         pereToUpdate.setDateNaissance(declarationExtraitDTO.getMere().getDateNaissance());
         pereToUpdate.setFonction(declarationExtraitDTO.getMere().getFonction());
 
-        /*pereToUpdate.setAdresseId(villeResidencePere.getId());
+        pereToUpdate.setAdresseId(villeResidencePere.getId());
         pereToUpdate.setLieuNaissanceId(lieuNaissancePere.getId());
         pereToUpdate.setPaysResidence(paysResidencePere.getNom());
         pereToUpdate.setPaysNaissance(paysNaissancePere.getNom());
         pereToUpdate.setVilleNaissance(lieuNaissancePere.getNom());
-        pereToUpdate.setVilleResidence(villeResidencePere.getNom());*/
+        pereToUpdate.setVilleResidence(villeResidencePere.getNom());
 
         enfantToUpdate = personneService.update(enfantToUpdate);
         mereToUpdate = personneService.update(mereToUpdate);

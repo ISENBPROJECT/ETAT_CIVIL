@@ -31,35 +31,5 @@ public interface DeclarationExtraitService {
     DeclarationExtraitRechercheDTO findOne(Long id);
 
     DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO);
-
-    /*  *//**
-     * Get all the declarationExtraits.
-     *
-     * @return the list of entities
-     *//*
-    List<DeclarationExtraitDTO> findAll();
-
-    *//**
-     * Get the "id" declarationExtrait.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     *//*
-    DeclarationExtraitDTO findOne(Long id);
-
-    *//**
-     * Delete the "id" declarationExtrait.
-     *
-     * @param id the id of the entity
-     *//*
-    void delete(Long id);
-
-    *//**
-     * Search for the declarationExtrait corresponding to the query.
-     *
-     * @param query the query of the search
-     * @return the list of entities
-     *//*
-    List<DeclarationExtraitDTO> search(String query);
-*/
+    String printExtraitNaissance(Long idExtrait);
 }

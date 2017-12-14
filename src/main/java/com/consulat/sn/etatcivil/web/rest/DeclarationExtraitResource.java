@@ -95,9 +95,9 @@ public class DeclarationExtraitResource {
     public ResponseEntity<DeclarationExtraitDTO> updateDeclarationExtrait(@RequestBody DeclarationExtraitRechercheDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to update DeclarationExtrait : {}", declarationExtraitDTO);
 
-       if (null != declarationExtraitDTO){
-          declarationExtraitService.update(declarationExtraitDTO);
-       }
+        if (null != declarationExtraitDTO) {
+            declarationExtraitService.update(declarationExtraitDTO);
+        }
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, declarationExtraitDTO.getNumeroRegistre()))
@@ -118,15 +118,29 @@ public class DeclarationExtraitResource {
     /**
      * GET  /declaration-extraits/:id : get the "id" declarationExtrait.
      *
-         * @param id the id of the declarationExtraitDTO to retrieve
+     * @param id the id of the declarationExtraitDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the declarationExtraitDTO, or with status 404 (Not Found)
-        */
+     */
     @GetMapping("/declaration-extraits/{id}")
     @Timed
     public ResponseEntity<DeclarationExtraitRechercheDTO> getDeclarationExtrait(@PathVariable Long id) {
         log.debug("REST request to get DeclarationExtrait : {}", id);
         DeclarationExtraitRechercheDTO declarationExtraitDTO = declarationExtraitService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(declarationExtraitDTO));
+    }
+
+    @RequestMapping(value = "/declaration-extraits-print", method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public DeclarationExtraitRechercheDTO printDeclarationPrint(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) {
+        log.debug("REST request to search DeclarationNaissance");
+        String nomFichier = "";
+        DeclarationExtraitRechercheDTO extrait = new DeclarationExtraitRechercheDTO();
+        if (null != declarationExtraitDTO) {
+            nomFichier = declarationExtraitService.printExtraitNaissance(declarationExtraitDTO.getId());
+            extrait.setNomExtrait(nomFichier);
+        }
+        return extrait;
     }
 
     /* *//**
@@ -182,17 +196,5 @@ public class DeclarationExtraitResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(declarationExtraitDTO));
     }
 
-    *//**
-     * SEARCH  /_search/declaration-extraits?query=:query : search for the declarationExtrait corresponding
-     * to the query.
-     *
-     * @param query the query of the declarationExtrait search
-     * @return the result of the search
-     *//*
-    @GetMapping("/_search/declaration-extraits")
-    @Timed
-    public List<DeclarationExtraitDTO> searchDeclarationExtraits(@RequestParam String query) {
-        log.debug("REST request to search DeclarationExtraits for query {}", query);
-        return declarationExtraitService.search(query);
-    }*/
+    */
 }
