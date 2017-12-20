@@ -365,7 +365,7 @@
                                    for="field_numeroIdentiteMere">Numero Identite Mere</label>
                             <input type="text" class="form-control" name="numeroIdentiteMere"
                                    id="field_numeroIdentiteMere"
-                                   ng-model="vm.declarationExtrait.mere.numeroIdentite"
+                                   ng-model="vm.declarationExtrait.mere.numeroCarteIdentite"
                             />
                         </div>
                         <div class="form-group">
@@ -565,7 +565,7 @@
                                        for="field_numeroIdentitePere">Numero Identite Pere</label>
                                 <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
                                        name="numeroIdentitePere" id="field_numeroIdentitePere"
-                                       ng-model="vm.declarationExtrait.pere.numeroIdentitePere"/>
+                                       ng-model="vm.declarationExtrait.pere.numeroCarteIdentite"/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label"
@@ -573,7 +573,7 @@
                                        for="field_numeroPassportPere">Numero Passport Pere</label>
                                 <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
                                        name="numeroPassportPere" id="field_numeroPassportPere"
-                                       ng-model="vm.declarationExtrait.pere.numeroPassportPere"
+                                       ng-model="vm.declarationExtrait.pere.numeroPassport"
                                 />
                             </div>
                         </div>
