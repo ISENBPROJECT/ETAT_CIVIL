@@ -101,8 +101,8 @@ jhipster:
             # security key (this key should be unique for your application, and kept secret)
             key: 2c4978b6460f9e2b8a3976b87498f974a97cdef9
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: ETAT_CIVIL@localhost
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
+        from: consulatsenegalbordeaux@gmail.com
+        base-url: http://192.168.1.1:8080 # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:

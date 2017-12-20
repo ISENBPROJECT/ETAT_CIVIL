@@ -110,8 +110,8 @@ jhipster:
             # security key (this key should be unique for your application, and kept secret)
             key: 2c4978b6460f9e2b8a3976b87498f974a97cdef9
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: ETAT_CIVIL@localhost
-        base-url: http://192.168.1.61:8080
+        from: consulatsenegalbordeaux@gmail.com
+        base-url: http://192.168.1.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite: # Use the "graphite" Maven profile to have the Graphite dependencies
