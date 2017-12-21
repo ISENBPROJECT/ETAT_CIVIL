@@ -534,9 +534,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
 
         pereToUpdate.setNom(declarationExtraitDTO.getPere().getNom());
-        pereToUpdate.setPrenom(declarationExtraitDTO.getMere().getPrenom());
-        pereToUpdate.setDateNaissance(declarationExtraitDTO.getMere().getDateNaissance());
-        pereToUpdate.setFonction(declarationExtraitDTO.getMere().getFonction());
+        pereToUpdate.setPrenom(declarationExtraitDTO.getPere().getPrenom());
+        pereToUpdate.setDateNaissance(declarationExtraitDTO.getPere().getDateNaissance());
+        pereToUpdate.setFonction(declarationExtraitDTO.getPere().getFonction());
+        pereToUpdate.setNumeroCarteIdentite(declarationExtraitDTO.getPere().getNumeroCarteIdentite());
+        pereToUpdate.setNumeroPassport(declarationExtraitDTO.getPere().getNumeroPassport());
 
         pereToUpdate.setAdresseId(villeResidencePere.getId());
         pereToUpdate.setLieuNaissanceId(lieuNaissancePere.getId());
@@ -544,6 +546,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         pereToUpdate.setPaysNaissance(paysNaissancePere.getNom());
         pereToUpdate.setVilleNaissance(lieuNaissancePere.getNom());
         pereToUpdate.setVilleResidence(villeResidencePere.getNom());
+        mereToUpdate.setNumeroCarteIdentite(declarationExtraitDTO.getMere().getNumeroCarteIdentite());
+        mereToUpdate.setNumeroPassport(declarationExtraitDTO.getMere().getNumeroPassport());
 
         enfantToUpdate = personneService.update(enfantToUpdate);
         mereToUpdate = personneService.update(mereToUpdate);
