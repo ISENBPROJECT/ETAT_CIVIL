@@ -43,6 +43,13 @@ public class DeclarationExtraitRechercheDTO implements Serializable {
 
     private UserDTO agent;
 
+    private String adresseComplMere;
+    private String adresseComplPere;
+
+    private String numeroIdentiteMere;
+
+    private String numeroPassportMere;
+
     private Set<PieceJointeDTO> piecesJointes= new HashSet<>();
 
     private String nomExtrait;
@@ -141,5 +148,37 @@ public class DeclarationExtraitRechercheDTO implements Serializable {
 
     public void setNomExtrait(String nomExtrait) {
         this.nomExtrait = nomExtrait;
+    }
+
+    public String getAdresseComplMere() {
+        return adresseComplMere;
+    }
+
+    public void setAdresseComplMere(String adresseComplMere) {
+        this.adresseComplMere = adresseComplMere;
+    }
+
+    public String getNumeroIdentiteMere() {
+        return numeroIdentiteMere;
+    }
+
+    public void setNumeroIdentiteMere(String numeroIdentiteMere) {
+        this.numeroIdentiteMere = numeroIdentiteMere;
+    }
+
+    public String getNumeroPassportMere() {
+        return numeroPassportMere;
+    }
+
+    public void setNumeroPassportMere(String numeroPassportMere) {
+        this.numeroPassportMere = numeroPassportMere;
+    }
+
+    public String getAdresseComplPere() {
+        return adresseComplPere;
+    }
+
+    public void setAdresseComplPere(String adresseComplPere) {
+        this.adresseComplPere = adresseComplPere;
     }
 }

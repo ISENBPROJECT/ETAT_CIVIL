@@ -66,6 +66,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="adresse_compl" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="adresse_id" type="bigint">
                 <constraints nullable="false" />
             </column>

@@ -45,6 +45,8 @@ public class PersonneDTO implements Serializable {
     @NotNull
     private String villeResidence;
 
+    private String adresseCompl;
+
     private Long adresseId;
 
     private Long pereId;
@@ -179,6 +181,14 @@ public class PersonneDTO implements Serializable {
 
     public void setLieuNaissanceId(Long villeId) {
         this.lieuNaissanceId = villeId;
+    }
+
+    public String getAdresseCompl() {
+        return adresseCompl;
+    }
+
+    public void setAdresseCompl(String adresseCompl) {
+        this.adresseCompl = adresseCompl;
     }
 
     @Override

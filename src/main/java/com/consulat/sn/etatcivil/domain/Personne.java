@@ -1,28 +1,21 @@
 package com.consulat.sn.etatcivil.domain;
 
-import com.consulat.sn.etatcivil.domain.enumeration.Genre;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import com.consulat.sn.etatcivil.domain.enumeration.Genre;
 
 /**
  * A Personne.
  */
 @Entity
 @Table(name = "personne")
-@NamedQueries({
-    @NamedQuery(name = "Personne.isPersonneExist",
-        query = "SELECT parent FROM Personne parent where parent.nom = :nom and " +
-            "parent.prenom =  :prenom and parent.dateNaissance = :dateNaissance and " +
-            "parent.villeNaissance = :villeNaissance and" +
-            " parent.numeroCarteIdentite = :numeroCarteIdentite")
-
-})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Personne implements Serializable {
 
@@ -72,6 +65,9 @@ public class Personne implements Serializable {
     @NotNull
     @Column(name = "ville_residence", nullable = false)
     private String villeResidence;
+
+    @Column(name = "adresse_compl")
+    private String adresseCompl;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -238,6 +234,19 @@ public class Personne implements Serializable {
         this.villeResidence = villeResidence;
     }
 
+    public String getAdresseCompl() {
+        return adresseCompl;
+    }
+
+    public Personne adresseCompl(String adresseCompl) {
+        this.adresseCompl = adresseCompl;
+        return this;
+    }
+
+    public void setAdresseCompl(String adresseCompl) {
+        this.adresseCompl = adresseCompl;
+    }
+
     public Ville getAdresse() {
         return adresse;
     }
@@ -325,6 +334,7 @@ public class Personne implements Serializable {
             ", villeNaissance='" + getVilleNaissance() + "'" +
             ", paysResidence='" + getPaysResidence() + "'" +
             ", villeResidence='" + getVilleResidence() + "'" +
+            ", adresseCompl='" + getAdresseCompl() + "'" +
             "}";
     }
 }

@@ -78,6 +78,9 @@ public class PersonneResourceIntTest {
     private static final String DEFAULT_VILLE_RESIDENCE = "AAAAAAAAAA";
     private static final String UPDATED_VILLE_RESIDENCE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ADRESSE_COMPL = "AAAAAAAAAA";
+    private static final String UPDATED_ADRESSE_COMPL = "BBBBBBBBBB";
+
     @Autowired
     private PersonneRepository personneRepository;
 
@@ -131,7 +134,8 @@ public class PersonneResourceIntTest {
             .paysNaissance(DEFAULT_PAYS_NAISSANCE)
             .villeNaissance(DEFAULT_VILLE_NAISSANCE)
             .paysResidence(DEFAULT_PAYS_RESIDENCE)
-            .villeResidence(DEFAULT_VILLE_RESIDENCE);
+            .villeResidence(DEFAULT_VILLE_RESIDENCE)
+            .adresseCompl(DEFAULT_ADRESSE_COMPL);
         // Add required entity
         Ville adresse = VilleResourceIntTest.createEntity(em);
         em.persist(adresse);
@@ -177,6 +181,7 @@ public class PersonneResourceIntTest {
         assertThat(testPersonne.getVilleNaissance()).isEqualTo(DEFAULT_VILLE_NAISSANCE);
         assertThat(testPersonne.getPaysResidence()).isEqualTo(DEFAULT_PAYS_RESIDENCE);
         assertThat(testPersonne.getVilleResidence()).isEqualTo(DEFAULT_VILLE_RESIDENCE);
+        assertThat(testPersonne.getAdresseCompl()).isEqualTo(DEFAULT_ADRESSE_COMPL);
     }
 
     @Test
@@ -353,7 +358,8 @@ public class PersonneResourceIntTest {
             .andExpect(jsonPath("$.[*].paysNaissance").value(hasItem(DEFAULT_PAYS_NAISSANCE.toString())))
             .andExpect(jsonPath("$.[*].villeNaissance").value(hasItem(DEFAULT_VILLE_NAISSANCE.toString())))
             .andExpect(jsonPath("$.[*].paysResidence").value(hasItem(DEFAULT_PAYS_RESIDENCE.toString())))
-            .andExpect(jsonPath("$.[*].villeResidence").value(hasItem(DEFAULT_VILLE_RESIDENCE.toString())));
+            .andExpect(jsonPath("$.[*].villeResidence").value(hasItem(DEFAULT_VILLE_RESIDENCE.toString())))
+            .andExpect(jsonPath("$.[*].adresseCompl").value(hasItem(DEFAULT_ADRESSE_COMPL.toString())));
     }
 
     @Test
@@ -377,7 +383,8 @@ public class PersonneResourceIntTest {
             .andExpect(jsonPath("$.paysNaissance").value(DEFAULT_PAYS_NAISSANCE.toString()))
             .andExpect(jsonPath("$.villeNaissance").value(DEFAULT_VILLE_NAISSANCE.toString()))
             .andExpect(jsonPath("$.paysResidence").value(DEFAULT_PAYS_RESIDENCE.toString()))
-            .andExpect(jsonPath("$.villeResidence").value(DEFAULT_VILLE_RESIDENCE.toString()));
+            .andExpect(jsonPath("$.villeResidence").value(DEFAULT_VILLE_RESIDENCE.toString()))
+            .andExpect(jsonPath("$.adresseCompl").value(DEFAULT_ADRESSE_COMPL.toString()));
     }
 
     @Test
@@ -408,7 +415,8 @@ public class PersonneResourceIntTest {
             .paysNaissance(UPDATED_PAYS_NAISSANCE)
             .villeNaissance(UPDATED_VILLE_NAISSANCE)
             .paysResidence(UPDATED_PAYS_RESIDENCE)
-            .villeResidence(UPDATED_VILLE_RESIDENCE);
+            .villeResidence(UPDATED_VILLE_RESIDENCE)
+            .adresseCompl(UPDATED_ADRESSE_COMPL);
         PersonneDTO personneDTO = personneMapper.toDto(updatedPersonne);
 
         restPersonneMockMvc.perform(put("/api/personnes")
@@ -431,6 +439,7 @@ public class PersonneResourceIntTest {
         assertThat(testPersonne.getVilleNaissance()).isEqualTo(UPDATED_VILLE_NAISSANCE);
         assertThat(testPersonne.getPaysResidence()).isEqualTo(UPDATED_PAYS_RESIDENCE);
         assertThat(testPersonne.getVilleResidence()).isEqualTo(UPDATED_VILLE_RESIDENCE);
+        assertThat(testPersonne.getAdresseCompl()).isEqualTo(UPDATED_ADRESSE_COMPL);
     }
 
     @Test

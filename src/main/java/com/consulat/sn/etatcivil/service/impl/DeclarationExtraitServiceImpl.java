@@ -93,7 +93,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             extraitDTO.setEnfantId(enfantId);
             extraitDTO.setValidated(false);
             PaysDTO paysDeclarationDto = paysService.findByNom(declarationExtraitDTO.getLieuDeclaration());
-            VilleDTO lieuDeclarationDto = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuDeclaration(), paysDeclarationDto);
+            VilleDTO lieuDeclarationDto = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuDeclaration(), paysDeclarationDto, null);
             extraitDTO.setLieuDeclarationId(lieuDeclarationDto.getId());
             extraitDTO.setAgentId(getCurrentUserId());
 
@@ -239,13 +239,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         PaysDTO paysNaissancePere = paysService.findByNom(declarationExtraitDTO.getPaysNaissancePere());
         PaysDTO paysResidencePere = paysService.findByNom(declarationExtraitDTO.getPaysResidencePere());
 
-        VilleDTO lieuNaissanceEnfant = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceEnfant(), paysNaissanceEnfant);
+        VilleDTO lieuNaissanceEnfant = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceEnfant(), paysNaissanceEnfant, null);
 
-        VilleDTO lieuNaissanceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceMere(), paysNaissanceMere);
-        VilleDTO villeResidenceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidenceMere(), paysResidenceMere);
+        VilleDTO lieuNaissanceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissanceMere(), paysNaissanceMere, null);
+        VilleDTO villeResidenceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidenceMere(), paysResidenceMere, declarationExtraitDTO.getAdresseComplMere());
 
-        VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissancePere(), paysNaissancePere);
-        VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidencePere(), paysResidencePere);
+        VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuNaissancePere(), paysNaissancePere, null);
+        VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getLieuResidencePere(), paysResidencePere, declarationExtraitDTO.getAdresseComplPere());
 
         if (null != lieuNaissanceEnfant.getId()) {
             enfant.setLieuNaissanceId(lieuNaissanceEnfant.getId());
@@ -265,6 +265,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         mere.setPrenom(declarationExtraitDTO.getPrenomMere());
         mere.setDateNaissance(declarationExtraitDTO.getDateNaissanceMere());
         mere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportMere());
+        mere.setNumeroCarteIdentite(declarationExtraitDTO.getNumeroIdentiteMere());
         mere.setGenre(Genre.FEMININ);
         mere.setAdresseId(villeResidenceMere.getId());
         mere.setFonction(declarationExtraitDTO.getFonctionMere());
@@ -273,11 +274,14 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         mere.setPaysNaissance(paysNaissanceMere.getNom());
         mere.setVilleNaissance(lieuNaissanceMere.getNom());
         mere.setVilleResidence(villeResidenceMere.getNom());
+        mere.setAdresseCompl(declarationExtraitDTO.getAdresseComplMere());
 
 
         pere.setNom(declarationExtraitDTO.getNomPere());
         pere.setPrenom(declarationExtraitDTO.getPrenomPere());
         pere.setDateNaissance(declarationExtraitDTO.getDateNaissancePere());
+        pere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportPere());
+        pere.setNumeroCarteIdentite(declarationExtraitDTO.getNumeroIdentitePere());
         pere.setGenre(Genre.MASCULIN);
         pere.setAdresseId(villeResidencePere.getId());
         pere.setFonction(declarationExtraitDTO.getFonctionPere());
@@ -286,6 +290,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         pere.setPaysNaissance(paysNaissancePere.getNom());
         pere.setVilleNaissance(lieuNaissancePere.getNom());
         pere.setVilleResidence(villeResidencePere.getNom());
+        pere.setAdresseCompl(declarationExtraitDTO.getAdresseComplPere());
 
         pere = personneService.save(pere);
 
@@ -503,6 +508,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         mereToUpdate.setPrenom(declarationExtraitDTO.getMere().getPrenom());
         mereToUpdate.setDateNaissance(declarationExtraitDTO.getMere().getDateNaissance());
         mereToUpdate.setNumeroPassport(declarationExtraitDTO.getMere().getNumeroPassport());
+        mereToUpdate.setNumeroCarteIdentite(declarationExtraitDTO.getMere().getNumeroCarteIdentite());
         mereToUpdate.setFonction(declarationExtraitDTO.getMere().getFonction());
 
         //je verifie si le pays existe sinon je le crée
@@ -514,13 +520,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         PaysDTO paysNaissancePere = paysService.findByNom(declarationExtraitDTO.getPere().getPaysNaissance());
         PaysDTO paysResidencePere = paysService.findByNom(declarationExtraitDTO.getPere().getPaysResidence());
 
-        VilleDTO lieuNaissanceEnfant = villeService.findByNomAndPaysId(declarationExtraitDTO.getEnfant().getVilleNaissance(), paysNaissanceEnfant);
+        VilleDTO lieuNaissanceEnfant = villeService.findByNomAndPaysId(declarationExtraitDTO.getEnfant().getVilleNaissance(), paysNaissanceEnfant, null);
 
-        VilleDTO lieuNaissanceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getMere().getVilleNaissance(), paysNaissanceMere);
-        VilleDTO villeResidenceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getMere().getVilleResidence(), paysResidenceMere);
+        VilleDTO lieuNaissanceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getMere().getVilleNaissance(), paysNaissanceMere, null);
+        VilleDTO villeResidenceMere = villeService.findByNomAndPaysId(declarationExtraitDTO.getMere().getVilleResidence(), paysResidenceMere, declarationExtraitDTO.getAdresseComplMere());
 
-        VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleNaissance(), paysNaissancePere);
-        VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleResidence(), paysResidencePere);
+        VilleDTO lieuNaissancePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleNaissance(), paysNaissancePere, null);
+        VilleDTO villeResidencePere = villeService.findByNomAndPaysId(declarationExtraitDTO.getPere().getVilleResidence(), paysResidencePere, declarationExtraitDTO.getAdresseComplPere());
 
         enfantToUpdate.setLieuNaissanceId(lieuNaissanceEnfant.getId());
         enfantToUpdate.setVilleNaissance(lieuNaissanceEnfant.getNom());
@@ -546,8 +552,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         pereToUpdate.setPaysNaissance(paysNaissancePere.getNom());
         pereToUpdate.setVilleNaissance(lieuNaissancePere.getNom());
         pereToUpdate.setVilleResidence(villeResidencePere.getNom());
-        mereToUpdate.setNumeroCarteIdentite(declarationExtraitDTO.getMere().getNumeroCarteIdentite());
-        mereToUpdate.setNumeroPassport(declarationExtraitDTO.getMere().getNumeroPassport());
 
         enfantToUpdate = personneService.update(enfantToUpdate);
         mereToUpdate = personneService.update(mereToUpdate);

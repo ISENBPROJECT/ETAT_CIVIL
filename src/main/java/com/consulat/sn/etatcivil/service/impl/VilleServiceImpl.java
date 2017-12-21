@@ -97,7 +97,7 @@ public class VilleServiceImpl implements VilleService {
     }
 
     @Override
-    public VilleDTO findByNomAndPaysId(String villeNaissance, PaysDTO paysNaissanceDTO) {
+    public VilleDTO findByNomAndPaysId(String villeNaissance, PaysDTO paysNaissanceDTO, String adressCompl) {
 
         log.debug("Request to get Ville : {}", villeNaissance, paysNaissanceDTO.getNom());
         Ville ville = villeRepository.findByNomAndPaysId(villeNaissance, paysNaissanceDTO.getId());

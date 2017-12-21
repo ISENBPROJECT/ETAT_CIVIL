@@ -18,8 +18,8 @@
         }
     ],
     "changelogDate": "20170702122635",
-    "entityTableName": "ville",
     "dto": "mapstruct",
-    "pagination": "no",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "ville",
+    "pagination": "no"
 }

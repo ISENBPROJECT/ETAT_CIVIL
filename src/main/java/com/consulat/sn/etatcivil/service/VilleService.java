@@ -41,5 +41,5 @@ public interface VilleService {
 
     VilleDTO findByNom(String lieuNaissanceEnfant);
 
-    VilleDTO findByNomAndPaysId(String lieuNaissanceEnfant, PaysDTO paysDTO);
+    VilleDTO findByNomAndPaysId(String lieuNaissanceEnfant, PaysDTO paysDTO, String adressCompl);
 }

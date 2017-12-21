@@ -94,11 +94,15 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "adresseCompl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170702122636",
-    "entityTableName": "personne",
     "dto": "mapstruct",
-    "pagination": "no",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "personne",
+    "pagination": "no"
 }

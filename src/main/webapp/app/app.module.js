@@ -15,6 +15,12 @@
             'ui.bootstrap.datetimepicker',
             'ui.router',
             'infinite-scroll',
+            'datatables',
+            'datatables.factory',
+            'datatables.bootstrap',
+            'datatables.colreorder',
+            'datatables.columnfilter',
+            'ods-lib',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar'
         ])
