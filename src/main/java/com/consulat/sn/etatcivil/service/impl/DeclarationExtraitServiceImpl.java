@@ -354,7 +354,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
             try {
 
-                pdfTemplate = new PdfReader("template_extrait_naissance.pdf");
+                pdfTemplate = new PdfReader("src/main/resources/templates/template_extrait_naissance.pdf");
                 FileOutputStream fileOutputStream = new FileOutputStream("src/main/webapp/app/documents/" + acteNaissance);
 
                 //ByteArrayOutputStream out = new ByteArrayOutputStream();
