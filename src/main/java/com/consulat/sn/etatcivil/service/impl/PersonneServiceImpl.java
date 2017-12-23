@@ -121,9 +121,16 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public PersonneDTO finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance) {
+    public List<PersonneDTO> finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance) {
 
-        Personne personne = personneRepository.findByNomAndPrenomAndDateNaissance(nom, prenom, dateNaissance);
-        return personneMapper.toDto(personne);
+        List<Personne> personnes = personneRepository.findByNomAndPrenomAndDateNaissance(nom, prenom, dateNaissance);
+        return personneMapper.toDto(personnes);
+    }
+
+    @Override
+    public List<PersonneDTO> finddByNomAndPrenomAndDateNaissanceAndNumeroCarteIdentite(String nom, String prenom, LocalDate dateNaissance,String numeroIdentite) {
+
+        List<Personne> personnes = personneRepository.findByNomAndPrenomAndDateNaissanceAndNumeroCarteIdentite(nom, prenom, dateNaissance,numeroIdentite);
+        return personneMapper.toDto(personnes);
     }
 }

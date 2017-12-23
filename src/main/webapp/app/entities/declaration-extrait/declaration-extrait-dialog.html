@@ -29,6 +29,7 @@
 
             <div class="modal-body">
                 <jhi-alert-info></jhi-alert-info>
+                <jhi-alert-error></jhi-alert-error>
 
                 <!--container-->
                 <div class="containerFlex">
@@ -382,7 +383,7 @@
                     </div>
 
                     <!--pere-->
-                    <div ng-show="!vm.isNotWithFather">
+                    <div ng-if="!vm.isNotWithFather">
                         <div class="modal-header transcription-bloc-title">
                             <p class="modal-title" id="blocPere"
                                data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a
@@ -951,7 +952,7 @@
 
 
             <!--pere-->
-            <div ng-show="!vm.isNotWithFather">
+            <div ng-if="!vm.isNotWithFather">
                 <div class="modal-header transcription-bloc-title">
                     <p class="modal-title" id="blocPere_recap"
                        data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration

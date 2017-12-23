@@ -105,7 +105,11 @@
             "search": {
                 "nom": "NOM DE L'ENFANT",
                 "prenom": "PRENOM DE L'ENFANT",
+                "prenomPere": "PRENOM PERE",
+                "prenomMere": "PRENOM MERE",
+                "nomMere": "NOM MERE",
                 "dateNaissance": "DATE DE NAISSANCE",
+                "dateNaissanceEnfant": "DATE DE NAISSANCE ENFANT",
                 "numeroRegistre": "NUMERO DANS LE REGISTRE",
                 "rechercher": "Rechercher",
                 "title": "RECHERCHER UN EXTRAIT DE NAISSANCE",

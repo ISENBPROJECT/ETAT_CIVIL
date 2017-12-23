@@ -6,7 +6,6 @@ import com.consulat.sn.etatcivil.domain.Extrait;
 import com.consulat.sn.etatcivil.domain.Ville;
 import com.consulat.sn.etatcivil.domain.Personne;
 import com.consulat.sn.etatcivil.domain.Personne;
-import com.consulat.sn.etatcivil.domain.Personne;
 import com.consulat.sn.etatcivil.domain.User;
 import com.consulat.sn.etatcivil.repository.ExtraitRepository;
 import com.consulat.sn.etatcivil.service.ExtraitService;
@@ -122,11 +121,6 @@ public class ExtraitResourceIntTest {
         em.persist(mere);
         em.flush();
         extrait.setMere(mere);
-        // Add required entity
-        Personne pere = PersonneResourceIntTest.createEntity(em);
-        em.persist(pere);
-        em.flush();
-        extrait.setPere(pere);
         // Add required entity
         User agent = UserResourceIntTest.createEntity(em);
         em.persist(agent);

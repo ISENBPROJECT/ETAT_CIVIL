@@ -26,17 +26,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="personne"/>
 
-        <addForeignKeyConstraint baseColumnNames="pere_id"
-                                 baseTableName="extrait"
-                                 constraintName="fk_extrait_pere_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="personne"/>
-
         <addForeignKeyConstraint baseColumnNames="agent_id"
                                  baseTableName="extrait"
                                  constraintName="fk_extrait_agent_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="pere_id"
+                                 baseTableName="extrait"
+                                 constraintName="fk_extrait_pere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne"/>
 
     </changeSet>
 </databaseChangeLog>

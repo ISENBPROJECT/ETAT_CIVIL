@@ -32,13 +32,13 @@
         <dd>
             <a ui-sref="personne-detail({id:vm.extrait.mereId})">{{vm.extrait.mereId}}</a>
         </dd>
-        <dt><span data-translate="etatCivilApp.extrait.pere">Pere</span></dt>
-        <dd>
-            <a ui-sref="personne-detail({id:vm.extrait.pereId})">{{vm.extrait.pereId}}</a>
-        </dd>
         <dt><span data-translate="etatCivilApp.extrait.agent">Agent</span></dt>
         <dd>
             {{vm.extrait.agentId}}
+        </dd>
+        <dt><span data-translate="etatCivilApp.extrait.pere">Pere</span></dt>
+        <dd>
+            <a ui-sref="personne-detail({id:vm.extrait.pereId})">{{vm.extrait.perePrenom}}</a>
         </dd>
     </dl>
 

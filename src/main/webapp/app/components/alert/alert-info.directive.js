@@ -7,16 +7,16 @@
                             '<uib-alert ng-cloak="" type="{{alert.type}}" close="alert.close($ctrl.alerts)"><pre>{{ alert.msg }}</pre></uib-alert>' +
                         '</div>' +
                   '</div>',
-        controller: jhiAlertErrorController
+        controller: jhiAlertInfoController
     };
 
     angular
         .module('etatCivilApp')
         .component('jhiAlertInfo', jhiAlertInfo);
 
-    jhiAlertErrorController.$inject = ['$scope', 'AlertService', '$rootScope', '$translate'];
+    jhiAlertInfoController.$inject = ['$scope', 'AlertService', '$rootScope', '$translate'];
 
-    function jhiAlertErrorController ($scope, AlertService, $rootScope, $translate) {
+    function jhiAlertInfoController ($scope, AlertService, $rootScope, $translate) {
         var vm = this;
 
         vm.alerts = [];

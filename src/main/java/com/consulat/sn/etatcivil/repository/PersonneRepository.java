@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -18,5 +19,7 @@ public interface PersonneRepository extends JpaRepository<Personne,Long> {
 
     Personne findByNomAndPrenom(String nom, String prenom);
 
-    Personne findByNomAndPrenomAndDateNaissance(String nom, String prenom, LocalDate dateNaissance);
+    List<Personne> findByNomAndPrenomAndDateNaissance(String nom, String prenom, LocalDate dateNaissance);
+
+    List<Personne> findByNomAndPrenomAndDateNaissanceAndNumeroCarteIdentite(String nom, String prenom, LocalDate dateNaissance, String numeroIdentite);
 }

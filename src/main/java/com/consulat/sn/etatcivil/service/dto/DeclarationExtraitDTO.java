@@ -66,22 +66,22 @@ public class DeclarationExtraitDTO implements Serializable {
 
     private String numeroPassportMere;
 
-    @NotNull
+
     private String nomPere;
 
-    @NotNull
+
     private String prenomPere;
 
     @NotNull
     private String lieuNaissanceEnfant;
 
-    @NotNull
+
     private String lieuResidencePere;
 
     @NotNull
     private String lieuResidenceMere;
 
-    @NotNull
+
     private String paysResidencePere;
 
     @NotNull
@@ -90,7 +90,7 @@ public class DeclarationExtraitDTO implements Serializable {
     @NotNull
     private String lieuNaissanceMere;
 
-    @NotNull
+
     private String lieuNaissancePere;
 
     @NotNull
@@ -103,13 +103,13 @@ public class DeclarationExtraitDTO implements Serializable {
     @NotNull
     private String paysNaissanceMere;
 
-    @NotNull
+
     private String paysNaissancePere;
 
     @NotNull
     private String paysDeclaration;
 
-    @NotNull
+
     private LocalDate dateNaissancePere;
 
     private String adresseComplPere;

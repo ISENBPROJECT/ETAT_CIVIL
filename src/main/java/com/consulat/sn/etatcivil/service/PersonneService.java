@@ -42,9 +42,11 @@ public interface PersonneService {
      */
     void delete(Long id);
 
-    PersonneDTO finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance);
+    List<PersonneDTO> finddByNomPrenomDateNaissance(String nom, String prenom, LocalDate dateNaissance);
 
     Boolean isParentExist(DeclarationExtraitDTO declarationExtraitDTO, Date dateNaissance, String villeNaissance, String numeroIdentite);
 
     PersonneDTO update(PersonneDTO enfantToUpdate);
+
+    List<PersonneDTO> finddByNomAndPrenomAndDateNaissanceAndNumeroCarteIdentite(String nom, String prenom, LocalDate dateNaissance, String numeroIdentite);
 }

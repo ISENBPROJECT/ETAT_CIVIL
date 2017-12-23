@@ -25,13 +25,6 @@
         {
             "relationshipType": "many-to-one",
             "relationshipValidateRules": "required",
-            "relationshipName": "pere",
-            "otherEntityName": "personne",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipValidateRules": "required",
             "relationshipName": "agent",
             "otherEntityName": "user",
             "otherEntityField": "id"
@@ -41,6 +34,12 @@
             "relationshipName": "piecesJointes",
             "otherEntityName": "pieceJointe",
             "otherEntityRelationshipName": "declaration"
+        },
+        {
+            "relationshipName": "pere",
+            "otherEntityName": "personne",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "prenom"
         }
     ],
     "fields": [
@@ -74,8 +73,8 @@
         }
     ],
     "changelogDate": "20170702122637",
-    "entityTableName": "extrait",
     "dto": "mapstruct",
-    "pagination": "no",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "extrait",
+    "pagination": "no"
 }

@@ -26,8 +26,8 @@
                     <th><span data-translate="etatCivilApp.extrait.lieuDeclaration">Lieu Declaration</span></th>
                     <th><span data-translate="etatCivilApp.extrait.enfant">Enfant</span></th>
                     <th><span data-translate="etatCivilApp.extrait.mere">Mere</span></th>
-                    <th><span data-translate="etatCivilApp.extrait.pere">Pere</span></th>
                     <th><span data-translate="etatCivilApp.extrait.agent">Agent</span></th>
+                    <th><span data-translate="etatCivilApp.extrait.pere">Pere</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,10 +48,10 @@
                         <a ui-sref="personne-detail({id:extrait.mereId})">{{extrait.mereId}}</a>
                     </td>
                     <td>
-                        <a ui-sref="personne-detail({id:extrait.pereId})">{{extrait.pereId}}</a>
+                        {{extrait.agentId}}
                     </td>
                     <td>
-                        {{extrait.agentId}}
+                        <a ui-sref="personne-detail({id:extrait.pereId})">{{extrait.perePrenom}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

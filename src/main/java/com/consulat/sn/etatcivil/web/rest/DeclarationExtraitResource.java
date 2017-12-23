@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,22 +60,27 @@ public class DeclarationExtraitResource {
     @Timed
     public ResponseEntity<DeclarationExtraitDTO> createDeclarationExtrait(@Valid @RequestBody DeclarationExtraitDTO declarationExtraitDTO) throws URISyntaxException {
         log.debug("REST request to save DeclarationExtrait : {}", declarationExtraitDTO);
+/*
+        List<PersonneDTO> enfantDTOs = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomEnfant(), declarationExtraitDTO.getPrenomEnfant(), declarationExtraitDTO.getDateNaissanceEnfant());
+        List<PersonneDTO> mereDTOs = new ArrayList<>();
+        List<PersonneDTO> pereDTOs = new ArrayList<>();
+        //uniquement si les deux parents ont des cartes d'identité
+        if (null != declarationExtraitDTO.getNumeroIdentiteMere() && null != declarationExtraitDTO.getNumeroIdentitePere()) {
 
-        PersonneDTO mereDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomMere(), declarationExtraitDTO.getPrenomMere(), declarationExtraitDTO.getDateNaissanceMere());
-
-        PersonneDTO pereDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomPere(), declarationExtraitDTO.getPrenomPere(), declarationExtraitDTO.getDateNaissancePere());
-
-        PersonneDTO enfantDTO = personneService.finddByNomPrenomDateNaissance(declarationExtraitDTO.getNomEnfant(), declarationExtraitDTO.getPrenomEnfant(), declarationExtraitDTO.getDateNaissanceEnfant());
+            mereDTOs = personneService.finddByNomPrenomDateNaissanceAndNumeroCarteIdentite(declarationExtraitDTO.getNomMere(), declarationExtraitDTO.getPrenomMere(), declarationExtraitDTO.getDateNaissanceMere(), declarationExtraitDTO.getNumeroIdentiteMere());
+            pereDTOs = personneService.finddByNomPrenomDateNaissanceAndNumeroCarteIdentite(declarationExtraitDTO.getNomPere(), declarationExtraitDTO.getPrenomPere(), declarationExtraitDTO.getDateNaissancePere(), declarationExtraitDTO.getNumeroIdentitePere());
+        }
 
         Boolean isDeclarationExist = false;
+        Long tableauIdPersonnesTrouvees[];
 
-        if (null != mereDTO && null != pereDTO && null != enfantDTO) {
+        if (null != mereDTOs.get(0).getId() && null != pereDTOs.get(0).getId() && null != enfantDTOs.get(i).getId()) {
             isDeclarationExist = extraitService.findExistantExtrait(enfantDTO.getId(), mereDTO.getId(), pereDTO.getId());
         }
 
         if (isDeclarationExist) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
-        }
+            return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
+        }*/
         DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);
         return ResponseEntity.created(new URI("/api/extraits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

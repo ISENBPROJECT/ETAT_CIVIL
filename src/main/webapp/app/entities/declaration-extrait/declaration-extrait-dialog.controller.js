@@ -254,13 +254,13 @@
             if (vm.isNotWithFather) {
                 vm.villesNaissancesPere.push(villeInconnu);
                 vm.villesResidencePere.push(villeInconnu);
-                vm.declarationExtrait.nomPere = "xxxx",
-                    vm.declarationExtrait.prenomPere = "xxxx",
-                    vm.declarationExtrait.dateNaissancePere = new Date(null),
-                    vm.declarationExtrait.adresseComplPere = "xxxx",
-                    vm.declarationExtrait.fonctionPere = "xxxx",
-                    vm.declarationExtrait.numeroIdentitePere = "xxxx",
-                    vm.declarationExtrait.numeroPassportPere = "xxxx",
+                vm.declarationExtrait.nomPere = "xxx",
+                    vm.declarationExtrait.prenomPere = "xxx",
+                    vm.declarationExtrait.dateNaissancePere = null,
+                    vm.declarationExtrait.adresseComplPere = "xxx",
+                    vm.declarationExtrait.fonctionPere = "xxx",
+                    vm.declarationExtrait.numeroIdentitePere = "xxx",
+                    vm.declarationExtrait.numeroPassportPere = "xxx",
                     vm.declarationExtrait.adrPaysPereId = paysInconnu,
                     vm.declarationExtrait.paysNaissancePereId = paysInconnu,
                     vm.declarationExtrait.lieuNaissancePereId = villeInconnu,

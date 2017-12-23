@@ -16,6 +16,14 @@ import com.consulat.sn.etatcivil.domain.enumeration.Genre;
  */
 @Entity
 @Table(name = "personne")
+@NamedQueries({
+    @NamedQuery(name = "Personne.isPersonneExist",
+        query = "SELECT parent FROM Personne parent where parent.nom = :nom and " +
+            "parent.prenom =  :prenom and parent.dateNaissance = :dateNaissance and " +
+            "parent.villeNaissance = :villeNaissance and" +
+            " parent.numeroCarteIdentite = :numeroCarteIdentite")
+
+})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Personne implements Serializable {
 

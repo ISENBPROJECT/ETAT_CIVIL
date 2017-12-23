@@ -22,9 +22,9 @@
             "lieuDeclaration": "Lieu Declaration",
             "enfant": "Enfant",
             "mere": "Mere",
-            "pere": "Pere",
             "agent": "Agent",
-            "piecesJointes": "Pieces Jointes"
+            "piecesJointes": "Pieces Jointes",
+            "pere": "Pere"
         }
     }
 }

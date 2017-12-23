@@ -96,17 +96,6 @@
             </p>
         </div>
         <div class="form-group">
-            <label data-translate="etatCivilApp.extrait.pere" for="field_pere">Pere</label>
-            <select class="form-control" id="field_pere" name="pere" ng-model="vm.extrait.pereId" ng-options="personne.id as personne.id for personne in vm.personnes"             required>
-            </select>
-        </div>
-        <div ng-show="editForm.pere.$invalid">
-            <p class="help-block"
-                ng-show="editForm.pere.$error.required" data-translate="entity.validation.required">
-                This field is required.
-            </p>
-        </div>
-        <div class="form-group">
             <label data-translate="etatCivilApp.extrait.agent" for="field_agent">Agent</label>
             <select class="form-control" id="field_agent" name="agent" ng-model="vm.extrait.agentId" ng-options="user.id as user.id for user in vm.users"             required>
             </select>
@@ -116,6 +105,12 @@
                 ng-show="editForm.agent.$error.required" data-translate="entity.validation.required">
                 This field is required.
             </p>
+        </div>
+        <div class="form-group">
+            <label data-translate="etatCivilApp.extrait.pere" for="field_pere">Pere</label>
+            <select class="form-control" id="field_pere" name="pere" ng-model="vm.extrait.pereId" ng-options="personne.id as personne.prenom for personne in vm.personnes"            >
+                <option value=""></option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">

@@ -5,13 +5,12 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Extrait.
@@ -79,16 +78,15 @@ public class Extrait implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    private Personne pere;
-
-    @ManyToOne(optional = false)
-    @NotNull
     private User agent;
 
     @OneToMany(mappedBy = "declaration")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PieceJointe> piecesJointes = new HashSet<>();
+
+    @ManyToOne
+    private Personne pere;
 
     public Long getId() {
         return id;
@@ -189,19 +187,6 @@ public class Extrait implements Serializable {
         this.mere = personne;
     }
 
-    public Personne getPere() {
-        return pere;
-    }
-
-    public Extrait pere(Personne personne) {
-        this.pere = personne;
-        return this;
-    }
-
-    public void setPere(Personne personne) {
-        this.pere = personne;
-    }
-
     public User getAgent() {
         return agent;
     }
@@ -238,6 +223,19 @@ public class Extrait implements Serializable {
 
     public void setPiecesJointes(Set<PieceJointe> pieceJointes) {
         this.piecesJointes = pieceJointes;
+    }
+
+    public Personne getPere() {
+        return pere;
+    }
+
+    public Extrait pere(Personne personne) {
+        this.pere = personne;
+        return this;
+    }
+
+    public void setPere(Personne personne) {
+        this.pere = personne;
     }
 
     @Override
