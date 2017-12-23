@@ -510,7 +510,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         PersonneDTO enfantToUpdate = personneService.findOne(declarationExtraitDTO.getEnfant().getId());
         PersonneDTO mereToUpdate = personneService.findOne(declarationExtraitDTO.getMere().getId());
-        PersonneDTO pereToUpdate = personneService.findOne(declarationExtraitDTO.getPere().getId());
+
 
         Set<PieceJointeDTO> piecesJointes = declarationExtraitDTO.getPiecesJointes();
         for (PieceJointeDTO pieceJointe : piecesJointes) {
@@ -564,6 +564,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         //gestion des enfants sans pere
         if (null != declarationExtraitDTO.getPere()) {
 
+            PersonneDTO pereToUpdate = personneService.findOne(declarationExtraitDTO.getPere().getId());
 
             PaysDTO paysNaissancePere = paysService.findByNom(declarationExtraitDTO.getPere().getPaysNaissance());
             PaysDTO paysResidencePere = paysService.findByNom(declarationExtraitDTO.getPere().getPaysResidence());
@@ -586,12 +587,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             pereToUpdate.setVilleNaissance(lieuNaissancePere.getNom());
             pereToUpdate.setVilleResidence(villeResidencePere.getNom());
 
-            enfantToUpdate = personneService.update(enfantToUpdate);
-            mereToUpdate = personneService.update(mereToUpdate);
+
             pereToUpdate = personneService.update(pereToUpdate);
             declarationExtraitUpdatedDTO.setPere(pereToUpdate);
         }
-
+        enfantToUpdate = personneService.update(enfantToUpdate);
+        mereToUpdate = personneService.update(mereToUpdate);
         declarationExtraitUpdatedDTO.setEnfant(enfantToUpdate);
         declarationExtraitUpdatedDTO.setMere(mereToUpdate);
 

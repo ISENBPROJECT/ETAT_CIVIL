@@ -12,6 +12,7 @@
 
         var vm = this;
         vm.declarationExtrait = entity;
+        vm.isSansPere = false;
         vm.paysDeclaration = "FRANCE";
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -19,7 +20,10 @@
         vm.openFile = DataUtils.openFile;
         vm.declarationExtrait.enfant.dateNaissance = new Date(vm.declarationExtrait.enfant.dateNaissance);
         vm.declarationExtrait.mere.dateNaissance = new Date(vm.declarationExtrait.mere.dateNaissance);
-        vm.declarationExtrait.pere.dateNaissance = new Date(vm.declarationExtrait.pere.dateNaissance);
+        if (null != vm.declarationExtrait.pere) {
+            vm.declarationExtrait.pere.dateNaissance = new Date(vm.declarationExtrait.pere.dateNaissance);
+            vm.isSansPere = true;
+        }
         vm.villes = Ville.query();
         vm.pays = Pays.query();
         vm.dateformat = "dd-MM-yyyy";
@@ -169,7 +173,7 @@
         }
 
         function onSuccess(data, headers) {
-           ouvrirActeNaissancePopup(data.nomExtrait)
+            ouvrirActeNaissancePopup(data.nomExtrait)
         }
 
         function onError() {

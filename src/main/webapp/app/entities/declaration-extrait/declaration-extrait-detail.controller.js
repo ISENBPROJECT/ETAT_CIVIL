@@ -11,6 +11,9 @@
         var vm = this;
 
         vm.declarationExtrait = entity;
+        if (null == vm.declarationExtrait.pere){
+            vm.isSansPere = true;
+        }
         vm.previousState = previousState.name;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;

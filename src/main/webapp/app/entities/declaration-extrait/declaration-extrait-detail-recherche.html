@@ -206,7 +206,7 @@
 
 
     <!--pere-->
-    <div ng-show="!vm.isNotWithFather">
+    <div ng-if="vm.isSansPere">{{vm.isSansPere}}
         <div class="modal-header transcription-bloc-title">
             <p class="modal-title" id="blocPere_recap"
                data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration

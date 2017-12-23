@@ -23,7 +23,18 @@
         vm.dateNaissanceEnfant = null;
 
         function search() {
-
+            if (null != vm.numeroRegistre && vm.numeroRegistre === "") {
+                vm.numeroRegistre = null;
+            }
+            if (null != vm.nomEnfant && vm.nomEnfant === "") {
+                vm.nomEnfant = null;
+            }
+            if (null != vm.prenomEnfant && vm.prenomEnfant === "") {
+                vm.prenomEnfant = null;
+            }
+            if (null != vm.dateNaissance && vm.dateNaissance === "") {
+                vm.dateNaissance = null;
+            }
             var dataSearch = {
                 numeroRegistre: vm.numeroRegistre,
                 nomEnfant: vm.nomEnfant,
