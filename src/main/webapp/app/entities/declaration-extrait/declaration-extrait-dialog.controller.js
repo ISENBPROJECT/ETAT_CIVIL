@@ -212,12 +212,8 @@
         }
 
         function retourAccueil() {
-            console.log(DeclarationExtrait)
-            $state.go('home');
-            if (null != vm.declarationExtrait.prenomEnfant && null != vm.declarationExtrait.nomEnfant) {
-                DeclarationExtrait.update(vm.declarationExtrait, onDeleteSuccess, onDeleteError);
-            }
 
+            $state.go('home');
         }
 
         function valider() {

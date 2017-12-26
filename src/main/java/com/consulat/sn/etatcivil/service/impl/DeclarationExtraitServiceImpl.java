@@ -357,13 +357,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             int year = c.get(Calendar.YEAR);
             DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
             try {
-                String templateFolder = context.getRealPath("downloads");
+                String templateFolder = context.getRealPath("/downloads");
 
                 File test = new File(templateFolder);
-                File test2 = new File(templateFolder+"/"+"golo");
                 if (!test.exists()){
                     test.mkdir();
-                    test2.mkdirs();
                 }
                 pdfTemplate = new PdfReader(templateFolder+"/template_extrait_naissance.pdf");
 
@@ -442,7 +440,18 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         int year = c.get(Calendar.YEAR);
         DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("src/main/webapp/app/documents/" + FILE));
+
+        String templateFolder = context.getRealPath("/app/documents/");
+        File template = new File(templateFolder);
+        if (!template.isDirectory()){
+            template.mkdirs();
+        }
+
+        File transcriptionFile = new File(templateFolder+"/"+FILE);
+        if (!transcriptionFile.exists()){
+            transcriptionFile.createNewFile();
+        }
+        PdfWriter.getInstance(document, new FileOutputStream(transcriptionFile));
         document.open();
         String personne_qui_transcrit = "Monsieur " + user.getFirstName() + "  " + user.getLastName(); //"Monsieur Abdourahmane KOITA"; /// c'est le user qui s'est connecté
         String fonction = "Consul Général de la République du Sénégal à Bordeaux"; //fonction du user
