@@ -17,9 +17,11 @@ import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,6 +55,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     private final MailService mailService;
     private final ExtraitRepository extraitRepository;
     private final ExtraitMapper extraitMapper;
+    @Autowired
+    ServletContext context;
 
     public DeclarationExtraitServiceImpl(PaysService paysService, PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
                                          RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService, ExtraitRepository extraitRepository, ExtraitMapper extraitMapper) {
@@ -353,9 +357,27 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             int year = c.get(Calendar.YEAR);
             DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
             try {
+                String templateFolder = context.getRealPath("downloads");
 
-                pdfTemplate = new PdfReader("src/main/resources/templates/template_extrait_naissance.pdf");
-                FileOutputStream fileOutputStream = new FileOutputStream("src/main/webapp/app/documents/" + acteNaissance);
+                File test = new File(templateFolder);
+                File test2 = new File(templateFolder+"/"+"golo");
+                if (!test.exists()){
+                    test.mkdir();
+                    test2.mkdirs();
+                }
+                pdfTemplate = new PdfReader(templateFolder+"/template_extrait_naissance.pdf");
+
+                String documentsFolder = context.getRealPath("/app/documents");
+                File docs = new File(documentsFolder);
+                if (!docs.isDirectory()){
+                    docs.mkdir();
+                }
+                File acte = new File(docs+"/"+acteNaissance);
+                if (!acte.exists()){
+                    acte.createNewFile();
+                }
+                FileOutputStream fileOutputStream = new FileOutputStream(acte);
+
 
                 //ByteArrayOutputStream out = new ByteArrayOutputStream();
                 PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
