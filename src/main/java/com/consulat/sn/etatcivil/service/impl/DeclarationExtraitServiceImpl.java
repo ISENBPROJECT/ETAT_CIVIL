@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -350,7 +351,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         String acteNaissance = "";
         if (null != extraitDTO && null != enfant && null != mere && null != pere) {
             PdfReader pdfTemplate;
-            acteNaissance = idExtrait + enfant.getPrenom() + "_" + enfant.getNom()
+
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+            Date today = new Date();
+            String dateDuJour = format.format(today);
+
+            acteNaissance = dateDuJour + "_" + enfant.getPrenom() + "_" + enfant.getNom()
                 + "_acte_naissance.pdf";
             // SimpleDateFormat dateDeclaration = null;
             Calendar c = Calendar.getInstance();
@@ -360,20 +367,23 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 String templateFolder = context.getRealPath("/downloads");
 
                 File test = new File(templateFolder);
-                if (!test.exists()){
+                if (!test.exists()) {
                     test.mkdir();
                 }
-                pdfTemplate = new PdfReader(templateFolder+"/template_extrait_naissance.pdf");
+                pdfTemplate = new PdfReader(templateFolder + "/template_extrait_naissance.pdf");
 
                 String documentsFolder = context.getRealPath("/app/documents");
                 File docs = new File(documentsFolder);
-                if (!docs.isDirectory()){
+                if (!docs.isDirectory()) {
                     docs.mkdir();
                 }
-                File acte = new File(docs+"/"+acteNaissance);
-                if (!acte.exists()){
+                File acte = new File(docs + "/" + acteNaissance);
+                if (!acte.exists()) {
                     acte.createNewFile();
                 }
+
+                //purgeRepertoireImpression(dateDuJour, docs);
+
                 FileOutputStream fileOutputStream = new FileOutputStream(acte);
 
 
@@ -430,7 +440,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public void creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
-        String FILE = declarationExtraitDTO.getId() + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date today = new Date();
+        String dateDuJour = format.format(today);
+
+        String FILE = dateDuJour + "_" + declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
             + "_transcription_naissance.pdf";
         Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
@@ -443,14 +459,16 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         String templateFolder = context.getRealPath("/app/documents/");
         File template = new File(templateFolder);
-        if (!template.isDirectory()){
+        if (!template.isDirectory()) {
             template.mkdirs();
         }
 
-        File transcriptionFile = new File(templateFolder+"/"+FILE);
-        if (!transcriptionFile.exists()){
+        File transcriptionFile = new File(templateFolder + "/" + FILE);
+        if (!transcriptionFile.exists()) {
             transcriptionFile.createNewFile();
         }
+
+
         PdfWriter.getInstance(document, new FileOutputStream(transcriptionFile));
         document.open();
         String personne_qui_transcrit = "Monsieur " + user.getFirstName() + "  " + user.getLastName(); //"Monsieur Abdourahmane KOITA"; /// c'est le user qui s'est connecté
@@ -467,9 +485,10 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         } else {
             lieuNaissancePere = declarationExtraitDTO.getLieuNaissancePere();
             dateNaissancePere = format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissancePere()));
-            if (null !=declarationExtraitDTO.getFonctionPere()){
-            fonctionPere = declarationExtraitDTO.getFonctionPere();}else {
-                fonctionPere="Sans emploi";
+            if (null != declarationExtraitDTO.getFonctionPere()) {
+                fonctionPere = declarationExtraitDTO.getFonctionPere();
+            } else {
+                fonctionPere = "Sans emploi";
             }
         }
         if (null != declarationExtraitDTO.getFonctionMere()) {
@@ -498,6 +517,25 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         document.add(preface);
         document.close();
 
+    }
+
+    private void purgeRepertoireImpression(String dateDuJour, File template) {
+        ArrayList<File> listeASupprimer = new ArrayList();
+        if (null != template && null != template.listFiles()) {
+            for (File file : template.listFiles()) {
+                if (file.isFile()) {
+                    String name = file.getName();
+                    String[] tableau = name.split("_");
+                    if (!tableau[0].equals(dateDuJour)) {
+                        listeASupprimer.add(file);
+                    }
+                }
+            }
+        }
+
+        if (!listeASupprimer.isEmpty()) {
+            boolean removed = listeASupprimer.removeIf(p -> p.isFile());
+        }
     }
 
     @Transactional(readOnly = true)
