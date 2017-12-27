@@ -82,9 +82,8 @@
         }
 
         function onSaveSuccess(result) {
-            console.log(result)
             vm.declarationExtrait.id = result.id;
-            vm.nomExtrait = result.nomExtrait;
+            vm.declarationExtrait.nomExtrait = result.nomExtrait;
             $state.go('declaration-extrait-affichagePdf');
             vm.isSaving = false;
         }
@@ -201,7 +200,7 @@
 
         function ouvirActeNaissancePopup() {
 
-            var fichier = 'app/documents/' + vm.declarationExtrait.nomExtrait ;
+            var fichier = 'app/documents/' + vm.declarationExtrait.nomExtrait;
             window.open(fichier, "popup", "width=900,height=600")
         }
 
@@ -366,11 +365,9 @@
         };
 
         function onDeleteSuccess(result) {
-            console.log(result)
         };
 
         function onDeleteError(result) {
-            console.log(result)
         };
 
         // saisie du nom de la carte
