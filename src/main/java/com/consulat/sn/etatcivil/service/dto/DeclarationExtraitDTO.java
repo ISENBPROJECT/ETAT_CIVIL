@@ -55,6 +55,8 @@ public class DeclarationExtraitDTO implements Serializable {
     @NotNull
     private String prenomMere;
 
+    private String nomExtrait;
+
     @NotNull
     private LocalDate dateNaissanceMere;
 
@@ -554,5 +556,13 @@ public class DeclarationExtraitDTO implements Serializable {
 
     public void setPaysDeclaration(String paysDeclaration) {
         this.paysDeclaration = paysDeclaration;
+    }
+
+    public String getNomExtrait() {
+        return nomExtrait;
+    }
+
+    public void setNomExtrait(String nomExtrait) {
+        this.nomExtrait = nomExtrait;
     }
 }

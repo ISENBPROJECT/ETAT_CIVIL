@@ -82,7 +82,9 @@
         }
 
         function onSaveSuccess(result) {
+            console.log(result)
             vm.declarationExtrait.id = result.id;
+            vm.nomExtrait = result.nomExtrait;
             $state.go('declaration-extrait-affichagePdf');
             vm.isSaving = false;
         }
@@ -198,12 +200,13 @@
         }
 
         function ouvirActeNaissancePopup() {
-            var fichier = 'app/documents/' + vm.declarationExtrait.id + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_acte_naissance.pdf';
+
+            var fichier = 'app/documents/' + vm.declarationExtrait.nomExtrait ;
             window.open(fichier, "popup", "width=900,height=600")
         }
 
         function ouvirTranscriptionPopup() {
-            var fichier = 'app/documents/' + vm.declarationExtrait.id + vm.declarationExtrait.prenomEnfant + '_' + vm.declarationExtrait.nomEnfant + '_transcription_naissance.pdf';
+            var fichier = 'app/documents/' + vm.declarationExtrait.nomExtrait;
             window.open(fichier, "popup", "width=900,height=600")
         }
 

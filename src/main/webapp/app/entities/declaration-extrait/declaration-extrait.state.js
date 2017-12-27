@@ -194,6 +194,7 @@
                             villeNaissancePere: null,
                             paysResidencePere: null,
                             villeResidencePere: null,
+                            nomExtrait: null,
                             id: null
                         };
                     }

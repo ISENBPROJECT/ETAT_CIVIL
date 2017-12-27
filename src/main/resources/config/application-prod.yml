@@ -23,7 +23,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/ETAT_CIVIL?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password: root
+        password: isenbProjectTeam01
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -102,7 +102,7 @@ jhipster:
             key: 2c4978b6460f9e2b8a3976b87498f974a97cdef9
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: consulatsenegalbordeaux@gmail.com
-        base-url: http://192.168.1.1:8080 # Modify according to your server's URL
+        base-url: http://192.168.1.11:8080/etat-civil # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:

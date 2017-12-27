@@ -181,7 +181,6 @@
         }
 
         function ouvrirActeNaissancePopup(nomExtrait) {
-            console.log(nomExtrait);
             var fichier = 'app/documents/' + nomExtrait;
             console.log(fichier);
 

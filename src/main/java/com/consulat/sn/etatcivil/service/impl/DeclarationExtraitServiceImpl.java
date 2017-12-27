@@ -122,7 +122,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             //je créé l'extrait fichier
             try {
 
-                printExtraitNaissance(extraitDTO.getId());
+                String actenaissance = printExtraitNaissance(extraitDTO.getId());
+                declarationExtraitDTO.setNomExtrait(actenaissance);
             } catch (Exception e) {
                 e.getMessage();
             }
@@ -384,6 +385,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
                 //purgeRepertoireImpression(dateDuJour, docs);
 
+
                 FileOutputStream fileOutputStream = new FileOutputStream(acte);
 
 
@@ -441,7 +443,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
         Date today = new Date();
         String dateDuJour = format.format(today);
