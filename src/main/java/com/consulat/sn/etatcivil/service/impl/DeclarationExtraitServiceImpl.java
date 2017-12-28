@@ -130,7 +130,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
 
             try {
-                creerTranscription(declarationExtraitDTO);
+                String nomTranscription = creerTranscription(declarationExtraitDTO);
+                declarationExtraitDTO.setNomTranscription(nomTranscription);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -439,7 +440,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
      * @throws IOException
      * @throws DocumentException Cette fonction permet de créer le fichier de transcription de naissance
      */
-    public void creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
+    public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
 
@@ -518,7 +519,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             + declarationExtraitDTO.getLieuDeclaration() + "."));
         document.add(preface);
         document.close();
-
+        return FILE;
     }
 
     private void purgeRepertoireImpression(String dateDuJour, File template) {

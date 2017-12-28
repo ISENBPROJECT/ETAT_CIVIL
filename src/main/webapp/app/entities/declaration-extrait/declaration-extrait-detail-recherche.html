@@ -13,12 +13,12 @@
             data-translate="entity.action.back">Retour</span>
         </button>
 
-        <button type="button" class="btn btn-primary" ui-sref="declaration-extrait-edit({id:vm.declarationExtrait.id})">
+        <button type="button" class="btn btn-primary" has-authority="ROLE_ADMIN" ui-sref="declaration-extrait-edit({id:vm.declarationExtrait.id})">
             <span class="glyphicon glyphicon-edit"></span>&nbsp;<span
             translate="etatCivilApp.declarationExtrait.search.modify">Modifier</span>
         </button>
 
-        <button type="button" class="btn btn-primary" ng-click="vm.printExtrait(vm.declarationExtrait.id)">
+        <button type="button" class="btn btn-primary"  ng-click="vm.printExtrait(vm.declarationExtrait.id)">
             <span class="glyphicon glyphicon-print"></span>&nbsp;<span
             translate="etatCivilApp.declarationExtrait.search.print">Imprimer</span>
         </button>

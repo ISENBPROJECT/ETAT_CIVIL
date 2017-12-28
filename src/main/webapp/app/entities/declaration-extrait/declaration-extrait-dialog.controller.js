@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.declarationExtrait = entity;
+        vm.declarationExtrait.mention = "NEANT";
         vm.clear = clear;
         vm.annuler = annuler;
         vm.datePickerOpenStatus = {};
@@ -84,6 +85,7 @@
         function onSaveSuccess(result) {
             vm.declarationExtrait.id = result.id;
             vm.declarationExtrait.nomExtrait = result.nomExtrait;
+            vm.declarationExtrait.nomTranscription = result.nomTranscription;
             $state.go('declaration-extrait-affichagePdf');
             vm.isSaving = false;
         }
@@ -205,7 +207,7 @@
         }
 
         function ouvirTranscriptionPopup() {
-            var fichier = 'app/documents/' + vm.declarationExtrait.nomExtrait;
+            var fichier = 'app/documents/' + vm.declarationExtrait.nomTranscription;
             window.open(fichier, "popup", "width=900,height=600")
         }
 

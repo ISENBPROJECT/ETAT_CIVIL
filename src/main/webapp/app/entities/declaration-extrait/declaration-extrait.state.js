@@ -195,6 +195,7 @@
                             paysResidencePere: null,
                             villeResidencePere: null,
                             nomExtrait: null,
+                            nomTranscription: null,
                             id: null
                         };
                     }

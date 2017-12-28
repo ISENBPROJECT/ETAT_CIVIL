@@ -22,8 +22,7 @@
             </div>
 
             <div ng-show="vm.isNotWithFather" class="alert alert-warning message-alerte-enfant-sans-pere">
-                <strong>Info! </strong><span
-                data-translate="etatCivilApp.declarationExtrait.home.noFatherInformation"></span>
+               <span data-translate="etatCivilApp.declarationExtrait.home.noFatherInformation"></span>
             </div>
 
             <div class="modal-body">
@@ -171,6 +170,205 @@
 
                         </div>
 
+                    </div>
+
+                    <!--pere-->
+                    <div ng-if="!vm.isNotWithFather">
+                        <div class="modal-header transcription-bloc-title">
+                            <p class="modal-title" id="blocPere"
+                               data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a
+                                Declaration
+                                Extrait</p>
+                        </div>
+                        <div class="containerFlexItemPere">
+
+                            <div class="merebloc1">
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.nomPere"
+                                           for="field_nomPere">Nom Pere</label>
+                                    <input type="text" class="form-control" name="nomPere" id="field_nomPere"
+                                           ng-model="vm.declarationExtrait.nomPere" ng-disabled="vm.isNotWithFather"
+                                           required/>
+                                    <div ng-show="editForm.nomPere.$invalid">
+                                        <p class="help-block"
+                                           ng-show="editForm.nomPere.$error.required"
+                                           data-translate="entity.validation.required">
+                                            This field is required.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.prenomPere"
+                                           for="field_prenomPere">Prenom Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
+                                           name="prenomPere"
+                                           id="field_prenomPere"
+                                           ng-model="vm.declarationExtrait.prenomPere"
+                                           required/>
+                                    <div ng-show="editForm.prenomPere.$invalid">
+                                        <p class="help-block"
+                                           ng-show="editForm.prenomPere.$error.required"
+                                           data-translate="entity.validation.required">
+                                            This field is required.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
+                                           for="field_dateNaissancePere">Date Naissance Pere</label>
+                                    <div class="input-group">
+                                        <input ng-disabled="vm.isNotWithFather" id="field_dateNaissancePere" type="text"
+                                               class="form-control"
+                                               name="dateNaissancePere" ng-change="vm.verifierSiPereMajeur()"
+                                               uib-datepicker-popup="{{vm.dateformat}}"
+                                               ng-model="vm.declarationExtrait.dateNaissancePere"
+                                               is-open="vm.datePickerOpenStatus.dateNaissancePere"
+                                               required/>
+                                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissancePere')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                                    </div>
+                                    <div ng-show="editForm.dateNaissancePere.$invalid">
+                                        <p class="help-block"
+                                           ng-show="editForm.dateNaissancePere.$error.required"
+                                           data-translate="entity.validation.required">
+                                            This field is required.
+                                        </p>
+                                    </div>
+                                    <div ng-show="vm.dateNaissancePereError">
+                                        <p class="help-block alert-danger"
+                                           ng-show="vm.dateNaissancePereError"
+                                           data-translate="etatCivilApp.declarationExtrait.dateNaissancePereErreur">
+                                            champs supérieur à 10 ans.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
+                                           for="field_paysNaissancePere">Pays
+                                        Naissance Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather"
+                                           class="form-control"
+                                           id="field_paysNaissancePere" name="paysNaissancePere"
+                                           list="pays" data-ng-model="vm.declarationExtrait.paysNaissancePere"
+                                           required/>
+                                </div>
+                                <div ng-show="editForm.paysNaissancePere.$invalid">
+                                    <p class="help-block"
+                                       ng-show="editForm.paysNaissancePere.$error.required"
+                                       data-translate="entity.validation.required">
+                                        This field is required.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="merebloc1">
+
+                                <div class="form-group">
+                                    <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
+                                           for="field_lieuNaissancePere">Lieu
+                                        Naissance Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" class="form-control"
+                                           id="field_lieuNaissancePere"
+                                           name="lieuNaissancePere"
+                                           list="villes" data-ng-model="vm.declarationExtrait.lieuNaissancePere"
+                                           required/>
+                                </div>
+                                <div ng-show="editForm.lieuNaissancePere.$invalid">
+                                    <p class="help-block"
+                                       ng-show="editForm.lieuNaissancePere.$error.required"
+                                       data-translate="entity.validation.required">
+                                        This field is required.
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere"
+                                           for="field_adrPaysPere">Adr
+                                        Pays
+                                        Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather"
+                                           class="form-control" id="field_adrPaysPere"
+                                           name="adrPaysPere"
+                                           list="pays" data-ng-model="vm.declarationExtrait.paysResidencePere"
+                                           required/>
+                                </div>
+                                <div ng-show="editForm.adrPaysPere.$invalid">
+                                    <p class="help-block"
+                                       ng-show="editForm.adrPaysPere.$error.required"
+                                       data-translate="entity.validation.required">
+                                        This field is required.
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label data-translate="etatCivilApp.declarationExtrait.adressePere"
+                                           for="field_adressePere">Adresse
+                                        Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" class="form-control" id="field_adressePere"
+                                           name="adressePere"
+                                           list="villes" data-ng-model="vm.declarationExtrait.lieuResidencePere"
+                                           required/>
+                                </div>
+                                <div ng-show="editForm.adressePere.$invalid">
+                                    <p class="help-block"
+                                       ng-show="editForm.adressePere.$error.required"
+                                       data-translate="entity.validation.required">
+                                        This field is required.
+                                    </p>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
+                                           for="field_adresseComplPere">Adresse Compl Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
+                                           name="adresseComplPere" id="field_adresseComplPere"
+                                           ng-model="vm.declarationExtrait.adresseComplPere"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="merebloc1">
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.fonctionPere"
+                                           for="field_fonctionPere">Fonction Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
+                                           name="fonctionPere"
+                                           id="field_fonctionPere"
+                                           ng-model="vm.declarationExtrait.fonctionPere"
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
+                                           for="field_numeroIdentitePere">Numero Identite Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
+                                           name="numeroIdentitePere" id="field_numeroIdentitePere"
+                                           ng-model="vm.declarationExtrait.numeroIdentitePere"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"
+                                           data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
+                                           for="field_numeroPassportPere">Numero Passport Pere</label>
+                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
+                                           name="numeroPassportPere" id="field_numeroPassportPere"
+                                           ng-model="vm.declarationExtrait.numeroPassportPere"
+                                    />
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
 
                     <!--mere-->
@@ -381,204 +579,7 @@
 
                     </div>
 
-                    <!--pere-->
-                    <div ng-if="!vm.isNotWithFather">
-                        <div class="modal-header transcription-bloc-title">
-                            <p class="modal-title" id="blocPere"
-                               data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a
-                                Declaration
-                                Extrait</p>
-                        </div>
-                        <div class="containerFlexItemPere">
 
-                            <div class="merebloc1">
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.nomPere"
-                                           for="field_nomPere">Nom Pere</label>
-                                    <input type="text" class="form-control" name="nomPere" id="field_nomPere"
-                                           ng-model="vm.declarationExtrait.nomPere" ng-disabled="vm.isNotWithFather"
-                                           required/>
-                                    <div ng-show="editForm.nomPere.$invalid">
-                                        <p class="help-block"
-                                           ng-show="editForm.nomPere.$error.required"
-                                           data-translate="entity.validation.required">
-                                            This field is required.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.prenomPere"
-                                           for="field_prenomPere">Prenom Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
-                                           name="prenomPere"
-                                           id="field_prenomPere"
-                                           ng-model="vm.declarationExtrait.prenomPere"
-                                           required/>
-                                    <div ng-show="editForm.prenomPere.$invalid">
-                                        <p class="help-block"
-                                           ng-show="editForm.prenomPere.$error.required"
-                                           data-translate="entity.validation.required">
-                                            This field is required.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
-                                           for="field_dateNaissancePere">Date Naissance Pere</label>
-                                    <div class="input-group">
-                                        <input ng-disabled="vm.isNotWithFather" id="field_dateNaissancePere" type="text"
-                                               class="form-control"
-                                               name="dateNaissancePere" ng-change="vm.verifierSiPereMajeur()"
-                                               uib-datepicker-popup="{{vm.dateformat}}"
-                                               ng-model="vm.declarationExtrait.dateNaissancePere"
-                                               is-open="vm.datePickerOpenStatus.dateNaissancePere"
-                                               required/>
-                                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateNaissancePere')"><i
-                            class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                                    </div>
-                                    <div ng-show="editForm.dateNaissancePere.$invalid">
-                                        <p class="help-block"
-                                           ng-show="editForm.dateNaissancePere.$error.required"
-                                           data-translate="entity.validation.required">
-                                            This field is required.
-                                        </p>
-                                    </div>
-                                    <div ng-show="vm.dateNaissancePereError">
-                                        <p class="help-block alert-danger"
-                                           ng-show="vm.dateNaissancePereError"
-                                           data-translate="etatCivilApp.declarationExtrait.dateNaissancePereErreur">
-                                            champs supérieur à 10 ans.
-                                        </p>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
-                                           for="field_paysNaissancePere">Pays
-                                        Naissance Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather"
-                                           class="form-control"
-                                           id="field_paysNaissancePere" name="paysNaissancePere"
-                                           list="pays" data-ng-model="vm.declarationExtrait.paysNaissancePere"
-                                           required/>
-                                </div>
-                                <div ng-show="editForm.paysNaissancePere.$invalid">
-                                    <p class="help-block"
-                                       ng-show="editForm.paysNaissancePere.$error.required"
-                                       data-translate="entity.validation.required">
-                                        This field is required.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="merebloc1">
-
-                                <div class="form-group">
-                                    <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
-                                           for="field_lieuNaissancePere">Lieu
-                                        Naissance Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" class="form-control"
-                                           id="field_lieuNaissancePere"
-                                           name="lieuNaissancePere"
-                                           list="villes" data-ng-model="vm.declarationExtrait.lieuNaissancePere"
-                                           required/>
-                                </div>
-                                <div ng-show="editForm.lieuNaissancePere.$invalid">
-                                    <p class="help-block"
-                                       ng-show="editForm.lieuNaissancePere.$error.required"
-                                       data-translate="entity.validation.required">
-                                        This field is required.
-                                    </p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere"
-                                           for="field_adrPaysPere">Adr
-                                        Pays
-                                        Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather"
-                                           class="form-control" id="field_adrPaysPere"
-                                           name="adrPaysPere"
-                                           list="pays" data-ng-model="vm.declarationExtrait.paysResidencePere"
-                                           required/>
-                                </div>
-                                <div ng-show="editForm.adrPaysPere.$invalid">
-                                    <p class="help-block"
-                                       ng-show="editForm.adrPaysPere.$error.required"
-                                       data-translate="entity.validation.required">
-                                        This field is required.
-                                    </p>
-                                </div>
-                                <div class="form-group">
-                                    <label data-translate="etatCivilApp.declarationExtrait.adressePere"
-                                           for="field_adressePere">Adresse
-                                        Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" class="form-control" id="field_adressePere"
-                                           name="adressePere"
-                                           list="villes" data-ng-model="vm.declarationExtrait.lieuResidencePere"
-                                           required/>
-                                </div>
-                                <div ng-show="editForm.adressePere.$invalid">
-                                    <p class="help-block"
-                                       ng-show="editForm.adressePere.$error.required"
-                                       data-translate="entity.validation.required">
-                                        This field is required.
-                                    </p>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
-                                           for="field_adresseComplPere">Adresse Compl Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
-                                           name="adresseComplPere" id="field_adresseComplPere"
-                                           ng-model="vm.declarationExtrait.adresseComplPere"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="merebloc1">
-
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.fonctionPere"
-                                           for="field_fonctionPere">Fonction Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
-                                           name="fonctionPere"
-                                           id="field_fonctionPere"
-                                           ng-model="vm.declarationExtrait.fonctionPere"
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
-                                           for="field_numeroIdentitePere">Numero Identite Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
-                                           name="numeroIdentitePere" id="field_numeroIdentitePere"
-                                           ng-model="vm.declarationExtrait.numeroIdentitePere"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label"
-                                           data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
-                                           for="field_numeroPassportPere">Numero Passport Pere</label>
-                                    <input ng-disabled="vm.isNotWithFather" type="text" class="form-control"
-                                           name="numeroPassportPere" id="field_numeroPassportPere"
-                                           ng-model="vm.declarationExtrait.numeroPassportPere"
-                                    />
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
 
                     <!--commun-->
                     <div class="modal-header transcription-bloc-title">
@@ -757,6 +758,12 @@
         <!--<div ng-if="!isnew"-->
         <div ng-if="!isnew">
 
+            <div class="modal-header">
+                <h4 class="transcription_header" id="recapInfosPanel"
+                    data-translate="etatCivilApp.declarationExtrait.home.recapInfoPanel">Create or edit a Declaration
+                    Extrait</h4>
+            </div>
+
             <!--enfant-->
             <div class="modal-header transcription-bloc-title">
                 <p id="blocEnfant_recap"
@@ -830,6 +837,126 @@
 
             </div>
 
+
+            <!--pere-->
+            <div ng-if="!vm.isNotWithFather">
+                <div class="modal-header transcription-bloc-title">
+                    <p class="modal-title" id="blocPere_recap"
+                       data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration
+                        Extrait</p>
+                </div>
+                <div class="containerFlexItemMere containerFlexItem-recap">
+
+                    <div class="merebloc1">
+                        <div class="form-group">
+                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomPere"
+                                   for="field_nomPere">Nom Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.nomPere}}</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomMere"
+                                   for="field_prenomMere">Prenom Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.prenomPere}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
+                                   for="field_dateNaissancePere">Date Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.dateNaissancePere | date : "dd.MM.y"}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
+                                   for="field_paysNaissancePere">Pays
+                                Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.paysNaissancePere}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merebloc2">
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
+                                   for="field_lieuNaissancePere">Lieu
+                                Naissance Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.lieuNaissancePere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere"
+                                   for="field_adrPaysPere">Adr
+                                Pays
+                                Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.paysResidencePere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-translate="etatCivilApp.declarationExtrait.adressePere"
+                                   for="field_adressePere">Adresse
+                                Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.lieuResidencePere}}</span>
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
+                                   for="field_adresseComplPere">Adresse Compl Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.adresseComplPere}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="merebloc2">
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.fonctionPere"
+                                   for="field_fonctionPere">Fonction Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.fonctionPere}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
+                                   for="field_numeroIdentitePere">Numero Identite Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.numeroIdentitePere}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
+                                   for="field_numeroPassportPere">Numero Passport Pere</label>
+                            <div class="input-group">
+                                <span>{{vm.declarationExtrait.numeroPassportPere}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
 
             <!--mere-->
             <div class="modal-header transcription-bloc-title">
@@ -950,127 +1077,6 @@
             </div>
 
 
-            <!--pere-->
-            <div ng-if="!vm.isNotWithFather">
-                <div class="modal-header transcription-bloc-title">
-                    <p class="modal-title" id="blocPere_recap"
-                       data-translate="etatCivilApp.declarationExtrait.home.blocPere">Create or edit a Declaration
-                        Extrait</p>
-                </div>
-                <div class="containerFlexItemMere containerFlexItem-recap">
-
-                    <div class="merebloc1">
-                        <div class="form-group">
-                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomPere"
-                                   for="field_nomPere">Nom Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.nomPere}}</span>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" data-translate="etatCivilApp.declarationExtrait.prenomMere"
-                                   for="field_prenomMere">Prenom Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.prenomMere}}</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label"
-                                   data-translate="etatCivilApp.declarationExtrait.dateNaissancePere"
-                                   for="field_dateNaissancePere">Date Naissance Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.dateNaissancePere | date : "dd.MM.y"}}</span>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.paysNaissancePere"
-                                   for="field_paysNaissancePere">Pays
-                                Naissance Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.paysNaissancePere}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="merebloc2">
-
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.lieuNaissancePere"
-                                   for="field_lieuNaissancePere">Lieu
-                                Naissance Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.lieuNaissancePere}}</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.adrPaysPere"
-                                   for="field_adrPaysPere">Adr
-                                Pays
-                                Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.paysResidencePere}}</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-translate="etatCivilApp.declarationExtrait.adressePere"
-                                   for="field_adressePere">Adresse
-                                Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.lieuResidencePere}}</span>
-                                </input>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label"
-                                   data-translate="etatCivilApp.declarationExtrait.adresseComplPere"
-                                   for="field_adresseComplPere">Adresse Compl Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.adresseComplPere}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="merebloc2">
-
-                        <div class="form-group">
-                            <label class="control-label"
-                                   data-translate="etatCivilApp.declarationExtrait.fonctionPere"
-                                   for="field_fonctionPere">Fonction Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.fonctionPere}}</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label"
-                                   data-translate="etatCivilApp.declarationExtrait.numeroIdentitePere"
-                                   for="field_numeroIdentitePere">Numero Identite Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.numeroIdentitePere}}</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label"
-                                   data-translate="etatCivilApp.declarationExtrait.numeroPassportPere"
-                                   for="field_numeroPassportPere">Numero Passport Pere</label>
-                            <div class="input-group">
-                                <span>{{vm.declarationExtrait.numeroPassportPere}}</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-
-
             <!--commun-->
             <div class="modal-header transcription-bloc-title">
                 <p class="modal-title" id="blocCommun_recap"
@@ -1142,6 +1148,7 @@
             </div>
 
         </div>
+
 
         <div class="modal-footer">
 
