@@ -21,7 +21,6 @@ public interface DeclarationExtraitService {
 
     List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationExtraitDTO);
 
-    void supprimerActesImprimer(String acteNaissance, String transcriptionNaissance);
     /**
      * Get the "id" declarationExtrait.
      *
@@ -30,6 +29,19 @@ public interface DeclarationExtraitService {
      */
     DeclarationExtraitRechercheDTO findOne(Long id);
 
+    /**
+     * permet de mettre à jour l'extrait
+     *
+     * @param declarationExtraitDTO le dto
+     * @return l'extrait modifié
+     */
     DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO);
+
+    /**
+     * permet d'imprimer un extrait de naissance
+     *
+     * @param idExtrait id de l'extrait
+     * @return le nom de l'extrait à imprimer
+     */
     String printExtraitNaissance(Long idExtrait);
 }

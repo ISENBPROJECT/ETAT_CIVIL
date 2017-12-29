@@ -13,7 +13,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +38,8 @@ import java.util.*;
 @Transactional
 public class DeclarationExtraitServiceImpl implements DeclarationExtraitService {
 
-    public static final Integer INITIAL_NUMERO = 0001;
-    public static final String INTIAL_INSTITUTION = "/CGSB/";
+    private static final Integer INITIAL_NUMERO = 0001;
+    private static final String INTIAL_INSTITUTION = "/CGSB/";
     private final Logger log = LoggerFactory.getLogger(DeclarationExtraitServiceImpl.class);
     private final ExtraitService extraitService;
     private final PaysService paysService;
@@ -48,7 +47,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     private final PieceJointeService pieceJointeService;
     private final RegistreNaissanceService registreNaissanceService;
     private final UserService userService;
-    public Integer newRegistreNumero = 0;
+    private Integer newRegistreNumero = 0;
     private Long enfantId = null;
     private Long pereId = null;
     private Long mereId = null;
@@ -59,6 +58,20 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     @Autowired
     ServletContext context;
 
+    /**
+     * constructeur
+     *
+     * @param paysService              paysService
+     * @param pieceJointeService       pieceJointeService
+     * @param personneService          personneService
+     * @param extraitService           extraitService
+     * @param registreNaissanceService registreNaissanceService
+     * @param userService              userService
+     * @param villeService             villeService
+     * @param mailService              mailService
+     * @param extraitRepository        extraitRepository
+     * @param extraitMapper            extraitMapper
+     */
     public DeclarationExtraitServiceImpl(PaysService paysService, PieceJointeService pieceJointeService, PersonneService personneService, ExtraitService extraitService,
                                          RegistreNaissanceService registreNaissanceService, UserService userService, VilleService villeService, MailService mailService, ExtraitRepository extraitRepository, ExtraitMapper extraitMapper) {
         this.paysService = paysService;
@@ -144,17 +157,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return declarationExtraitDTO;
     }
 
-    private void viderDocuments() {
-        File file = new File("src/main/webapp/app/documents/");
-        try {
-            File[] listeDesFichiers = file.listFiles();
-            if (listeDesFichiers.length != 0) {
-                FileUtils.cleanDirectory(file);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * recupere l'utilisateur courant
@@ -206,6 +208,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return newNumeroRegistre;
     }
 
+    /**
+     * permet de créér le pattern composant le numéro de registre
+     *
+     * @param registreNaissance le numéro
+     * @return le pattern complet
+     */
     private String createCompleteNumeroRegistre(RegistreNaissanceDTO registreNaissance) {
         String numero = registreNaissance.getNumero().toString();
         String annee = String.valueOf(registreNaissance.getAnneeRegistre().getYear());
@@ -320,6 +328,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return result;
     }
 
+    /**
+     * permet de créér une piece jointe
+     *
+     * @param declarationExtraitDTO le dto
+     * @param idExtrait             id de l'extrait
+     */
     private void createPieceJointe(DeclarationExtraitDTO declarationExtraitDTO, Long idExtrait) {
 
         PieceJointeDTO pieceJointeDTO = new PieceJointeDTO();
@@ -384,7 +398,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                     acte.createNewFile();
                 }
 
-                //purgeRepertoireImpression(dateDuJour, docs);
+                purgeRepertoireImpression(dateDuJour, docs);
 
 
                 FileOutputStream fileOutputStream = new FileOutputStream(acte);
@@ -522,25 +536,38 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return FILE;
     }
 
+    /**
+     * permet de supprimer les fichiers créér de la veille
+     *
+     * @param dateDuJour date du jour
+     * @param template   le répertoire contenant les fichiers
+     */
     private void purgeRepertoireImpression(String dateDuJour, File template) {
-        ArrayList<File> listeASupprimer = new ArrayList();
-        if (null != template && null != template.listFiles()) {
-            for (File file : template.listFiles()) {
+
+        if (null != template.listFiles()) {
+            List<File> list = new LinkedList<File>(Arrays.asList(template.listFiles()));
+
+            for (Iterator<File> iterator = list.iterator(); iterator.hasNext(); ) {
+                File file = iterator.next();
                 if (file.isFile()) {
                     String name = file.getName();
                     String[] tableau = name.split("_");
                     if (!tableau[0].equals(dateDuJour)) {
-                        listeASupprimer.add(file);
+                        iterator.remove();
+                        file.delete();
                     }
+
                 }
             }
         }
-
-        if (!listeASupprimer.isEmpty()) {
-            boolean removed = listeASupprimer.removeIf(p -> p.isFile());
-        }
     }
 
+    /**
+     * permet de trouver un extrait en fonction des criteres saisis
+     *
+     * @param declarationNaissanceDTO le dto
+     * @return liste des extraits trouvés
+     */
     @Transactional(readOnly = true)
     public List<DeclarationExtraitRechercheDTO> findExtraitByCriteria(DeclarationExtraitDTO declarationNaissanceDTO) {
         log.debug("Request to get DeclarationNaissances by criteria");
@@ -548,17 +575,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return result;
     }
 
-    @Override
-    public void supprimerActesImprimer(String acteNaissance, String transcriptionNaissance) {
-        File documents = new File("src/main/webapp/app/documents/");
-        if (documents.isDirectory()) {
-            for (File file : documents.listFiles()) {
-                if (file.getName().equals(acteNaissance) || file.getName().equals(transcriptionNaissance)) {
-                    file.delete();
-                }
-            }
-        }
-    }
 
     /**
      * Get one declarationExtrait by id.
@@ -575,6 +591,12 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return extrait;
     }
 
+    /**
+     * permet de mettre à jour l'extrait de naissance
+     *
+     * @param declarationExtraitDTO le dto
+     * @return le dto modifié
+     */
     @Override
     public DeclarationExtraitRechercheDTO update(DeclarationExtraitRechercheDTO declarationExtraitDTO) {
 
