@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -47,6 +47,7 @@
         $scope.isnew = true;
         vm.renseignerInfosPere = renseignerInfosPere;
         vm.verifierSiMajeur = verifierSiMajeur;
+        vm.verifiersisanspere = verifiersisanspere;
         vm.verifierSiPereMajeur = verifierSiPereMajeur;
         vm.dateNaissanceEnfantFutur = dateNaissanceEnfantFutur;
         vm.dateNaissanceMereError = false;
@@ -73,6 +74,7 @@
             $scope.isrecap = false;
             $scope.test = false;
         }
+
         function save() {
             vm.isSaving = true;
             if (vm.declarationExtrait.id !== null) {
@@ -97,8 +99,8 @@
 
         vm.setCopieLiterale = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
+                DataUtils.toBase64($file, function (base64Data) {
+                    $scope.$apply(function () {
                         declarationExtrait.copieLiterale = base64Data;
                         declarationExtrait.copieLiteraleContentType = $file.type;
                     });
@@ -108,8 +110,8 @@
 
         vm.setCopieCarte = function ($file, declarationExtrait) {
             if ($file) {
-                DataUtils.toBase64($file, function(base64Data) {
-                    $scope.$apply(function() {
+                DataUtils.toBase64($file, function (base64Data) {
+                    $scope.$apply(function () {
                         declarationExtrait.copieCarte = base64Data;
                         declarationExtrait.copieCarteContentType = $file.type;
                     });
@@ -120,7 +122,7 @@
         vm.datePickerOpenStatus.dateNaissanceMere = false;
         vm.datePickerOpenStatus.dateNaissancePere = false;
 
-        function openCalendar (date) {
+        function openCalendar(date) {
             vm.datePickerOpenStatus[date] = true;
         }
 
@@ -156,6 +158,7 @@
                 }
             })
         };
+
         function updateVilleResidencePere() {
 
             vm.villesResidencePere.length = 0;
@@ -254,17 +257,19 @@
             if (vm.isNotWithFather) {
                 vm.villesNaissancesPere.push(villeInconnu);
                 vm.villesResidencePere.push(villeInconnu);
-                vm.declarationExtrait.nomPere = "xxx",
-                    vm.declarationExtrait.prenomPere = "xxx",
-                    vm.declarationExtrait.dateNaissancePere = null,
-                    vm.declarationExtrait.adresseComplPere = "xxx",
-                    vm.declarationExtrait.fonctionPere = "xxx",
-                    vm.declarationExtrait.numeroIdentitePere = "xxx",
-                    vm.declarationExtrait.numeroPassportPere = "xxx",
-                    vm.declarationExtrait.adrPaysPereId = paysInconnu,
-                    vm.declarationExtrait.paysNaissancePereId = paysInconnu,
-                    vm.declarationExtrait.lieuNaissancePereId = villeInconnu,
-                    vm.declarationExtrait.adressePereId = villeInconnu
+                vm.declarationExtrait.nomPere = "xxx";
+                vm.declarationExtrait.prenomPere = "xxx";
+                vm.declarationExtrait.dateNaissancePere = null;
+                vm.declarationExtrait.adresseComplPere = "xxx";
+                vm.declarationExtrait.fonctionPere = "xxx";
+                vm.declarationExtrait.numeroIdentitePere = "xxx";
+                vm.declarationExtrait.numeroPassportPere = "xxx";
+                vm.declarationExtrait.adrPaysPereId = paysInconnu;
+                vm.declarationExtrait.paysNaissancePereId = paysInconnu;
+                vm.declarationExtrait.lieuNaissancePereId = villeInconnu;
+                vm.declarationExtrait.adressePereId = villeInconnu;
+
+                verifiersisanspere();
             }
             if (!vm.isNotWithFather) {
                 vm.villesNaissancesPere.length == 0;
@@ -305,7 +310,7 @@
         function verifierSiMajeur() {
 
             var dateNaissance = vm.declarationExtrait.dateNaissanceMere;
-          vm.declarationExtrait.dateNaissanceMereCache = vm.declarationExtrait.dateNaissanceMere;
+            vm.declarationExtrait.dateNaissanceMereCache = vm.declarationExtrait.dateNaissanceMere;
             var dateNaissanceEnfant = vm.declarationExtrait.dateNaissanceEnfant;
             if (null != dateNaissance) {
                 var today = new Date();
@@ -374,5 +379,12 @@
 
         // saisie du nom de la carte
         $scope.card = null;
+
+
+        function verifiersisanspere() {
+            if (vm.isNotWithFather) {
+                vm.declarationExtrait.nomEnfant = vm.declarationExtrait.nomMere;
+            }
+        }
     }
 })();

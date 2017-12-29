@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomEnfant"
                                        for="field_nomEnfant">Nom Enfant</label>
-                                <input type="text" class="form-control" name="nomEnfant" id="field_nomEnfant"
+                                <input ng-change="vm.verifiersisanspere()" type="text" class="form-control" name="nomEnfant" id="field_nomEnfant"
                                        ng-model="vm.declarationExtrait.nomEnfant"
                                        required/>
                                 <div ng-show="editForm.nomEnfant.$invalid">
@@ -383,7 +383,7 @@
                             <div class="form-group">
                                 <label class="control-label" data-translate="etatCivilApp.declarationExtrait.nomMere"
                                        for="field_nomMere">Nom Mere</label>
-                                <input type="text" class="form-control" name="nomMere" id="field_nomMere"
+                                <input ng-change="vm.verifiersisanspere()" type="text" class="form-control" name="nomMere" id="field_nomMere"
                                        ng-model="vm.declarationExtrait.nomMere"
                                        required/>
                                 <div ng-show="editForm.nomMere.$invalid">
