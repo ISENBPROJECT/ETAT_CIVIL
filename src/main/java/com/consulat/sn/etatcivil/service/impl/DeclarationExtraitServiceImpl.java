@@ -386,7 +386,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 if (!test.exists()) {
                     test.mkdir();
                 }
-                pdfTemplate = new PdfReader(templateFolder + "/template_extrait_naissance.pdf");
+                pdfTemplate = new PdfReader(templateFolder + "/TEMPLATE_ACTE_DE_NAISSANCE_ORIGINAL_BIS.pdf");
 
                 String documentsFolder = context.getRealPath("/app/documents");
                 File docs = new File(documentsFolder);
@@ -407,18 +407,20 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 //ByteArrayOutputStream out = new ByteArrayOutputStream();
                 PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
                 stamper.setFormFlattening(true);
-                stamper.getAcroFields().setField("annee", Integer.toString(year));
-                stamper.getAcroFields().setField("registre", extraitDTO.getNumeroRegistre());
-                stamper.getAcroFields().setField("dateNaissance", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
+                stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
+                stamper.getAcroFields().setField("numeroDansRegistre", extraitDTO.getNumeroRegistre());
+                //stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
+                stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
                 stamper.getAcroFields().setField("lieu", lieuDeclaration.getNom());
-                stamper.getAcroFields().setField("lieuNaissance", lieuNaissanceEnfant.getNom());
-                stamper.getAcroFields().setField("sexe", enfant.getGenre().toString());
-                stamper.getAcroFields().setField("prenom", enfant.getPrenom());
-                stamper.getAcroFields().setField("nom", enfant.getNom());
+                stamper.getAcroFields().setField("lieuDeNaissance", lieuNaissanceEnfant.getNom());
+                stamper.getAcroFields().setField("genreEnfant", enfant.getGenre().toString());
+                stamper.getAcroFields().setField("prenomEnfant", enfant.getPrenom());
+                stamper.getAcroFields().setField("nomEnfant", enfant.getNom());
                 stamper.getAcroFields().setField("prenomPere", pere.getPrenom());
-                stamper.getAcroFields().setField("nomMere", mere.getPrenom() + " " + mere.getNom());
-                stamper.getAcroFields().setField("mentionMarginale", extraitDTO.getMention());
-                stamper.getAcroFields().setField("dateDeclaration", format_fr.format(new Date()));
+                stamper.getAcroFields().setField("prenomEtNomMere", mere.getPrenom() + " " + mere.getNom());
+                stamper.getAcroFields().setField("mention", extraitDTO.getMention());
+                stamper.getAcroFields().setField("dateImpression", format_fr.format(new Date()));
+
                 stamper.close();
                 pdfTemplate.close();
             } catch (IOException e) {
