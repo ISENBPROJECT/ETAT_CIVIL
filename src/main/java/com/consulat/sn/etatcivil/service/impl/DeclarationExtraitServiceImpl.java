@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -105,7 +106,15 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         if (isFamilyCreated) {
             extraitDTO.setDateDeclaration(LocalDate.now());
             extraitDTO.setMention(declarationExtraitDTO.getMention());
-            extraitDTO.setNumeroRegistre(createNumeroRegistre());
+
+            if (null == declarationExtraitDTO.getNumeroRegistre()) {
+
+                extraitDTO.setNumeroRegistre(createNumeroRegistre());
+
+            } else {
+
+                extraitDTO.setNumeroRegistre(declarationExtraitDTO.getNumeroRegistre());
+            }
             extraitDTO.setPereId(pereId);
             extraitDTO.setMereId(mereId);
             extraitDTO.setEnfantId(enfantId);
@@ -120,13 +129,48 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         //enregistrement des fichiers pieces jointes
         if (null != extraitDTO.getId()) {
+
             createPieceJointe(declarationExtraitDTO, extraitDTO.getId());
 
             //je créé le registre
             RegistreNaissanceDTO registreNaissanceDTO = new RegistreNaissanceDTO();
+
             registreNaissanceDTO.setAnneeRegistre(extraitDTO.getDateDeclaration());
+
             registreNaissanceDTO.setExtraitId(extraitDTO.getId());
-            registreNaissanceDTO.setNumero(newRegistreNumero);
+
+            if (null == declarationExtraitDTO.getNumeroRegistre()) {
+
+                registreNaissanceDTO.setNumero(newRegistreNumero);
+
+            } else {
+
+                String[] numeroRegistre = declarationExtraitDTO.getNumeroRegistre().split("/");
+
+                registreNaissanceDTO.setNumero(Integer.valueOf(numeroRegistre[0]));
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy");
+
+                Date dateExtrait = null;
+                try {
+                    dateExtrait = format.parse(numeroRegistre[2]);
+
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+                }
+                ZoneId defaultZoneId = ZoneId.systemDefault();
+
+                System.out.println("date : " + dateExtrait);
+
+                //1. Convert Date -> Instant
+                Instant instant = dateExtrait.toInstant();
+
+                //2. Instant + system default time zone + toLocalDate() = LocalDate
+                LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+
+                registreNaissanceDTO.setAnneeRegistre(localDate);
+            }
 
             registreNaissanceService.save(registreNaissanceDTO);
 
