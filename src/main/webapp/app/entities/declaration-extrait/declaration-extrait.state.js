@@ -280,6 +280,64 @@
                     }
                 }
 
+            })
+            .state('declaration-extrait.rdd', {
+                parent: 'declaration-extrait',
+                url: '/reprise-de-donnees',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/declaration-extrait/declaration-extrait-rdd.html',
+                        controller: 'DeclarationExtraitDialogController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    entity: function () {
+                        return {
+                            copieLiterale: null,
+                            copieLiteraleContentType: null,
+                            copieCarte: null,
+                            copieCarteContentType: null,
+                            mention: null,
+                            nomEnfant: null,
+                            prenomEnfant: null,
+                            dateNaissanceEnfant: null,
+                            genreEnfant: null,
+                            nomMere: null,
+                            prenomMere: null,
+                            dateNaissanceMere: null,
+                            fonctionMere: null,
+                            adresseComplMere: null,
+                            numeroIdentiteMere: null,
+                            numeroPassportMere: null,
+                            nomPere: null,
+                            prenomPere: null,
+                            dateNaissancePere: null,
+                            adresseComplPere: null,
+                            fonctionPere: null,
+                            numeroIdentitePere: null,
+                            numeroPassportPere: null,
+                            paysNaissanceEnfant: null,
+                            villeNaissanceEnfant: null,
+                            paysNaissanceMere: null,
+                            villeNaissanceMere: null,
+                            paysResidenceMere: null,
+                            villeResidenceMere: null,
+                            paysNaissancePere: null,
+                            villeNaissancePere: null,
+                            paysResidencePere: null,
+                            villeResidencePere: null,
+                            nomExtrait: null,
+                            nomTranscription: null,
+                            numeroRegistre: null,
+                            id: null
+                        };
+                    }
+                }
+
             });
     }
 
