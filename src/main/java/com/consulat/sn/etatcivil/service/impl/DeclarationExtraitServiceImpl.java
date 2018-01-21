@@ -633,7 +633,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public DeclarationExtraitRechercheDTO findOne(Long id) {
         log.debug("Request to get DeclarationExtrait : {}", id);
         DeclarationExtraitRechercheDTO extrait = extraitService.findExtraitById(id);
-        extrait.setAgent(null);
         return extrait;
     }
 
