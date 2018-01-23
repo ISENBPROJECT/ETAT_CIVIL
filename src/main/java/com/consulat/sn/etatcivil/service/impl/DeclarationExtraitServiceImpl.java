@@ -6,6 +6,9 @@ import com.consulat.sn.etatcivil.repository.ExtraitRepository;
 import com.consulat.sn.etatcivil.service.*;
 import com.consulat.sn.etatcivil.service.dto.*;
 import com.consulat.sn.etatcivil.service.mapper.ExtraitMapper;
+
+import com.ibm.icu.text.NumberFormat;
+import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -29,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -633,6 +637,22 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     public DeclarationExtraitRechercheDTO findOne(Long id) {
         log.debug("Request to get DeclarationExtrait : {}", id);
         DeclarationExtraitRechercheDTO extrait = extraitService.findExtraitById(id);
+
+        int num = 2018;
+        int annee = extrait.getDateDeclaration().getYear();
+        Month mois = extrait.getDateDeclaration().getMonth();
+        int jour = extrait.getDateDeclaration().getDayOfMonth();
+        NumberFormat formatter = new RuleBasedNumberFormat(RuleBasedNumberFormat.SPELLOUT);
+        // NumberFormat formatter = new RuleBasedNumberFormat(Locale.FRANCE, RuleBasedNumberFormat.SPELLOUT);
+        String result = formatter.format(num);
+        String resultannee = formatter.format(annee);
+        String resultjour = formatter.format(jour);
+        System.out.println(result);
+
+        // résultat avec Locale.ENGLISH : two thousand seven hundred and eighteen point two eight
+        // résultat avec Locale.GERMAN : zwei tausend sieben hundert achtzehn Komma zwei acht
+        // résultat avec Locale.FRANCE : deux-mille-sept-cent-dix-huit virgule deux huit
+
         return extrait;
     }
 
