@@ -1,0 +1,15 @@
+<form name="deleteForm" ng-submit="vm.confirmDelete(vm.declarationExtrait.id)">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" data-translate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+    <div class="modal-body">
+        Ce numéro existe dèjà dans le registre de l'année!!
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clearPopup">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.valid">Valider</span>
+        </button>
+    </div>
+</form>
