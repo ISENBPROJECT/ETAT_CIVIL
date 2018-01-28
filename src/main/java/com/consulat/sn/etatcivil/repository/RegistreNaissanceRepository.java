@@ -1,9 +1,8 @@
 package com.consulat.sn.etatcivil.repository;
 
 import com.consulat.sn.etatcivil.domain.RegistreNaissance;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import org.springframework.data.jpa.repository.*;
 
 
 /**
@@ -11,7 +10,7 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface RegistreNaissanceRepository extends JpaRepository<RegistreNaissance,Long> {
+public interface RegistreNaissanceRepository extends JpaRepository<RegistreNaissance, Long> {
 
     RegistreNaissance findFirstByOrderByIdDesc();
 }

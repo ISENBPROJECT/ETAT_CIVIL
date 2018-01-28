@@ -14,6 +14,11 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "registre_naissance")
+@NamedQueries({
+    @NamedQuery(name = "RegistreNaissance.isNumeroExist",
+        query = "select count(registre) from RegistreNaissance registre WHERE year(registre.anneeRegistre) = :anneeRegistre AND registre.numero = :numero")
+})
+
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class RegistreNaissance implements Serializable {
 

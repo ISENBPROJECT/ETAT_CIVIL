@@ -40,4 +40,10 @@ public interface RegistreNaissanceService {
 
     RegistreNaissanceDTO findFirstByOrderByIdDesc();
 
+    /**
+     * permet de savoir si un numero de registre existe
+     * @param numeroRegistre le numero de registre
+     * @return vrai ou faux
+     */
+    boolean isNumeroExist(String numeroRegistre);
 }

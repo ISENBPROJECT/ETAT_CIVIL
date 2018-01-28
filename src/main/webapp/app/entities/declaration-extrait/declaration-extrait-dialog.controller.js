@@ -5,14 +5,15 @@
         .module('etatCivilApp')
         .controller('DeclarationExtraitDialogController', DeclarationExtraitDialogController);
 
-    DeclarationExtraitDialogController.$inject = ['$timeout', '$scope', '$state', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays'];
+    DeclarationExtraitDialogController.$inject = ['$timeout', '$scope', '$state', 'DataUtils', 'entity', 'DeclarationExtrait', 'Ville', 'Pays','$uibModal'];
 
-    function DeclarationExtraitDialogController($timeout, $scope, $state, DataUtils, entity, DeclarationExtrait, Ville, Pays) {
+    function DeclarationExtraitDialogController($timeout, $scope, $state, DataUtils, entity, DeclarationExtrait, Ville, Pays,$uibModal) {
         var vm = this;
 
         vm.declarationExtrait = entity;
         vm.declarationExtrait.mention = "NEANT";
         vm.clear = clear;
+        vm.clearPopup = clearPopup;
         vm.annuler = annuler;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -94,6 +95,12 @@
 
         function onSaveError() {
             vm.isSaving = false;
+            $uibModal.open({
+                templateUrl: 'app/entities/declaration-extrait/numero-registre-existant-message.html',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg'
+            })
         }
 
 
@@ -385,6 +392,10 @@
             if (vm.isNotWithFather) {
                 vm.declarationExtrait.nomEnfant = vm.declarationExtrait.nomMere;
             }
+        }
+
+        function clearPopup(){
+            $uibModal.close(true);
         }
     }
 })();

@@ -4,12 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import com.consulat.sn.etatcivil.service.DeclarationExtraitService;
 import com.consulat.sn.etatcivil.service.ExtraitService;
 import com.consulat.sn.etatcivil.service.PersonneService;
+import com.consulat.sn.etatcivil.service.RegistreNaissanceService;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitDTO;
 import com.consulat.sn.etatcivil.service.dto.DeclarationExtraitRechercheDTO;
-import com.consulat.sn.etatcivil.service.dto.PersonneDTO;
 import com.consulat.sn.etatcivil.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,20 +34,13 @@ public class DeclarationExtraitResource {
 
     private final DeclarationExtraitService declarationExtraitService;
 
-    private final PersonneService personneService;
-    private final ExtraitService extraitService;
+    private final RegistreNaissanceService registreNaissanceService;
     @Autowired
     ServletContext context;
 
-    private static String UNDEFINED = "undefined";
-    private String[] datePattern = {"yyyy-MM-dd"};
-    final org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MMM-dd");
-
-
-    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService, PersonneService personneService, ExtraitService extraitService) {
+    public DeclarationExtraitResource(DeclarationExtraitService declarationExtraitService, PersonneService personneService, ExtraitService extraitService, RegistreNaissanceService registreNaissanceService) {
         this.declarationExtraitService = declarationExtraitService;
-        this.personneService = personneService;
-        this.extraitService = extraitService;
+        this.registreNaissanceService = registreNaissanceService;
     }
 
     /**
@@ -86,6 +75,11 @@ public class DeclarationExtraitResource {
         if (isDeclarationExist) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
         }*/
+
+        boolean isNumeroExist = registreNaissanceService.isNumeroExist(declarationExtraitDTO.getNumeroRegistre());
+        if (isNumeroExist) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
+        }
         DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);
         return ResponseEntity.created(new URI("/api/extraits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -136,7 +130,6 @@ public class DeclarationExtraitResource {
     @Timed
     public ResponseEntity<DeclarationExtraitRechercheDTO> getDeclarationExtrait(@PathVariable Long id) {
         log.debug("REST request to get DeclarationExtrait : {}", id);
-
 
 
         DeclarationExtraitRechercheDTO declarationExtraitDTO = declarationExtraitService.findOne(id);

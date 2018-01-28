@@ -165,8 +165,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 }
                 ZoneId defaultZoneId = ZoneId.systemDefault();
 
-                System.out.println("date : " + dateExtrait);
-
                 //1. Convert Date -> Instant
                 Instant instant = dateExtrait.toInstant();
 
@@ -647,7 +645,6 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         String result = formatter.format(num);
         String resultannee = formatter.format(annee);
         String resultjour = formatter.format(jour);
-        System.out.println(result);
 
         // résultat avec Locale.ENGLISH : two thousand seven hundred and eighteen point two eight
         // résultat avec Locale.GERMAN : zwei tausend sieben hundert achtzehn Komma zwei acht
