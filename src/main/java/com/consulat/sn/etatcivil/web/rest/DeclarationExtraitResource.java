@@ -79,7 +79,7 @@ public class DeclarationExtraitResource {
 
             boolean isNumeroExist = registreNaissanceService.isNumeroExist(declarationExtraitDTO.getNumeroRegistre());
             if (isNumeroExist) {
-                return ResponseEntity.ok().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
+                return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
             }
         }
         DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);

@@ -92,20 +92,18 @@
                 vm.declarationExtrait.nomExtrait = result.nomExtrait;
                 vm.declarationExtrait.nomTranscription = result.nomTranscription;
                 $state.go('declaration-extrait-affichagePdf');
-            }else {
-                $uibModal.open({
-                    templateUrl: 'app/entities/declaration-extrait/numero-registre-existant-message.html',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg'
-                })
             }
             vm.isSaving = false;
         }
 
         function onSaveError() {
             vm.isSaving = false;
-
+            $uibModal.open({
+                templateUrl: 'app/entities/declaration-extrait/numero-registre-existant-message.html',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg'
+            })
         }
 
 
