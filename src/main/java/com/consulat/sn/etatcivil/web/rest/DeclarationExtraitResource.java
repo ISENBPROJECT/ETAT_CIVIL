@@ -75,10 +75,12 @@ public class DeclarationExtraitResource {
         if (isDeclarationExist) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
         }*/
+        if (null != declarationExtraitDTO.getNumeroRegistre()) {
 
-        boolean isNumeroExist = registreNaissanceService.isNumeroExist(declarationExtraitDTO.getNumeroRegistre());
-        if (isNumeroExist) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
+            boolean isNumeroExist = registreNaissanceService.isNumeroExist(declarationExtraitDTO.getNumeroRegistre());
+            if (isNumeroExist) {
+                return ResponseEntity.ok().headers(HeaderUtil.createAlertExistenceDeclaration(ENTITY_NAME, "declarationexist", "Cette enfant a déjà été déclaré")).body(null);
+            }
         }
         DeclarationExtraitDTO result = declarationExtraitService.save(declarationExtraitDTO);
         return ResponseEntity.created(new URI("/api/extraits/" + result.getId()))

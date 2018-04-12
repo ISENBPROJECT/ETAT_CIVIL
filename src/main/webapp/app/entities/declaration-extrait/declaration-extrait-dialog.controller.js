@@ -60,6 +60,7 @@
         vm.declarationExtrait.paysDeclaration = "FRANCE";
         vm.declarationExtrait.lieuDeclaration = "Bordeaux";
         vm.dateformat = "dd-MM-yyyy";
+        vm.supprimerPopup = supprimerPopup;
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -86,21 +87,25 @@
         }
 
         function onSaveSuccess(result) {
-            vm.declarationExtrait.id = result.id;
-            vm.declarationExtrait.nomExtrait = result.nomExtrait;
-            vm.declarationExtrait.nomTranscription = result.nomTranscription;
-            $state.go('declaration-extrait-affichagePdf');
+            if (null != result.id) {
+                vm.declarationExtrait.id = result.id;
+                vm.declarationExtrait.nomExtrait = result.nomExtrait;
+                vm.declarationExtrait.nomTranscription = result.nomTranscription;
+                $state.go('declaration-extrait-affichagePdf');
+            }else {
+                $uibModal.open({
+                    templateUrl: 'app/entities/declaration-extrait/numero-registre-existant-message.html',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg'
+                })
+            }
             vm.isSaving = false;
         }
 
         function onSaveError() {
             vm.isSaving = false;
-            $uibModal.open({
-                templateUrl: 'app/entities/declaration-extrait/numero-registre-existant-message.html',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg'
-            })
+
         }
 
 
@@ -396,6 +401,11 @@
 
         function clearPopup(){
             $uibModal.close(true);
+        }
+
+        function supprimerPopup() {
+            console.log("yeksilll");
+
         }
     }
 })();

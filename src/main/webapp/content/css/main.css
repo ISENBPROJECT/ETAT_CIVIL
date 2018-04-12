@@ -605,3 +605,8 @@ ui bootstrap tweaks
     max-width: 262px;
     max-height: 120px;
 }
+
+.centrerHeaderPopup{
+    text-align: center;
+    color: rgba(255, 42, 44, 0.88);
+}
