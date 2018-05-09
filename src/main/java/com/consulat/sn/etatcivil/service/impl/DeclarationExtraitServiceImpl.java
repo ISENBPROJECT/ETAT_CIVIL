@@ -6,7 +6,6 @@ import com.consulat.sn.etatcivil.repository.ExtraitRepository;
 import com.consulat.sn.etatcivil.service.*;
 import com.consulat.sn.etatcivil.service.dto.*;
 import com.consulat.sn.etatcivil.service.mapper.ExtraitMapper;
-
 import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.itextpdf.text.Document;
@@ -255,6 +254,29 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     }
 
     /**
+     * permet de formatter le numéro de registre sur 4 digits exemple : 0001
+     *
+     * @param declarationExtraitDTO l'extrait de naissance
+     * @return le numéro formaté
+     */
+    private String formatNumeroRegistre(ExtraitDTO declarationExtraitDTO) {
+        String formatedNumeroRegistre;
+        String[] numerosRegistre = declarationExtraitDTO.getNumeroRegistre().split("/");
+
+        Integer numeroRegistre = Integer.valueOf(numerosRegistre[0]);
+        if (numeroRegistre < 10) {
+            formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
+        } else if (numeroRegistre < 100) {
+            formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
+        } else if (numeroRegistre < 999) {
+            formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
+        } else {
+            formatedNumeroRegistre = numeroRegistre.toString();
+        }
+        return formatedNumeroRegistre;
+    }
+
+    /**
      * permet de créér le pattern composant le numéro de registre
      *
      * @param registreNaissance le numéro
@@ -454,7 +476,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
                 stamper.setFormFlattening(true);
                 stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
-                stamper.getAcroFields().setField("numeroDansRegistre", extraitDTO.getNumeroRegistre());
+                stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO));
                 //stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
                 stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
                 stamper.getAcroFields().setField("lieu", lieuDeclaration.getNom());
