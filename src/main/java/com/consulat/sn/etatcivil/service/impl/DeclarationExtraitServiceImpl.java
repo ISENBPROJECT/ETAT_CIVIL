@@ -265,15 +265,15 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         Integer numeroRegistre = Integer.valueOf(numerosRegistre[0]);
         if (numeroRegistre < 10) {
-            formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
+            formatedNumeroRegistre = "0" + "0" + "0" + numeroRegistre.toString();
         } else if (numeroRegistre < 100) {
             formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
         } else if (numeroRegistre < 999) {
-            formatedNumeroRegistre = "0" + "0" + numeroRegistre.toString();
+            formatedNumeroRegistre = "0" + numeroRegistre.toString();
         } else {
             formatedNumeroRegistre = numeroRegistre.toString();
         }
-        return formatedNumeroRegistre;
+        return formatedNumeroRegistre + "/" + numerosRegistre[1] + "/" + numerosRegistre[2];
     }
 
     /**
