@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -261,6 +262,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
      */
     private String formatNumeroRegistre(ExtraitDTO declarationExtraitDTO) {
         String formatedNumeroRegistre;
+        DateFormat format_fr = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH);
         String[] numerosRegistre = declarationExtraitDTO.getNumeroRegistre().split("/");
 
         Integer numeroRegistre = Integer.valueOf(numerosRegistre[0]);
@@ -273,7 +275,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         } else {
             formatedNumeroRegistre = numeroRegistre.toString();
         }
-        return formatedNumeroRegistre + "/" + numerosRegistre[1] + "/" + numerosRegistre[2];
+        return formatedNumeroRegistre + "/" + numerosRegistre[1] + " " + "DU" + " " + format_fr.format(new Date());
     }
 
     /**
@@ -344,7 +346,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         mere.setDateNaissance(declarationExtraitDTO.getDateNaissanceMere());
         mere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportMere());
         mere.setNumeroCarteIdentite(declarationExtraitDTO.getNumeroIdentiteMere());
-        mere.setGenre(Genre.FEMININ);
+        mere.setGenre(Genre.Féminin);
         mere.setAdresseId(villeResidenceMere.getId());
         mere.setFonction(declarationExtraitDTO.getFonctionMere());
         mere.setLieuNaissanceId(lieuNaissanceMere.getId());
@@ -367,7 +369,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             pere.setDateNaissance(declarationExtraitDTO.getDateNaissancePere());
             pere.setNumeroPassport(declarationExtraitDTO.getNumeroPassportPere());
             pere.setNumeroCarteIdentite(declarationExtraitDTO.getNumeroIdentitePere());
-            pere.setGenre(Genre.MASCULIN);
+            pere.setGenre(Genre.Masculin);
             pere.setAdresseId(villeResidencePere.getId());
             pere.setFonction(declarationExtraitDTO.getFonctionPere());
             pere.setLieuNaissanceId(lieuNaissancePere.getId());
@@ -446,7 +448,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             // SimpleDateFormat dateDeclaration = null;
             Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
-            DateFormat format_fr = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRENCH);
+            DateFormat format_fr = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH);
             try {
                 String templateFolder = context.getRealPath("/downloads");
 
@@ -477,15 +479,15 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 stamper.setFormFlattening(true);
                 stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
                 stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO));
-                //stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
+                stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
                 stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
-                stamper.getAcroFields().setField("lieu", lieuDeclaration.getNom());
-                stamper.getAcroFields().setField("lieuDeNaissance", lieuNaissanceEnfant.getNom());
-                stamper.getAcroFields().setField("genreEnfant", enfant.getGenre().toString());
+                stamper.getAcroFields().setField("lieu", StringUtils.capitalize(lieuDeclaration.getNom()));
+                stamper.getAcroFields().setField("lieuDeNaissance", StringUtils.capitalize(lieuNaissanceEnfant.getNom()));
+                stamper.getAcroFields().setField("genreEnfant", StringUtils.capitalize(enfant.getGenre().toString()));
                 stamper.getAcroFields().setField("prenomEnfant", enfant.getPrenom());
-                stamper.getAcroFields().setField("nomEnfant", enfant.getNom());
+                stamper.getAcroFields().setField("nomEnfant", enfant.getNom().toUpperCase());
                 stamper.getAcroFields().setField("prenomPere", pere.getPrenom());
-                stamper.getAcroFields().setField("prenomEtNomMere", mere.getPrenom() + " " + mere.getNom());
+                stamper.getAcroFields().setField("prenomEtNomMere", mere.getPrenom() + " " + mere.getNom().toUpperCase());
                 stamper.getAcroFields().setField("mention", extraitDTO.getMention());
                 stamper.getAcroFields().setField("dateImpression", format_fr.format(new Date()));
 
@@ -500,12 +502,25 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return acteNaissance;
     }
 
+
+    /**
+     * permet d'ajouter une ligne vide
+     *
+     * @param paragraph le paragraphe
+     * @param number    le nombre
+     */
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
         }
     }
 
+    /**
+     * permet de faire des conversions de localDate vers date
+     *
+     * @param date la date locale
+     * @return la date en sortie
+     */
     public static Date fromLocalDate(LocalDate date) {
         Instant instant = date.atStartOfDay().atZone(ZoneId.systemDefault())
             .toInstant();
@@ -520,8 +535,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     }
 
     /**
-     * @param declarationExtraitDTO
-     * @throws IOException
+     * @param declarationExtraitDTO le dto
+     * @throws IOException       exception
      * @throws DocumentException Cette fonction permet de créer le fichier de transcription de naissance
      */
     public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)

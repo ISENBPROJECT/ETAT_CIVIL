@@ -89,7 +89,7 @@
         {
             "fieldName": "genreEnfant",
             "fieldType": "Genre",
-            "fieldValues": "MASCULIN,FEMININ"
+            "fieldValues": "Masculin,Féminin"
         },
         {
             "fieldName": "nomMere",

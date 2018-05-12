@@ -4,7 +4,6 @@ import com.consulat.sn.etatcivil.EtatCivilApp;
 
 import com.consulat.sn.etatcivil.domain.Personne;
 import com.consulat.sn.etatcivil.domain.Ville;
-import com.consulat.sn.etatcivil.domain.Ville;
 import com.consulat.sn.etatcivil.repository.PersonneRepository;
 import com.consulat.sn.etatcivil.service.PersonneService;
 import com.consulat.sn.etatcivil.service.dto.PersonneDTO;
@@ -57,8 +56,8 @@ public class PersonneResourceIntTest {
     private static final String DEFAULT_FONCTION = "AAAAAAAAAA";
     private static final String UPDATED_FONCTION = "BBBBBBBBBB";
 
-    private static final Genre DEFAULT_GENRE = Genre.MASCULIN;
-    private static final Genre UPDATED_GENRE = Genre.FEMININ;
+    private static final Genre DEFAULT_GENRE = Genre.Masculin;
+    private static final Genre UPDATED_GENRE = Genre.Féminin;
 
     private static final String DEFAULT_NUMERO_CARTE_IDENTITE = "AAAAAAAAAA";
     private static final String UPDATED_NUMERO_CARTE_IDENTITE = "BBBBBBBBBB";

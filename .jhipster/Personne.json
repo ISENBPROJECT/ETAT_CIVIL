@@ -57,7 +57,7 @@
         {
             "fieldName": "genre",
             "fieldType": "Genre",
-            "fieldValues": "MASCULIN,FEMININ"
+            "fieldValues": "Masculin,Féminin"
         },
         {
             "fieldName": "numeroCarteIdentite",

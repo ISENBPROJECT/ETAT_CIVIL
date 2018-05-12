@@ -11,7 +11,7 @@ entity Commune {
 }
 
 enum Genre {
-    MASCULIN, FEMININ
+    Masculin, Féminin
   }
 
 entity Personne {
