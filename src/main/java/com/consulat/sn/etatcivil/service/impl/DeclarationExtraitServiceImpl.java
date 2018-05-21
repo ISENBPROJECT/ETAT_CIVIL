@@ -8,13 +8,8 @@ import com.consulat.sn.etatcivil.service.dto.*;
 import com.consulat.sn.etatcivil.service.mapper.ExtraitMapper;
 import com.ibm.icu.text.NumberFormat;
 import com.ibm.icu.text.RuleBasedNumberFormat;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +30,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.List;
 
 /**
  * Service Implementation for managing DeclarationExtrait.
@@ -189,7 +185,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
 
             try {
-                String nomTranscription = creerTranscription(declarationExtraitDTO);
+
+                String nomTranscription = creerTranscription(declarationExtraitDTO,extraitDTO.getNumeroRegistre());
                 declarationExtraitDTO.setNomTranscription(nomTranscription);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -257,13 +254,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
     /**
      * permet de formatter le numéro de registre sur 4 digits exemple : 0001
      *
-     * @param declarationExtraitDTO l'extrait de naissance
+     * @param extraitDTO l'extrait de naissance
      * @return le numéro formaté
      */
-    private String formatNumeroRegistre(ExtraitDTO declarationExtraitDTO) {
+    private String formatNumeroRegistre(ExtraitDTO extraitDTO) {
         String formatedNumeroRegistre;
         DateFormat format_fr = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH);
-        String[] numerosRegistre = declarationExtraitDTO.getNumeroRegistre().split("/");
+        String[] numerosRegistre = extraitDTO.getNumeroRegistre().split("/");
 
         Integer numeroRegistre = Integer.valueOf(numerosRegistre[0]);
         if (numeroRegistre < 10) {
@@ -471,28 +468,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
                 purgeRepertoireImpression(dateDuJour, docs);
 
 
-                FileOutputStream fileOutputStream = new FileOutputStream(acte);
+                ecrireDansPdf(extraitDTO, enfant, mere, pere, lieuDeclaration, lieuNaissanceEnfant, pdfTemplate, year, format_fr, acte);
 
-
-                //ByteArrayOutputStream out = new ByteArrayOutputStream();
-                PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
-                stamper.setFormFlattening(true);
-                stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
-                stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO));
-                stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
-                stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
-                stamper.getAcroFields().setField("lieu", StringUtils.capitalize(lieuDeclaration.getNom()));
-                stamper.getAcroFields().setField("lieuDeNaissance", StringUtils.capitalize(lieuNaissanceEnfant.getNom()));
-                stamper.getAcroFields().setField("genreEnfant", StringUtils.capitalize(enfant.getGenre().toString()));
-                stamper.getAcroFields().setField("prenomEnfant", enfant.getPrenom());
-                stamper.getAcroFields().setField("nomEnfant", enfant.getNom().toUpperCase());
-                stamper.getAcroFields().setField("prenomPere", pere.getPrenom());
-                stamper.getAcroFields().setField("prenomEtNomMere", mere.getPrenom() + " " + mere.getNom().toUpperCase());
-                stamper.getAcroFields().setField("mention", extraitDTO.getMention());
-                stamper.getAcroFields().setField("dateImpression", format_fr.format(new Date()));
-
-                stamper.close();
-                pdfTemplate.close();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (DocumentException e) {
@@ -500,6 +477,46 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             }
         }
         return acteNaissance;
+    }
+
+    /**
+     * permet d'écrire dans le fichier pdf
+     * @param extraitDTO l'extrait
+     * @param enfant infos de l'enfant
+     * @param mere infos de la mère
+     * @param pere infos du père
+     * @param lieuDeclaration le lieu de déclaration
+     * @param lieuNaissanceEnfant lieu de naissance du pere
+     * @param pdfTemplate le template
+     * @param year l'année
+     * @param format_fr le formatteur
+     * @param acte l'acte de naissance
+     * @throws DocumentException exception du document
+     * @throws IOException exception
+     */
+    private void ecrireDansPdf(ExtraitDTO extraitDTO, PersonneDTO enfant, PersonneDTO mere, PersonneDTO pere, VilleDTO lieuDeclaration, VilleDTO lieuNaissanceEnfant, PdfReader pdfTemplate, int year, DateFormat format_fr, File acte) throws DocumentException, IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(acte);
+
+
+        //ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
+        stamper.setFormFlattening(true);
+        stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
+        stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO));
+        stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
+        stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
+        stamper.getAcroFields().setField("lieu", StringUtils.capitalize(lieuDeclaration.getNom()));
+        stamper.getAcroFields().setField("lieuDeNaissance", StringUtils.capitalize(lieuNaissanceEnfant.getNom()));
+        stamper.getAcroFields().setField("genreEnfant", StringUtils.capitalize(enfant.getGenre().toString()));
+        stamper.getAcroFields().setField("prenomEnfant", enfant.getPrenom());
+        stamper.getAcroFields().setField("nomEnfant", enfant.getNom().toUpperCase());
+        stamper.getAcroFields().setField("prenomPere", pere.getPrenom());
+        stamper.getAcroFields().setField("prenomEtNomMere", mere.getPrenom() + " " + mere.getNom().toUpperCase());
+        stamper.getAcroFields().setField("mention", extraitDTO.getMention());
+        stamper.getAcroFields().setField("dateImpression", format_fr.format(new Date()));
+
+        stamper.close();
+        pdfTemplate.close();
     }
 
 
@@ -536,10 +553,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
     /**
      * @param declarationExtraitDTO le dto
+     * @param numeroRegistre numéro de rehistre
      * @throws IOException       exception
      * @throws DocumentException Cette fonction permet de créer le fichier de transcription de naissance
      */
-    public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO)
+    public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO, String numeroRegistre)
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
 
@@ -597,13 +615,32 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             fonctionMere = declarationExtraitDTO.getFonctionMere();
         }
 
+        String[] tableauNumRegistre = numeroRegistre.split("/");
+
+        ExtraitDTO extraitDTO = new ExtraitDTO();
+        extraitDTO.setNumeroRegistre(tableauNumRegistre[0]);
+
         Paragraph preface = new Paragraph();
+
         addEmptyLine(preface, 1);
+
         preface.add(new Paragraph("Transcription de l’acte de naissance", catFont));
+
         addEmptyLine(preface, 2);
-        preface.add(new Paragraph("Année :" + year, smallBold));
+
+        preface.add(new Paragraph("Numéro d'ordre :" + formatNumeroRegistre(extraitDTO) + "/" + tableauNumRegistre[2], smallBold));
+
         addEmptyLine(preface, 1);
-        preface.add(new Paragraph("Le " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant())) + " est né(e) à "
+
+        preface.add(new Paragraph("Année :" + year, smallBold));
+
+        addEmptyLine(preface, 1);
+
+        Paragraph firstTranscriptionParagraph = new Paragraph();
+
+        firstTranscriptionParagraph.setSpacingBefore(4);
+        firstTranscriptionParagraph.setAlignment(Element.ALIGN_JUSTIFIED_ALL);
+        firstTranscriptionParagraph.add("Le " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceEnfant())) + " est né(e) à "
             + declarationExtraitDTO.getLieuNaissanceEnfant() + ", "
             + declarationExtraitDTO.getPrenomEnfant() + " " + declarationExtraitDTO.getNomEnfant()
             + ", de " + declarationExtraitDTO.getPrenomPere() + " " + nomPere
@@ -611,12 +648,56 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
             + " à " + lieuNaissancePere + ", " + fonctionPere
             + " et de " + declarationExtraitDTO.getPrenomMere() + " " + declarationExtraitDTO.getNomMere() + ","
             + " née le : " + format_fr.format(fromLocalDate(declarationExtraitDTO.getDateNaissanceMere()))
-            + " à " + declarationExtraitDTO.getLieuNaissanceMere() + ", " + fonctionMere + "."));
+            + " à " + declarationExtraitDTO.getLieuNaissanceMere() + ", " + fonctionMere + ".");
+
+        preface.add(firstTranscriptionParagraph);
+
         addEmptyLine(preface, 1);
-        preface.add(new Paragraph("Transcrit le " + format_fr.format(new Date()) + ", par Nous, " + personne_qui_transcrit + ", " + fonction
+
+        Paragraph secondTranscriptionParagraph = new Paragraph();
+        secondTranscriptionParagraph.setAlignment(Element.ALIGN_JUSTIFIED_ALL);
+        secondTranscriptionParagraph.add("Transcrit le " + format_fr.format(new Date()) + ", par Nous, " + personne_qui_transcrit + ", " + fonction
             + ", Officier de l’état-civil sur la foi de l’acte de naissance authentique, ci-contre, dressé par la Mairie de "
-            + declarationExtraitDTO.getLieuDeclaration() + "."));
+            + declarationExtraitDTO.getLieuDeclaration() + ".");
+
+        preface.add(secondTranscriptionParagraph);
+
         document.add(preface);
+
+
+        Paragraph ligne = new Paragraph();
+
+        addEmptyLine(ligne, 10);
+
+        PdfPCell cell = new PdfPCell(ligne);
+        cell.setBorder(Rectangle.BOTTOM);
+        cell.setBorderColor(new BaseColor(44, 67, 144));
+        cell.setBorderWidth(2f);
+
+        PdfPTable table = new PdfPTable(1);
+        table.addCell(cell);
+        table.setHorizontalAlignment(Element.PARAGRAPH);
+        table.setWidthPercentage(100f);
+        document.add(table);
+
+        Paragraph ordre = new Paragraph();
+
+        addEmptyLine(ordre, 4);
+
+
+
+        ordre.add("Numéro d'ordre : "+ formatNumeroRegistre(extraitDTO) + "/" + tableauNumRegistre[2]);
+
+        addEmptyLine(ordre,1);
+
+        ordre.add("Nom :" + declarationExtraitDTO.getNomEnfant());
+
+        addEmptyLine(ordre,1);
+
+        ordre.add("Prénom :" + declarationExtraitDTO.getPrenomEnfant());
+
+        document.add(ordre);
+
         document.close();
         return FILE;
     }
