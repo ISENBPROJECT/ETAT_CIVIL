@@ -22,7 +22,12 @@
 
         <button type="button" class="btn btn-primary" ng-click="vm.printExtrait(vm.declarationExtrait.id)">
             <span class="glyphicon glyphicon-print"></span>&nbsp;<span
-            translate="etatCivilApp.declarationExtrait.search.print">Imprimer</span>
+            translate="etatCivilApp.declarationExtrait.search.printExtrait">Imprimer extrait de naissance</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" ng-click="vm.printTranscription(vm.declarationExtrait.id)">
+            <span class="glyphicon glyphicon-print"></span>&nbsp;<span
+            translate="etatCivilApp.declarationExtrait.search.printTranscription">Imprimer transcription de naissance</span>
         </button>
     </div>
 
@@ -379,4 +384,26 @@
         </div>
     </div>
 
+    <div class="rechercheButton">
+        <button type="button" class="btn btn-default" ui-sref="declaration-naissance-recherche">
+            <span class="glyphicon glyphicon-backward"></span>&nbsp;<span
+            data-translate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" has-authority="ROLE_ADMIN"
+                ui-sref="declaration-extrait-edit({id:vm.declarationExtrait.id})">
+            <span class="glyphicon glyphicon-edit"></span>&nbsp;<span
+            translate="etatCivilApp.declarationExtrait.search.modify">Modifier</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" ng-click="vm.printExtrait(vm.declarationExtrait.id)">
+            <span class="glyphicon glyphicon-print"></span>&nbsp;<span
+            translate="etatCivilApp.declarationExtrait.search.printExtrait">Imprimer extrait de naissance</span>
+        </button>
+
+        <button type="button" class="btn btn-primary" ng-click="vm.printTranscription(vm.declarationExtrait.id)">
+            <span class="glyphicon glyphicon-print"></span>&nbsp;<span
+            translate="etatCivilApp.declarationExtrait.search.printTranscription">Imprimer transcription de naissance</span>
+        </button>
+    </div>
 </div>

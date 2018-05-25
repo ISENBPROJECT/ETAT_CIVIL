@@ -145,9 +145,11 @@ public class DeclarationExtraitResource {
         log.debug("REST request to search DeclarationNaissance");
         String nomFichier = "";
         DeclarationExtraitRechercheDTO extrait = new DeclarationExtraitRechercheDTO();
-        if (null != declarationExtraitDTO) {
+        if (null != declarationExtraitDTO && declarationExtraitDTO.isPrintExtrait()) {
             nomFichier = declarationExtraitService.printExtraitNaissance(declarationExtraitDTO.getId());
             extrait.setNomExtrait(nomFichier);
+        }else{
+
         }
         return extrait;
     }

@@ -115,7 +115,8 @@
                 "rechercher": "Rechercher",
                 "title": "RECHERCHER UN EXTRAIT DE NAISSANCE",
                 "modify": "Modifier",
-                "print": "Imprimer",
+                "printExtrait": "Imprimer extrait",
+                "printTranscription": "Imprimer transcription",
                 "noData": "Aucun résultat trouvé !"
 
             }

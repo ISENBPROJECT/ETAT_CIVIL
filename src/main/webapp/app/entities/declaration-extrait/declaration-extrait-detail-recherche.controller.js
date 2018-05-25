@@ -35,6 +35,7 @@
         vm.dateNaissanceEnfantErrorFutur = false;
         vm.save = save;
         vm.printExtrait = printExtrait;
+        vm.printTranscription = printTranscription;
 
         function openCalendar(date) {
             vm.datePickerOpenStatus[date] = true;
@@ -165,7 +166,18 @@
         function printExtrait(idExtrait) {
 
             var dataSearch = {
-                id: idExtrait
+                id: idExtrait,
+                //vm.declarationExtrait.isPrintExtrait = true
+            };
+            DeclarationPrint.print(dataSearch,
+                onSuccess, onError);
+
+        }
+        function printTranscription(idExtrait) {
+
+            var dataSearch = {
+                id: idExtrait,
+               // vm.declarationExtrait.isPrintExtrait = false
             };
             DeclarationPrint.print(dataSearch,
                 onSuccess, onError);

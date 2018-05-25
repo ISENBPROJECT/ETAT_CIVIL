@@ -196,7 +196,8 @@
                             villeResidencePere: null,
                             nomExtrait: null,
                             nomTranscription: null,
-                            id: null
+                            id: null,
+                            isPrintExtrait : false
                         };
                     }
                 }
@@ -333,7 +334,8 @@
                             nomExtrait: null,
                             nomTranscription: null,
                             numeroRegistre: null,
-                            id: null
+                            id: null,
+                            isPrintExtrait:false
                         };
                     }
                 }
