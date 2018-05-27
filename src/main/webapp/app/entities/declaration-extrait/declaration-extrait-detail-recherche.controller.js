@@ -164,20 +164,19 @@
 
 
         function printExtrait(idExtrait) {
-
             var dataSearch = {
                 id: idExtrait,
-                //vm.declarationExtrait.isPrintExtrait = true
+                printExtrait: true
             };
             DeclarationPrint.print(dataSearch,
                 onSuccess, onError);
 
         }
-        function printTranscription(idExtrait) {
 
+        function printTranscription(idExtrait) {
             var dataSearch = {
                 id: idExtrait,
-               // vm.declarationExtrait.isPrintExtrait = false
+                printExtrait: false
             };
             DeclarationPrint.print(dataSearch,
                 onSuccess, onError);

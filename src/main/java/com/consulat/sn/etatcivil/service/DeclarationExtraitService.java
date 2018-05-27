@@ -44,4 +44,12 @@ public interface DeclarationExtraitService {
      * @return le nom de l'extrait à imprimer
      */
     String printExtraitNaissance(Long idExtrait);
+
+    /**
+     * permet d'imprimer la transcription de naissance
+     *
+     * @param idExtrait id de l'extrait en question
+     * @return le nom de la transcription
+     */
+    String printTranscriptionNaissance(Long idExtrait);
 }

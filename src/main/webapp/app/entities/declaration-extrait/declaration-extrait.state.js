@@ -197,7 +197,7 @@
                             nomExtrait: null,
                             nomTranscription: null,
                             id: null,
-                            isPrintExtrait : false
+                            printExtrait: null
                         };
                     }
                 }
@@ -335,7 +335,7 @@
                             nomTranscription: null,
                             numeroRegistre: null,
                             id: null,
-                            isPrintExtrait:false
+                            printExtrait: null
                         };
                     }
                 }

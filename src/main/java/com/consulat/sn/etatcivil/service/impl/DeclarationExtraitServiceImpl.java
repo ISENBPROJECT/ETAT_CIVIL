@@ -185,8 +185,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
 
             try {
-
-                String nomTranscription = creerTranscription(declarationExtraitDTO,extraitDTO.getNumeroRegistre());
+                declarationExtraitDTO.setNumeroRegistre(extraitDTO.getNumeroRegistre());
+                String nomTranscription = creerTranscription(declarationExtraitDTO, extraitDTO.getNumeroRegistre(), false);
                 declarationExtraitDTO.setNomTranscription(nomTranscription);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -257,11 +257,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
      * @param extraitDTO l'extrait de naissance
      * @return le numéro formaté
      */
-    private String formatNumeroRegistre(ExtraitDTO extraitDTO) {
+    private String formatNumeroRegistre(ExtraitDTO extraitDTO, Boolean isExtrait) {
         String formatedNumeroRegistre;
         DateFormat format_fr = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRENCH);
         String[] numerosRegistre = extraitDTO.getNumeroRegistre().split("/");
-
+        String texteFormated = "";
         Integer numeroRegistre = Integer.valueOf(numerosRegistre[0]);
         if (numeroRegistre < 10) {
             formatedNumeroRegistre = "0" + "0" + "0" + numeroRegistre.toString();
@@ -272,7 +272,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         } else {
             formatedNumeroRegistre = numeroRegistre.toString();
         }
-        return formatedNumeroRegistre + "/" + numerosRegistre[1] + " " + "DU" + " " + format_fr.format(new Date());
+        if (isExtrait) {
+
+            texteFormated = formatedNumeroRegistre + "/" + numerosRegistre[1] + " " + "DU" + " " + format_fr.format(new Date());
+        } else {
+            texteFormated = formatedNumeroRegistre + "/";
+        }
+        return texteFormated;
     }
 
     /**
@@ -479,20 +485,69 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         return acteNaissance;
     }
 
+    @Override
+    public String printTranscriptionNaissance(Long idExtrait) {
+        PersonneDTO pere, mere, enfant = new PersonneDTO();
+        DeclarationExtraitDTO declarationExtraitDTO = new DeclarationExtraitDTO();
+        String nomTranscription = "";
+        ExtraitDTO extrait = extraitService.findOne(idExtrait);
+        if (null != extrait && null != extrait.getPereId()) {
+            pere = personneService.findOne(extrait.getPereId());
+            declarationExtraitDTO.setNomPere(pere.getNom());
+            declarationExtraitDTO.setPrenomPere(pere.getPrenom());
+            declarationExtraitDTO.setLieuNaissancePere(pere.getVilleNaissance());
+            declarationExtraitDTO.setDateNaissancePere(pere.getDateNaissance());
+            if (null != pere.getFonction()) {
+                declarationExtraitDTO.setFonctionPere(pere.getFonction());
+            }
+        }
+        if (null != extrait) {
+            enfant = personneService.findOne(extrait.getEnfantId());
+            declarationExtraitDTO.setNomEnfant(enfant.getNom());
+            declarationExtraitDTO.setPrenomEnfant(enfant.getPrenom());
+            declarationExtraitDTO.setDateNaissanceEnfant(enfant.getDateNaissance());
+            declarationExtraitDTO.setLieuNaissanceEnfant(enfant.getVilleNaissance());
+        }
+        if (null != extrait) {
+            mere = personneService.findOne(extrait.getMereId());
+            declarationExtraitDTO.setNomMere(mere.getNom());
+            declarationExtraitDTO.setPrenomMere(mere.getPrenom());
+            declarationExtraitDTO.setLieuNaissanceMere(mere.getVilleNaissance());
+            if (null != mere.getFonction()) {
+                declarationExtraitDTO.setFonctionMere(mere.getFonction());
+            }
+            declarationExtraitDTO.setNumeroRegistre(extrait.getNumeroRegistre());
+            declarationExtraitDTO.setDateNaissanceMere(mere.getDateNaissance());
+        }
+        VilleDTO lieuDeclaration = villeService.findOne(extrait.getLieuDeclarationId());
+        if (null != lieuDeclaration) {
+            declarationExtraitDTO.setLieuDeclaration(lieuDeclaration.getNom());
+        }
+        try {
+            nomTranscription = creerTranscription(declarationExtraitDTO, extrait.getNumeroRegistre(), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        return nomTranscription;
+    }
+
     /**
      * permet d'écrire dans le fichier pdf
-     * @param extraitDTO l'extrait
-     * @param enfant infos de l'enfant
-     * @param mere infos de la mère
-     * @param pere infos du père
-     * @param lieuDeclaration le lieu de déclaration
+     *
+     * @param extraitDTO          l'extrait
+     * @param enfant              infos de l'enfant
+     * @param mere                infos de la mère
+     * @param pere                infos du père
+     * @param lieuDeclaration     le lieu de déclaration
      * @param lieuNaissanceEnfant lieu de naissance du pere
-     * @param pdfTemplate le template
-     * @param year l'année
-     * @param format_fr le formatteur
-     * @param acte l'acte de naissance
+     * @param pdfTemplate         le template
+     * @param year                l'année
+     * @param format_fr           le formatteur
+     * @param acte                l'acte de naissance
      * @throws DocumentException exception du document
-     * @throws IOException exception
+     * @throws IOException       exception
      */
     private void ecrireDansPdf(ExtraitDTO extraitDTO, PersonneDTO enfant, PersonneDTO mere, PersonneDTO pere, VilleDTO lieuDeclaration, VilleDTO lieuNaissanceEnfant, PdfReader pdfTemplate, int year, DateFormat format_fr, File acte) throws DocumentException, IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(acte);
@@ -502,7 +557,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
         stamper.setFormFlattening(true);
         stamper.getAcroFields().setField("PourAnnee", Integer.toString(year));
-        stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO));
+        stamper.getAcroFields().setField("numeroDansRegistre", formatNumeroRegistre(extraitDTO, true));
         stamper.getAcroFields().setField("dateRegistre", extraitDTO.getNumeroRegistre());
         stamper.getAcroFields().setField("dateNaissanceEnfant", format_fr.format(fromLocalDate(LocalDate.from(enfant.getDateNaissance()))));
         stamper.getAcroFields().setField("lieu", StringUtils.capitalize(lieuDeclaration.getNom()));
@@ -553,11 +608,11 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
     /**
      * @param declarationExtraitDTO le dto
-     * @param numeroRegistre numéro de rehistre
+     * @param numeroRegistre        numéro de rehistre
      * @throws IOException       exception
      * @throws DocumentException Cette fonction permet de créer le fichier de transcription de naissance
      */
-    public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO, String numeroRegistre)
+    public String creerTranscription(DeclarationExtraitDTO declarationExtraitDTO, String numeroRegistre, boolean isExtrait)
         throws IOException, DocumentException {
         User user = userService.getUserWithAuthorities(3L);
 
@@ -618,7 +673,8 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         String[] tableauNumRegistre = numeroRegistre.split("/");
 
         ExtraitDTO extraitDTO = new ExtraitDTO();
-        extraitDTO.setNumeroRegistre(tableauNumRegistre[0]);
+        //extraitDTO.setNumeroRegistre(tableauNumRegistre[0]);
+        extraitDTO.setNumeroRegistre(declarationExtraitDTO.getNumeroRegistre());
 
         Paragraph preface = new Paragraph();
 
@@ -628,7 +684,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         addEmptyLine(preface, 2);
 
-        preface.add(new Paragraph("Numéro d'ordre :" + formatNumeroRegistre(extraitDTO) + "/" + tableauNumRegistre[2], smallBold));
+        preface.add(new Paragraph("Numéro d'ordre :" + formatNumeroRegistre(extraitDTO, isExtrait) + "/" + tableauNumRegistre[2], smallBold));
 
         addEmptyLine(preface, 1);
 
@@ -685,14 +741,13 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
         addEmptyLine(ordre, 4);
 
 
+        ordre.add("Numéro d'ordre : " + formatNumeroRegistre(extraitDTO, isExtrait) + "/" + tableauNumRegistre[2]);
 
-        ordre.add("Numéro d'ordre : "+ formatNumeroRegistre(extraitDTO) + "/" + tableauNumRegistre[2]);
-
-        addEmptyLine(ordre,1);
+        addEmptyLine(ordre, 1);
 
         ordre.add("Nom :" + declarationExtraitDTO.getNomEnfant());
 
-        addEmptyLine(ordre,1);
+        addEmptyLine(ordre, 1);
 
         ordre.add("Prénom :" + declarationExtraitDTO.getPrenomEnfant());
 
@@ -873,63 +928,7 @@ public class DeclarationExtraitServiceImpl implements DeclarationExtraitService 
 
         return declarationExtraitUpdatedDTO;
     }
-    /*
-     *//**
-     * Get all the declarationExtraits.
-     *
-     * @return the list of entities
-     *//*
-    @Override
-    @Transactional(readOnly = true)
-    public List<DeclarationExtraitDTO> findAll() {
-        log.debug("Request to get all DeclarationExtraits");
-        List<DeclarationExtraitDTO> result = declarationExtraitRepository.findAll().stream()
-            .map(declarationExtraitMapper::declarationExtraitToDeclarationExtraitDTO)
-            .collect(Collectors.toCollection(LinkedList::new));
-        return result;
-    }
 
-    *//**
-     * Get one declarationExtrait by id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     *//*
-    @Override
-    @Transactional(readOnly = true)
-    public DeclarationExtraitDTO findOne(Long id) {
-        log.debug("Request to get DeclarationExtrait : {}", id);
-        DeclarationExtrait declarationExtrait = declarationExtraitRepository.findOne(id);
-        DeclarationExtraitDTO declarationExtraitDTO = declarationExtraitMapper.declarationExtraitToDeclarationExtraitDTO(declarationExtrait);
-        return declarationExtraitDTO;
-    }
 
-    *//**
-     * Delete the  declarationExtrait by id.
-     *
-     * @param id the id of the entity
-     *//*
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete DeclarationExtrait : {}", id);
-        declarationExtraitRepository.delete(id);
-        declarationExtraitSearchRepository.delete(id);
-    }
-
-    *//**
-     * Search for the declarationExtrait corresponding to the query.
-     *
-     * @param query the query of the search
-     * @return the list of entities
-     *//*
-    @Override
-    @Transactional(readOnly = true)
-    public List<DeclarationExtraitDTO> search(String query) {
-        log.debug("Request to search DeclarationExtraits for query {}", query);
-        return StreamSupport
-            .stream(declarationExtraitSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .map(declarationExtraitMapper::declarationExtraitToDeclarationExtraitDTO)
-            .collect(Collectors.toList());
-    }*/
 }
 

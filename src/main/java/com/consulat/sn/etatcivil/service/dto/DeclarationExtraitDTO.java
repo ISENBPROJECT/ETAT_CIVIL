@@ -70,8 +70,7 @@ public class DeclarationExtraitDTO implements Serializable {
 
     private String numeroPassportMere;
 
-    private boolean isPrintExtrait = false;
-
+    private Boolean printExtrait;
 
     private String nomPere;
 
@@ -578,11 +577,11 @@ public class DeclarationExtraitDTO implements Serializable {
         this.nomTranscription = nomTranscription;
     }
 
-    public boolean isPrintExtrait() {
-        return isPrintExtrait;
+    public Boolean getPrintExtrait() {
+        return printExtrait;
     }
 
-    public void setPrintExtrait(boolean printExtrait) {
-        isPrintExtrait = printExtrait;
+    public void setPrintExtrait(Boolean printExtrait) {
+        this.printExtrait = printExtrait;
     }
 }

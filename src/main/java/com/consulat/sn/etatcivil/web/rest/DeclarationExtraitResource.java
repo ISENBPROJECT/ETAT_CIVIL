@@ -145,67 +145,13 @@ public class DeclarationExtraitResource {
         log.debug("REST request to search DeclarationNaissance");
         String nomFichier = "";
         DeclarationExtraitRechercheDTO extrait = new DeclarationExtraitRechercheDTO();
-        if (null != declarationExtraitDTO && declarationExtraitDTO.isPrintExtrait()) {
+        if (null != declarationExtraitDTO && declarationExtraitDTO.getPrintExtrait()) {
             nomFichier = declarationExtraitService.printExtraitNaissance(declarationExtraitDTO.getId());
             extrait.setNomExtrait(nomFichier);
-        }else{
-
+        }else if (null != declarationExtraitDTO && !declarationExtraitDTO.getPrintExtrait()){
+            nomFichier = declarationExtraitService.printTranscriptionNaissance(declarationExtraitDTO.getId());
+            extrait.setNomExtrait(nomFichier);
         }
         return extrait;
     }
-
-    /* *//**
-     * DELETE  /declaration-extraits/:id : delete the "id" declarationExtrait.
-     *
-     * @param id the id of the declarationExtraitDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
-     *//*
-    @RequestMapping(value = "/declaration-extraits-recherche",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public void supprimerimpressionDeclarationExtrait(@RequestBody DeclarationExtraitDTO declarationExtraitDTO) {
-        log.debug("REST request to delete DeclarationExtrait : {}", declarationExtraitDTO);
-        String acteToDelete = "";
-        String transcriptionToDelete = "";
-
-        if (null != declarationExtraitDTO) {
-            transcriptionToDelete = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
-                + "_transcription_naissance.pdf";
-
-            acteToDelete = declarationExtraitDTO.getPrenomEnfant() + "_" + declarationExtraitDTO.getNomEnfant()
-                + "_acte_naissance.pdf";
-
-            declarationExtraitService.supprimerActesImprimer(acteToDelete, transcriptionToDelete);
-        }
-
-    }*/
-    /*
-     *//**
-     * GET  /declaration-extraits : get all the declarationExtraits.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of declarationExtraits in body
-     *//*
-    @GetMapping("/declaration-extraits")
-    @Timed
-    public List<DeclarationExtraitDTO> getAllDeclarationExtraits() {
-        log.debug("REST request to get all DeclarationExtraits");
-        return declarationExtraitService.findAll();
-    }
-
-    *//**
-     * GET  /declaration-extraits/:id : get the "id" declarationExtrait.
-     *
-     * @param id the id of the declarationExtraitDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the declarationExtraitDTO, or with status 404 (Not Found)
-     *//*
-    @GetMapping("/declaration-extraits/{id}")
-    @Timed
-    public ResponseEntity<DeclarationExtraitDTO> getDeclarationExtrait(@PathVariable Long id) {
-        log.debug("REST request to get DeclarationExtrait : {}", id);
-        DeclarationExtraitDTO declarationExtraitDTO = declarationExtraitService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(declarationExtraitDTO));
-    }
-
-    */
 }
